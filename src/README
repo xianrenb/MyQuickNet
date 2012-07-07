@@ -1,0 +1,91 @@
+This is the README file for MyQuickNet 2.0.0.
+
+    This program (MyQuickNet) is free software: you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+About MyQuickNet:
+MyQuickNet is an open-source web application framework using JavaScript
+and PHP developed by MyQuickNet Development Group.
+It uses jQuery as the JavaScript library, MySQL as the database, PHPUnit for
+PHP unit testing, QUnit for JavaScript unit testing, and NetBeans IDE for
+development.
+
+Files/directory structure:
+html/ --- directory that contains HTML file(s)
+jquery/ --- directory that contains jQuery and QUnit related file(s)
+js_object/ --- directory that contains JavaScript (object) file(s)
+js_test/ --- directory that contains JavaScript test file(s)
+php_class/ --- directory that contains PHP class file(s)
+php_test/ --- directory that contains PHP test file(s)
+public/ --- directory that contains public accessible resource(s)
+sql/ --- directory that contains SQL file(s)
+sqlite/ --- directory that contains the default sqlite3 database
+.htaccess --- file that contains Apache configuration
+COPYING -- file that contains the GNU General Public License
+README --- the file that you are reading now
+config.php --- the basic configuration file for all PHP class files
+index.php --- the main PHP file
+
+Notes:
+1. You should modify "config.php" to add/change path(s) for PHP class files,
+change default timezone settings, etc., and modify "index.php" to use your own
+controller.
+2. Files "php_class/com/myquicknet/testing/*.class.php",
+"php_class/com/myquicknet/testing_config/*.class.php",
+"js_object/com/myquicknet/testing/*.js",
+"js_object/com/myquicknet/testing_config/*.js" are example configurations/uses.
+3. "MQNAutoRecordTest.php" and "MQNAutoRecordQueryTest.php" in directory
+"php_test/php_class/com/myquicknet/autorecord/" shows how to use MQNAutoRecord
+and MQNAutoRecordQuery as ORM.
+4. MQNAutoRecord, MQNAutoRecordQuery and MQNAutoRecordQueryTable instances use
+database resource. It is advised to free these instances explicitly (set to
+null) as in the above test files.
+5. Each database table used for MQNAutoRecord must have two (reserved) fields:
+"id" and "valid".
+6. It is simple to write Object-Oriented JavaScript program by using
+"newType.def()" as in the JavaScript object files. Method "_" should be called
+explicitly after using "new" to create and initialize instances. Method (other
+than "_") with name started by an underscore should be treated as protected
+method. Method with name not started by an underscore should be treated as
+public method. The first letter of public method name and the second letter
+(the letter just after the underscore) of protected method name should be
+small. The first letter of type name should be capital. Use "base" to access
+the base type prototype. Use "my" to access the object holding private data
+member(s). Use "shared" to access the object holding static data member(s).
+7. File "html/default.html" is the default html file.
+8. File ".htaccess" controls how Apache rewrites URL. The default URL for the
+default html file is "http://localhost/MyQuickNet/".
+9. TestingController and TestingView are the controller and view classes for
+the URL "http://localhost/MyQuickNet/testing/".
+10. Using default settings, "http://localhost/MyQuickNet/xxx/" would use
+class "XxxController" as the controller.
+11. Please choose "config.php" as the bootstrap file when using PHPUnit.
+12. "TestingAutoRecordManagerConfig.class.php" uses SQLite as the default
+database for testing. Please modify it to choose between MySQLi and SQLite. You
+should also import data from the SQL file(s) into the database before testing
+if a new database is used.
+
+Major changes from version 1.0.0:
+* MyQuickNet uses PHP 5.3+.
+* All PHP and JavaScript files in paths like ".../com/myquicknet/..." moves to
+".../com/googlecode/myquicknet/...".
+* All PHP files, except "config.php" and "index.php", have no include() or
+require() statements.
+* "config.php" defines MyQuickNet base path constant "MQN_BASE_PATH".
+* "$config['static_file_path']" used in MQNStaticFileView has no "/" at the
+end.
+* All JavaScript files (jQuery and QUnit not checked), have 'use strict'
+statements.
+* MyQuickNet supports SQLite ("MQNDatabaseSQlite.class.php").
+
+For any inquiries, please visit "http://myquicknet.googlecode.com/".
