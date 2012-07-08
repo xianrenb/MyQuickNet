@@ -20,7 +20,7 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
     public function __construct(array $config = array()) {
         //Settings for using SQLite3
         $config['db_class'] = 'MQNDatabaseSQLite';
-        $config['db_filename'] = (string) (MQN_BASE_PATH . '/sqlite/mqntestdb.sqlite3');
+        $config['db_filename'] = (string) (MQN_BASE_PATH . 'sqlite/mqntestdb.sqlite3');
 
         //Settings for using MySQLi
         /*

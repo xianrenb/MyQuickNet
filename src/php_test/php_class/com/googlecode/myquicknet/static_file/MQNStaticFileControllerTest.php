@@ -39,7 +39,7 @@ class MQNStaticFileControllerTest extends PHPUnit_Framework_TestCase {
         $controller->run();
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(MQN_BASE_PATH . '/html/default.html');
+        $expected = (string) file_get_contents(MQN_BASE_PATH . 'html/default.html');
         $this->assertEquals($expected, $actual);
     }
 
@@ -51,7 +51,7 @@ class MQNStaticFileControllerTest extends PHPUnit_Framework_TestCase {
         $controller->run();
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(MQN_BASE_PATH . '/html/default.html');
+        $expected = (string) file_get_contents(MQN_BASE_PATH . 'html/default.html');
         $this->assertEquals($expected, $actual);
         unset($_SERVER['PATH_INFO']);
     }

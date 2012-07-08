@@ -19,7 +19,7 @@ class TestingViewConfig extends MQNView {
      */
     public function __construct(array $config = array()) {
         $config['json_string'] = '{}';
-        $config['html_file_name'] = (string) (MQN_BASE_PATH . '/html/testing.html');
+        $config['html_file_name'] = (string) (MQN_BASE_PATH . 'html/testing.html');
         parent::__construct($config);
     }
 

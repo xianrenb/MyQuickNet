@@ -112,7 +112,7 @@ class MQNStaticFileView extends MQNView {
      * @return bool
      */
     public function output() {
-        $fileName = (string) ($this->staticFilePath . '/' . $this->staticFileName);
+        $fileName = (string) ($this->staticFilePath . $this->staticFileName);
 
         if (file_exists($fileName) && is_file($fileName)) {
             if (!headers_sent()) {

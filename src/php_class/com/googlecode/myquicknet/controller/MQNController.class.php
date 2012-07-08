@@ -63,30 +63,6 @@ class MQNController {
 
     /**
      *
-     * @return MQNAutoRecord
-     */
-    public function getModel() {
-        return $this->model;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getUrlBasePath() {
-        return $this->urlBasePath;
-    }
-
-    /**
-     *
-     * @return MQNView
-     */
-    public function getView() {
-        return $this->view;
-    }
-
-    /**
-     *
      * @param string $longName
      * @return string
      */
@@ -120,6 +96,30 @@ class MQNController {
         }
 
         return $shortName;
+    }
+
+    /**
+     *
+     * @return MQNAutoRecord
+     */
+    public function getModel() {
+        return $this->model;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getUrlBasePath() {
+        return $this->urlBasePath;
+    }
+
+    /**
+     *
+     * @return MQNView
+     */
+    public function getView() {
+        return $this->view;
     }
 
     public function run() {

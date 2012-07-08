@@ -161,7 +161,7 @@ class MQNAutoRecord {
             $id = 1;
         }
 
-        // insert an invalid record with the new id
+        // insert an (invalid) record with the new id
         $sql = 'INSERT INTO `';
         $sql .= (string) $this->table;
         $sql .= '` ( `id` , `valid` )';

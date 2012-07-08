@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 2.0.0.
+This is the README file for MyQuickNet 2.0.1.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published by
@@ -82,8 +82,6 @@ Major changes from version 1.0.0:
 * All PHP files, except "config.php" and "index.php", have no include() or
 require() statements.
 * "config.php" defines MyQuickNet base path constant "MQN_BASE_PATH".
-* "$config['static_file_path']" used in MQNStaticFileView has no "/" at the
-end.
 * All JavaScript files (jQuery and QUnit not checked), have 'use strict'
 statements.
 * MyQuickNet supports SQLite ("MQNDatabaseSQlite.class.php").

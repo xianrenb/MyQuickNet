@@ -41,12 +41,12 @@ class MQNViewTest extends PHPUnit_Framework_TestCase {
     public function test1() {
         $view = new $this->testingViewClass();
         $this->assertTrue($view instanceof MQNView);
-        $view->setHTMLFileName(MQN_BASE_PATH . '/html/default.html');
+        $view->setHTMLFileName(MQN_BASE_PATH . 'html/default.html');
         ob_start();
         $this->assertTrue($view->output());
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(MQN_BASE_PATH . '/html/default.html');
+        $expected = (string) file_get_contents(MQN_BASE_PATH . 'html/default.html');
         $this->assertEquals($expected, $actual);
     }
 
@@ -65,12 +65,12 @@ class MQNViewTest extends PHPUnit_Framework_TestCase {
     public function test3() {
         $view = new $this->testingViewClass();
         $this->assertTrue($view instanceof MQNView);
-        $view->setHTMLFileName(MQN_BASE_PATH . '/html/default.html');
+        $view->setHTMLFileName(MQN_BASE_PATH . 'html/default.html');
         ob_start();
         $this->assertTrue($view->outputHTML());
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(MQN_BASE_PATH . '/html/default.html');
+        $expected = (string) file_get_contents(MQN_BASE_PATH . 'html/default.html');
         $this->assertEquals($expected, $actual);
     }
 

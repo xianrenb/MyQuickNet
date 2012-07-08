@@ -42,7 +42,7 @@ class MQNView {
         if (key_exists('html_file_name', $config)) {
             $this->htmlFileName = (string) $config['html_file_name'];
         } else {
-            $this->htmlFileName = (string) (MQN_BASE_PATH . '/html/default.html');
+            $this->htmlFileName = (string) (MQN_BASE_PATH . 'html/default.html');
         }
     }
 

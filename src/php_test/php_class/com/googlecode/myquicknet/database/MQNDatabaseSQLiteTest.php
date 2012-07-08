@@ -27,7 +27,7 @@ class MQNDatabaseSQLiteTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $config['db_filename'] = (string) (MQN_BASE_PATH . '/sqlite/mqntestdb.sqlite3');
+        $config['db_filename'] = (string) (MQN_BASE_PATH . 'sqlite/mqntestdb.sqlite3');
         $this->config = $config;
     }
 
