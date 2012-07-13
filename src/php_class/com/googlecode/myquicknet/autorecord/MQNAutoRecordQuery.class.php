@@ -156,68 +156,79 @@ class MQNAutoRecordQuery {
      */
     protected function _buildWhereConditionSql() {
         $sql = '';
-        $n = (int) count($this->whereConditionArray);
+        $countWhereConditionArray = (int) count($this->whereConditionArray);
 
-        for ($i = 0; $i < $n; ++$i) {
-            $sql .= ( $i) ? ' AND ' : ' WHERE ';
-            $operator = (string) $this->whereConditionArray[$i]->getOperator();
-            $value1 = $this->whereConditionArray[$i]->getValue1();
-            $value2 = $this->whereConditionArray[$i]->getValue2();
+        if ($countWhereConditionArray) {
+            for ($i = 0; $i < $countWhereConditionArray; ++$i) {
+                $sql .= ( $i) ? ' AND ' : ' WHERE ';
+                $operator = (string) $this->whereConditionArray[$i]->getOperator();
+                $value1 = $this->whereConditionArray[$i]->getValue1();
+                $value2 = $this->whereConditionArray[$i]->getValue2();
 
-            if ($value1 instanceof MQNAutoRecordQueryField) {
-                $sql .= '`t';
-                $sql .= (int) $value1->getTable()->getId();
-                $sql .= '`.`valid` = 1 AND ';
+                if ($value1 instanceof MQNAutoRecordQueryField) {
+                    $sql .= '`t';
+                    $sql .= (int) $value1->getTable()->getId();
+                    $sql .= '`.`valid` = 1 AND ';
+                }
+
+                if ($value2 instanceof MQNAutoRecordQueryField) {
+                    $sql .= '`t';
+                    $sql .= (int) $value2->getTable()->getId();
+                    $sql .= '`.`valid` = 1 AND ';
+                }
+
+                if ($value1 instanceof MQNAutoRecordQueryField) {
+                    $sql .= '`t';
+                    $sql .= (int) $value1->getTable()->getId();
+                    $sql .= '`.`';
+                    $sql .= (string) $value1->getName();
+                    $sql .= '`';
+                } else if (is_bool($value1)) {
+                    $sql .= (int) $value1;
+                } else if (is_float($value1)) {
+                    $sql .= (float) $value1;
+                } else if (is_int($value1)) {
+                    $sql .= (int) $value1;
+                } else if (is_string($value1)) {
+                    $sql .= '\'';
+                    $sql .= (string) $this->database->escapeString($value1);
+                    $sql .= '\'';
+                } else {
+                    throw new Exception('Type not supported.');
+                }
+
+                $sql .= ' ';
+                $sql .= (string) $operator;
+                $sql .= ' ';
+
+                if ($value2 instanceof MQNAutoRecordQueryField) {
+                    $sql .= '`t';
+                    $sql .= (int) $value2->getTable()->getId();
+                    $sql .= '`.`';
+                    $sql .= (string) $value2->getName();
+                    $sql .= '`';
+                } else if (is_bool($value2)) {
+                    $sql .= (int) $value2;
+                } else if (is_float($value2)) {
+                    $sql .= (float) $value2;
+                } else if (is_int($value2)) {
+                    $sql .= (int) $value2;
+                } else if (is_string($value2)) {
+                    $sql .= '\'';
+                    $sql .= (string) $this->database->escapeString($value2);
+                    $sql .= '\'';
+                } else {
+                    throw new Exception('Type not supported.');
+                }
             }
+        } else {
+            $countTableArray = (int) count($this->tableArray);
 
-            if ($value2 instanceof MQNAutoRecordQueryField) {
+            for ($i = 0; $i < $countTableArray; ++$i) {
+                $sql .= ( $i) ? ' AND ' : ' WHERE ';
                 $sql .= '`t';
-                $sql .= (int) $value2->getTable()->getId();
-                $sql .= '`.`valid` = 1 AND ';
-            }
-
-            if ($value1 instanceof MQNAutoRecordQueryField) {
-                $sql .= '`t';
-                $sql .= (int) $value1->getTable()->getId();
-                $sql .= '`.`';
-                $sql .= (string) $value1->getName();
-                $sql .= '`';
-            } else if (is_bool($value1)) {
-                $sql .= (int) $value1;
-            } else if (is_float($value1)) {
-                $sql .= (float) $value1;
-            } else if (is_int($value1)) {
-                $sql .= (int) $value1;
-            } else if (is_string($value1)) {
-                $sql .= '\'';
-                $sql .= (string) $this->database->escapeString($value1);
-                $sql .= '\'';
-            } else {
-                throw new Exception('Type not supported.');
-            }
-
-            $sql .= ' ';
-            $sql .= (string) $operator;
-            $sql .= ' ';
-
-            if ($value2 instanceof MQNAutoRecordQueryField) {
-                $sql .= '`t';
-                $sql .= (int) $value2->getTable()->getId();
-                $sql .= '`.`';
-                $sql .= (string) $value2->getName();
-                $sql .= '`';
-            } else if (is_bool($value2)) {
-                $sql .= (int) $value2;
-            } else if (is_float($value2)) {
-                $sql .= (float) $value2;
-            } else if (is_int($value2)) {
-                $sql .= (int) $value2;
-            } else if (is_string($value2)) {
-                $sql .= '\'';
-                $sql .= (string) $this->database->escapeString($value2);
-                $sql .= '\'';
-            } else {
-                throw new Exception('Type not supported.');
+                $sql .= (int) $this->tableArray[$i]->getId();
+                $sql .='`.`valid` = 1';
             }
         }
 

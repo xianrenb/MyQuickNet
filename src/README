@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 2.0.1.
+This is the README file for MyQuickNet 2.0.2.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published by
@@ -74,6 +74,9 @@ class "XxxController" as the controller.
 database for testing. Please modify it to choose between MySQLi and SQLite. You
 should also import data from the SQL file(s) into the database before testing
 if a new database is used.
+
+Major changes from version 2.0.1:
+* fixed a bug related to MQNAutoRecordQuery.
 
 Major changes from version 1.0.0:
 * MyQuickNet uses PHP 5.3+.
