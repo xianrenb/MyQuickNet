@@ -14,7 +14,7 @@
 /**
  *
  */
-class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource {
+class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implements Iterator {
 
     /**
      *
@@ -43,6 +43,41 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource {
 
     /**
      *
+     * @return int
+     */
+    public function count() {
+        $n = (int) count($this->resultArray);
+        return $n;
+    }
+
+    /**
+     *
+     * @return MQNAutoRecordQueryResult 
+     */
+    public function current() {
+        $result = new MQNAutoRecordQueryResult();
+        $result->setResult($this->resultArray[$this->index]);
+        return $result;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function key() {
+        $key = (int) $this->index;
+        return $key;
+    }
+
+    /**
+     * 
+     */
+    public function next() {
+        $this->index += 1;
+    }
+
+    /**
+     *
      * @return MQNAutoRecordResult
      */
     public function nextResult() {
@@ -57,6 +92,15 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource {
     }
 
     /**
+     * 
+     */
+    public function rewind() {
+        if ($this->index) {
+            throw new Exception('Could not rewind.');
+        }
+    }
+
+    /**
      *
      * @param array $resultArray
      */
@@ -66,11 +110,11 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @return int
+     * @return bool
      */
-    public function count() {
-        $n = (int) count($this->resultArray);
-        return $n;
+    public function valid() {
+        $valid = (bool) array_key_exists($this->index, $this->resultArray);
+        return $valid;
     }
 
 }

@@ -117,6 +117,29 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
+        $resultArray = $query->execute();
+        $resultArrayCount = $resultArray->count();
+        $this->assertEquals(10, $resultArrayCount);
+        $i = 0;
+
+        foreach ($resultArray as $key => $value) {
+            $autoRecordA = $value->getAutoRecord($tableA);
+            $this->assertEquals($i, $key);
+            $this->assertEquals($i, $autoRecordA->getMyA());
+            $this->assertEquals($i, $autoRecordA->getMyX());
+            $i += 1;
+        }
+
+        $this->assertEquals(10, $i);
+        $query = null;
+        $tableA = null;
+        $autoRecordA = null;
+    }
+
+    public function test4() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
         $tableB = $query->table($this->testingAutoRecordBClassName);
         $resultArray = $query->execute();
         $resultArrayCount = $resultArray->count();
@@ -126,7 +149,7 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $tableB = null;
     }
 
-    public function test4() {
+    public function test5() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -164,7 +187,7 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test5() {
+    public function test6() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -207,7 +230,7 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test6() {
+    public function test7() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
