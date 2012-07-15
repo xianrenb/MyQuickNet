@@ -105,6 +105,30 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
     public function test2() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $table = $query->table('TestingAutoRecord');
+        $resultArray = $query->execute();
+        $resultArrayCount = $resultArray->count();
+        $this->assertEquals(0, $resultArrayCount);
+        $query = null;
+        $table = null;
+    }
+
+    public function test3() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $tableB = $query->table($this->testingAutoRecordBClassName);
+        $resultArray = $query->execute();
+        $resultArrayCount = $resultArray->count();
+        $this->assertEquals(100, $resultArrayCount);
+        $query = null;
+        $tableA = null;
+        $tableB = null;
+    }
+
+    public function test4() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
         $tableB = $query->table($this->testingAutoRecordBClassName);
         $tableC = $query->table($this->testingAutoRecordCClassName);
@@ -140,7 +164,7 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test3() {
+    public function test5() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -183,7 +207,7 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test4() {
+    public function test6() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
