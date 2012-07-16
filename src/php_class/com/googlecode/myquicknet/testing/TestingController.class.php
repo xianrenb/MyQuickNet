@@ -38,7 +38,7 @@ class TestingController extends TestingControllerConfig {
     public function run() {
         if (key_exists('PATH_INFO', $_SERVER)) {
             $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
-            $pattern = '/^' . $pattern . 'testing\/get_data.json$/';
+            $pattern = '/^' . $pattern . 'testing\/get_data\.json$/';
             $subject = (string) $_SERVER['PATH_INFO'];
 
             if (preg_match($pattern, $subject, $matches)) {
