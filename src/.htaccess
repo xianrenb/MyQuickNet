@@ -1,4 +1,8 @@
 RewriteEngine on
 RewriteBase /MyQuickNet/
+RewriteRule ^php_class/(.*)$	-	[F,L]
+RewriteRule ^php_test/(.*)$	-	[F,L]
+RewriteRule ^sql/(.*)$	-	[F,L]
+RewriteRule ^sqlite/(.*)$	-	[F,L]
 RewriteCond %{REQUEST_FILENAME}	!-f
 RewriteRule ^(.*)$	index.php/MyQuickNet/$1	[QSA,L]
