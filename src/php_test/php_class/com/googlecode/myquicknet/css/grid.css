@@ -18,6 +18,32 @@ margin-right: auto;
 position: relative;
 width: 960px;
 }
+.fgrid {
+display: inline;
+float: left;
+margin-left: 0px;
+margin-right: 10px;
+}
+.frgrid {
+display: inline;
+float: left;
+margin-left: 0px;
+margin-right: 10px;
+position: relative;
+}
+.lgrid {
+display: inline;
+float: left;
+margin-left: 10px;
+margin-right: 0px;
+}
+.lrgrid {
+display: inline;
+float: left;
+margin-left: 10px;
+margin-right: 0px;
+position: relative;
+}
 .rgrid {
 display: inline;
 float: left;
