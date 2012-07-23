@@ -31,6 +31,19 @@ margin-left: 0px;
 margin-right: 10px;
 position: relative;
 }
+.igrid {
+display: inline;
+float: left;
+margin-left: 0px;
+margin-right: 0px;
+}
+.irgrid {
+display: inline;
+float: left;
+margin-left: 0px;
+margin-right: 0px;
+position: relative;
+}
 .lgrid {
 display: inline;
 float: left;
