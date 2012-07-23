@@ -24,12 +24,21 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
 
         //Settings for using MySQLi
         /*
+          if (array_key_exists('OPENSHIFT_APP_NAME', $_ENV)) {
+          $config['db_class'] = 'MQNDatabaseMySQLi';
+          $config['db_host'] = (string) $_ENV['OPENSHIFT_DB_HOST'];
+          $config['db_port'] = (string) $_ENV['OPENSHIFT_DB_PORT'];
+          $config['db_name'] = (string) $_ENV['OPENSHIFT_APP_NAME'];
+          $config['db_user'] = (string) $_ENV['OPENSHIFT_DB_USERNAME'];
+          $config['db_password'] = (string) $_ENV['OPENSHIFT_DB_PASSWORD'];
+          } else {
           $config['db_class'] = 'MQNDatabaseMySQLi';
           $config['db_host'] = 'localhost';
           $config['db_port'] = '';
           $config['db_name'] = 'mqntestdb';
           $config['db_user'] = 'mqntestdbuser';
           $config['db_password'] = 'mqntest';
+          }
          * 
          */
 

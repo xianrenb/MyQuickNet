@@ -1,3 +1,8 @@
+/*
+SET AUTOCOMMIT=0;
+START TRANSACTION;
+*/
+BEGIN EXCLUSIVE;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,6 +45,7 @@ INSERT INTO `table_c` (`id`, `valid`, `my_c`, `my_y`) VALUES(10, 0, 11, 13);
 
 INSERT INTO `testing_auto_record` (`id`, `valid`, `my_a`, `my_b`, `my_c`, `my_d`, `my_e`) VALUES(1, 0, 1, 2.2, 3, 'string', 0);
 INSERT INTO `testing_auto_record` (`id`, `valid`, `my_a`, `my_b`, `my_c`, `my_d`, `my_e`) VALUES(2, 0, 0, 1.1, 2, 'abc', 1);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

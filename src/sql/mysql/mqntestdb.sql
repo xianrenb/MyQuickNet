@@ -1,6 +1,7 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT=0;
 START TRANSACTION;
+SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -15,7 +16,7 @@ CREATE TABLE `table_a` (
   `my_a` int(11) NOT NULL,
   `my_x` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `valid` (`valid`,`id`)
+  UNIQUE KEY `valid` (`valid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `table_a` (`id`, `valid`, `my_a`, `my_x`) VALUES
@@ -38,7 +39,7 @@ CREATE TABLE `table_b` (
   `my_x` int(11) NOT NULL,
   `my_y` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `valid` (`valid`,`id`)
+  UNIQUE KEY `valid` (`valid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `table_b` (`id`, `valid`, `my_b`, `my_x`, `my_y`) VALUES
@@ -60,7 +61,7 @@ CREATE TABLE `table_c` (
   `my_c` int(11) NOT NULL,
   `my_y` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `valid` (`valid`,`id`)
+  UNIQUE KEY `valid` (`valid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `table_c` (`id`, `valid`, `my_c`, `my_y`) VALUES
@@ -81,7 +82,6 @@ CREATE TABLE `test` (
   KEY `data` (`data`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
 DROP TABLE IF EXISTS `testing_auto_record`;
 CREATE TABLE `testing_auto_record` (
   `id` int(11) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE `testing_auto_record` (
   `my_d` varchar(255) COLLATE utf8_bin NOT NULL,
   `my_e` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `valid` (`valid`,`id`)
+  UNIQUE KEY `valid` (`valid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `testing_auto_record` (`id`, `valid`, `my_a`, `my_b`, `my_c`, `my_d`, `my_e`) VALUES
