@@ -19,14 +19,26 @@ var MQNTools;
             _: function () {
                 return this;
             },
-            nl2br: function (text) {
-                var ch, i;
-                var out = '';
-                text = text.toString();
+            htmlspecialchars: function (text, convertSingleQuote) {
+                var out = text.toString();
+                out = out.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
 
-                for (i = 0; i < text.length; ++i) {
-                    ch = text.charAt(i).toString();
-                    out += (ch === "\n") ? '<br />' : ch.toString();
+                if (convertSingleQuote) {
+                    out = out.replace(/'/g, '&apos;');
+                }
+
+                return out;
+            },
+            nl2br: function (text, isXhtml) {
+                var out = text.toString();
+
+                if ((typeof isXhtml === 'undefined') || isXhtml) {
+                    out = out.replace(/\r\n|\n\r|\n|\r/g, '<br />');
+                } else {
+                    out = out.replace(/\r\n|\n\r|\n|\r/g, '<br>');
                 }
 
                 return out;

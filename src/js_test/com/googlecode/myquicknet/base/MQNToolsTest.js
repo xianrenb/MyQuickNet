@@ -23,11 +23,46 @@ var MQNToolsTest;
                 module('MQNToolsTest');
 
                 test('Test1', function () {
-                    var elementA, elementB;
+                    var mqnTools = new MQNTools();
+                    mqnTools._();
+                    equal(mqnTools.htmlspecialchars('abc', false), 'abc');
+                    equal(mqnTools.htmlspecialchars('abc&abc', false), 'abc&amp;abc');
+                    equal(mqnTools.htmlspecialchars('abc<abc', false), 'abc&lt;abc');
+                    equal(mqnTools.htmlspecialchars('abc>abc', false), 'abc&gt;abc');
+                    equal(mqnTools.htmlspecialchars('abc"abc', false), 'abc&quot;abc');
+                    equal(mqnTools.htmlspecialchars('abc\'abc', false), 'abc\'abc');
+                    equal(mqnTools.htmlspecialchars('abc', true), 'abc');
+                    equal(mqnTools.htmlspecialchars('abc&abc', true), 'abc&amp;abc');
+                    equal(mqnTools.htmlspecialchars('abc<abc', true), 'abc&lt;abc');
+                    equal(mqnTools.htmlspecialchars('abc>abc', true), 'abc&gt;abc');
+                    equal(mqnTools.htmlspecialchars('abc"abc', true), 'abc&quot;abc');
+                    equal(mqnTools.htmlspecialchars('abc\'abc', true), 'abc&apos;abc');
+                });
+
+                test('Test2', function () {
                     var mqnTools = new MQNTools();
                     mqnTools._();
                     equal(mqnTools.nl2br('abc'), 'abc');
+                    equal(mqnTools.nl2br("abc\r\nabc"), 'abc<br />abc');
+                    equal(mqnTools.nl2br("abc\n\rabc"), 'abc<br />abc');
                     equal(mqnTools.nl2br("abc\nabc"), 'abc<br />abc');
+                    equal(mqnTools.nl2br("abc\rabc"), 'abc<br />abc');
+                    equal(mqnTools.nl2br('abc', false), 'abc');
+                    equal(mqnTools.nl2br("abc\r\nabc", false), 'abc<br>abc');
+                    equal(mqnTools.nl2br("abc\n\rabc", false), 'abc<br>abc');
+                    equal(mqnTools.nl2br("abc\nabc", false), 'abc<br>abc');
+                    equal(mqnTools.nl2br("abc\rabc", false), 'abc<br>abc');
+                    equal(mqnTools.nl2br('abc', true), 'abc');
+                    equal(mqnTools.nl2br("abc\r\nabc", true), 'abc<br />abc');
+                    equal(mqnTools.nl2br("abc\n\rabc", true), 'abc<br />abc');
+                    equal(mqnTools.nl2br("abc\nabc", true), 'abc<br />abc');
+                    equal(mqnTools.nl2br("abc\rabc", true), 'abc<br />abc');
+                });
+
+                test('Test3', function () {
+                    var elementA, elementB;
+                    var mqnTools = new MQNTools();
+                    mqnTools._();
                     mqnTools.print('MQNToolsTest-output-a', 'testing');
                     elementA = document.getElementById('MQNToolsTest-output-a');
                     elementB = document.getElementById('MQNToolsTest-output-b');
