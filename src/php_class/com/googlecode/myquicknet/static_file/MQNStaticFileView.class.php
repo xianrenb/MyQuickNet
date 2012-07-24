@@ -125,17 +125,14 @@ class MQNStaticFileView extends MQNView {
                     $headers = array_change_key_case($headers, CASE_LOWER);
                     $modified = true;
 
-                    if (key_exists('if-none-match', $headers) &&
-                            (trim($headers['if-none-match']) === $eTag)
-                    ) {
-                        $modified = false;
-                    }
-
-                    if ($modified &&
-                            key_exists('if-modified-since', $headers) &&
-                            (strtotime(trim($headers['if-modified-since'])) >= $modifiedTime)
-                    ) {
-                        $modified = false;
+                    if (key_exists('if-none-match', $headers)) {
+                        if (trim($headers['if-none-match']) === $eTag) {
+                            $modified = false;
+                        }
+                    } else if (key_exists('if-modified-since', $headers)) {
+                        if (strtotime(trim($headers['if-modified-since'])) >= $modifiedTime) {
+                            $modified = false;
+                        }
                     }
 
                     if (!$modified) {
