@@ -142,6 +142,37 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     }
 
     /**
+     *
+     * @param string $name
+     * @throws BadMethodCallException 
+     */
+    protected function _getField($name) {
+        new String($name);
+        throw new BadMethodCallException();
+    }
+
+    /**
+     *
+     * @param bool $newValid
+     * @throws BadMethodCallException 
+     */
+    protected function _getNewId($newValid) {
+        new Bool($newValid);
+        throw new BadMethodCallException();
+    }
+
+    /**
+     *
+     * @param string $name
+     * @param mixed $value
+     * @throws BadMethodCallException 
+     */
+    protected function _setField($name, $value) {
+        new String($name);
+        throw new BadMethodCallException();
+    }
+
+    /**
      * 
      */
     protected function _unbindCache() {
