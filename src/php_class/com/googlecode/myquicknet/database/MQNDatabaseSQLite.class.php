@@ -173,7 +173,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
             return $rowList;
         } else {
             if ($this->sqlite3) {
+                $this->sqlite3->busyTimeout(60000);
                 $result = (bool) $this->sqlite3->exec($sql);
+                $this->sqlite3->busyTimeout(0);
             } else {
                 $result = false;
             }

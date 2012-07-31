@@ -84,7 +84,15 @@ class MQNAutoRecord {
         $this->valid = false;
     }
 
+    /**
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
     public function __call($name, $arguments) {
+        new String($name);
+
         if (preg_match('/^get/', $name)) {
             sscanf($name, 'get%s', $shortFieldName);
             $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
@@ -97,6 +105,9 @@ class MQNAutoRecord {
         }
     }
 
+    /**
+     * 
+     */
     public function __destruct() {
         if ($this->autoUpdate && $this->dirty) {
             $this->update();
@@ -161,11 +172,37 @@ class MQNAutoRecord {
         // insert an (invalid) record with the new id
         $sql = 'INSERT INTO `';
         $sql .= (string) $this->table;
-        $sql .= '` ( `id` , `valid` )';
-        $sql .= ' VALUES ( ';
+        $sql .= '` ( `id` , `valid`';
+
+        foreach ($this->fieldArray as $name => $value) {
+            $sql .= ' , `';
+            $sql .= (string) $name;
+            $sql .= '`';
+        }
+
+        $sql .= ' ) VALUES ( ';
         $sql .= (int) $id;
         $sql .= ' , ';
         $sql .= (int) $newValid;
+
+        foreach ($this->fieldArray as $name => $value) {
+            $sql .= ' , ';
+
+            if (is_bool($value)) {
+                $sql .= (int) $value;
+            } else if (is_float($value)) {
+                $sql .= (float) $value;
+            } else if (is_int($value)) {
+                $sql .= (int) $value;
+            } else if (is_string($value)) {
+                $sql .= '\'';
+                $sql .= (string) $this->database->escapeString($value);
+                $sql .= '\'';
+            } else {
+                throw new Exception('Type not supported.');
+            }
+        }
+
         $sql .= ' )';
         $this->database->query($sql);
         return $id;
@@ -206,6 +243,9 @@ class MQNAutoRecord {
         $this->dirty = true;
     }
 
+    /**
+     * 
+     */
     public function create() {
         $this->autoUpdate = true;
         $this->dirty = true;
@@ -214,6 +254,9 @@ class MQNAutoRecord {
         $this->fieldArray = $this->defaultFieldArray;
     }
 
+    /**
+     * 
+     */
     public function delete() {
         $this->valid = false;
         $this->update();
@@ -298,6 +341,11 @@ class MQNAutoRecord {
         }
     }
 
+    /**
+     *
+     * @return null
+     * @throws Exception 
+     */
     public function update() {
         $id = (int) $this->getId();
         $valid = (bool) $this->isValid();
