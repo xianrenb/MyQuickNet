@@ -63,6 +63,33 @@ class MQNAutoRecordCacheTest extends PHPUnit_Framework_TestCase {
         $record2->delete();
         $this->assertTrue($record2->getId() == 0);
         $this->assertFalse($record2->isValid());
+
+        try {
+            $record1->badMethod();
+            $exception = false;
+        } catch (BadMethodCallException $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+
+        try {
+            $record1->setBadDataMember(1);
+            $exception = false;
+        } catch (BadMethodCallException $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+
+        try {
+            $record1->getBadDataMember();
+            $exception = false;
+        } catch (BadMethodCallException $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
         $record1->delete();
         $record1 = null;
         $record2 = null;

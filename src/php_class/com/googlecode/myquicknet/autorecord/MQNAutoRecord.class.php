@@ -89,19 +89,26 @@ class MQNAutoRecord {
      * @param string $name
      * @param array $arguments
      * @return mixed
+     * @throws BadMethodCallException 
      */
     public function __call($name, $arguments) {
         new String($name);
 
-        if (preg_match('/^get/', $name)) {
-            sscanf($name, 'get%s', $shortFieldName);
-            $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
-            return $this->_getField($fieldName);
-        } else if (preg_match('/^set/', $name)) {
-            sscanf($name, 'set%s', $shortFieldName);
-            $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
-            $value = $arguments[0];
-            $this->_setField($fieldName, $value);
+        try {
+            if (preg_match('/^get/', $name)) {
+                sscanf($name, 'get%s', $shortFieldName);
+                $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
+                return $this->_getField($fieldName);
+            } else if (preg_match('/^set/', $name)) {
+                sscanf($name, 'set%s', $shortFieldName);
+                $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
+                $value = $arguments[0];
+                $this->_setField($fieldName, $value);
+            } else {
+                throw new InvalidArgumentException();
+            }
+        } catch (InvalidArgumentException $e) {
+            throw new BadMethodCallException();
         }
     }
 
@@ -121,9 +128,15 @@ class MQNAutoRecord {
      *
      * @param string $name
      * @return bool|float|int|string
+     * @throws InvalidArgumentException 
      */
     protected function _getField($name) {
         new String($name);
+
+        if (!array_key_exists($name, $this->fieldArray)) {
+            throw new InvalidArgumentException();
+        }
+
         return $this->fieldArray[$name];
     }
 
@@ -212,9 +225,15 @@ class MQNAutoRecord {
      *
      * @param string $name
      * @param bool|float|int|string|MQNAutoRecord $value
+     * @throws Exception
+     * @throws InvalidArgumentException 
      */
     protected function _setField($name, $value) {
         new String($name);
+
+        if (!array_key_exists($name, $this->fieldArray)) {
+            throw new InvalidArgumentException();
+        }
 
         if (is_scalar($value)) {
             $oldValue = $this->fieldArray[$name];
