@@ -21,10 +21,10 @@ var MQNTools;
             },
             htmlspecialchars: function (text, convertSingleQuote) {
                 var out = text.toString();
-                out = out.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
+                out = out.replace(/&/g, '&amp;');
+                out = out.replace(/</g, '&lt;');
+                out = out.replace(/>/g, '&gt;');
+                out = out.replace(/"/g, '&quot;');
 
                 if (convertSingleQuote) {
                     out = out.replace(/'/g, '&apos;');
