@@ -20,23 +20,17 @@ var MQNMVCTest;
                 return this;
             },
             callback: function (json) {
-                module('MQNMVCTest');
-
-                test(
-                    'Test1',
-                    function () {
-                        my.a = json.a;
-                        my.b = json.b;
-                        my.c = json.c;
-                        my.d = json.d;
-                        equal(my.a, true);
-                        equal(my.b, 2.2);
-                        equal(my.c, 3);
-                        equal(my.d, 'string');
-                    }
-                    );
+                my.a = json.a;
+                my.b = json.b;
+                my.c = json.c;
+                my.d = json.d;
+                equal(my.a, true);
+                equal(my.b, 2.2);
+                equal(my.c, 3);
+                equal(my.d, 'string');
+                start();
             },
-            run: function () {
+            getData: function () {
                 var mvc = new TestingMVC();
                 mvc._();
 
@@ -46,6 +40,19 @@ var MQNMVCTest;
                     (function (that) {
                         return function (json) {
                             that.callback(json);
+                        };
+                    }(this))
+                    );
+            },
+            run: function () {
+                module('MQNMVCTest');
+
+                asyncTest(
+                    'Test1',
+                    (function (that) {
+                        return function () {
+                            expect(4);
+                            that.getData();
                         };
                     }(this))
                     );
