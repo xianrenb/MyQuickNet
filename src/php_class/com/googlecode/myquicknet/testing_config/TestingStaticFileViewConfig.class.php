@@ -18,7 +18,7 @@ class TestingStaticFileViewConfig extends MQNStaticFileView {
      * @param array $config
      */
     public function __construct(array $config = array()) {
-        $config['cache_max_age'] = 20 * 60;
+        $config['cache_max_age'] = 60 * 20;
         $config['static_file_path'] = (string) MQN_BASE_PATH;
         parent::__construct($config);
     }

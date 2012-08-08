@@ -39,7 +39,7 @@ class MQNStaticFileView extends MQNView {
         if (key_exists('cache_max_age', $config)) {
             $this->cacheMaxAge = (int) $config['cache_max_age'];
         } else {
-            $this->cacheMaxAge = 20 * 60;
+            $this->cacheMaxAge = 60 * 20;
         }
 
         if (key_exists('static_file_path', $config)) {
@@ -82,6 +82,9 @@ class MQNStaticFileView extends MQNView {
             case 'js':
                 $out = 'text/javascript';
                 break;
+            case 'json':
+                $out = 'application/json';
+                break;
             case 'pdf':
                 $out = 'application/pdf';
                 break;
@@ -106,12 +109,25 @@ class MQNStaticFileView extends MQNView {
 
     /**
      *
-     * @return bool
+     * @return boolean
+     * @throws Exception 
      */
     public function output() {
         $fileName = (string) ($this->staticFilePath . $this->staticFileName);
 
         if (file_exists($fileName) && is_file($fileName)) {
+            $file = fopen($fileName, 'r');
+
+            if ($file === false) {
+                return false;
+            }
+
+            if (!flock($file, LOCK_SH)) {
+                throw new Exception('Could not acquire file lock.');
+            }
+
+            //critical section started
+
             if (!headers_sent()) {
                 $eTag = '"' . md5_file($fileName) . '"';
                 $modifiedTime = (int) filemtime($fileName);
@@ -151,6 +167,17 @@ class MQNStaticFileView extends MQNView {
             }
 
             readfile($fileName);
+
+            if (!flock($file, LOCK_UN)) {
+                throw new Exception('Could not release file lock.');
+            }
+
+            //critical section ended
+
+            if (!fclose($file)) {
+                throw new Exception('Could not close file.');
+            }
+
             return true;
         } else {
             return false;
