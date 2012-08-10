@@ -35,22 +35,26 @@ class TestingController extends TestingControllerConfig {
         $this->view = parent::getView();
     }
 
+    /**
+     *
+     * @return null
+     */
     public function run() {
         if (key_exists('PATH_INFO', $_SERVER)) {
-            $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
-            $pattern = '/^' . $pattern . 'testing\/get_data\.json$/';
+            $urlBasePath = (string) preg_quote($this->getUrlBasePath(), '/');
             $subject = (string) $_SERVER['PATH_INFO'];
+            $pattern = '/^' . $urlBasePath . 'testing\/advance_example_(.+)\.html$/';
 
             if (preg_match($pattern, $subject, $matches)) {
-                $this->model->create();
-                $data = array();
-                $data['a'] = $this->model->getMyA();
-                $data['b'] = $this->model->getMyB();
-                $data['c'] = $this->model->getMyC();
-                $data['d'] = $this->model->getMyD();
-                $this->view->setJSONString(json_encode($data));
-                $this->model->delete();
-                $this->view->outputJSON();
+                $s = (string) $matches[1];
+                $this->view->advanceExample($this->model, $s);
+                return;
+            }
+
+            $pattern = '/^' . $urlBasePath . 'testing\/get_data\.json$/';
+
+            if (preg_match($pattern, $subject, $matches)) {
+                $this->view->getData($this->model);
                 return;
             }
         }
