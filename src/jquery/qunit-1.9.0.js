@@ -1,13 +1,11 @@
 /**
- * QUnit v1.9.0pre - A JavaScript Unit Testing Framework
+ * QUnit v1.9.0 - A JavaScript Unit Testing Framework
  *
  * http://docs.jquery.com/QUnit
  *
  * Copyright (c) 2012 John Resig, Jörn Zaefferer
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * or GPL (GPL-LICENSE.txt) licenses.
- * Pulled Live from Git Mon Jul  2 05:10:01 UTC 2012
- * Last Commit: 1ebf587386dbbe259f363baa71eca20165cfed41
  */
 
 (function( window ) {
