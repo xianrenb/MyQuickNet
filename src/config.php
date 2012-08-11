@@ -26,6 +26,7 @@ call_user_func(function () {
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/controller/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/css/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/database/');
+            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/dom/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/scalar/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/static_file/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/testing/');

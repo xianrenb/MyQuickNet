@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <attr>
+        <data attr="attr"></data>
+        <tagA attr="attr"></tagA>
+        <tagB attrA="attrA" attr="attr"></tagB>
+        <tagC attrA="attrA" attr="attr">
+            <tagD></tagD>
+        </tagC>
+    </attr>
+    <text>
+        <data>text</data>
+        <tagA>text</tagA>
+        <tagB attrA="">text</tagB>
+        <tagC attrA="">text</tagC>
+    </text>
+    <val>
+        <data value="value"></data>
+        <tagA value="value"></tagA>
+        <tagB value="value"></tagB>
+        <tagC id="val_c" value="value">
+            <tagD></tagD>
+        </tagC>
+    </val>
+    <xml>
+        <data><a></a><b></b></data>
+        <tagA><xml></xml></tagA>
+        <tagB value=""><xml></xml></tagB>
+        <tagC id="xml_c" value=""><xml></xml></tagC>
+    </xml>
+</root>

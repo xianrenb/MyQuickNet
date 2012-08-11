@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * MQNDomTest
+ * @package MyQuickNet
+ * @version 2.0
+ * @copyright (c) 2012 MyQuickNet Development Group
+ * @license http://www.opensource.org/licenses/gpl-3.0.html GNU General Public License version 3 (GPLv3)
+ */
+
+/**
+ * Test class for MQNDom.
+ */
+class MQNDomTest extends PHPUnit_Framework_TestCase {
+
+    /**
+     * Sets up the fixture, for example, opens a network connection.
+     * This method is called before a test is executed.
+     */
+    protected function setUp() {
+        
+    }
+
+    /**
+     * Tears down the fixture, for example, closes a network connection.
+     * This method is called after a test is executed.
+     */
+    protected function tearDown() {
+        
+    }
+
+    public function test1() {
+        $dom = new MQNDom();
+        $doc = $dom->getDoc();
+        $xPath = $dom->getXPath();
+        $this->assertTrue($doc instanceof DOMDocument);
+        $this->assertTrue($xPath === null);
+        $dom->load(dirname(__FILE__) . '/input.xml');
+        $dom->save(dirname(__FILE__) . '/output.xml');
+        $doc = $dom->getDoc();
+        $xPath = $dom->getXPath();
+        $this->assertTrue($doc instanceof DOMDocument);
+        $this->assertTrue($xPath instanceof DOMXPath);
+        $input = (string) file_get_contents(dirname(__FILE__) . '/input.xml');
+        $output = (string) file_get_contents(dirname(__FILE__) . '/output.xml');
+        $this->assertEquals($input, $output);
+    }
+
+    public function test2() {
+        $dom = new MQNDom();
+        $dom->loadHTMLFile(dirname(__FILE__) . '/input.html');
+        $dom->saveHTMLFile(dirname(__FILE__) . '/output.html');
+        $input = (string) file_get_contents(dirname(__FILE__) . '/input.html');
+        $output = (string) file_get_contents(dirname(__FILE__) . '/output.html');
+        $this->assertEquals($input, $output);
+    }
+
+    public function test3() {
+        $dom = new MQNDom();
+        $input = (string) file_get_contents(dirname(__FILE__) . '/input.xml');
+        $dom->loadXML($input);
+        $output = $dom->saveXML();
+        $this->assertEquals($input, $output);
+    }
+
+    public function test4() {
+        $dom = new MQNDom();
+        $input = (string) file_get_contents(dirname(__FILE__) . '/input.html');
+        $dom->loadHTML($input);
+        $output = $dom->saveHTML();
+        $this->assertEquals($input, $output);
+    }
+
+    public function test5() {
+        $dom = new MQNDom();
+        $dom->load(dirname(__FILE__) . '/input_template.xml');
+        $attrValue = $dom->queryAttr('//attr/data', 'attr');
+        $this->assertEquals('attr', $attrValue);
+        $attrValue = $dom->queryAttr('//attr/badData', 'attr');
+        $this->assertEquals(null, $attrValue);
+        $text = $dom->queryText('//text/data');
+        $this->assertEquals('text', $text);
+        $text = $dom->queryText('//text/badData');
+        $this->assertEquals(null, $text);
+        $value = $dom->queryVal('//val/data');
+        $this->assertEquals('value', $value);
+        $value = $dom->queryVal('//val/badData');
+        $this->assertEquals(null, $value);
+        $xml = $dom->queryXml('//xml/data');
+        $this->assertEquals('<a/><b/>', $xml);
+        $xml = $dom->queryXml('//xml/badData');
+        $this->assertEquals(null, $xml);
+        $dom->queryAttr('//attr/tagA', 'attr', 'attr');
+        $dom->queryAttr('//attr/tagB', 'attr', 'attr');
+        $dom->queryAttr('//attr/tagC', 'attr', 'attr');
+        $dom->queryText('//text/tagA', 'text');
+        $dom->queryText('//text/tagB', 'text');
+        $dom->queryText('//text/tagC', 'text');
+        $dom->queryVal('//val/tagA', 'value');
+        $dom->queryVal('//val/tagB', 'value');
+        $dom->queryVal('//val/tagC', 'value');
+        $dom->queryXml('//xml/tagA', '<xml></xml>');
+        $dom->queryXml('//xml/tagB', '<xml></xml>');
+        $dom->queryXml('//xml/tagC', '<xml></xml>');
+        $actual = (string) $dom->saveXML();
+        $dom = new MQNDom();
+        $dom->load(dirname(__FILE__) . '/output_template.xml');
+        $expected = (string) $dom->saveXML();
+        $this->assertEquals($expected, $actual);
+    }
+
+}
+
+?>
