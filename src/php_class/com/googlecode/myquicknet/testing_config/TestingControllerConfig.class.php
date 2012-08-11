@@ -18,7 +18,7 @@ class TestingControllerConfig extends MQNController {
      * @param array $config
      */
     public function __construct(array $config = array()) {
-        $config['model_class'] = 'TestingAutoRecord';
+        $config['model_class'] = 'TestingAutoRecordCache';
         $config['url_base_path'] = '/MyQuickNet/';
         $config['view_class'] = 'TestingView';
         parent::__construct($config);

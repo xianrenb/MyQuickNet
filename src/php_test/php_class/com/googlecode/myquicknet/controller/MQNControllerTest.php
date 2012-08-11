@@ -52,7 +52,7 @@ class MQNControllerTest extends PHPUnit_Framework_TestCase {
     public function test2() {
         $controller = new $this->testingControllerClass();
         $this->assertTrue($controller instanceof MQNController);
-        $this->assertTrue($controller->getModel() instanceof TestingAutoRecord);
+        $this->assertTrue($controller->getModel() instanceof TestingAutoRecordCache);
         $this->assertEquals('/MyQuickNet/', $controller->getUrlBasePath());
         $this->assertTrue($controller->getView() instanceof TestingView);
     }

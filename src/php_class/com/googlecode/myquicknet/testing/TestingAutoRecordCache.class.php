@@ -29,6 +29,21 @@ class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
         return 'TestingAutoRecordCache';
     }
 
+    /**
+     *
+     * @return array
+     */
+    public function outputDefaultData() {
+        $this->create();
+        $dataArray = array();
+        $dataArray['data_a'] = (bool) $this->getMyA();
+        $dataArray['data_b'] = (float) $this->getMyB();
+        $dataArray['data_c'] = (int) $this->getMyC();
+        $dataArray['data_d'] = (string) $this->getMyD();
+        $this->delete();
+        return $dataArray;
+    }
+
 }
 
 ?>
