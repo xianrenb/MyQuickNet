@@ -197,6 +197,18 @@ class MQNDom {
     /**
      *
      * @param string $query
+     * @param callable $callback
+     * @return mixed
+     */
+    public function queryDo($query, $callback) {
+        new String($query);
+        $nodes = $this->xPath->query($query);
+        return $callback($nodes, $this);
+    }
+
+    /**
+     *
+     * @param string $query
      * @param string|null $text
      * @return string|null
      */

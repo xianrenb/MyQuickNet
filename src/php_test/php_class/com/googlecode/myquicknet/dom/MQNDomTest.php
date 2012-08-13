@@ -78,6 +78,26 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('attr', $attrValue);
         $attrValue = $dom->queryAttr('//attr/badData', 'attr');
         $this->assertEquals(null, $attrValue);
+
+        $text = $dom->queryDo('//do/data', function (DOMNodeList $nodes, MQNDom $dom) {
+                    $node = $nodes->item(0);
+
+                    if ($node && $node->firstChild && ($node->firstChild instanceof DOMText)) {
+                        $text = (string) $node->firstChild->wholeText;
+                        return $text;
+                    } else {
+                        return null;
+                    }
+                });
+
+        $this->assertEquals('do', $text);
+
+        $dom->queryDo('//do/tagA', function (DOMNodeList $nodes, MQNDom $dom) {
+                    foreach ($nodes as $node) {
+                        $node->appendChild($dom->getDoc()->createTextNode('text'));
+                    }
+                });
+
         $text = $dom->queryText('//text/data');
         $this->assertEquals('text', $text);
         $text = $dom->queryText('//text/badData');

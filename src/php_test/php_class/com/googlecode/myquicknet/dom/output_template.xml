@@ -8,6 +8,10 @@
             <tagD></tagD>
         </tagC>
     </attr>
+    <do>
+        <data>do</data>
+        <tagA>text</tagA>
+    </do>
     <text>
         <data>text</data>
         <tagA>text</tagA>
