@@ -271,6 +271,82 @@ class MQNAutoRecordQueryTest extends PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
+    public function test8() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $fieldAX = $query->field($tableA, 'my_x');
+        $query->condition($fieldAX, '=', 9, true);
+
+        try {
+            $query->execute();
+            $exception = false;
+        } catch (Exception $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+        $query = null;
+        $tableA = null;
+    }
+
+    public function test9() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $fieldAX = $query->field($tableA, 'my_x');
+        $query->condition($fieldAX, '=', 9, true);
+        $query->condition($fieldAX, '=', 8);
+        $resultArray = $query->execute();
+        $this->assertEquals(2, $resultArray->count());
+        $query = null;
+        $tableA = null;
+    }
+
+    public function test10() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $tableB = $query->table($this->testingAutoRecordBClassName);
+        $fieldAA = $query->field($tableA, 'my_a');
+        $fieldAX = $query->field($tableA, 'my_x');
+        $fieldBX = $query->field($tableB, 'my_x');
+        $fieldBY = $query->field($tableB, 'my_y');
+        $query->condition($fieldAA, '>', 0);
+        $query->condition($fieldAX, '=', $fieldBX);
+        $query->condition($fieldAX, '=', 9, true);
+        $query->condition($fieldAX, '=', 8, true);
+        $query->condition($fieldAX, '=', 7);
+        $query->condition($fieldBY, '>', 0);
+        $resultArray = $query->execute();
+        $this->assertEquals(3, $resultArray->count());
+        $query = null;
+        $tableA = null;
+        $tableB = null;
+    }
+
+    public function test11() {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $tableB = $query->table($this->testingAutoRecordBClassName);
+        $fieldAA = $query->field($tableA, 'my_a');
+        $fieldAX = $query->field($tableA, 'my_x');
+        $fieldBX = $query->field($tableB, 'my_x');
+        $fieldBY = $query->field($tableB, 'my_y');
+        $query->condition($fieldAA, '>', 0);
+        $query->condition($fieldAX, '=', $fieldBX);
+        $query->condition($fieldAX, '=', 9, true);
+        $query->condition($fieldAX, '=', 8, true);
+        $query->condition($fieldAX, '=', 7);
+        $query->condition($fieldBY, '<', 0);
+        $resultArray = $query->execute();
+        $this->assertEquals(0, $resultArray->count());
+        $query = null;
+        $tableA = null;
+        $tableB = null;
+    }
+
 }
 
 ?>

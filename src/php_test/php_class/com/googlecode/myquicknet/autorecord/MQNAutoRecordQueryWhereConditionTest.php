@@ -32,6 +32,11 @@ class MQNAutoRecordQueryWhereConditionTest extends PHPUnit_Framework_TestCase {
     public function test1() {
         $whereCondition = new MQNAutoRecordQueryWhereCondition();
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
+        $this->assertFalse($whereCondition->getOrNext());
+        $whereCondition->setOrNext(true);
+        $this->assertTrue($whereCondition->getOrNext());
+        $whereCondition->setOrNext(false);
+        $this->assertFalse($whereCondition->getOrNext());
     }
 
     public function test2() {

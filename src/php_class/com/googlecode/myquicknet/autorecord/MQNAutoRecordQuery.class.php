@@ -150,17 +150,34 @@ class MQNAutoRecordQuery {
     /**
      *
      * @return string
+     * @throws Exception 
      */
     protected function _buildWhereConditionSql() {
         $sql = '';
         $countWhereConditionArray = (int) count($this->whereConditionArray);
 
         if ($countWhereConditionArray) {
+            $lastOrNext = false;
+
             for ($i = 0; $i < $countWhereConditionArray; ++$i) {
-                $sql .= ( $i) ? ' AND ' : ' WHERE ';
                 $operator = (string) $this->whereConditionArray[$i]->getOperator();
+                $orNext = (bool) $this->whereConditionArray[$i]->getOrNext();
                 $value1 = $this->whereConditionArray[$i]->getValue1();
                 $value2 = $this->whereConditionArray[$i]->getValue2();
+
+                if ($i) {
+                    if ($lastOrNext) {
+                        $sql .= ' OR ';
+                    } else {
+                        $sql .= ' AND ';
+                    }
+                } else {
+                    $sql .= ' WHERE ';
+                }
+
+                if (!$lastOrNext && $orNext) {
+                    $sql .= '( ';
+                }
 
                 if ($value1 instanceof MQNAutoRecordQueryField) {
                     $sql .= '`t';
@@ -217,6 +234,16 @@ class MQNAutoRecordQuery {
                 } else {
                     throw new Exception('Type not supported.');
                 }
+
+                if ($lastOrNext && !$orNext) {
+                    $sql .= ' )';
+                }
+
+                $lastOrNext = (bool) $orNext;
+            }
+
+            if ($lastOrNext) {
+                throw new Exception('Next condition is expected.');
             }
         } else {
             $countTableArray = (int) count($this->tableArray);
@@ -237,8 +264,10 @@ class MQNAutoRecordQuery {
      * @param bool|float|int|string|MQNAutoRecordQueryField $value1
      * @param string $operator
      * @param bool|float|int|string|MQNAutoRecordQueryField $value2
+     * @param bool $orNext
+     * @throws InvalidArgumentException 
      */
-    public function condition($value1, $operator, $value2) {
+    public function condition($value1, $operator, $value2, $orNext = false) {
         new String($operator);
         $value1IsField = false;
         $value2IsField = false;
@@ -265,6 +294,10 @@ class MQNAutoRecordQuery {
                 $value2IsField &&
                 ($value1->getTable() !== $value2->getTable())
         ) {
+            if ($orNext) {
+                throw new InvalidArgumentException();
+            }
+
             $joinCondition = new MQNAutoRecordQueryJoinCondition();
             $joinCondition->setField1($value1);
             $joinCondition->setField2($value2);
@@ -273,6 +306,7 @@ class MQNAutoRecordQuery {
         } else {
             $whereCondition = new MQNAutoRecordQueryWhereCondition();
             $whereCondition->setOperator($operator);
+            $whereCondition->setOrNext($orNext);
             $whereCondition->setValue1($value1);
             $whereCondition->setValue2($value2);
             $n = (int) count($this->whereConditionArray);
@@ -371,6 +405,7 @@ class MQNAutoRecordQuery {
      *
      * @param string $autoRecordClassName
      * @return MQNAutoRecordQueryTable
+     * @throws InvalidArgumentException 
      */
     public function table($autoRecordClassName) {
         new String($autoRecordClassName);

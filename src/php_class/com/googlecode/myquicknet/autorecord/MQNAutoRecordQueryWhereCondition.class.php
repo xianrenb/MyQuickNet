@@ -21,6 +21,12 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
 
     /**
      *
+     * @var bool
+     */
+    private $orNext;
+
+    /**
+     *
      * @var bool|float|int|string|MQNAutoRecordQueryField
      */
     private $value1;
@@ -41,6 +47,7 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
         new String($name);
         parent::__construct($id, $name);
         $this->operator = '';
+        $this->orNext = false;
         $this->value1 = null;
         $this->value2 = null;
     }
@@ -51,6 +58,14 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      */
     public function getOperator() {
         return $this->operator;
+    }
+
+    /**
+     *
+     * @return bool
+     */
+    public function getOrNext() {
+        return $this->orNext;
     }
 
     /**
@@ -76,6 +91,15 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
     public function setOperator($operator) {
         new String($operator);
         $this->operator = (string) $operator;
+    }
+
+    /**
+     *
+     * @param bool $orNext 
+     */
+    public function setOrNext($orNext) {
+        new Bool($orNext);
+        $this->orNext = (bool) $orNext;
     }
 
     /**
