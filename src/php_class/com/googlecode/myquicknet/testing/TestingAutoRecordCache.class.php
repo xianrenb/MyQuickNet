@@ -23,10 +23,27 @@ class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
 
     /**
      *
+     * @return boolean
+     */
+    public function getMyA() {
+        $myA = (bool) parent::getMyA();
+        $this->methodB();
+        return $myA;
+    }
+
+    /**
+     *
      * @return string
      */
     public function methodA() {
         return 'TestingAutoRecordCache';
+    }
+
+    /**
+     * 
+     */
+    public function methodB() {
+        
     }
 
     /**

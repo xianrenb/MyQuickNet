@@ -23,45 +23,25 @@ class TestingView extends TestingViewConfig {
 
     /**
      *
-     * @param DOMDocument $doc
-     * @param DOMXPath $xpath
+     * @param MQNDom $dom
      * @param array $dataArray 
      */
-    protected function _insertAdvanceExampleContent($doc, $xpath, $dataArray) {
+    protected function _insertAdvanceExampleContent(MQNDom $dom, array $dataArray) {
         $query = '//span[@id=\'data_a\']';
-
-        foreach ($xpath->query($query, $doc) as $span) {
-            $span->appendChild($doc->createTextNode($dataArray['data_a'] ? 'true' : 'false'));
-            $span->normalize();
-        }
-
+        $text = (string) $dataArray['data_a'] ? 'true' : 'false';
+        $dom->queryText($query, $text);
         $query = '//span[@id=\'data_b\']';
-
-        foreach ($xpath->query($query, $doc) as $span) {
-            $span->appendChild($doc->createTextNode($dataArray['data_b']));
-            $span->normalize();
-        }
-
+        $text = (string) $dataArray['data_b'];
+        $dom->queryText($query, $text);
         $query = '//span[@id=\'data_c\']';
-
-        foreach ($xpath->query($query, $doc) as $span) {
-            $span->appendChild($doc->createTextNode($dataArray['data_c']));
-            $span->normalize();
-        }
-
+        $text = (string) $dataArray['data_c'];
+        $dom->queryText($query, $text);
         $query = '//span[@id=\'data_d\']';
-
-        foreach ($xpath->query($query, $doc) as $span) {
-            $span->appendChild($doc->createTextNode($dataArray['data_d']));
-            $span->normalize();
-        }
-
+        $text = (string) $dataArray['data_d'];
+        $dom->queryText($query, $text);
         $query = '//span[@id=\'s\']';
-
-        foreach ($xpath->query($query, $doc) as $span) {
-            $span->appendChild($doc->createTextNode($dataArray['s']));
-            $span->normalize();
-        }
+        $text = (string) $dataArray['s'];
+        $dom->queryText($query, $text);
     }
 
     /**
@@ -70,16 +50,14 @@ class TestingView extends TestingViewConfig {
      * @param string $s
      * @return boolean 
      */
-    public function advanceExample($model, $s) {
+    public function advanceExample(MQNAutoRecord $model, $s) {
         new String($s);
         $dataArray = $model->outputDefaultData();
-        $dataArray['s'] = $s;
-        $html = (string) file_get_contents(MQN_BASE_PATH . 'html/testing.advance_example.html');
-        $doc = new DOMDocument();
-        $doc->formatOutput = true;
-        $doc->loadXML($html);
-        $xpath = new DOMXPath($doc);
-        $this->_insertAdvanceExampleContent($doc, $xpath, $dataArray);
+        $dataArray['s'] = (string) $s;
+        $dom = new MQNDom();
+        $dom->load(MQN_BASE_PATH . 'html/testing.advance_example.html');
+        $this->_insertAdvanceExampleContent($dom, $dataArray);
+        $doc = $dom->getDoc();
         $xhtml = (string) $doc->saveXML($doc->doctype);
         $xhtml .= "\n";
         $xhtml .= (string) $doc->saveXML($doc->documentElement);
@@ -92,7 +70,7 @@ class TestingView extends TestingViewConfig {
      * @param MQNAutoRecord $model
      * @return boolean
      */
-    public function getData($model) {
+    public function getData(MQNAutoRecord $model) {
         $model->create();
         $dataArray = array();
         $dataArray['a'] = $model->getMyA();
