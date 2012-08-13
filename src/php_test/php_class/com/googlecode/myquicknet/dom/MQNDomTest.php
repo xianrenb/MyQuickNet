@@ -35,29 +35,29 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
         $xPath = $dom->getXPath();
         $this->assertTrue($doc instanceof DOMDocument);
         $this->assertTrue($xPath === null);
-        $dom->load(dirname(__FILE__) . '/input.xml');
-        $dom->save(dirname(__FILE__) . '/output.xml');
+        $dom->load(__DIR__ . '/input.xml');
+        $dom->save(__DIR__ . '/output.xml');
         $doc = $dom->getDoc();
         $xPath = $dom->getXPath();
         $this->assertTrue($doc instanceof DOMDocument);
         $this->assertTrue($xPath instanceof DOMXPath);
-        $input = (string) file_get_contents(dirname(__FILE__) . '/input.xml');
-        $output = (string) file_get_contents(dirname(__FILE__) . '/output.xml');
+        $input = (string) file_get_contents(__DIR__ . '/input.xml');
+        $output = (string) file_get_contents(__DIR__ . '/output.xml');
         $this->assertEquals($input, $output);
     }
 
     public function test2() {
         $dom = new MQNDom();
-        $dom->loadHTMLFile(dirname(__FILE__) . '/input.html');
-        $dom->saveHTMLFile(dirname(__FILE__) . '/output.html');
-        $input = (string) file_get_contents(dirname(__FILE__) . '/input.html');
-        $output = (string) file_get_contents(dirname(__FILE__) . '/output.html');
+        $dom->loadHTMLFile(__DIR__ . '/input.html');
+        $dom->saveHTMLFile(__DIR__ . '/output.html');
+        $input = (string) file_get_contents(__DIR__ . '/input.html');
+        $output = (string) file_get_contents(__DIR__ . '/output.html');
         $this->assertEquals($input, $output);
     }
 
     public function test3() {
         $dom = new MQNDom();
-        $input = (string) file_get_contents(dirname(__FILE__) . '/input.xml');
+        $input = (string) file_get_contents(__DIR__ . '/input.xml');
         $dom->loadXML($input);
         $output = $dom->saveXML();
         $this->assertEquals($input, $output);
@@ -65,7 +65,7 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
 
     public function test4() {
         $dom = new MQNDom();
-        $input = (string) file_get_contents(dirname(__FILE__) . '/input.html');
+        $input = (string) file_get_contents(__DIR__ . '/input.html');
         $dom->loadHTML($input);
         $output = $dom->saveHTML();
         $this->assertEquals($input, $output);
@@ -73,7 +73,7 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
 
     public function test5() {
         $dom = new MQNDom();
-        $dom->load(dirname(__FILE__) . '/input_template.xml');
+        $dom->load(__DIR__ . '/input_template.xml');
         $attrValue = $dom->queryAttr('//attr/data', 'attr');
         $this->assertEquals('attr', $attrValue);
         $attrValue = $dom->queryAttr('//attr/badData', 'attr');
@@ -104,7 +104,7 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
         $dom->queryXml('//xml/tagC', '<xml></xml>');
         $actual = (string) $dom->saveXML();
         $dom = new MQNDom();
-        $dom->load(dirname(__FILE__) . '/output_template.xml');
+        $dom->load(__DIR__ . '/output_template.xml');
         $expected = (string) $dom->saveXML();
         $this->assertEquals($expected, $actual);
     }

@@ -48,7 +48,7 @@ class MQNCssControllerTest extends PHPUnit_Framework_TestCase {
         $controller->run();
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(dirname(__FILE__) . '/reset.css');
+        $expected = (string) file_get_contents(__DIR__ . '/reset.css');
         $this->assertEquals($expected, $actual);
         unset($_SERVER['PATH_INFO']);
     }
@@ -61,7 +61,7 @@ class MQNCssControllerTest extends PHPUnit_Framework_TestCase {
         $controller->run();
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(dirname(__FILE__) . '/grid.css');
+        $expected = (string) file_get_contents(__DIR__ . '/grid.css');
         $this->assertEquals($expected, $actual);
         unset($_SERVER['PATH_INFO']);
     }

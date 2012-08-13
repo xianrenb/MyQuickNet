@@ -36,7 +36,7 @@ class MQNCssViewTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($view->output());
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(dirname(__FILE__) . '/reset.css');
+        $expected = (string) file_get_contents(__DIR__ . '/reset.css');
         $this->assertEquals($expected, $actual);
     }
 
@@ -47,7 +47,7 @@ class MQNCssViewTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($view->outputReset());
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(dirname(__FILE__) . '/reset.css');
+        $expected = (string) file_get_contents(__DIR__ . '/reset.css');
         $this->assertEquals($expected, $actual);
     }
 
@@ -58,7 +58,7 @@ class MQNCssViewTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($view->outputGrid());
         $actual = (string) ob_get_contents();
         ob_end_clean();
-        $expected = (string) file_get_contents(dirname(__FILE__) . '/grid.css');
+        $expected = (string) file_get_contents(__DIR__ . '/grid.css');
         $this->assertEquals($expected, $actual);
     }
 

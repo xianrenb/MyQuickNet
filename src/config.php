@@ -19,7 +19,7 @@ call_user_func(function () {
             // Uncomment the following line when using mod_suphp
             // $_SERVER['PATH_INFO'] = (string) preg_replace('/^([^?]*).*$/', '\1', $_SERVER['REQUEST_URI']);
             // Define MyQuickNet base path constant
-            define('MQN_BASE_PATH', (string) (dirname(__FILE__) . '/'));
+            define('MQN_BASE_PATH', (string) (__DIR__ . '/'));
             // Set include path
             $path = (string) get_include_path();
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/autorecord/');
