@@ -47,7 +47,7 @@ class MQNDom {
      *
      * @param DOMNode $node 
      */
-    protected function _removeChildNodes($node) {
+    protected function _removeChildNodes(DOMNode $node) {
         while ($node->firstChild) {
             while ($node->firstChild->firstChild) {
                 $this->_removeChildNodes($node->firstChild);
