@@ -117,7 +117,7 @@ var newType;
             if (typeof my.interfaces[i] === 'string') {
                 interfaceName = my.interfaces[i].toString();
             } else {
-                interfaceName = my.interfaces[i].shared.name.toString();
+                interfaceName = my.interfaces[i].typeName.toString();
             }
 
             global[my.name].prototype['_' + interfaceName] = {};
@@ -129,18 +129,17 @@ var newType;
             }
         }
 
-        my.shared.name = my.name.toString();
         global[my.name].shared = my.shared;
+        global[my.name].typeName = my.name.toString();
     };
 
     NewType.prototype.isInstance = function (object, type) {
-        var typeName = (typeof type === 'string') ? type : (type.shared.name.toString());
+        var typeName = (typeof type === 'string') ? type : (type.typeName.toString());
         return object.hasOwnProperty('_' + typeName);
     };
 
-    NewType.shared = {
-        name: 'NewType'
-    };
+    NewType.shared = {};
+    NewType.typeName = 'NewType';
 
     global.NewType = NewType;
     global.newType = new NewType();

@@ -25,8 +25,16 @@ var NewTypeTest;
                 this.test2();
                 this.test3();
                 this.test4();
+                this.test5();
             },
             test1: function () {
+                test('TestingNewType', function () {
+                    ok(newType instanceof NewType);
+                    ok(newType.isInstance(newType, NewType));
+                    ok(newType.isInstance(newType, 'NewType'));
+                });
+            },
+            test2: function () {
                 test('TestingType1', function () {
                     var testingType1, testingType1a;
                     testingType1 = new TestingType1();
@@ -78,7 +86,7 @@ var NewTypeTest;
                     equal(testingType1a.getS(), 7);
                 });
             },
-            test2: function () {
+            test3: function () {
                 test('TestingType2', function () {
                     var testingType2, testingType2a;
                     testingType2 = new TestingType2();
@@ -130,7 +138,7 @@ var NewTypeTest;
                     equal(testingType2a.getS(), 22);
                 });
             },
-            test3: function () {
+            test4: function () {
                 test('TestingType3', function () {
                     var testingType3, testingType3a;
                     testingType3 = new TestingType3();
@@ -182,7 +190,7 @@ var NewTypeTest;
                     equal(testingType3a.getS(), 37);
                 });
             },
-            test4: function () {
+            test5: function () {
                 test('Checking Subtypes', function () {
                     ok(TestingType2.prototype instanceof TestingType1);
                     ok(TestingType3.prototype instanceof TestingType2);
