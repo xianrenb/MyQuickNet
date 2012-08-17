@@ -49,6 +49,19 @@ var TestingType2;
             getS: function () {
                 return shared.s;
             }
+        },
+        sharedMethods: {
+            _sfa: function (a) {
+                var result = a;
+                result += shared.s;
+                return result;
+            },
+            _sfb: function () {
+                return 1;
+            },
+            sfc: function (a) {
+                return this._sfa(a);
+            }
         }
     });
 }());

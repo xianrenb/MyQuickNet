@@ -47,6 +47,22 @@ var TestingType3;
             },
             getS: function () {
                 return shared.s;
+            },
+            newObj: function() {
+                var o = new self();
+                o._(1, 2);
+                return o;
+            }
+        },
+        sharedMethods: {
+            sfc: function (a) {
+                var result = base._sfa(a) + this._sfb() + shared.s;
+                return result;
+            },
+            sNewObj: function () {
+                var o = new self();
+                o._(1, 2);
+                return o;
             }
         }
     });

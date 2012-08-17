@@ -136,11 +136,13 @@ var NewTypeTest;
                     equal(testingType2a.getB(), 1);
                     equal(testingType2a.getX(), 26);
                     equal(testingType2a.getS(), 22);
+                    equal(TestingType2.shared.sfc(1), 23);
+                    equal(TestingType2.shared.sfc(2), 24);
                 });
             },
             test4: function () {
                 test('TestingType3', function () {
-                    var testingType3, testingType3a;
+                    var o, testingType3, testingType3a;
                     testingType3 = new TestingType3();
                     testingType3._(1, 2);
                     ok(testingType3 instanceof TestingType1);
@@ -188,6 +190,13 @@ var NewTypeTest;
                     equal(testingType3a.getB(), 2);
                     equal(testingType3a.getX(), 26);
                     equal(testingType3a.getS(), 37);
+                    equal(TestingType2.shared.sfc(0), 38);
+                    equal(TestingType3.shared.sfc(0), 76);
+                    equal(TestingType3.shared.sfc(1), 77);
+                    o = testingType3a.newObj();
+                    ok(o instanceof TestingType3);
+                    o = TestingType3.shared.sNewObj();
+                    ok(o instanceof TestingType3);
                 });
             },
             test5: function () {
