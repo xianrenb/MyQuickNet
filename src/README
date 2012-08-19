@@ -1,17 +1,8 @@
-This is the README file for MyQuickNet 2.0.2.
+This is the README file for MyQuickNet 2.1.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
-    modify it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
+    file.
 
 About MyQuickNet:
 MyQuickNet is an open-source web application framework using JavaScript
@@ -25,13 +16,15 @@ html/ --- directory that contains HTML file(s)
 jquery/ --- directory that contains jQuery and QUnit related file(s)
 js_object/ --- directory that contains JavaScript (object) file(s)
 js_test/ --- directory that contains JavaScript test file(s)
+js_test_public/ --- directory that contains public accessible resource(s) for
+                    JavaScript testing
 php_class/ --- directory that contains PHP class file(s)
 php_test/ --- directory that contains PHP test file(s)
 public/ --- directory that contains public accessible resource(s)
 sql/ --- directory that contains SQL file(s)
 sqlite/ --- directory that contains the default sqlite3 database
 .htaccess --- file that contains Apache configuration
-COPYING -- file that contains the GNU General Public License
+MIT-LICENSE.txt --- file that contains the MIT License
 README --- the file that you are reading now
 config.php --- the basic configuration file for all PHP class files
 index.php --- the main PHP file
@@ -40,13 +33,14 @@ Notes:
 1. You should modify "config.php" to add/change path(s) for PHP class files,
 change default timezone settings, etc., and modify "index.php" to use your own
 controller.
-2. Files "php_class/com/myquicknet/testing/*.class.php",
-"php_class/com/myquicknet/testing_config/*.class.php",
-"js_object/com/myquicknet/testing/*.js",
-"js_object/com/myquicknet/testing_config/*.js" are example configurations/uses.
+2. Files "php_class/com/googlecode/myquicknet/testing/*.class.php",
+"php_class/com/googlecode/myquicknet/testing_config/*.class.php",
+"js_object/com/googlecode/myquicknet/testing/*.js",
+"js_object/com/googlecode/myquicknet/testing_config/*.js" are example
+configurations/uses.
 3. "MQNAutoRecordTest.php" and "MQNAutoRecordQueryTest.php" in directory
-"php_test/php_class/com/myquicknet/autorecord/" shows how to use MQNAutoRecord
-and MQNAutoRecordQuery as ORM.
+"php_test/php_class/com/googlecode/myquicknet/autorecord/" shows how to use
+MQNAutoRecord and MQNAutoRecordQuery as ORM.
 4. MQNAutoRecord, MQNAutoRecordQuery and MQNAutoRecordQueryTable instances use
 database resource. It is advised to free these instances explicitly (set to
 null) as in the above test files.
@@ -59,9 +53,14 @@ than "_") with name started by an underscore should be treated as protected
 method. Method with name not started by an underscore should be treated as
 public method. The first letter of public method name and the second letter
 (the letter just after the underscore) of protected method name should be
-small. The first letter of type name should be capital. Use "base" to access
-the base type prototype. Use "my" to access the object holding private data
-member(s). Use "shared" to access the object holding static data member(s).
+small. The first letter of type name should be capital. Within normal methods,
+use "base" to access the base type prototype, use "my" to access the object
+holding private data member(s), use "self" as the type itself, and use "shared"
+to access the object holding static data member(s). Within shared/static
+methods, use "base" to access the object holding base type's shared methods,
+use "self" as the type itself, and use "shared" to access the object holding
+static data member(s). The property "shared" of a type, defined using the above
+method, is the object holding the type's shared methods.
 7. File "html/default.html" is the default html file.
 8. File ".htaccess" controls how Apache rewrites URL. The default URL for the
 default html file is "http://localhost/MyQuickNet/".
@@ -74,6 +73,20 @@ class "XxxController" as the controller.
 database for testing. Please modify it to choose between MySQLi and SQLite. You
 should also import data from the SQL file(s) into the database before testing
 if a new database is used.
+
+Major changes from version 2.0.2:
+* MyQuickNet changed to use MIT license
+* MyQuickNet uses PHP 5.3.6+
+* improved CSS grid system
+* improved code to allow better static file handling
+* improved MQNTools.js
+* added MQNAutoRecordCache to ensure multiple reads from the database would get
+  the same data throughout the program and data would automatically synchronize
+  with the database.
+* updated jQuery and QUnit
+* added MQNDom to allow using (X)HTML file as view template.
+* improved MQNAutoRecordQuery to allow more complex query condition
+* improved newType.js to allow using JavaScript shared/static methods.
 
 Major changes from version 2.0.1:
 * fixed a bug related to MQNAutoRecordQuery.
