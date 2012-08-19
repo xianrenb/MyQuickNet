@@ -1,9 +1,9 @@
 /**
  * MQNToolsTest
  * @package MyQuickNet
- * @version 2.0
+ * @version 2.1
  * @copyright (c) 2012 MyQuickNet Development Group
- * @license http://www.opensource.org/licenses/gpl-3.0.html GNU General Public License version 3 (GPLv3)
+ * @license http://opensource.org/licenses/MIT
  */
 /**
  *
