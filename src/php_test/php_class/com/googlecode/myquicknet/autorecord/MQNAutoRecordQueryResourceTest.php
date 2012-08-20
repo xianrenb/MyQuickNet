@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  * Test class for MQNAutoRecordQueryResource.
  */
-class MQNAutoRecordQueryResourceTest extends PHPUnit_Framework_TestCase {
+class MQNAutoRecordQueryResourceTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.

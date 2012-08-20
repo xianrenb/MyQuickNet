@@ -7,11 +7,12 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
+namespace com\googlecode\myquicknet\static_file;
 
 /**
  * Test class for MQNStaticFileView.
  */
-class MQNStaticFileViewTest extends PHPUnit_Framework_TestCase {
+class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.

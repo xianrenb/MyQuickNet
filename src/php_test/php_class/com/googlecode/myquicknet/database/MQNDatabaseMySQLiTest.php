@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\database;
+
 /**
  * Test class for MQNDatabaseMySQLi.
  */
-class MQNDatabaseMySQLiTest extends PHPUnit_Framework_TestCase {
+class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

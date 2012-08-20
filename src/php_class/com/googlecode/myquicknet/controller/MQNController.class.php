@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\controller;
+
 /**
  *
  */
@@ -52,7 +54,7 @@ class MQNController {
         if (key_exists('view_class', $config)) {
             $viewClass = (string) $config['view_class'];
         } else {
-            $viewClass = 'MQNView';
+            $viewClass = '\com\googlecode\myquicknet\view\MQNView';
         }
 
         $this->view = new $viewClass();
@@ -64,7 +66,7 @@ class MQNController {
      * @return string
      */
     protected function _toShortName($longName) {
-        new String($longName);
+        new \String($longName);
         $string = (string) strtolower($longName);
         $shortName = '';
         $n = strlen($string);

@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -19,7 +21,7 @@ class MQNAutoRecordTools {
      * @return string
      */
     public static function shortFieldNameToFieldName($shortFieldName) {
-        new String($shortFieldName);
+        new \String($shortFieldName);
         $fieldName = '';
         $n = (int) strlen($shortFieldName);
 

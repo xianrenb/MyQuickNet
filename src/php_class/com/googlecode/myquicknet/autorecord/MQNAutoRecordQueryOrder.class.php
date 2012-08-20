@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -31,8 +33,8 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new Int($id);
-        new String($name);
+        new \Int($id);
+        new \String($name);
         parent::__construct($id, $name);
         $this->ascending = true;
         $this->field = null;
@@ -59,7 +61,7 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      * @param bool $ascending
      */
     public function setAscending($ascending) {
-        new Bool($ascending);
+        new \Bool($ascending);
         $this->ascending = (bool) $ascending;
     }
 

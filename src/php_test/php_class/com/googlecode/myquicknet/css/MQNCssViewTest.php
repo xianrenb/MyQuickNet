@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\css;
+
 /**
  * Test class for MQNCssView.
  */
-class MQNCssViewTest extends PHPUnit_Framework_TestCase {
+class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.

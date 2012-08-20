@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\static_file;
+
 /**
  * Test class for MQNStaticFileController.
  */
-class MQNStaticFileControllerTest extends PHPUnit_Framework_TestCase {
+class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -41,7 +43,7 @@ class MQNStaticFileControllerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test2() {
-        $controller = new TestingStaticFileController();
+        $controller = new \TestingStaticFileController();
         $this->assertTrue($controller instanceof MQNStaticFileController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_static_file/html/default.html';
         ob_start();

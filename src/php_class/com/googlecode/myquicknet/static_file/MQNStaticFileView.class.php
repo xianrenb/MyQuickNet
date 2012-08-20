@@ -8,6 +8,10 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\static_file;
+
+use com\googlecode\myquicknet\view\MQNView;
+
 /**
  *
  */
@@ -57,7 +61,7 @@ class MQNStaticFileView extends MQNView {
      * @return string
      */
     protected function _fileContentType($fileExtension) {
-        new String($fileExtension);
+        new \String($fileExtension);
 
         switch ($fileExtension) {
             case 'css':
@@ -123,7 +127,7 @@ class MQNStaticFileView extends MQNView {
             }
 
             if (!flock($file, LOCK_SH)) {
-                throw new Exception('Could not acquire file lock.');
+                throw new \Exception('Could not acquire file lock.');
             }
 
             //critical section started
@@ -169,13 +173,13 @@ class MQNStaticFileView extends MQNView {
             readfile($fileName);
 
             if (!flock($file, LOCK_UN)) {
-                throw new Exception('Could not release file lock.');
+                throw new \Exception('Could not release file lock.');
             }
 
             //critical section ended
 
             if (!fclose($file)) {
-                throw new Exception('Could not close file.');
+                throw new \Exception('Could not close file.');
             }
 
             return true;
@@ -189,7 +193,7 @@ class MQNStaticFileView extends MQNView {
      * @param string $fileName
      */
     public function setStaticFileName($fileName) {
-        new String($fileName);
+        new \String($fileName);
         $this->staticFileName = (string) $fileName;
     }
 
@@ -198,7 +202,7 @@ class MQNStaticFileView extends MQNView {
      * @param string $filePath
      */
     public function setStaticFilePath($filePath) {
-        new String($filePath);
+        new \String($filePath);
         $this->staticFilePath = (string) $filePath;
     }
 

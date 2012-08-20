@@ -8,6 +8,10 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
+use com\googlecode\myquicknet\database\MQNDatabase;
+
 /**
  *
  */
@@ -44,7 +48,7 @@ class MQNAutoRecordManager {
                 self::$database->connect();
             } else {
                 self::$database = null;
-                throw new UnexpectedValueException();
+                throw new \UnexpectedValueException();
             }
         }
 
@@ -63,7 +67,7 @@ class MQNAutoRecordManager {
                 self::$database = null;
             } else {
                 self::$database = null;
-                throw new Exception('Could not commit database.');
+                throw new \Exception('Could not commit database.');
             }
         }
     }

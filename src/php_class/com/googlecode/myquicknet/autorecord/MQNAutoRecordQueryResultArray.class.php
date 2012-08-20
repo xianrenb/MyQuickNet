@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
-class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implements Iterator {
+class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implements \Iterator {
 
     /**
      *
@@ -31,8 +33,8 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new Int($id);
-        new String($name);
+        new \Int($id);
+        new \String($name);
         parent::__construct($id, $name);
         $this->index = 0;
         $this->resultArray = array();
@@ -93,7 +95,7 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      */
     public function rewind() {
         if ($this->index) {
-            throw new Exception('Could not rewind.');
+            throw new \Exception('Could not rewind.');
         }
     }
 

@@ -7,6 +7,7 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
+use com\googlecode\myquicknet\view\MQNView;
 
 /**
  *

@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -208,7 +210,7 @@ class MQNAutoRecordQuery {
                     $sql .= (string) $this->database->escapeString($value1);
                     $sql .= '\'';
                 } else {
-                    throw new Exception('Type not supported.');
+                    throw new \Exception('Type not supported.');
                 }
 
                 $sql .= ' ';
@@ -232,7 +234,7 @@ class MQNAutoRecordQuery {
                     $sql .= (string) $this->database->escapeString($value2);
                     $sql .= '\'';
                 } else {
-                    throw new Exception('Type not supported.');
+                    throw new \Exception('Type not supported.');
                 }
 
                 if ($lastOrNext && !$orNext) {
@@ -243,7 +245,7 @@ class MQNAutoRecordQuery {
             }
 
             if ($lastOrNext) {
-                throw new Exception('Next condition is expected.');
+                throw new \Exception('Next condition is expected.');
             }
         } else {
             $countTableArray = (int) count($this->tableArray);
@@ -268,7 +270,7 @@ class MQNAutoRecordQuery {
      * @throws InvalidArgumentException 
      */
     public function condition($value1, $operator, $value2, $orNext = false) {
-        new String($operator);
+        new \String($operator);
         $value1IsField = false;
         $value2IsField = false;
 
@@ -276,7 +278,7 @@ class MQNAutoRecordQuery {
             if ($value1 instanceof MQNAutoRecordQueryField) {
                 $value1IsField = true;
             } else {
-                throw new InvalidArgumentException();
+                throw new \InvalidArgumentException();
             }
         }
 
@@ -284,7 +286,7 @@ class MQNAutoRecordQuery {
             if ($value2 instanceof MQNAutoRecordQueryField) {
                 $value2IsField = true;
             } else {
-                throw new InvalidArgumentException();
+                throw new \InvalidArgumentException();
             }
         }
 
@@ -295,7 +297,7 @@ class MQNAutoRecordQuery {
                 ($value1->getTable() !== $value2->getTable())
         ) {
             if ($orNext) {
-                throw new InvalidArgumentException();
+                throw new \InvalidArgumentException();
             }
 
             $joinCondition = new MQNAutoRecordQueryJoinCondition();
@@ -321,7 +323,7 @@ class MQNAutoRecordQuery {
      * @return MQNAutoRecordQueryField
      */
     public function field(MQNAutoRecordQueryTable $table, $fieldName) {
-        new String($fieldName);
+        new \String($fieldName);
         $id = (int) count($this->fieldArray);
         $field = new MQNAutoRecordQueryField($id, $fieldName);
         $field->setTable($table);
@@ -335,8 +337,8 @@ class MQNAutoRecordQuery {
      * @param int $offset
      */
     public function limit($rowCount, $offset) {
-        new Int($rowCount);
-        new Int($offset);
+        new \Int($rowCount);
+        new \Int($offset);
         $this->useLimit = true;
         $this->limitOffset = (int) $offset;
         $this->limitRowCount = (int) $rowCount;
@@ -393,7 +395,7 @@ class MQNAutoRecordQuery {
      * @param bool $ascending
      */
     public function order(MQNAutoRecordQueryField $field, $ascending = true) {
-        new Bool($ascending);
+        new \Bool($ascending);
         $order = new MQNAutoRecordQueryOrder();
         $order->setAscending($ascending);
         $order->setField($field);
@@ -408,12 +410,12 @@ class MQNAutoRecordQuery {
      * @throws InvalidArgumentException 
      */
     public function table($autoRecordClassName) {
-        new String($autoRecordClassName);
+        new \String($autoRecordClassName);
         $autoRecord = new $autoRecordClassName();
 
         if ($this->database) {
             if ($this->database != $autoRecord->getDatabase()) {
-                throw new InvalidArgumentException();
+                throw new \InvalidArgumentException();
             }
         } else {
             $this->database = $autoRecord->getDatabase();

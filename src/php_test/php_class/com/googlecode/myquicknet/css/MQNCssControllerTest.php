@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\css;
+
 /**
  * Test class for MQNCssController.
  */
-class MQNCssControllerTest extends PHPUnit_Framework_TestCase {
+class MQNCssControllerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -41,7 +43,7 @@ class MQNCssControllerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test2() {
-        $controller = new TestingCssController();
+        $controller = new \TestingCssController();
         $this->assertTrue($controller instanceof MQNCssController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_css/reset.css';
         ob_start();
@@ -54,7 +56,7 @@ class MQNCssControllerTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test3() {
-        $controller = new TestingCssController();
+        $controller = new \TestingCssController();
         $this->assertTrue($controller instanceof MQNCssController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_css/grid.css';
         ob_start();

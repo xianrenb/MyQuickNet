@@ -8,6 +8,10 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\static_file;
+
+use com\googlecode\myquicknet\controller\MQNController;
+
 /**
  *
  */

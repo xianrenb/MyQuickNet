@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\database;
+
 /**
  *
  */
@@ -59,7 +61,7 @@ class MQNDatabase {
      * @return string
      */
     public function escapeString($string) {
-        new String($string);
+        new \String($string);
         return $string;
     }
 
@@ -77,7 +79,7 @@ class MQNDatabase {
      * @return array|bool
      */
     public function query($sql) {
-        new String($sql);
+        new \String($sql);
         return false;
     }
 
@@ -87,7 +89,7 @@ class MQNDatabase {
      * @return array|bool
      */
     public function queryForUpdate($sql) {
-        new String($sql);
+        new \String($sql);
         return false;
     }
 
@@ -99,9 +101,9 @@ class MQNDatabase {
      * @return array|bool
      */
     public function queryLimit($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         return false;
     }
 
@@ -113,9 +115,9 @@ class MQNDatabase {
      * @return array|bool
      */
     public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         return false;
     }
 

@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\view;
+
 /**
  * Test class for MQNView.
  */
-class MQNViewTest extends PHPUnit_Framework_TestCase {
+class MQNViewTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

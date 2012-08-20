@@ -8,10 +8,14 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\controller;
+
+use com\googlecode\myquicknet\view\MQNView;
+
 /**
  * Test class for MQNController.
  */
-class MQNControllerTest extends PHPUnit_Framework_TestCase {
+class MQNControllerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
@@ -52,9 +56,9 @@ class MQNControllerTest extends PHPUnit_Framework_TestCase {
     public function test2() {
         $controller = new $this->testingControllerClass();
         $this->assertTrue($controller instanceof MQNController);
-        $this->assertTrue($controller->getModel() instanceof TestingAutoRecordCache);
+        $this->assertTrue($controller->getModel() instanceof \TestingAutoRecordCache);
         $this->assertEquals('/MyQuickNet/', $controller->getUrlBasePath());
-        $this->assertTrue($controller->getView() instanceof TestingView);
+        $this->assertTrue($controller->getView() instanceof \TestingView);
     }
 
 }

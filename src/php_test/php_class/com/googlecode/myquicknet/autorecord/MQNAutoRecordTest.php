@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  * Test class for MQNAutoRecord.
  */
-class MQNAutoRecordTest extends PHPUnit_Framework_TestCase {
+class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
@@ -67,7 +69,7 @@ class MQNAutoRecordTest extends PHPUnit_Framework_TestCase {
         try {
             $record1->badMethod();
             $exception = false;
-        } catch (BadMethodCallException $e) {
+        } catch (\BadMethodCallException $e) {
             $exception = true;
         }
 
@@ -76,7 +78,7 @@ class MQNAutoRecordTest extends PHPUnit_Framework_TestCase {
         try {
             $record1->setBadDataMember(1);
             $exception = false;
-        } catch (BadMethodCallException $e) {
+        } catch (\BadMethodCallException $e) {
             $exception = true;
         }
 
@@ -85,7 +87,7 @@ class MQNAutoRecordTest extends PHPUnit_Framework_TestCase {
         try {
             $record1->getBadDataMember();
             $exception = false;
-        } catch (BadMethodCallException $e) {
+        } catch (\BadMethodCallException $e) {
             $exception = true;
         }
 

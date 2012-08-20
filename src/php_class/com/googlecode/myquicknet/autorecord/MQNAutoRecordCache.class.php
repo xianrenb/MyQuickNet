@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -74,7 +76,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @return mixed
      */
     public function __call($name, $arguments) {
-        new String($name);
+        new \String($name);
         $this->id = (int) $this->cache->getId();
         $result = $this->cache->__call($name, $arguments);
         return $result;
@@ -147,8 +149,8 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws BadMethodCallException 
      */
     protected function _getField($name) {
-        new String($name);
-        throw new BadMethodCallException();
+        new \String($name);
+        throw new \BadMethodCallException();
     }
 
     /**
@@ -157,8 +159,8 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws BadMethodCallException 
      */
     protected function _getNewId($newValid) {
-        new Bool($newValid);
-        throw new BadMethodCallException();
+        new \Bool($newValid);
+        throw new \BadMethodCallException();
     }
 
     /**
@@ -168,8 +170,8 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws BadMethodCallException 
      */
     protected function _setField($name, $value) {
-        new String($name);
-        throw new BadMethodCallException();
+        new \String($name);
+        throw new \BadMethodCallException();
     }
 
     /**
@@ -280,7 +282,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @param int $id
      */
     public function read($id) {
-        new Int($id);
+        new \Int($id);
         $this->id = (int) $this->cache->getId();
         $this->_unbindCache();
         $this->id = (int) $id;

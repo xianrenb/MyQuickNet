@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -31,8 +33,8 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new Int($id);
-        new String($name);
+        new \Int($id);
+        new \String($name);
         parent::__construct($id, $name);
         $this->autoRecord = null;
         $this->autoRecordClassName = '';
@@ -63,7 +65,7 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
      * @param string $autoRecordClassName
      */
     public function setAutoRecordClassName($autoRecordClassName) {
-        new String($autoRecordClassName);
+        new \String($autoRecordClassName);
         $this->autoRecordClassName = (string) $autoRecordClassName;
     }
 

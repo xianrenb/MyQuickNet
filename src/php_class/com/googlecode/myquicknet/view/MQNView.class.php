@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\view;
+
 /**
  *
  */
@@ -74,7 +76,7 @@ class MQNView {
      * @param string $jsonString
      */
     public function setJSONString($jsonString) {
-        new String($jsonString);
+        new \String($jsonString);
         $this->jsonString = (string) $jsonString;
     }
 
@@ -83,7 +85,7 @@ class MQNView {
      * @param string $fileName
      */
     public function setHTMLFileName($fileName) {
-        new String($fileName);
+        new \String($fileName);
         $this->htmlFileName = (string) $fileName;
     }
 

@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\dom;
+
 /**
  *
  */
@@ -30,7 +32,7 @@ class MQNDom {
      * @param array $config 
      */
     public function __construct(array $config = array()) {
-        $this->doc = new DOMDocument();
+        $this->doc = new \DOMDocument();
         $this->doc->formatOutput = true;
         $this->xPath = null;
     }
@@ -47,7 +49,7 @@ class MQNDom {
      *
      * @param DOMNode $node 
      */
-    protected function _removeChildNodes(DOMNode $node) {
+    protected function _removeChildNodes(\DOMNode $node) {
         while ($node->firstChild) {
             while ($node->firstChild->firstChild) {
                 $this->_removeChildNodes($node->firstChild);
@@ -80,11 +82,11 @@ class MQNDom {
      * @return boolean 
      */
     public function load($filename, $options = 0) {
-        new String($filename);
-        new Int($options);
+        new \String($filename);
+        new \Int($options);
 
         if ($this->doc->load($filename, $options)) {
-            $this->xPath = new DOMXPath($this->doc);
+            $this->xPath = new \DOMXPath($this->doc);
             return true;
         } else {
             return false;
@@ -97,10 +99,10 @@ class MQNDom {
      * @return boolean 
      */
     public function loadHTML($source) {
-        new String($source);
+        new \String($source);
 
         if ($this->doc->loadHTML($source)) {
-            $this->xPath = new DOMXPath($this->doc);
+            $this->xPath = new \DOMXPath($this->doc);
             return true;
         } else {
             return false;
@@ -113,10 +115,10 @@ class MQNDom {
      * @return boolean 
      */
     public function loadHTMLFile($filename) {
-        new String($filename);
+        new \String($filename);
 
         if ($this->doc->loadHTMLFile($filename)) {
-            $this->xPath = new DOMXPath($this->doc);
+            $this->xPath = new \DOMXPath($this->doc);
             return true;
         } else {
             return false;
@@ -130,11 +132,11 @@ class MQNDom {
      * @return boolean 
      */
     public function loadXML($source, $options = 0) {
-        new String($source);
-        new Int($options);
+        new \String($source);
+        new \Int($options);
 
         if ($this->doc->loadXML($source, $options)) {
-            $this->xPath = new DOMXPath($this->doc);
+            $this->xPath = new \DOMXPath($this->doc);
             return true;
         } else {
             return false;
@@ -150,8 +152,8 @@ class MQNDom {
      * @throws Exception 
      */
     public function queryAttr($query, $attrName, $attrValue = null) {
-        new String($query);
-        new String($attrName);
+        new \String($query);
+        new \String($attrName);
 
         if ($attrValue === null) {
             $node = $this->xPath->query($query)->item(0);
@@ -159,7 +161,7 @@ class MQNDom {
             if ($node && $node->hasAttributes()) {
                 $attr = $node->attributes->getNamedItem($attrName);
 
-                if ($attr && ($attr instanceof DOMAttr)) {
+                if ($attr && ($attr instanceof \DOMAttr)) {
                     $attrValue = (string) $attr->value;
                     return $attrValue;
                 } else {
@@ -169,7 +171,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new String($attrValue);
+            new \String($attrValue);
 
             foreach ($this->xPath->query($query) as $node) {
                 if ($node->hasAttributes()) {
@@ -184,11 +186,11 @@ class MQNDom {
                     $attr = $node->attributes->getNamedItem($attrName);
                 }
 
-                if ($attr instanceof DOMAttr) {
+                if ($attr instanceof \DOMAttr) {
                     $attr->value = (string) $attrValue;
                     $node->normalize();
                 } else {
-                    throw new Exception('Node is not DOMAttr.');
+                    throw new \Exception('Node is not DOMAttr.');
                 }
             }
         }
@@ -201,7 +203,7 @@ class MQNDom {
      * @return mixed
      */
     public function queryDo($query, $callback) {
-        new String($query);
+        new \String($query);
         $nodes = $this->xPath->query($query);
         return $callback($nodes, $this);
     }
@@ -213,7 +215,7 @@ class MQNDom {
      * @return string|null
      */
     public function queryText($query, $text = null) {
-        new String($query);
+        new \String($query);
 
         if ($text === null) {
             $node = $this->xPath->query($query)->item(0);
@@ -222,7 +224,7 @@ class MQNDom {
                 $node->normalize();
 
                 foreach ($node->childNodes as $child) {
-                    if ($child instanceof DOMText) {
+                    if ($child instanceof \DOMText) {
                         $text = (string) $child->wholeText;
                         return $text;
                     }
@@ -233,7 +235,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new String($text);
+            new \String($text);
 
             foreach ($this->xPath->query($query) as $node) {
                 $this->_removeChildNodes($node);
@@ -250,10 +252,10 @@ class MQNDom {
      * @return string|null
      */
     public function queryVal($query, $value = null) {
-        new String($query);
+        new \String($query);
 
         if ($value !== null) {
-            new String($value);
+            new \String($value);
         }
 
         return $this->queryAttr($query, 'value', $value);
@@ -266,7 +268,7 @@ class MQNDom {
      * @return string|null
      */
     public function queryXml($query, $xml = null) {
-        new String($query);
+        new \String($query);
 
         if ($xml === null) {
             $xml = '';
@@ -282,7 +284,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new String($xml);
+            new \String($xml);
 
             foreach ($this->xPath->query($query) as $node) {
                 $this->_removeChildNodes($node);
@@ -301,12 +303,12 @@ class MQNDom {
      * @return int|bool
      */
     public function save($filename, $options = null) {
-        new String($filename);
+        new \String($filename);
 
         if ($options === null) {
             return $this->doc->save($filename);
         } else {
-            new Int($options);
+            new \Int($options);
             return $this->doc->save($filename, $options);
         }
     }
@@ -316,7 +318,7 @@ class MQNDom {
      * @param DOMNode|null $node
      * @return string|bool
      */
-    public function saveHTML(DOMNode $node = null) {
+    public function saveHTML(\DOMNode $node = null) {
         return $this->doc->saveHTML($node);
     }
 
@@ -326,7 +328,7 @@ class MQNDom {
      * @return int|bool
      */
     public function saveHTMLFile($filename) {
-        new String($filename);
+        new \String($filename);
         return $this->doc->saveHTMLFile($filename);
     }
 
@@ -336,7 +338,7 @@ class MQNDom {
      * @param int|null $options
      * @return string|bool
      */
-    public function saveXML(DOMNode $node = null, $options = null) {
+    public function saveXML(\DOMNode $node = null, $options = null) {
         if ($node === null) {
             return $this->doc->saveXML();
         }
@@ -344,7 +346,7 @@ class MQNDom {
         if ($options === null) {
             return $this->doc->saveXML($node);
         } else {
-            new Int($options);
+            new \Int($options);
             return $this->doc->saveXML($node, $options);
         }
     }

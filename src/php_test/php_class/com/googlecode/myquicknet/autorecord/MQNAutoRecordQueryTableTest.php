@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  * Test class for MQNAutoRecordQueryTable.
  */
-class MQNAutoRecordQueryTableTest extends PHPUnit_Framework_TestCase {
+class MQNAutoRecordQueryTableTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

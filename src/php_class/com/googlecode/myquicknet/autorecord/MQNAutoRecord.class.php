@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  *
  */
@@ -92,7 +94,7 @@ class MQNAutoRecord {
      * @throws BadMethodCallException 
      */
     public function __call($name, $arguments) {
-        new String($name);
+        new \String($name);
 
         try {
             if (preg_match('/^get/', $name)) {
@@ -105,10 +107,10 @@ class MQNAutoRecord {
                 $value = $arguments[0];
                 $this->_setField($fieldName, $value);
             } else {
-                throw new InvalidArgumentException();
+                throw new \InvalidArgumentException();
             }
-        } catch (InvalidArgumentException $e) {
-            throw new BadMethodCallException();
+        } catch (\InvalidArgumentException $e) {
+            throw new \BadMethodCallException();
         }
     }
 
@@ -131,10 +133,10 @@ class MQNAutoRecord {
      * @throws InvalidArgumentException 
      */
     protected function _getField($name) {
-        new String($name);
+        new \String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
 
         return $this->fieldArray[$name];
@@ -146,7 +148,7 @@ class MQNAutoRecord {
      * @return int
      */
     protected function _getNewId($newValid) {
-        new Bool($newValid);
+        new \Bool($newValid);
         // try to find the smallest invalid id, which could be reused
         $sql = 'SELECT `id` FROM `';
         $sql .= (string) $this->table;
@@ -212,7 +214,7 @@ class MQNAutoRecord {
                 $sql .= (string) $this->database->escapeString($value);
                 $sql .= '\'';
             } else {
-                throw new Exception('Type not supported.');
+                throw new \Exception('Type not supported.');
             }
         }
 
@@ -229,10 +231,10 @@ class MQNAutoRecord {
      * @throws InvalidArgumentException 
      */
     protected function _setField($name, $value) {
-        new String($name);
+        new \String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
 
         if (is_scalar($value)) {
@@ -247,16 +249,16 @@ class MQNAutoRecord {
             } else if (is_string($oldValue)) {
                 $this->fieldArray[$name] = (string) $value;
             } else {
-                throw new Exception('Type not supported.');
+                throw new \Exception('Type not supported.');
             }
         } else if ($value instanceof MQNAutoRecord) {
             if (is_int($this->fieldArray[$name])) {
                 $this->fieldArray[$name] = (int) $value->getId();
             } else {
-                throw new Exception('Type not supported.');
+                throw new \Exception('Type not supported.');
             }
         } else {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
 
         $this->dirty = true;
@@ -321,7 +323,7 @@ class MQNAutoRecord {
      * @param int $id
      */
     public function read($id) {
-        new Int($id);
+        new \Int($id);
 
         if ($this->autoUpdate && $this->dirty) {
             $this->update();
@@ -351,7 +353,7 @@ class MQNAutoRecord {
                 } else if (is_string($oldValue)) {
                     $this->fieldArray[$name] = (string) $rows[0][$name];
                 } else {
-                    throw new Exception('Type not supported.');
+                    throw new \Exception('Type not supported.');
                 }
             }
         } else {
@@ -394,7 +396,7 @@ class MQNAutoRecord {
                 $sql .= (string) $this->database->escapeString($value);
                 $sql .= '\'';
             } else {
-                throw new Exception('Type not supported.');
+                throw new \Exception('Type not supported.');
             }
         }
 

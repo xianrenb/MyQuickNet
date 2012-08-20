@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\database;
+
 /**
  *
  */
@@ -109,14 +111,14 @@ class MQNDatabaseMySQLi extends MQNDatabase {
             if (!$this->closed) {
                 if ($this->transactionStarted) {
                     if (!$this->rollback()) {
-                        throw new Exception('Could not rollback.');
+                        throw new \Exception('Could not rollback.');
                     }
                 }
 
                 $this->closed = (bool) $this->mysqli->close();
 
                 if (!$this->closed) {
-                    throw new Exception('Could not close database: ' . $this->mysqli->error);
+                    throw new \Exception('Could not close database: ' . $this->mysqli->error);
                 }
             }
 
@@ -146,10 +148,10 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      */
     public function connect() {
         $this->close();
-        $this->mysqli = new mysqli($this->host, $this->user, $this->password, $this->name, $this->port);
+        $this->mysqli = new \mysqli($this->host, $this->user, $this->password, $this->name, $this->port);
 
         if ($this->mysqli->connect_error) {
-            throw new Exception('Database Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
+            throw new \Exception('Database Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
         }
 
         $this->closed = false;
@@ -166,7 +168,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @return string
      */
     public function escapeString($string) {
-        new String($string);
+        new \String($string);
         $result = (string) $this->mysqli->real_escape_string($string);
         return $result;
     }
@@ -186,7 +188,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @return array|bool
      */
     public function query($sql) {
-        new String($sql);
+        new \String($sql);
 
         if ($this->mysqli) {
             $result = $this->mysqli->query($sql);
@@ -195,10 +197,10 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         }
 
         if (!$result) {
-            throw new Exception('Database query error: ' . $this->mysqli->error);
+            throw new \Exception('Database query error: ' . $this->mysqli->error);
         }
 
-        if ($result instanceof mysqli_result) {
+        if ($result instanceof \mysqli_result) {
             $rowList = array();
             $i = 0;
 
@@ -220,7 +222,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @return array|bool
      */
     public function queryForUpdate($sql) {
-        new String($sql);
+        new \String($sql);
         $sql = (string) ('' . $sql . ' FOR UPDATE');
         $result = $this->query($sql);
         return $result;
@@ -234,9 +236,9 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimit($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount);
         $result = $this->query($sql);
         return $result;
@@ -250,9 +252,9 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount . ' FOR UPDATE');
         $result = $this->query($sql);
         return $result;

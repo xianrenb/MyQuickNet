@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\autorecord;
+
 /**
  * Test class for MQNAutoRecordQueryJoinCondition.
  */
-class MQNAutoRecordQueryJoinConditionTest extends PHPUnit_Framework_TestCase {
+class MQNAutoRecordQueryJoinConditionTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.

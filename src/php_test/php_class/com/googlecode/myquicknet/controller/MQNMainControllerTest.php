@@ -8,10 +8,14 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\controller;
+
+use com\googlecode\myquicknet\view\MQNView;
+
 /**
  * Test class for MQNMainController.
  */
-class MQNMainControllerTest extends PHPUnit_Framework_TestCase {
+class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\controller;
+
 /**
  *
  */
@@ -45,7 +47,7 @@ class MQNMainController extends MQNController {
 
                 try {
                     if (class_exists($controllerClassName, true)) {
-                        if (is_subclass_of($controllerClassName, 'MQNController')) {
+                        if (is_subclass_of($controllerClassName, '\com\googlecode\myquicknet\controller\MQNController')) {
                             if (strtolower($controllerClassName) != strtolower('MQNMainController')) {
                                 if (strtolower($controllerClassName) != strtolower($this->mainControllerClass)) {
                                     $controllerExists = true;
@@ -53,7 +55,7 @@ class MQNMainController extends MQNController {
                             }
                         }
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $controllerExists = false;
                 }
 

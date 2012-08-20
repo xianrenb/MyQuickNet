@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\database;
+
 /**
  *
  */
@@ -78,14 +80,14 @@ class MQNDatabaseSQLite extends MQNDatabase {
             if (!$this->closed) {
                 if ($this->transactionStarted) {
                     if (!$this->rollback()) {
-                        throw new Exception('Could not rollback.');
+                        throw new \Exception('Could not rollback.');
                     }
                 }
 
                 $this->closed = (bool) $this->sqlite3->close();
 
                 if (!$this->closed) {
-                    throw new Exception('Could not close database.');
+                    throw new \Exception('Could not close database.');
                 }
             }
 
@@ -115,7 +117,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      */
     public function connect() {
         $this->close();
-        $this->sqlite3 = new SQLite3($this->filename);
+        $this->sqlite3 = new \SQLite3($this->filename);
         $this->closed = false;
         $this->query('BEGIN EXCLUSIVE');
         $this->transactionStarted = true;
@@ -128,7 +130,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return string
      */
     public function escapeString($string) {
-        new String($string);
+        new \String($string);
         $result = (string) $this->sqlite3->escapeString($string);
         return $result;
     }
@@ -148,7 +150,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function query($sql) {
-        new String($sql);
+        new \String($sql);
 
         if (preg_match('/^select/i', $sql)) {
             if ($this->sqlite3) {
@@ -157,8 +159,8 @@ class MQNDatabaseSQLite extends MQNDatabase {
                 $result = null;
             }
 
-            if (!$result || !($result instanceof SQLite3Result)) {
-                throw new Exception('Database query error.');
+            if (!$result || !($result instanceof \SQLite3Result)) {
+                throw new \Exception('Database query error.');
             }
 
             $rowList = array();
@@ -181,7 +183,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
             }
 
             if (!$result) {
-                throw new Exception('Database query error.');
+                throw new \Exception('Database query error.');
             }
         }
 
@@ -194,7 +196,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryForUpdate($sql) {
-        new String($sql);
+        new \String($sql);
         $result = $this->query($sql);
         return $result;
     }
@@ -207,9 +209,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimit($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount);
         $result = $this->query($sql);
         return $result;
@@ -223,9 +225,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
-        new String($sql);
-        new Int($rowCount);
-        new Int($offset);
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
         $result = $this->queryLimit($sql, $rowCount, $offset);
         return $result;
     }

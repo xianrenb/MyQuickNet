@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\dom;
+
 /**
  * Test class for MQNDom.
  */
-class MQNDomTest extends PHPUnit_Framework_TestCase {
+class MQNDomTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -33,14 +35,14 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
         $dom = new MQNDom();
         $doc = $dom->getDoc();
         $xPath = $dom->getXPath();
-        $this->assertTrue($doc instanceof DOMDocument);
+        $this->assertTrue($doc instanceof \DOMDocument);
         $this->assertTrue($xPath === null);
         $dom->load(__DIR__ . '/input.xml');
         $dom->save(__DIR__ . '/output.xml');
         $doc = $dom->getDoc();
         $xPath = $dom->getXPath();
-        $this->assertTrue($doc instanceof DOMDocument);
-        $this->assertTrue($xPath instanceof DOMXPath);
+        $this->assertTrue($doc instanceof \DOMDocument);
+        $this->assertTrue($xPath instanceof \DOMXPath);
         $input = (string) file_get_contents(__DIR__ . '/input.xml');
         $output = (string) file_get_contents(__DIR__ . '/output.xml');
         $this->assertEquals($input, $output);
@@ -79,10 +81,10 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
         $attrValue = $dom->queryAttr('//attr/badData', 'attr');
         $this->assertEquals(null, $attrValue);
 
-        $text = $dom->queryDo('//do/data', function (DOMNodeList $nodes, MQNDom $dom) {
+        $text = $dom->queryDo('//do/data', function (\DOMNodeList $nodes, MQNDom $dom) {
                     $node = $nodes->item(0);
 
-                    if ($node && $node->firstChild && ($node->firstChild instanceof DOMText)) {
+                    if ($node && $node->firstChild && ($node->firstChild instanceof \DOMText)) {
                         $text = (string) $node->firstChild->wholeText;
                         return $text;
                     } else {
@@ -92,7 +94,7 @@ class MQNDomTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('do', $text);
 
-        $dom->queryDo('//do/tagA', function (DOMNodeList $nodes, MQNDom $dom) {
+        $dom->queryDo('//do/tagA', function (\DOMNodeList $nodes, MQNDom $dom) {
                     foreach ($nodes as $node) {
                         $node->appendChild($dom->getDoc()->createTextNode('text'));
                     }

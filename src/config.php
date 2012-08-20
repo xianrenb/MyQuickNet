@@ -22,16 +22,10 @@ call_user_func(function () {
             define('MQN_BASE_PATH', (string) (__DIR__ . '/'));
             // Set include path
             $path = (string) get_include_path();
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/autorecord/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/controller/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/css/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/database/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/dom/');
+            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/scalar/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/static_file/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/testing/');
             $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/testing_config/');
-            $path .= (string) (PATH_SEPARATOR . MQN_BASE_PATH . 'php_class/com/googlecode/myquicknet/view/');
             // $path .= (string) (PATH_SEPARATOR . 'additional/path/');
             set_include_path($path);
 

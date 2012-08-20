@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\database;
+
 /**
  * Test class for MQNDatabaseSQLite.
  */
-class MQNDatabaseSQLiteTest extends PHPUnit_Framework_TestCase {
+class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *

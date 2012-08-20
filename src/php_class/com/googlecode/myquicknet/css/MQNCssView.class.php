@@ -8,6 +8,10 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\css;
+
+use com\googlecode\myquicknet\view\MQNView;
+
 /**
  *
  */
@@ -75,7 +79,7 @@ class MQNCssView extends MQNView {
      * @return bool
      */
     protected function _outputCss($css) {
-        new String($css);
+        new \String($css);
 
         if (!headers_sent()) {
             $eTag = '"' . md5($css) . '"';
