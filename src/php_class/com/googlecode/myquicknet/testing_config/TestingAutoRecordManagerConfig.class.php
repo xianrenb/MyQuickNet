@@ -7,6 +7,9 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
+
+namespace com\googlecode\myquicknet\testing_config;
+
 use com\googlecode\myquicknet\autorecord\MQNAutoRecordManager;
 
 /**
@@ -20,13 +23,13 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
      */
     public function __construct(array $config = array()) {
         //Settings for using SQLite3
-        $config['db_class'] = '\com\googlecode\myquicknet\database\MQNDatabaseSQLite';
+        $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseSQLite';
         $config['db_filename'] = (string) (MQN_BASE_PATH . 'sqlite/mqntestdb.sqlite3');
 
         //Settings for using MySQLi
         /*
           if (array_key_exists('OPENSHIFT_APP_NAME', $_ENV)) {
-          $config['db_class'] = '\com\googlecode\myquicknet\database\MQNDatabaseMySQLi';
+          $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseMySQLi';
           $config['db_host'] = (string) $_ENV['OPENSHIFT_DB_HOST'];
           $config['db_port'] = (string) $_ENV['OPENSHIFT_DB_PORT'];
           $config['db_name'] = (string) $_ENV['OPENSHIFT_APP_NAME'];

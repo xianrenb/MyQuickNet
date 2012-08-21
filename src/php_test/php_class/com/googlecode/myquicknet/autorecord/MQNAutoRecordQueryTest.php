@@ -52,13 +52,20 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
     private $testingAutoRecordCClassName;
 
     /**
+     *
+     * @var string
+     */
+    private $testingAutoRecordClassName;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->testingAutoRecordAClassName = 'TestingAutoRecordA';
-        $this->testingAutoRecordBClassName = 'TestingAutoRecordB';
-        $this->testingAutoRecordCClassName = 'TestingAutoRecordC';
+        $this->testingAutoRecordAClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordA';
+        $this->testingAutoRecordBClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordB';
+        $this->testingAutoRecordCClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordC';
+        $this->testingAutoRecordClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecord';
 
         for ($i = 0; $i < 10; ++$i) {
             $this->autoRecordAArray[$i] = new $this->testingAutoRecordAClassName();
@@ -104,7 +111,7 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
     public function test2() {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
-        $table = $query->table('TestingAutoRecord');
+        $table = $query->table($this->testingAutoRecordClassName);
         $resultArray = $query->execute();
         $resultArrayCount = $resultArray->count();
         $this->assertEquals(0, $resultArrayCount);

@@ -11,6 +11,8 @@
 namespace com\googlecode\myquicknet\controller;
 
 use com\googlecode\myquicknet\view\MQNView;
+use com\googlecode\myquicknet\testing\TestingAutoRecordCache;
+use com\googlecode\myquicknet\testing\TestingView;
 
 /**
  * Test class for MQNController.
@@ -28,7 +30,7 @@ class MQNControllerTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->testingControllerClass = 'TestingController';
+        $this->testingControllerClass = '\\com\\googlecode\\myquicknet\\testing\\TestingController';
     }
 
     /**
@@ -56,9 +58,9 @@ class MQNControllerTest extends \PHPUnit_Framework_TestCase {
     public function test2() {
         $controller = new $this->testingControllerClass();
         $this->assertTrue($controller instanceof MQNController);
-        $this->assertTrue($controller->getModel() instanceof \TestingAutoRecordCache);
+        $this->assertTrue($controller->getModel() instanceof TestingAutoRecordCache);
         $this->assertEquals('/MyQuickNet/', $controller->getUrlBasePath());
-        $this->assertTrue($controller->getView() instanceof \TestingView);
+        $this->assertTrue($controller->getView() instanceof TestingView);
     }
 
 }

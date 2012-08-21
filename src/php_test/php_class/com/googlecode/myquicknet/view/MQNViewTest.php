@@ -26,7 +26,7 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->testingViewClass = 'TestingView';
+        $this->testingViewClass = '\\com\\googlecode\\myquicknet\\testing\\TestingView';
     }
 
     /**

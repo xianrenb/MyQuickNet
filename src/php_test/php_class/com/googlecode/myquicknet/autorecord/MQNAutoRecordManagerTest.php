@@ -28,7 +28,7 @@ class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->testingAutoRecordManagerClass = 'TestingAutoRecordManager';
+        $this->testingAutoRecordManagerClass = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordManager';
     }
 
     /**

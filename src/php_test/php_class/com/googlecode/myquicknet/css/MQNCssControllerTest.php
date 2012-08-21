@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\css;
 
+use com\googlecode\myquicknet\testing\TestingCssController;
+
 /**
  * Test class for MQNCssController.
  */
@@ -43,7 +45,7 @@ class MQNCssControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function test2() {
-        $controller = new \TestingCssController();
+        $controller = new TestingCssController();
         $this->assertTrue($controller instanceof MQNCssController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_css/reset.css';
         ob_start();
@@ -56,7 +58,7 @@ class MQNCssControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function test3() {
-        $controller = new \TestingCssController();
+        $controller = new TestingCssController();
         $this->assertTrue($controller instanceof MQNCssController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_css/grid.css';
         ob_start();

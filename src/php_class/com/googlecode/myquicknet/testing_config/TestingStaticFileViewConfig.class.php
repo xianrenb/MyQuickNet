@@ -7,6 +7,9 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
+
+namespace com\googlecode\myquicknet\testing_config;
+
 use com\googlecode\myquicknet\static_file\MQNStaticFileView;
 
 /**

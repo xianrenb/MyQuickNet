@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\static_file;
 
+use com\googlecode\myquicknet\testing\TestingStaticFileController;
+
 /**
  * Test class for MQNStaticFileController.
  */
@@ -43,7 +45,7 @@ class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function test2() {
-        $controller = new \TestingStaticFileController();
+        $controller = new TestingStaticFileController();
         $this->assertTrue($controller instanceof MQNStaticFileController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_static_file/html/default.html';
         ob_start();

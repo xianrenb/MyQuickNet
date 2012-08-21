@@ -7,8 +7,12 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
+
+namespace com\googlecode\myquicknet\testing;
+
 use com\googlecode\myquicknet\autorecord\MQNAutoRecord;
 use com\googlecode\myquicknet\dom\MQNDom;
+use com\googlecode\myquicknet\testing_config\TestingViewConfig;
 
 /**
  *
@@ -53,7 +57,7 @@ class TestingView extends TestingViewConfig {
      * @return boolean 
      */
     public function advanceExample(MQNAutoRecord $model, $s) {
-        new String($s);
+        new \String($s);
         $dataArray = $model->outputDefaultData();
         $dataArray['s'] = (string) $s;
         $dom = new MQNDom();

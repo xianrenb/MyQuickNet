@@ -19,6 +19,12 @@ class MQNMainController extends MQNController {
      *
      * @var string
      */
+    private $controllerClassPrefix;
+
+    /**
+     *
+     * @var string
+     */
     private $mainControllerClass;
 
     /**
@@ -27,10 +33,18 @@ class MQNMainController extends MQNController {
      */
     public function __construct(array $config = array()) {
         parent::__construct($config);
-        if (key_exists('main_controller_class', $config)) {
+
+        if (array_key_exists('controller_class_prefix', $config)) {
+            $this->controllerClassPrefix = (string) $config['controller_class_prefix'];
+        } else {
+            $this->controllerClassPrefix = '\\com\\googlecode\\myquicknet\\controller\\';
+        }
+
+
+        if (array_key_exists('main_controller_class', $config)) {
             $this->mainControllerClass = (string) $config['main_controller_class'];
         } else {
-            $this->mainControllerClass = 'MQNMainController';
+            $this->mainControllerClass = '\\com\\googlecode\\myquicknet\\controller\\MQNMainController';
         }
     }
 
@@ -41,14 +55,15 @@ class MQNMainController extends MQNController {
             $subject = (string) $_SERVER['PATH_INFO'];
 
             if (preg_match($pattern, $subject, $matches)) {
-                $controllerClassName = (string) $this->_toShortName($matches[1]);
+                $controllerClassName = (string) $this->controllerClassPrefix;
+                $controllerClassName .= (string) $this->_toShortName($matches[1]);
                 $controllerClassName .= 'Controller';
                 $controllerExists = false;
 
                 try {
                     if (class_exists($controllerClassName, true)) {
-                        if (is_subclass_of($controllerClassName, '\com\googlecode\myquicknet\controller\MQNController')) {
-                            if (strtolower($controllerClassName) != strtolower('MQNMainController')) {
+                        if (is_subclass_of($controllerClassName, '\\com\\googlecode\\myquicknet\\controller\\MQNController')) {
+                            if (strtolower($controllerClassName) != strtolower('\\com\\googlecode\\myquicknet\\controller\\MQNMainController')) {
                                 if (strtolower($controllerClassName) != strtolower($this->mainControllerClass)) {
                                     $controllerExists = true;
                                 }

@@ -54,7 +54,7 @@ class MQNController {
         if (key_exists('view_class', $config)) {
             $viewClass = (string) $config['view_class'];
         } else {
-            $viewClass = '\com\googlecode\myquicknet\view\MQNView';
+            $viewClass = '\\com\\googlecode\\myquicknet\\view\\MQNView';
         }
 
         $this->view = new $viewClass();

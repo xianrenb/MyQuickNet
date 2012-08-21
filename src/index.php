@@ -15,7 +15,7 @@ call_user_func(function () {
 
             try {
                 ob_start();
-                $controller = new TestingMainController();
+                $controller = new \com\googlecode\myquicknet\testing\TestingMainController();
                 $controller->run();
                 ob_end_flush();
             } catch (Exception $e) {
