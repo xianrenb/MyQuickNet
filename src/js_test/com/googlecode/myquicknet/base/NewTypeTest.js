@@ -26,12 +26,13 @@ var NewTypeTest;
                 this.test3();
                 this.test4();
                 this.test5();
+                this.test6();
             },
             test1: function () {
                 test('TestingNewType', function () {
-                    ok(newType instanceof NewType);
-                    ok(newType.isInstance(newType, NewType));
-                    ok(newType.isInstance(newType, 'NewType'));
+                    ok(newType instanceof com.googlecode.myquicknet.base.NewType);
+                    ok(newType.isInstance(newType, com.googlecode.myquicknet.base.NewType));
+                    ok(newType.isInstance(newType, 'com.googlecode.myquicknet.base.NewType'));
                 });
             },
             test2: function () {
@@ -239,6 +240,24 @@ var NewTypeTest;
                     ok(newType.isInstance(TestingType3.prototype, 'TestingType2'));
                     ok(!newType.isInstance(TestingType3.prototype, TestingType3));
                     ok(!newType.isInstance(TestingType3.prototype, 'TestingType3'));
+                });
+            },
+            test6: function () {
+                test('Testing Namespace', function () {
+                    var testingNSType1, testingNSType2;
+                    testingNSType1 = new com.googlecode.myquicknet.testing.TestingNSType1;
+                    testingNSType2 = new com.googlecode.myquicknet.testing.TestingNSType2;
+                    ok(testingNSType1 instanceof com.googlecode.myquicknet.testing.TestingNSType1);
+                    ok(newType.isInstance(testingNSType1, com.googlecode.myquicknet.testing.TestingNSType1));
+                    ok(newType.isInstance(testingNSType1, 'com.googlecode.myquicknet.testing.TestingNSType1'));
+                    ok(testingNSType2 instanceof com.googlecode.myquicknet.testing.TestingNSType2);
+                    ok(newType.isInstance(testingNSType2, com.googlecode.myquicknet.testing.TestingNSType2));
+                    ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSType2'));
+                    ok(testingNSType2 instanceof com.googlecode.myquicknet.testing.TestingNSType1);
+                    ok(newType.isInstance(testingNSType2, com.googlecode.myquicknet.testing.TestingNSType1));
+                    ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSType1'));
+                    ok(newType.isInstance(testingNSType2, com.googlecode.myquicknet.testing.TestingNSInterface1));
+                    ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSInterface1'));
                 });
             }
         }
