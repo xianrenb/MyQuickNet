@@ -30,19 +30,39 @@ var NewTypeTest;
             },
             test1: function () {
                 test('TestingNewType', function () {
+                    ok(newType instanceof Object);
+                    ok(newType.isInstance(newType, Object));
+                    ok(newType.isInstance(newType, 'Object'));
                     ok(newType instanceof com.googlecode.myquicknet.base.NewType);
                     ok(newType.isInstance(newType, com.googlecode.myquicknet.base.NewType));
                     ok(newType.isInstance(newType, 'com.googlecode.myquicknet.base.NewType'));
+                    ok(com.googlecode.myquicknet.base.NewType instanceof Object);
+                    ok(com.googlecode.myquicknet.base.NewType instanceof Function);
+                    ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, Object));
+                    ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, Function));
+                    ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, 'Object'));
+                    ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, 'Function'));
+                    equal(newType.getTypeName(com.googlecode.myquicknet.base.NewType), 'com.googlecode.myquicknet.base.NewType');
                 });
             },
             test2: function () {
                 test('TestingType1', function () {
                     var testingType1, testingType1a;
+                    ok(TestingType1 instanceof Object);
+                    ok(TestingType1 instanceof Function);
+                    ok(newType.isInstance(TestingType1, Object));
+                    ok(newType.isInstance(TestingType1, Function));
+                    ok(newType.isInstance(TestingType1, 'Object'));
+                    ok(newType.isInstance(TestingType1, 'Function'));
+                    equal(newType.getTypeName(TestingType1), 'TestingType1');
                     testingType1 = new TestingType1();
                     testingType1._(1, 2);
+                    ok(testingType1 instanceof Object);
                     ok(testingType1 instanceof TestingType1);
                     ok(!(testingType1 instanceof TestingType2));
                     ok(!(testingType1 instanceof TestingType3));
+                    ok(newType.isInstance(testingType1, Object));
+                    ok(newType.isInstance(testingType1, 'Object'));
                     ok(newType.isInstance(testingType1, TestingType1));
                     ok(newType.isInstance(testingType1, 'TestingType1'));
                     ok(!newType.isInstance(testingType1, TestingType2));
@@ -90,11 +110,21 @@ var NewTypeTest;
             test3: function () {
                 test('TestingType2', function () {
                     var testingType2, testingType2a;
+                    ok(TestingType2 instanceof Object);
+                    ok(TestingType2 instanceof Function);
+                    ok(newType.isInstance(TestingType2, Object));
+                    ok(newType.isInstance(TestingType2, Function));
+                    ok(newType.isInstance(TestingType2, 'Object'));
+                    ok(newType.isInstance(TestingType2, 'Function'));
+                    equal(newType.getTypeName(TestingType2), 'TestingType2');
                     testingType2 = new TestingType2();
                     testingType2._(1, 2);
+                    ok(testingType2 instanceof Object);
                     ok(testingType2 instanceof TestingType1);
                     ok(testingType2 instanceof TestingType2);
                     ok(!(testingType2 instanceof TestingType3));
+                    ok(newType.isInstance(testingType2, Object));
+                    ok(newType.isInstance(testingType2, 'Object'));
                     ok(newType.isInstance(testingType2, TestingType1));
                     ok(newType.isInstance(testingType2, 'TestingType1'));
                     ok(newType.isInstance(testingType2, TestingType2));
@@ -144,11 +174,21 @@ var NewTypeTest;
             test4: function () {
                 test('TestingType3', function () {
                     var o, testingType3, testingType3a;
+                    ok(TestingType3 instanceof Object);
+                    ok(TestingType3 instanceof Function);
+                    ok(newType.isInstance(TestingType3, Object));
+                    ok(newType.isInstance(TestingType3, Function));
+                    ok(newType.isInstance(TestingType3, 'Object'));
+                    ok(newType.isInstance(TestingType3, 'Function'));
+                    equal(newType.getTypeName(TestingType3), 'TestingType3');
                     testingType3 = new TestingType3();
                     testingType3._(1, 2);
+                    ok(testingType3 instanceof Object);
                     ok(testingType3 instanceof TestingType1);
                     ok(testingType3 instanceof TestingType2);
                     ok(testingType3 instanceof TestingType3);
+                    ok(newType.isInstance(testingType3, Object));
+                    ok(newType.isInstance(testingType3, 'Object'));
                     ok(newType.isInstance(testingType3, TestingType1));
                     ok(newType.isInstance(testingType3, 'TestingType1'));
                     ok(newType.isInstance(testingType3, TestingType2));
@@ -244,13 +284,33 @@ var NewTypeTest;
             },
             test6: function () {
                 test('Testing Namespace', function () {
-                    var testingNSType1, testingNSType2;
+                    var o, testingNSType1, testingNSType2;
+                    ok(com.googlecode.myquicknet.testing.TestingNSType1 instanceof Object);
+                    ok(com.googlecode.myquicknet.testing.TestingNSType1 instanceof Function);
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType1, Object));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType1, Function));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType1, 'Object'));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType1, 'Function'));
+                    equal(newType.getTypeName(com.googlecode.myquicknet.testing.TestingNSType1), 'com.googlecode.myquicknet.testing.TestingNSType1');
+                    ok(com.googlecode.myquicknet.testing.TestingNSType2 instanceof Object);
+                    ok(com.googlecode.myquicknet.testing.TestingNSType2 instanceof Function);
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2, Object));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2, Function));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2, 'Object'));
+                    ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2, 'Function'));
+                    equal(newType.getTypeName(com.googlecode.myquicknet.testing.TestingNSType2), 'com.googlecode.myquicknet.testing.TestingNSType2');
                     testingNSType1 = new com.googlecode.myquicknet.testing.TestingNSType1;
                     testingNSType2 = new com.googlecode.myquicknet.testing.TestingNSType2;
+                    ok(testingNSType1 instanceof Object);
                     ok(testingNSType1 instanceof com.googlecode.myquicknet.testing.TestingNSType1);
+                    ok(newType.isInstance(testingNSType1, Object));
+                    ok(newType.isInstance(testingNSType1, 'Object'));
                     ok(newType.isInstance(testingNSType1, com.googlecode.myquicknet.testing.TestingNSType1));
                     ok(newType.isInstance(testingNSType1, 'com.googlecode.myquicknet.testing.TestingNSType1'));
+                    ok(testingNSType2 instanceof Object);
                     ok(testingNSType2 instanceof com.googlecode.myquicknet.testing.TestingNSType2);
+                    ok(newType.isInstance(testingNSType2, Object));
+                    ok(newType.isInstance(testingNSType2, 'Object'));
                     ok(newType.isInstance(testingNSType2, com.googlecode.myquicknet.testing.TestingNSType2));
                     ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSType2'));
                     ok(testingNSType2 instanceof com.googlecode.myquicknet.testing.TestingNSType1);
@@ -258,6 +318,8 @@ var NewTypeTest;
                     ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSType1'));
                     ok(newType.isInstance(testingNSType2, com.googlecode.myquicknet.testing.TestingNSInterface1));
                     ok(newType.isInstance(testingNSType2, 'com.googlecode.myquicknet.testing.TestingNSInterface1'));
+                    o = testingNSType2.newTestingNSType1();
+                    ok(newType.isInstance(o, 'com.googlecode.myquicknet.testing.TestingNSType1'));
                 });
             }
         }

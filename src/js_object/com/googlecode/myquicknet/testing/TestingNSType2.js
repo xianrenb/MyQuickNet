@@ -20,6 +20,10 @@
             },
             fa: function() {
                 return 'ok too!';
+            },
+            newTestingNSType1: function() {
+                var o = new _.TestingNSType1();
+                return o;
             }
         }
     });

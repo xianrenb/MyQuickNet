@@ -8,6 +8,7 @@
 /**
  *
  */
+var _ = {};
 var base = {};
 var my = {};
 var self = {};
@@ -18,9 +19,12 @@ var newType;
     'use strict';
 
     var NewType = function () {
+        this._Object = {};
         this['_com.googlecode.myquicknet.base.NewType'] = {};
     }
 
+    NewType._Object = {};
+    NewType._Function = {};
     NewType.prototype = {};
 
     NewType.prototype._ = function () {
@@ -31,6 +35,7 @@ var newType;
 
     NewType.prototype._backup = function () {
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        my.stack.push(global._);
         my.stack.push(global.base);
         my.stack.push(global.my);
         my.stack.push(global.self);
@@ -39,6 +44,7 @@ var newType;
 
     NewType.prototype._decorateMethod = function (method) {
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        var v_ = my._;
         var vBase = my.base;
         var vMethod = method;
         var vFullName = my.fullName.toString();
@@ -49,6 +55,7 @@ var newType;
         return function () {
             var r;
             vNewType._backup();
+            global._ = v_;
             global.base = (vBase && vBase.prototype) ? vBase.prototype : null;
             global.my = this['_' + vFullName];
             global.self = vSelf;
@@ -61,6 +68,7 @@ var newType;
 
     NewType.prototype._decorateSharedMethod = function (method) {
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        var v_ = my._;
         var vBase = my.base;
         var vMethod = method;
         var vNewType = this;
@@ -70,6 +78,7 @@ var newType;
         return function () {
             var r;
             vNewType._backup();
+            global._ = v_;
             global.base = vBase.shared || null;
             global.my = null;
             global.self = vSelf;
@@ -103,6 +112,7 @@ var newType;
             _[my.name] = (function (_, vName, vFullName) {
                 return function () {
                     var propertyName;
+                    this._Object = {};
                     this['_' + vFullName] = {};
 
                     for (propertyName in _[vName].prototype) {
@@ -116,6 +126,8 @@ var newType;
             _[my.name].prototype = {};
         }
 
+        _[my.name]._Object = {};
+        _[my.name]._Function = {};
         my.self = _[my.name];
     };
 
@@ -125,6 +137,7 @@ var newType;
         global.self = my.stack.pop();
         global.my = my.stack.pop();
         global.base = my.stack.pop();
+        global._ = my.stack.pop();
     };
 
     NewType.prototype.def = function (args) {
@@ -149,6 +162,7 @@ var newType;
             _ = global;
         }
 
+        my._ = _;
         my.name = args.name.toString();
 
         if (my.namespace === '') {
@@ -181,7 +195,7 @@ var newType;
             if (typeof my.interfaces[i] === 'string') {
                 interfaceName = my.interfaces[i].toString();
             } else {
-                interfaceName = my.interfaces[i].typeName.toString();
+                interfaceName = this.getTypeName(my.interfaces[i]).toString();
             }
 
             _[my.name].prototype['_' + interfaceName] = {};
@@ -207,16 +221,43 @@ var newType;
             }
         }
 
-        _[my.name].typeName = my.fullName.toString();
+        _[my.name]._Function.typeName = my.fullName.toString();
+    };
+
+    NewType.prototype.getTypeName = function (object) {
+        var typeName;
+
+        if (('_Function' in object) && ('typeName' in object._Function)) {
+            typeName = object._Function.typeName.toString();
+        } else {
+            typeName = null;
+        }
+
+        return typeName;
     };
 
     NewType.prototype.isInstance = function (object, type) {
-        var typeName = (typeof type === 'string') ? type : (type.typeName.toString());
+        var typeName;
+
+        if (typeof type === 'string') {
+            typeName = type.toString();
+        } else {
+            if (object instanceof type) {
+                return true;
+            }
+
+            typeName = this.getTypeName(type).toString();
+
+            if (typeName === null) {
+                return false;
+            }
+        }
+
         return object.hasOwnProperty('_' + typeName);
     };
 
     NewType.shared = {};
-    NewType.typeName = 'com.googlecode.myquicknet.base.NewType';
+    NewType._Function.typeName = 'com.googlecode.myquicknet.base.NewType';
 
     (function (global) {
         var _, i, namespaceSplits, namespaceSplitsCount;
