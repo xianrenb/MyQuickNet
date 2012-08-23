@@ -119,19 +119,21 @@ var newType;
         };
     };
 
-    NewType.prototype._defCore = function (_) {
+    NewType.prototype._defCore = function () {
+        var _;
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        _ = my._;
 
         if (my.base) {
-            _[my.name] = (function (vBase, _, vName, vFullName) {
+            _[my.name] = (function (vBase, v_, vName, vFullName) {
                 return function () {
                     var propertyName;
                     vBase.call(this);
                     this['_' + vFullName] = {};
 
-                    for (propertyName in _[vName].prototype) {
-                        if ((typeof _[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
-                            this[propertyName] = _[vName].prototype[propertyName];
+                    for (propertyName in v_[vName].prototype) {
+                        if ((typeof v_[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
+                            this[propertyName] = v_[vName].prototype[propertyName];
                         }
                     }
                 };
@@ -139,15 +141,15 @@ var newType;
 
             _[my.name].prototype = new (my.base)();
         } else {
-            _[my.name] = (function (_, vName, vFullName) {
+            _[my.name] = (function (v_, vName, vFullName) {
                 return function () {
                     var propertyName;
                     this._Object = {};
                     this['_' + vFullName] = {};
 
-                    for (propertyName in _[vName].prototype) {
-                        if ((typeof _[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
-                            this[propertyName] = _[vName].prototype[propertyName];
+                    for (propertyName in v_[vName].prototype) {
+                        if ((typeof v_[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
+                            this[propertyName] = v_[vName].prototype[propertyName];
                         }
                     }
                 };
@@ -253,7 +255,7 @@ var newType;
         my.methods = args.methods || {};
         my.shared = args.shared || {};
         my.sharedMethods = args.sharedMethods || {};
-        this._defCore(_);
+        this._defCore();
         interfacesCount = my.interfaces.length;
         interfaceName = '';
 
@@ -293,6 +295,7 @@ var newType;
 
     NewType.prototype.getTypeFromFullName = function (fullName) {
         var fullNameSplits, fullNameSplitsCount, i, type;
+        var my = this['_com.googlecode.myquicknet.base.NewType'];
         type = global;
         fullNameSplits = fullName.toString().split('.');
         fullNameSplitsCount = fullNameSplits.length;
@@ -310,6 +313,7 @@ var newType;
 
     NewType.prototype.getTypeFullName = function (object) {
         var typeFullName;
+        var my = this['_com.googlecode.myquicknet.base.NewType'];
 
         if (('_Function' in object) && ('typeFullName' in object._Function)) {
             typeFullName = object._Function.typeFullName.toString();
@@ -322,6 +326,7 @@ var newType;
 
     NewType.prototype.getTypeName = function (object) {
         var typeName;
+        var my = this['_com.googlecode.myquicknet.base.NewType'];
 
         if (('_Function' in object) && ('typeName' in object._Function)) {
             typeName = object._Function.typeName.toString();
@@ -334,6 +339,7 @@ var newType;
 
     NewType.prototype.isInstance = function (object, type) {
         var typeFullName;
+        var my = this['_com.googlecode.myquicknet.base.NewType'];
 
         if (typeof type === 'string') {
             typeFullName = type.toString();
