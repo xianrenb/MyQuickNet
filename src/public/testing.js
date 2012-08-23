@@ -12,11 +12,11 @@
     'use strict';
 
     $(document).ready(function () {
-        var newTypeTest = new NewTypeTest();
+        var newTypeTest = new com.googlecode.myquicknet.base.NewTypeTest();
         newTypeTest._().run();
-        var mqnToolsTest = new MQNToolsTest();
+        var mqnToolsTest = new com.googlecode.myquicknet.base.MQNToolsTest();
         mqnToolsTest._().run();
-        var mqnMvcTest = new MQNMVCTest();
+        var mqnMvcTest = new com.googlecode.myquicknet.mvc.MQNMVCTest();
         mqnMvcTest._().run();
     });
 }());

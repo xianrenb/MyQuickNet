@@ -8,12 +8,11 @@
 /**
  *
  */
-var MQNMVC;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.mvc',
         name: 'MQNMVC',
         methods: {
             _: function (config) {

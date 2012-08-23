@@ -5,7 +5,9 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-
+/**
+ *
+ */
 (function () {
     'use strict';
 

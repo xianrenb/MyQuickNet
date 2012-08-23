@@ -8,12 +8,11 @@
 /**
  *
  */
-var NewTypeTest;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.base',
         name: 'NewTypeTest',
         methods: {
             _: function () {

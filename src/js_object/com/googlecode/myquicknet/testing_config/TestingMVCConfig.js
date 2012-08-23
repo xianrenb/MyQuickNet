@@ -8,14 +8,13 @@
 /**
  *
  */
-var TestingMVCConfig;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.testing_config',
         name: 'TestingMVCConfig',
-        base: MQNMVC,
+        base: com.googlecode.myquicknet.mvc.MQNMVC,
         methods: {
             _: function (config) {
                 config = {

@@ -8,13 +8,13 @@
 /**
  *
  */
-var MQNMVCTest;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.mvc',
         name: 'MQNMVCTest',
+        imports: [['com.googlecode.myquicknet.testing.TestingMVC']],
         methods: {
             _: function () {
                 return this;

@@ -8,12 +8,11 @@
 /**
  *
  */
-var MQNTools;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.base',
         name: 'MQNTools',
         methods: {
             _: function () {

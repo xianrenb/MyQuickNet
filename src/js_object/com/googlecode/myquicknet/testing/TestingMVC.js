@@ -8,14 +8,13 @@
 /**
  *
  */
-var TestingMVC;
-
 (function () {
     'use strict';
 
     newType.def({
+        namespace: 'com.googlecode.myquicknet.testing',
         name: 'TestingMVC',
-        base: TestingMVCConfig,
+        base: com.googlecode.myquicknet.testing_config.TestingMVCConfig,
         methods: {
             _: function (config) {
                 base._.call(this, config);
