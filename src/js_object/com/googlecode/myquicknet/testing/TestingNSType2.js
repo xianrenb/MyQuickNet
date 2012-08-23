@@ -15,13 +15,16 @@
         namespace: 'com.googlecode.myquicknet.testing',
         name: 'TestingNSType2',
         base: 'com.googlecode.myquicknet.testing.TestingNSType1',
-        interfaces: ['com.googlecode.myquicknet.testing.TestingNSInterface1'],
+        interfaces: ['com.googlecode.myquicknet.testing.TestingNSInterface1', com.googlecode.myquicknet.testing.TestingNSInterface2],
         imports: [['com.googlecode.myquicknet.testing.TestingNSType1'], ['com.googlecode.myquicknet.testing.TestingNSType2', 'T2'], ['com.googlecode.myquicknet.testing.TestingNSType2', 'TestingType2']],
         methods: {
             _: function () {
                 return this;
             },
             fa: function() {
+                return 'ok too!';
+            },
+            fb: function() {
                 return 'ok too!';
             },
             new_TestingNSType1: function() {

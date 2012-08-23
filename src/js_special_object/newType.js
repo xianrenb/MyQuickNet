@@ -102,7 +102,7 @@ var newType;
             vNewType._backup();
             vNewType._backupImportNames(vImportNames);
             global._ = v_;
-            global.base = vBase.shared || null;
+            global.base = (vBase && vBase.shared) ? vBase.shared : null;
             global.my = null;
             global.self = vSelf;
             global.shared = vShared;
@@ -263,7 +263,7 @@ var newType;
             if (typeof my.interfaces[i] === 'string') {
                 interfaceName = my.interfaces[i].toString();
             } else {
-                interfaceName = this.getTypeName(my.interfaces[i]).toString();
+                interfaceName = this.getTypeFullName(my.interfaces[i]).toString();
             }
 
             _[my.name].prototype['_' + interfaceName] = {};
@@ -315,11 +315,14 @@ var newType;
     NewType.prototype.getTypeFullName = function (object) {
         var typeFullName;
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        typeFullName = null;
 
-        if (('_Function' in object) && ('typeFullName' in object._Function)) {
-            typeFullName = object._Function.typeFullName.toString();
-        } else {
-            typeFullName = null;
+        if (object && ('_Function' in object)) {
+            if  ('typeFullName' in object._Function) {
+                if (typeof object._Function.typeFullName === 'string') {
+                    typeFullName = object._Function.typeFullName.toString();
+                }
+            }
         }
 
         return typeFullName;
@@ -328,11 +331,14 @@ var newType;
     NewType.prototype.getTypeName = function (object) {
         var typeName;
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        typeName = null;
 
-        if (('_Function' in object) && ('typeName' in object._Function)) {
-            typeName = object._Function.typeName.toString();
-        } else {
-            typeName = null;
+        if (object && ('_Function' in object)) {
+            if  ('typeName' in object._Function) {
+                if (typeof object._Function.typeName === 'string') {
+                    typeName = object._Function.typeName.toString();
+                }
+            }
         }
 
         return typeName;
