@@ -296,15 +296,16 @@ var newType;
     NewType.prototype.getTypeFromFullName = function (fullName) {
         var fullNameSplits, fullNameSplitsCount, i, type;
         var my = this['_com.googlecode.myquicknet.base.NewType'];
+        fullName = fullName.toString();
         type = global;
-        fullNameSplits = fullName.toString().split('.');
+        fullNameSplits = fullName.split('.');
         fullNameSplitsCount = fullNameSplits.length;
 
         for (i = 0; i < fullNameSplitsCount; ++i) {
             if (fullNameSplits[i] in type) {
                 type = type[fullNameSplits[i]];
             } else {
-                return null;
+                throw new ReferenceError(fullName + ' not found.');
             }
         }
 

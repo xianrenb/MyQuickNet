@@ -30,6 +30,7 @@ var NewTypeTest;
             },
             test1: function () {
                 test('TestingNewType', function () {
+                    var error, errorName, type;
                     ok(newType instanceof Object);
                     ok(newType.isInstance(newType, Object));
                     ok(newType.isInstance(newType, 'Object'));
@@ -42,6 +43,21 @@ var NewTypeTest;
                     ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, Function));
                     ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, 'Object'));
                     ok(newType.isInstance(com.googlecode.myquicknet.base.NewType, 'Function'));
+                    equal(newType.getTypeFromFullName('com.googlecode.myquicknet.base.NewType'), com.googlecode.myquicknet.base.NewType);
+
+                    try {
+                        type = newType.getTypeFromFullName('bad.full.Name');
+                        error = false;
+                        errorName = '';
+                    } catch (e) {
+                        type = null;
+                        error = true;
+                        errorName = e.name.toString();
+                    }
+
+                    equal(type, null);
+                    ok(error);
+                    equal(errorName, 'ReferenceError')
                     equal(newType.getTypeFullName(com.googlecode.myquicknet.base.NewType), 'com.googlecode.myquicknet.base.NewType');
                     equal(newType.getTypeName(com.googlecode.myquicknet.base.NewType), 'NewType');
                 });
