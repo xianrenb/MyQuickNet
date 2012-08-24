@@ -18,13 +18,12 @@ var newType;
 (function (global) {
     'use strict';
     var newTypeNamespace = 'com.googlecode.myquicknet.base';
-    var newTypeTypeFullName = newTypeNamespace.toString();
-    newTypeTypeFullName += '.NewType';
+    var newTypeTypeFullName = newTypeNamespace.toString() + '.NewType';
 
     var NewType = function () {
         this._Object = {};
         this['_' + newTypeTypeFullName.toString()] = {};
-    }
+    };
 
     NewType._Object = {};
     NewType._Function = {};
@@ -191,9 +190,11 @@ var newType;
         i = 0;
 
         for (importName in imports2) {
-            my.importNames[i] = importName.toString();
-            my.importFullNames[i] = imports2[importName].toString();
-            ++i;
+            if (typeof imports2[importName] === 'string') {
+                my.importNames[i] = importName.toString();
+                my.importFullNames[i] = imports2[importName].toString();
+                ++i;
+            }
         }
     };
 
@@ -211,24 +212,24 @@ var newType;
         var my = this['_' + newTypeTypeFullName.toString()];
         importNamesCount = importNames.length;
 
-        for (i = importNamesCount - 1; i >= 0 ; --i) {
+        for (i = importNamesCount - 1; i >= 0; --i) {
             global[importNames[i]] = my.stack.pop();
         }
     };
 
     NewType.prototype.def = function (args) {
-        var _, f, i, interfacesCount, interfaceName, methodName, namespaceSplits, namespaceSplitsCount;
+        var _, F, i, interfacesCount, interfaceName, methodName, namespaceSplits, namespaceSplitsCount;
         var my = this['_' + newTypeTypeFullName.toString()];
 
-        if ('namespace' in args) {
+        if (args.hasOwnProperty('namespace')) {
             my.namespace = args.namespace.toString();
             _ = global;
             namespaceSplits = my.namespace.toString().split('.');
             namespaceSplitsCount = namespaceSplits.length;
 
             for (i = 0; i < namespaceSplitsCount; ++i) {
-                if (!(namespaceSplits[i] in _)) {
-                    _[namespaceSplits[i]] = {}
+                if (!_.hasOwnProperty(namespaceSplits[i])) {
+                    _[namespaceSplits[i]] = {};
                 }
 
                 _ = _[namespaceSplits[i]];
@@ -279,9 +280,9 @@ var newType;
         }
 
         if (my.base) {
-            f = (function () {});
-            f.prototype = my.base.shared;
-            _[my.name].shared = new f();
+            F = function () {};
+            F.prototype = my.base.shared;
+            _[my.name].shared = new F();
         } else {
             _[my.name].shared = {};
         }
@@ -298,14 +299,13 @@ var newType;
 
     NewType.prototype.getTypeFromFullName = function (fullName) {
         var fullNameSplits, fullNameSplitsCount, i, type;
-        var my = this['_' + newTypeTypeFullName.toString()];
         fullName = fullName.toString();
         type = global;
         fullNameSplits = fullName.toString().split('.');
         fullNameSplitsCount = fullNameSplits.length;
 
         for (i = 0; i < fullNameSplitsCount; ++i) {
-            if (fullNameSplits[i] in type) {
+            if (type.hasOwnProperty(fullNameSplits[i])) {
                 type = type[fullNameSplits[i]];
             } else {
                 throw new ReferenceError(fullName.toString() + ' not found.');
@@ -317,11 +317,10 @@ var newType;
 
     NewType.prototype.getTypeFullName = function (object) {
         var typeFullName;
-        var my = this['_' + newTypeTypeFullName.toString()];
         typeFullName = null;
 
-        if (object && ('_Function' in object)) {
-            if  ('typeFullName' in object._Function) {
+        if (object && object.hasOwnProperty('_Function')) {
+            if (object._Function.hasOwnProperty('typeFullName')) {
                 if (typeof object._Function.typeFullName === 'string') {
                     typeFullName = object._Function.typeFullName.toString();
                 }
@@ -333,11 +332,10 @@ var newType;
 
     NewType.prototype.getTypeName = function (object) {
         var typeName;
-        var my = this['_' + newTypeTypeFullName.toString()];
         typeName = null;
 
-        if (object && ('_Function' in object)) {
-            if  ('typeName' in object._Function) {
+        if (object && object.hasOwnProperty('_Function')) {
+            if (object._Function.hasOwnProperty('typeName')) {
                 if (typeof object._Function.typeName === 'string') {
                     typeName = object._Function.typeName.toString();
                 }
@@ -349,7 +347,6 @@ var newType;
 
     NewType.prototype.isInstance = function (object, type) {
         var typeFullName;
-        var my = this['_' + newTypeTypeFullName.toString()];
 
         if (typeof type === 'string') {
             typeFullName = type.toString();
@@ -379,8 +376,8 @@ var newType;
         namespaceSplitsCount = namespaceSplits.length;
 
         for (i = 0; i < namespaceSplitsCount; ++i) {
-            if (!(namespaceSplits[i] in _)) {
-                _[namespaceSplits[i]] = {}
+            if (!_.hasOwnProperty(namespaceSplits[i])) {
+                _[namespaceSplits[i]] = {};
             }
 
             _ = _[namespaceSplits[i]];
@@ -389,6 +386,6 @@ var newType;
         _.NewType = NewType;
     }());
 
-    global.newType = new com.googlecode.myquicknet.base.NewType();
+    global.newType = new global.com.googlecode.myquicknet.base.NewType();
     global.newType._();
 }(this));
