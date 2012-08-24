@@ -5,9 +5,7 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-/**
- *
- */
+/*jslint nomen: true, plusplus: true, vars: true, browser: true */
 var TestingType3;
 
 (function () {
@@ -48,7 +46,7 @@ var TestingType3;
             getS: function () {
                 return shared.s;
             },
-            newObj: function() {
+            newObj: function () {
                 var o = new self();
                 o._(1, 2);
                 return o;
