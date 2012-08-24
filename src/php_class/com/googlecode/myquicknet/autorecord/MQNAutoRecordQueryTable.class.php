@@ -3,7 +3,7 @@
 /**
  * MQNAutoRecordQueryTable
  * @package MyQuickNet
- * @version 2.1
+ * @version 3.0
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
