@@ -21,13 +21,13 @@
             _: function () {
                 return this;
             },
-            fa: function() {
+            fa: function () {
                 return 'ok too!';
             },
-            fb: function() {
+            fb: function () {
                 return 'ok too!';
             },
-            new_TestingNSType1: function() {
+            new_TestingNSType1: function () {
                 var o = new _.TestingNSType1();
                 o._();
                 return o;
@@ -37,19 +37,19 @@
                 o._();
                 return o;
             },
-            newTestingNSType1: function() {
+            newTestingNSType1: function () {
                 var o = new TestingNSType1();
                 o._();
                 return o;
             },
-            testingTestingType2: function() {
+            testingTestingType2: function () {
                 var o = new TestingType2();
                 o._();
                 return o.fa();
             }
         },
         sharedMethods: {
-            snew_TestingNSType1: function() {
+            snew_TestingNSType1: function () {
                 var o = new _.TestingNSType1();
                 o._();
                 return o;
@@ -59,12 +59,12 @@
                 o._();
                 return o;
             },
-            snewTestingNSType1: function() {
+            snewTestingNSType1: function () {
                 var o = new TestingNSType1();
                 o._();
                 return o;
             },
-            stestingTestingType2: function() {
+            stestingTestingType2: function () {
                 var o = new TestingType2();
                 o._();
                 return o.fa();

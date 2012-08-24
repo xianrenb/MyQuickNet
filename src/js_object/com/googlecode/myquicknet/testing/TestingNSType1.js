@@ -18,7 +18,7 @@
             _: function () {
                 return this;
             },
-            fa: function() {
+            fa: function () {
                 return 'ok!';
             }
         }

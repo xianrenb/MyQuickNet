@@ -34,7 +34,7 @@
             nl2br: function (text, isXhtml) {
                 var out = text.toString();
 
-                if ((typeof isXhtml === 'undefined') || isXhtml) {
+                if ((isXhtml === undefined) || isXhtml) {
                     out = out.replace(/\r\n|\n\r|\n|\r/g, '<br />');
                 } else {
                     out = out.replace(/\r\n|\n\r|\n|\r/g, '<br>');

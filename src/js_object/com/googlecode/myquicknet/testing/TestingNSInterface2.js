@@ -15,7 +15,7 @@
         namespace: 'com.googlecode.myquicknet.testing',
         name: 'TestingNSInterface2',
         methods: {
-            fb: function() {
+            fb: function () {
             }
         }
     });

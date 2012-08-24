@@ -56,7 +56,7 @@
 
                     equal(type, null);
                     ok(error);
-                    equal(errorName, 'ReferenceError')
+                    equal(errorName, 'ReferenceError');
                     equal(newType.getTypeFullName(com.googlecode.myquicknet.base.NewType), 'com.googlecode.myquicknet.base.NewType');
                     equal(newType.getTypeName(com.googlecode.myquicknet.base.NewType), 'NewType');
                 });
@@ -334,8 +334,8 @@
                     ok(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2.prototype, 'com.googlecode.myquicknet.testing.TestingNSType1'));
                     ok(!(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2.prototype, com.googlecode.myquicknet.testing.TestingNSType2)));
                     ok(!(newType.isInstance(com.googlecode.myquicknet.testing.TestingNSType2.prototype, 'com.googlecode.myquicknet.testing.TestingNSType2')));
-                    testingNSType1 = new com.googlecode.myquicknet.testing.TestingNSType1;
-                    testingNSType2 = new com.googlecode.myquicknet.testing.TestingNSType2;
+                    testingNSType1 = new com.googlecode.myquicknet.testing.TestingNSType1();
+                    testingNSType2 = new com.googlecode.myquicknet.testing.TestingNSType2();
                     ok(testingNSType1 instanceof Object);
                     ok(testingNSType1 instanceof com.googlecode.myquicknet.testing.TestingNSType1);
                     ok(newType.isInstance(testingNSType1, Object));
