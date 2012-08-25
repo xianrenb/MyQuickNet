@@ -12,6 +12,7 @@ namespace com\googlecode\myquicknet\testing;
 
 use com\googlecode\myquicknet\autorecord\MQNAutoRecord;
 use com\googlecode\myquicknet\dom\MQNDom;
+use com\googlecode\myquicknet\dom\MQNDomTools;
 use com\googlecode\myquicknet\testing_config\TestingViewConfig;
 
 /**
@@ -33,6 +34,7 @@ class TestingView extends TestingViewConfig {
      * @param array $dataArray 
      */
     protected function _insertAdvanceExampleContent(MQNDom $dom, array $dataArray) {
+        $domTools = new MQNDomTools();
         $query = '//span[@id=\'data_a\']';
         $text = (string) $dataArray['data_a'] ? 'true' : 'false';
         $dom->queryText($query, $text);
@@ -48,6 +50,10 @@ class TestingView extends TestingViewConfig {
         $query = '//span[@id=\'s\']';
         $text = (string) $dataArray['s'];
         $dom->queryText($query, $text);
+        $query = '//div[@id=\'view\']';
+        $xml = (string) highlight_file(__FILE__, true);
+        $xml = (string) $domTools->convertNamedEntityToNumericEntity($xml);
+        $dom->queryXml($query, $xml);
     }
 
     /**
