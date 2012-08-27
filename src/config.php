@@ -27,8 +27,9 @@ call_user_func(function () {
             // $path .= (string) (PATH_SEPARATOR . 'additional/path/');
             set_include_path($path);
 
-            spl_autoload_register(function ($class_name) {
-                        include_once($class_name . '.class.php');
+            spl_autoload_register(function ($className) {
+                        $className = (string) str_replace('\\', DIRECTORY_SEPARATOR, $className);
+                        include_once($className . '.class.php');
                     });
         });
 ?>
