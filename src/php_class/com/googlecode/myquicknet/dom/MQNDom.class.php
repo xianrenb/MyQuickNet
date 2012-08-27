@@ -149,7 +149,7 @@ class MQNDom {
      * @param string $attrName
      * @param string|null $attrValue
      * @return string|null
-     * @throws Exception 
+     * @throws \Exception 
      */
     public function queryAttr($query, $attrName, $attrValue = null) {
         new \String($query);

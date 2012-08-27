@@ -91,7 +91,7 @@ class MQNAutoRecord {
      * @param string $name
      * @param array $arguments
      * @return mixed
-     * @throws BadMethodCallException 
+     * @throws \BadMethodCallException 
      */
     public function __call($name, $arguments) {
         new \String($name);
@@ -130,7 +130,7 @@ class MQNAutoRecord {
      *
      * @param string $name
      * @return bool|float|int|string
-     * @throws InvalidArgumentException 
+     * @throws \InvalidArgumentException 
      */
     protected function _getField($name) {
         new \String($name);
@@ -227,8 +227,8 @@ class MQNAutoRecord {
      *
      * @param string $name
      * @param bool|float|int|string|MQNAutoRecord $value
-     * @throws Exception
-     * @throws InvalidArgumentException 
+     * @throws \Exception
+     * @throws \InvalidArgumentException 
      */
     protected function _setField($name, $value) {
         new \String($name);
@@ -365,7 +365,7 @@ class MQNAutoRecord {
     /**
      *
      * @return null
-     * @throws Exception 
+     * @throws \Exception 
      */
     public function update() {
         $id = (int) $this->getId();

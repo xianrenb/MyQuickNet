@@ -114,7 +114,7 @@ class MQNStaticFileView extends MQNView {
     /**
      *
      * @return boolean
-     * @throws Exception 
+     * @throws \Exception 
      */
     public function output() {
         $fileName = (string) ($this->staticFilePath . $this->staticFileName);

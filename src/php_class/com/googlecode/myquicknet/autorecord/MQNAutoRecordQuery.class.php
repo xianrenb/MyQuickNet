@@ -152,7 +152,7 @@ class MQNAutoRecordQuery {
     /**
      *
      * @return string
-     * @throws Exception 
+     * @throws \Exception 
      */
     protected function _buildWhereConditionSql() {
         $sql = '';
@@ -267,7 +267,7 @@ class MQNAutoRecordQuery {
      * @param string $operator
      * @param bool|float|int|string|MQNAutoRecordQueryField $value2
      * @param bool $orNext
-     * @throws InvalidArgumentException 
+     * @throws \InvalidArgumentException 
      */
     public function condition($value1, $operator, $value2, $orNext = false) {
         new \String($operator);
@@ -407,7 +407,7 @@ class MQNAutoRecordQuery {
      *
      * @param string $autoRecordClassName
      * @return MQNAutoRecordQueryTable
-     * @throws InvalidArgumentException 
+     * @throws \InvalidArgumentException 
      */
     public function table($autoRecordClassName) {
         new \String($autoRecordClassName);

@@ -146,7 +146,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     /**
      *
      * @param string $name
-     * @throws BadMethodCallException 
+     * @throws \BadMethodCallException 
      */
     protected function _getField($name) {
         new \String($name);
@@ -156,7 +156,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     /**
      *
      * @param bool $newValid
-     * @throws BadMethodCallException 
+     * @throws \BadMethodCallException 
      */
     protected function _getNewId($newValid) {
         new \Bool($newValid);
@@ -167,7 +167,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @param string $name
      * @param mixed $value
-     * @throws BadMethodCallException 
+     * @throws \BadMethodCallException 
      */
     protected function _setField($name, $value) {
         new \String($name);
