@@ -1,6 +1,7 @@
 # MyQuickNet .htaccess file
 RewriteEngine on
 RewriteBase /MyQuickNet/
+RewriteRule ^error\.log$	-	[F,L]
 RewriteRule ^html/?.*$	-	[F,L]
 #RewriteRule ^js_test/?.*$	-	[F,L]
 #RewriteRule ^js_test_public/?.*$	-	[F,L]

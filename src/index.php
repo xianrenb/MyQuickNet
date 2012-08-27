@@ -11,17 +11,34 @@
  *
  */
 call_user_func(function () {
-            require_once(dirname(__FILE__) . '/config.php');
+            require_once(__DIR__ . '/config.php');
 
             try {
                 ob_start();
                 $controller = new \com\googlecode\myquicknet\testing\TestingMainController();
                 $controller->run();
                 ob_end_flush();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 ob_end_clean();
+                $error = (string) $e;
+                $error .= "\n";
 
-                if (key_exists('SERVER_PROTOCOL', $_SERVER)) {
+                try {
+                    $errorLog = fopen(__DIR__ . '/error.log', 'c');
+
+                    if (flock($errorLog, LOCK_EX)) {
+                        fseek($errorLog, 0, SEEK_END);
+                        fwrite($errorLog, $error);
+                        fflush($errorLog);
+                        flock($errorLog, LOCK_UN);
+                    }
+
+                    fclose($errorLog);
+                } catch (\Exception $e) {
+                    
+                }
+
+                if (array_key_exists('SERVER_PROTOCOL', $_SERVER)) {
                     $status = (string) ($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
                     header($status);
                     header('Status: 500 Internal Server Error');
