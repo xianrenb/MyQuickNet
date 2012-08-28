@@ -87,6 +87,7 @@ class MQNDom {
 
         if ($this->doc->load($filename, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
+            $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
             return true;
         } else {
             return false;
@@ -103,6 +104,7 @@ class MQNDom {
 
         if ($this->doc->loadHTML($source)) {
             $this->xPath = new \DOMXPath($this->doc);
+            $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
             return true;
         } else {
             return false;
@@ -119,6 +121,7 @@ class MQNDom {
 
         if ($this->doc->loadHTMLFile($filename)) {
             $this->xPath = new \DOMXPath($this->doc);
+            $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
             return true;
         } else {
             return false;
@@ -137,6 +140,7 @@ class MQNDom {
 
         if ($this->doc->loadXML($source, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
+            $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
             return true;
         } else {
             return false;

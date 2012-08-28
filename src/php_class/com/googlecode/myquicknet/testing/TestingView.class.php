@@ -35,22 +35,22 @@ class TestingView extends TestingViewConfig {
      */
     protected function _insertAdvanceExampleContent(MQNDom $dom, array $dataArray) {
         $domTools = new MQNDomTools();
-        $query = '//span[@id=\'data_a\']';
+        $query = '//_:span[@id=\'data_a\']';
         $text = (string) $dataArray['data_a'] ? 'true' : 'false';
         $dom->queryText($query, $text);
-        $query = '//span[@id=\'data_b\']';
+        $query = '//_:span[@id=\'data_b\']';
         $text = (string) $dataArray['data_b'];
         $dom->queryText($query, $text);
-        $query = '//span[@id=\'data_c\']';
+        $query = '//_:span[@id=\'data_c\']';
         $text = (string) $dataArray['data_c'];
         $dom->queryText($query, $text);
-        $query = '//span[@id=\'data_d\']';
+        $query = '//_:span[@id=\'data_d\']';
         $text = (string) $dataArray['data_d'];
         $dom->queryText($query, $text);
-        $query = '//span[@id=\'s\']';
+        $query = '//_:span[@id=\'s\']';
         $text = (string) $dataArray['s'];
         $dom->queryText($query, $text);
-        $query = '//div[@id=\'view\']';
+        $query = '//_:div[@id=\'view\']';
         $xml = (string) highlight_file(__FILE__, true);
         $xml = (string) $domTools->convertNamedEntityToNumericEntity($xml);
         $dom->queryXml($query, $xml);
