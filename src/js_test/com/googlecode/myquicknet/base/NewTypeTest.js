@@ -5,7 +5,8 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-/*jslint nomen: true, plusplus: true, vars: true, browser: true */
+/*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
+/*global com: false, equal: false, module: false, newType: false, ok: false, test: false, TestingInterface1: false, TestingInterface2: false, TestingInterface3: false, TestingType1: false, TestingType2: false, TestingType3: false */
 (function () {
     'use strict';
 

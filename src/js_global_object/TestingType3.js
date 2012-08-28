@@ -5,7 +5,8 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-/*jslint nomen: true, plusplus: true, vars: true, browser: true */
+/*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
+/*global base: false, my: false, newType: false, self: false, shared: false, TestingInterface3: false */
 var TestingType3;
 
 (function () {
@@ -47,7 +48,8 @@ var TestingType3;
                 return shared.s;
             },
             newObj: function () {
-                var o = new self();
+                var F = self;
+                var o = new F();
                 o._(1, 2);
                 return o;
             }
@@ -58,7 +60,8 @@ var TestingType3;
                 return result;
             },
             sNewObj: function () {
-                var o = new self();
+                var F = self;
+                var o = new F();
                 o._(1, 2);
                 return o;
             }

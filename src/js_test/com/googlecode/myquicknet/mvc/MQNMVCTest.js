@@ -5,7 +5,8 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-/*jslint nomen: true, plusplus: true, vars: true, browser: true */
+/*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
+/*global $: false, asyncTest: false, equal: false, expect: false, module: false, my: false, newType: false, start: false, TestingMVC: false */
 (function () {
     'use strict';
 
@@ -40,7 +41,7 @@
                             that.callback(json);
                         };
                     }(this))
-                    );
+                );
             },
             run: function () {
                 module('MQNMVCTest');
@@ -53,7 +54,7 @@
                             that.getData();
                         };
                     }(this))
-                    );
+                );
             }
         }
     });
