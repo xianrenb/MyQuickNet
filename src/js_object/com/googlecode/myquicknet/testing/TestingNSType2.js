@@ -44,7 +44,7 @@
             testingTestingType2: function () {
                 var o = new TestingType2();
                 o._();
-                return o.fa();
+                return o.fa().toString();
             }
         },
         sharedMethods: {
@@ -66,7 +66,7 @@
             stestingTestingType2: function () {
                 var o = new TestingType2();
                 o._();
-                return o.fa();
+                return o.fa().toString();
             }
         }
     });

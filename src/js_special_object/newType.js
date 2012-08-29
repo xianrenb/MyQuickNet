@@ -48,7 +48,7 @@ var newType;
         importNamesCount = importNames.length;
 
         for (i = 0; i < importNamesCount; ++i) {
-            my.stack.push(global[importNames[i]]);
+            my.stack.push(global[importNames[i].toString()]);
         }
     };
 
@@ -70,13 +70,13 @@ var newType;
             vNewType._backupImportNames(vImportNames);
             global._ = v_;
             global.base = (vBase && vBase.prototype) ? vBase.prototype : null;
-            global.my = this['_' + vFullName];
+            global.my = this['_' + vFullName.toString()];
             global.self = vSelf;
             global.shared = vShared;
             importNamesCount = vImportNames.length;
 
             for (i = 0; i < importNamesCount; ++i) {
-                global[vImportNames[i]] = vNewType.getTypeFromFullName(vImportFullNames[i]);
+                global[vImportNames[i].toString()] = vNewType.getTypeFromFullName(vImportFullNames[i].toString());
             }
 
             r = vMethod.apply(this, arguments);
@@ -109,7 +109,7 @@ var newType;
             importNamesCount = vImportNames.length;
 
             for (i = 0; i < importNamesCount; ++i) {
-                global[vImportNames[i]] = vNewType.getTypeFromFullName(vImportFullNames[i]);
+                global[vImportNames[i].toString()] = vNewType.getTypeFromFullName(vImportFullNames[i].toString());
             }
 
             r = vMethod.apply(this, arguments);
@@ -125,42 +125,42 @@ var newType;
         _ = my._;
 
         if (my.base) {
-            _[my.name] = (function (vBase, v_, vName, vFullName) {
+            _[my.name.toString()] = (function (vBase, v_, vName, vFullName) {
                 return function () {
                     var propertyName;
                     vBase.call(this);
-                    this['_' + vFullName] = {};
+                    this['_' + vFullName.toString()] = {};
 
-                    for (propertyName in v_[vName].prototype) {
-                        if ((typeof v_[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
-                            this[propertyName] = v_[vName].prototype[propertyName];
+                    for (propertyName in v_[vName.toString()].prototype) {
+                        if ((typeof v_[vName.toString()].prototype[propertyName] === 'object') && (propertyName.toString().charAt(0) === '_')) {
+                            this[propertyName.toString()] = v_[vName.toString()].prototype[propertyName.toString()];
                         }
                     }
                 };
             }(my.base, _, my.name, my.fullName));
 
-            _[my.name].prototype = new (my.base)();
+            _[my.name.toString()].prototype = new (my.base)();
         } else {
-            _[my.name] = (function (v_, vName, vFullName) {
+            _[my.name.toString()] = (function (v_, vName, vFullName) {
                 return function () {
                     var propertyName;
                     this._Object = {};
-                    this['_' + vFullName] = {};
+                    this['_' + vFullName.toString()] = {};
 
-                    for (propertyName in v_[vName].prototype) {
-                        if ((typeof v_[vName].prototype[propertyName] === 'object') && (propertyName.charAt(0) === '_')) {
-                            this[propertyName] = v_[vName].prototype[propertyName];
+                    for (propertyName in v_[vName.toString()].prototype) {
+                        if ((typeof v_[vName.toString()].prototype[propertyName] === 'object') && (propertyName.toString().charAt(0) === '_')) {
+                            this[propertyName.toString()] = v_[vName.toString()].prototype[propertyName.toString()];
                         }
                     }
                 };
             }(_, my.name, my.fullName));
 
-            _[my.name].prototype = {};
+            _[my.name.toString()].prototype = {};
         }
 
-        _[my.name]._Object = {};
-        _[my.name]._Function = {};
-        my.self = _[my.name];
+        _[my.name.toString()]._Object = {};
+        _[my.name.toString()]._Function = {};
+        my.self = _[my.name.toString()];
     };
 
     NewType.prototype._defImports = function (imports) {
@@ -180,7 +180,7 @@ var newType;
                 importName = importsItem[1].toString();
             }
 
-            imports2[importName] = importFullName.toString();
+            imports2[importName.toString()] = importFullName.toString();
         }
 
         my.importNames = [];
@@ -190,7 +190,7 @@ var newType;
         for (importName in imports2) {
             if (typeof imports2[importName] === 'string') {
                 my.importNames[i] = importName.toString();
-                my.importFullNames[i] = imports2[importName].toString();
+                my.importFullNames[i] = imports2[importName.toString()].toString();
                 ++i;
             }
         }
@@ -211,7 +211,7 @@ var newType;
         importNamesCount = importNames.length;
 
         for (i = importNamesCount - 1; i >= 0; --i) {
-            global[importNames[i]] = my.stack.pop();
+            global[importNames[i].toString()] = my.stack.pop();
         }
     };
 
@@ -226,11 +226,11 @@ var newType;
             namespaceSplitsCount = namespaceSplits.length;
 
             for (i = 0; i < namespaceSplitsCount; ++i) {
-                if (!_.hasOwnProperty(namespaceSplits[i])) {
-                    _[namespaceSplits[i]] = {};
+                if (!_.hasOwnProperty(namespaceSplits[i].toString())) {
+                    _[namespaceSplits[i].toString()] = {};
                 }
 
-                _ = _[namespaceSplits[i]];
+                _ = _[namespaceSplits[i].toString()];
             }
         } else {
             my.namespace = '';
@@ -268,31 +268,31 @@ var newType;
                 interfaceName = this.getTypeFullName(my.interfaces[i]).toString();
             }
 
-            _[my.name].prototype['_' + interfaceName.toString()] = {};
+            _[my.name.toString()].prototype['_' + interfaceName.toString()] = {};
         }
 
         for (methodName in my.methods) {
             if (typeof my.methods[methodName] === 'function') {
-                _[my.name].prototype[methodName] = this._decorateMethod(my.methods[methodName]);
+                _[my.name.toString()].prototype[methodName.toString()] = this._decorateMethod(my.methods[methodName.toString()]);
             }
         }
 
         if (my.base) {
             F = function () {};
             F.prototype = my.base.shared;
-            _[my.name].shared = new F();
+            _[my.name.toString()].shared = new F();
         } else {
-            _[my.name].shared = {};
+            _[my.name.toString()].shared = {};
         }
 
         for (methodName in my.sharedMethods) {
             if (typeof my.sharedMethods[methodName] === 'function') {
-                _[my.name].shared[methodName] = this._decorateSharedMethod(my.sharedMethods[methodName]);
+                _[my.name.toString()].shared[methodName.toString()] = this._decorateSharedMethod(my.sharedMethods[methodName.toString()]);
             }
         }
 
-        _[my.name]._Function.typeFullName = my.fullName.toString();
-        _[my.name]._Function.typeName = my.name.toString();
+        _[my.name.toString()]._Function.typeFullName = my.fullName.toString();
+        _[my.name.toString()]._Function.typeName = my.name.toString();
     };
 
     NewType.prototype.getTypeFromFullName = function (fullName) {
@@ -303,8 +303,8 @@ var newType;
         fullNameSplitsCount = fullNameSplits.length;
 
         for (i = 0; i < fullNameSplitsCount; ++i) {
-            if (type.hasOwnProperty(fullNameSplits[i])) {
-                type = type[fullNameSplits[i]];
+            if (type.hasOwnProperty(fullNameSplits[i].toString())) {
+                type = type[fullNameSplits[i].toString()];
             } else {
                 throw new ReferenceError(fullName.toString() + ' not found.');
             }
@@ -360,7 +360,7 @@ var newType;
             }
         }
 
-        return object.hasOwnProperty('_' + typeFullName);
+        return object.hasOwnProperty('_' + typeFullName.toString());
     };
 
     NewType.shared = {};
@@ -374,11 +374,11 @@ var newType;
         namespaceSplitsCount = namespaceSplits.length;
 
         for (i = 0; i < namespaceSplitsCount; ++i) {
-            if (!_.hasOwnProperty(namespaceSplits[i])) {
-                _[namespaceSplits[i]] = {};
+            if (!_.hasOwnProperty(namespaceSplits[i].toString())) {
+                _[namespaceSplits[i].toString()] = {};
             }
 
-            _ = _[namespaceSplits[i]];
+            _ = _[namespaceSplits[i].toString()];
         }
 
         _.NewType = NewType;

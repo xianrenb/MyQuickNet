@@ -19,13 +19,13 @@
             },
             htmlspecialchars: function (text, convertSingleQuote) {
                 var out = text.toString();
-                out = out.replace(/&/g, '&amp;');
-                out = out.replace(/</g, '&lt;');
-                out = out.replace(/>/g, '&gt;');
-                out = out.replace(/"/g, '&quot;');
+                out = out.toString().replace(/&/g, '&amp;').toString();
+                out = out.toString().replace(/</g, '&lt;').toString();
+                out = out.toString().replace(/>/g, '&gt;').toString();
+                out = out.toString().replace(/"/g, '&quot;').toString();
 
                 if (convertSingleQuote) {
-                    out = out.replace(/'/g, '&apos;');
+                    out = out.toString().replace(/'/g, '&apos;').toString();
                 }
 
                 return out;
@@ -34,9 +34,9 @@
                 var out = text.toString();
 
                 if ((isXhtml === undefined) || isXhtml) {
-                    out = out.replace(/\r\n|\n\r|\n|\r/g, '<br />');
+                    out = out.toString().replace(/\r\n|\n\r|\n|\r/g, '<br />').toString();
                 } else {
-                    out = out.replace(/\r\n|\n\r|\n|\r/g, '<br>');
+                    out = out.toString().replace(/\r\n|\n\r|\n|\r/g, '<br>').toString();
                 }
 
                 return out;
