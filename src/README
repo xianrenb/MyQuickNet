@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 2.1.0.
+This is the README file for MyQuickNet 3.0.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -7,18 +7,21 @@ This is the README file for MyQuickNet 2.1.0.
 About MyQuickNet:
 MyQuickNet is an open-source web application framework using JavaScript
 and PHP developed by MyQuickNet Development Group.
-It uses jQuery as the JavaScript library, MySQL as the database, PHPUnit for
-PHP unit testing, QUnit for JavaScript unit testing, and NetBeans IDE for
-development.
+It uses jQuery as the JavaScript library, JSLint as the JavaScript code quality
+checking tools, MySQL as the database, PHPUnit for PHP unit testing, QUnit for
+JavaScript unit testing, and NetBeans IDE for development.
 
 Files/directory structure:
 html/ --- directory that contains HTML file(s)
 jquery/ --- directory that contains jQuery and QUnit related file(s)
+js_global_object/ --- directory that contains JavaScript (global object) file(s)
 js_object/ --- directory that contains JavaScript (object) file(s)
+js_special_object/ --- directory that contains the "newType.js" file
 js_test/ --- directory that contains JavaScript test file(s)
 js_test_public/ --- directory that contains public accessible resource(s) for
                     JavaScript testing
 php_class/ --- directory that contains PHP class file(s)
+php_global_class/ --- directory that contains PHP global class file(s)
 php_test/ --- directory that contains PHP test file(s)
 public/ --- directory that contains public accessible resource(s)
 sql/ --- directory that contains SQL file(s)
@@ -40,12 +43,16 @@ controller.
 configurations/uses.
 3. "MQNAutoRecordTest.php" and "MQNAutoRecordQueryTest.php" in directory
 "php_test/php_class/com/googlecode/myquicknet/autorecord/" shows how to use
-MQNAutoRecord and MQNAutoRecordQuery as ORM.
-4. MQNAutoRecord, MQNAutoRecordQuery and MQNAutoRecordQueryTable instances use
+"\com\googlecode\myquicknet\autorecord\MQNAutoRecord" and
+"\com\googlecode\myquicknet\autorecord\MQNAutoRecordQuery" as ORM.
+4. "\com\googlecode\myquicknet\autorecord\MQNAutoRecord",
+"\com\googlecode\myquicknet\autorecord\MQNAutoRecordQuery" and
+"\com\googlecode\myquicknet\autorecord\MQNAutoRecordQueryTable" instances use
 database resource. It is advised to free these instances explicitly (set to
 null) as in the above test files.
-5. Each database table used for MQNAutoRecord must have two (reserved) fields:
-"id" and "valid".
+5. Each database table used for
+"\com\googlecode\myquicknet\autorecord\MQNAutoRecord" must have two (reserved)
+fields: "id" and "valid".
 6. It is simple to write Object-Oriented JavaScript program by using
 "newType.def()" as in the JavaScript object files. Method "_" should be called
 explicitly after using "new" to create and initialize instances. Method (other
@@ -54,25 +61,50 @@ method. Method with name not started by an underscore should be treated as
 public method. The first letter of public method name and the second letter
 (the letter just after the underscore) of protected method name should be
 small. The first letter of type name should be capital. Within normal methods,
-use "base" to access the base type prototype, use "my" to access the object
-holding private data member(s), use "self" as the type itself, and use "shared"
-to access the object holding static data member(s). Within shared/static
-methods, use "base" to access the object holding base type's shared methods,
+use "_" to access the current namespace, use "base" to access the base type
+prototype, use "my" to access the object holding private data member(s), use
+"self" as the type itself, and use "shared" to access the object holding static
+data member(s). Within shared/static methods, use "_" to access the current
+namespace, use "base" to access the object holding base type's shared methods,
 use "self" as the type itself, and use "shared" to access the object holding
 static data member(s). The property "shared" of a type, defined using the above
-method, is the object holding the type's shared methods.
+method, is the object holding the type's shared methods. When "imports" is
+used, the corresponding type(s) would be available as short name(s) within the
+methods.
 7. File "html/default.html" is the default html file.
 8. File ".htaccess" controls how Apache rewrites URL. The default URL for the
 default html file is "http://localhost/MyQuickNet/".
-9. TestingController and TestingView are the controller and view classes for
-the URL "http://localhost/MyQuickNet/testing/".
+9. "\com\googlecode\myquicknet\testing\TestingController" and
+"\com\googlecode\myquicknet\testing\TestingView" are the controller and view
+classes for the URL "http://localhost/MyQuickNet/testing/".
 10. Using default settings, "http://localhost/MyQuickNet/xxx/" would use
-class "XxxController" as the controller.
+class "\com\googlecode\myquicknet\testing\XxxController" as the controller.
+Please change setting for the main controller to use other prefix.
 11. Please choose "config.php" as the bootstrap file when using PHPUnit.
-12. "TestingAutoRecordManagerConfig.class.php" uses SQLite as the default
-database for testing. Please modify it to choose between MySQLi and SQLite. You
-should also import data from the SQL file(s) into the database before testing
-if a new database is used.
+12.
+"\com\googlecode\myquicknet\testing_config\TestingAutoRecordManagerConfig" uses
+SQLite as the default database for testing. Please modify it to choose between
+MySQLi and SQLite. You should also import data from the SQL file(s) into the
+database before testing if a new database is used.
+13. "\com\googlecode\myquicknet\dom\MQNDom" could be used to simplify using
+html files as view templates. Please see the details in the advance example.
+14. The typical data flow is as follows:
+Database ->
+Model (\com\googlecode\myquicknet\autorecord\MQNAutoRecord) ->
+View (\com\googlecode\myquicknet\view\MQNView) ->
+Controller (\com\googlecode\myquicknet\controller\MQNController) ->
+JavaScript code (optional) ->
+Browser/User
+15. One should use \com\googlecode\myquicknet\autorecord\MQNAutoRecordCache
+instead of \com\googlecode\myquicknet\autorecord\MQNAutoRecord to build a
+practical system, as this would handle the data better and avoid unexpected
+problems.
+
+Major changes form version 2.1.0:
+* MyQuickNet supports PHP namespace
+* MyQuickNet supports JavaScript namespace
+* MyQuickNet's JavaScript codes pass JSLint with proper directives
+* added error logging
 
 Major changes from version 2.0.2:
 * MyQuickNet changed to use MIT license
