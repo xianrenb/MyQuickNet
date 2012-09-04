@@ -61,9 +61,16 @@ class MQNDomTools {
         $this->numericEntityArray = array();
         $translationTable = get_html_translation_table(HTML_ENTITIES);
 
-        foreach ($translationTable as $key => $value) {
-            $numericEntity = (string) mb_encode_numericentity($key, array(0x0, 0xffff, 0, 0xffff), 'HTML-ENTITIES');
-            $this->numericEntityArray[$value] = $numericEntity;
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            foreach ($translationTable as $key => $value) {
+                $numericEntity = (string) mb_encode_numericentity($key, array(0x0, 0xffff, 0, 0xffff), 'UTF-8');
+                $this->numericEntityArray[$value] = $numericEntity;
+            }
+        } else {
+            foreach ($translationTable as $key => $value) {
+                $numericEntity = (string) mb_encode_numericentity($key, array(0x0, 0xffff, 0, 0xffff), 'HTML-ENTITIES');
+                $this->numericEntityArray[$value] = $numericEntity;
+            }
         }
     }
 
