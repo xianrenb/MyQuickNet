@@ -212,6 +212,10 @@ var newType;
 
         for (i = importNamesCount - 1; i >= 0; --i) {
             global[importNames[i].toString()] = my.stack.pop();
+
+            if (global[importNames[i].toString()] === undefined) {
+                delete global[importNames[i].toString()];
+            }
         }
     };
 
