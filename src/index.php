@@ -20,7 +20,10 @@ call_user_func(function () {
                 ob_end_flush();
             } catch (\Exception $e) {
                 ob_end_clean();
-                $error = (string) $e;
+                $error = '[';
+                $error .= (string) date(DATE_W3C);
+                $error .= ']';
+                $error .= (string) $e;
                 $error .= "\n";
 
                 try {

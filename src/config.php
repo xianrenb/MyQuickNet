@@ -9,8 +9,8 @@
  */
 call_user_func(function () {
             // Settings for PHP
-            set_error_handler(function ($a, $b, $c, $d) {
-                        throw new ErrorException($b, 0, $a, $c, $d);
+            set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+                        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
                     });
 
             mb_internal_encoding('UTF-8');
