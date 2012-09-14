@@ -24,7 +24,7 @@ class TestingMainControllerConfig extends MQNMainController {
     public function __construct(array $config = array()) {
         $config['controller_class_prefix'] = '\\com\\googlecode\\myquicknet\\testing\\';
         $config['main_controller_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingMainController';
-        $config['url_base_path'] = '/MyQuickNet/';
+        $config['url_base_path'] = (string) TestingCommonConfig::getUrlBasePath();
         parent::__construct($config);
     }
 

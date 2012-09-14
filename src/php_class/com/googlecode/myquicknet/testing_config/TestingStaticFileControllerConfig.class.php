@@ -22,7 +22,7 @@ class TestingStaticFileControllerConfig extends MQNStaticFileController {
      * @param array $config
      */
     public function __construct(array $config = array()) {
-        $config['url_base_path'] = '/MyQuickNet/';
+        $config['url_base_path'] = (string) TestingCommonConfig::getUrlBasePath();
         $config['view_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingStaticFileView';
         parent::__construct($config);
     }
