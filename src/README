@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 3.0.0.
+This is the README file for MyQuickNet 3.0.1.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -88,6 +88,8 @@ MySQLi and SQLite. You should also import data from the SQL file(s) into the
 database before testing if a new database is used.
 13. "\com\googlecode\myquicknet\dom\MQNDom" could be used to simplify using
 html files as view templates. Please see the details in the advance example.
+"_" is the prefix for the default XML namespace when using query*() methods of
+"\com\googlecode\myquicknet\dom\MQNDom".
 14. The typical data flow is as follows:
 Database ->
 Model (\com\googlecode\myquicknet\autorecord\MQNAutoRecord) ->
@@ -95,10 +97,16 @@ View (\com\googlecode\myquicknet\view\MQNView) ->
 Controller (\com\googlecode\myquicknet\controller\MQNController) ->
 JavaScript code (optional) ->
 Browser/User
-15. One should use \com\googlecode\myquicknet\autorecord\MQNAutoRecordCache
-instead of \com\googlecode\myquicknet\autorecord\MQNAutoRecord to build a
+15. One should use "\com\googlecode\myquicknet\autorecord\MQNAutoRecordCache"
+instead of "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" to build a
 practical system, as this would handle the data better and avoid unexpected
 problems.
+
+Major changes from version 3.0.0:
+* changed code to support PHP v5.3.6+ and v5.4+
+* improved newType.js
+* improved code for error handling
+* added TestingCommonConfig
 
 Major changes form version 2.1.0:
 * MyQuickNet supports PHP namespace
