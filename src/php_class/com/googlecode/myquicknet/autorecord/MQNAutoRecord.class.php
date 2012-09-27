@@ -196,30 +196,22 @@ class MQNAutoRecord {
         }
 
         $sql .= ' ) VALUES ( ';
-        $sql .= (int) $id;
-        $sql .= ' , ';
-        $sql .= (int) $newValid;
+        $sql .= '? , ?';
 
-        foreach ($this->fieldArray as $name => $value) {
-            $sql .= ' , ';
-
-            if (is_bool($value)) {
-                $sql .= (int) $value;
-            } else if (is_float($value)) {
-                $sql .= (float) $value;
-            } else if (is_int($value)) {
-                $sql .= (int) $value;
-            } else if (is_string($value)) {
-                $sql .= '\'';
-                $sql .= (string) $this->database->escapeString($value);
-                $sql .= '\'';
-            } else {
-                throw new \Exception('Type not supported.');
-            }
+        foreach ($this->fieldArray as $value) {
+            $sql .= ' , ?';
         }
 
         $sql .= ' )';
-        $this->database->query($sql);
+        $statement = $this->database->prepare($sql);
+        $statement->appendBindValueArray($id);
+        $statement->appendBindValueArray($newValid);
+
+        foreach ($this->fieldArray as $value) {
+            $statement->appendBindValueArray($value);
+        }
+
+        $statement->execute();
         return $id;
     }
 
@@ -377,32 +369,24 @@ class MQNAutoRecord {
 
         $sql = 'UPDATE `';
         $sql .= (string) $this->table;
-        $sql .= '` SET `valid` = ';
-        $sql .= (int) $valid;
+        $sql .= '` SET `valid` = ?';
 
         foreach ($this->fieldArray as $name => $value) {
             $sql .= ' , `';
             $sql .= (string) $name;
-            $sql .= '` = ';
-
-            if (is_bool($value)) {
-                $sql .= (int) $value;
-            } else if (is_float($value)) {
-                $sql .= (float) $value;
-            } else if (is_int($value)) {
-                $sql .= (int) $value;
-            } else if (is_string($value)) {
-                $sql .= '\'';
-                $sql .= (string) $this->database->escapeString($value);
-                $sql .= '\'';
-            } else {
-                throw new \Exception('Type not supported.');
-            }
+            $sql .= '` = ?';
         }
 
-        $sql .= ' WHERE `id` = ';
-        $sql .= (int) $id;
-        $this->database->query($sql);
+        $sql .= ' WHERE `id` = ?';
+        $statement = $this->database->prepare($sql);
+        $statement->appendBindValueArray($valid);
+
+        foreach ($this->fieldArray as $value) {
+            $statement->appendBindValueArray($value);
+        }
+
+        $statement->appendBindValueArray($id);
+        $statement->execute();
         $this->dirty = false;
     }
 
