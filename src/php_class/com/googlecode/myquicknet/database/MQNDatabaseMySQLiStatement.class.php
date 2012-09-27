@@ -93,15 +93,16 @@ class MQNDatabaseMySQLiStatement {
         array_push($args, $types);
         $args = array_merge($args, $refBindValueArray);
         call_user_func_array(array($this->statement, 'bind_param'), $args);
-        $this->statement->execute();
-        $result = $this->statement->get_result();
+        $result = (bool) $this->statement->execute();
 
         if (!$result) {
             throw new \Exception('Database statement execute error: ' . $this->statement->error);
         }
 
+        $result = $this->statement->get_result();
+        $rowList = array();
+
         if ($result instanceof \mysqli_result) {
-            $rowList = array();
             $i = 0;
 
             while ($row = $result->fetch_assoc()) {
@@ -110,10 +111,9 @@ class MQNDatabaseMySQLiStatement {
             }
 
             $result->free();
-            return $rowList;
         }
 
-        return true;
+        return $rowList;
     }
 
 }
