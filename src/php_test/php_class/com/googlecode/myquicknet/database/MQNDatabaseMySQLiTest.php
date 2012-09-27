@@ -88,6 +88,22 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($o->isReady());
     }
 
+    public function testPrepare() {
+        $o = new MQNDatabaseMySQLi($this->config);
+        $o->connect();
+        $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
+
+        for ($i = 0; $i < 10; ++$i) {
+            $sql .= ( $i > 0) ? ' , ' : '';
+            $sql .= '( ' . (int) $i . ' )';
+        }
+
+        $o->query($sql);
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $statement = $o->prepare($sql);
+        $this->assertTrue($statement instanceof MQNDatabaseMySQLiStatement);
+    }
+
     public function testQuery() {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();

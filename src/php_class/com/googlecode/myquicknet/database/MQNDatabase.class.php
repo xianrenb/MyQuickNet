@@ -74,6 +74,17 @@ class MQNDatabase {
     }
 
     /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepare($sql) {
+        new \String($sql);
+        $statement = new MQNDatabaseStatement(array());
+        return $statement;
+    }
+
+    /**
      *
      * @param string $sql
      * @return array|bool

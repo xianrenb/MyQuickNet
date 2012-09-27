@@ -183,6 +183,21 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseMySQLiStatement
+     */
+    public function prepare($sql) {
+        new \String($sql);
+        $statement = $this->mysqli->stmt_init();
+        $statement->prepare($sql);
+        $config = array();
+        $config['statement'] = $statement;
+        $statement = new MQNDatabaseMySQLiStatement($config);
+        return $statement;
+    }
+
+    /**
      *
      * @param string $sql
      * @return array|bool

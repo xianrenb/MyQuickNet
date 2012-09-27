@@ -91,6 +91,20 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($o->isReady());
     }
 
+    public function testPrepare() {
+        $o = new MQNDatabaseSQLite($this->config);
+        $o->connect();
+
+        for ($i = 0; $i < 10; ++$i) {
+            $sql = 'INSERT INTO `test` ( `data` ) VALUES ( ' . (int) $i . ' )';
+            $o->query($sql);
+        }
+
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $statement = $o->prepare($sql);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+    }
+
     public function testQuery() {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();

@@ -145,6 +145,20 @@ class MQNDatabaseSQLite extends MQNDatabase {
     }
 
     /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseSQLiteStatement
+     */
+    public function prepare($sql) {
+        new \String($sql);
+        $statement = $this->sqlite3->prepare($sql);
+        $config = array();
+        $config['statement'] = $statement;
+        $statement = new MQNDatabaseSQLiteStatement($config);
+        return $statement;
+    }
+
+    /**
      *
      * @param string $sql
      * @return array|bool

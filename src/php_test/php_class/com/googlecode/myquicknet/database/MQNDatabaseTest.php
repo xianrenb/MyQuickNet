@@ -68,6 +68,12 @@ class MQNDatabaseTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($o->isReady());
     }
 
+    public function testPrepare() {
+        $o = new MQNDatabase($this->config);
+        $statement = $o->prepare('SELECT 1');
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+    }
+
     public function testQuery() {
         $o = new MQNDatabase($this->config);
         $sql = 'string';
