@@ -16,10 +16,10 @@ namespace com\googlecode\myquicknet\database;
 class MQNDatabaseStatement {
 
     /**
-     *
-     * @param array $config
+     * 
+     * @param mixed $statement
      */
-    public function __construct(array $config) {
+    public function __construct($statement) {
         
     }
 
@@ -28,6 +28,14 @@ class MQNDatabaseStatement {
      * @param bool|float|int|string|MQNAutoRecord $value
      */
     public function appendBindValueArray($value) {
+        
+    }
+
+    /**
+     * 
+     * @param bool|float|int|string|MQNAutoRecord $value
+     */
+    public function appendExtraBindValueArray($value) {
         
     }
 

@@ -103,6 +103,100 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
         $statement = $o->prepare($sql);
         $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(5);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(4, $result[0]['data']);
+        $this->assertEquals(5, $result[1]['data']);
+    }
+
+    public function testPrepareForUpdate() {
+        $o = new MQNDatabaseSQLite($this->config);
+        $o->connect();
+
+        for ($i = 0; $i < 10; ++$i) {
+            $sql = 'INSERT INTO `test` ( `data` ) VALUES ( ' . (int) $i . ' )';
+            $o->query($sql);
+        }
+
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $statement = $o->prepareForUpdate($sql);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(5);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(4, $result[0]['data']);
+        $this->assertEquals(5, $result[1]['data']);
+    }
+
+    public function testPrepareLimit() {
+        $o = new MQNDatabaseSQLite($this->config);
+        $o->connect();
+
+        for ($i = 0; $i < 10; ++$i) {
+            $sql = 'INSERT INTO `test` ( `data` ) VALUES ( ' . (int) $i . ' )';
+            $o->query($sql);
+        }
+
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $statement = $o->prepareLimit($sql, 2);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(6);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(4, $result[0]['data']);
+        $this->assertEquals(5, $result[1]['data']);
+        $statement = $o->prepareLimit($sql, 2, 1);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(6);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(5, $result[0]['data']);
+        $this->assertEquals(6, $result[1]['data']);
+    }
+
+    public function testPrepareLimitForUpdate() {
+        $o = new MQNDatabaseSQLite($this->config);
+        $o->connect();
+
+        for ($i = 0; $i < 10; ++$i) {
+            $sql = 'INSERT INTO `test` ( `data` ) VALUES ( ' . (int) $i . ' )';
+            $o->query($sql);
+        }
+
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $statement = $o->prepareLimitForUpdate($sql, 2);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(6);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(4, $result[0]['data']);
+        $this->assertEquals(5, $result[1]['data']);
+        $statement = $o->prepareLimitForUpdate($sql, 2, 1);
+        $this->assertTrue($statement instanceof MQNDatabaseSQLiteStatement);
+        $statement->appendBindValueArray(3);
+        $statement->appendBindValueArray(6);
+        $result = $statement->execute();
+        $statement = null;
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(2, count($result));
+        $this->assertEquals(5, $result[0]['data']);
+        $this->assertEquals(6, $result[1]['data']);
     }
 
     public function testQuery() {

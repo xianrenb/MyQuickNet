@@ -25,17 +25,24 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
 
     /**
      *
+     * @var array
+     */
+    private $extraBindValueArray;
+
+    /**
+     *
      * @var mysqli_stmt
      */
     private $statement;
 
     /**
-     *
-     * @param array $config
+     * 
+     * @param \mysqli_stmt $statement
      */
-    public function __construct(array $config) {
+    public function __construct(\mysqli_stmt $statement) {
         $this->bindValueArray = array();
-        $this->statement = $config['statement'];
+        $this->extraBindValueArray = array();
+        $this->statement = $statement;
     }
 
     /**
@@ -65,6 +72,20 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
 
     /**
      * 
+     * @param bool|float|int|string|MQNAutoRecord $value
+     */
+    public function appendExtraBindValueArray($value) {
+        if (is_scalar($value)) {
+            $this->extraBindValueArray[] = $value;
+        } else if ($value instanceof MQNAutoRecord) {
+            $this->extraBindValueArray[] = (int) $value->getId();
+        } else {
+            throw new \InvalidArgumentException();
+        }
+    }
+
+    /**
+     * 
      * @return array
      */
     public function execute() {
@@ -87,6 +108,25 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
             }
 
             $refBindValueArray[] = &$this->bindValueArray[$i];
+        }
+
+        $extraBindValueArrayCount = (int) count($this->extraBindValueArray);
+
+        for ($i = 0; $i < $extraBindValueArrayCount; ++$i) {
+            if (is_bool($this->extraBindValueArray[$i])) {
+                $types .= 'i';
+                $this->extraBindValueArray[$i] = (int) $this->extraBindValueArray[$i];
+            } else if (is_float($this->extraBindValueArray[$i])) {
+                $types .= 'd';
+            } else if (is_int($this->extraBindValueArray[$i])) {
+                $types .= 'i';
+            } else if (is_string($this->extraBindValueArray[$i])) {
+                $types .= 's';
+            } else {
+                throw new \UnexpectedValueException();
+            }
+
+            $refBindValueArray[] = &$this->extraBindValueArray[$i];
         }
 
         $args = array();

@@ -17,12 +17,6 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
-     * @var array
-     */
-    private $config;
-
-    /**
-     *
      * @var MQNDatabaseMySQLi;
      */
     private $db;
@@ -48,8 +42,6 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
         }
 
         $this->db->query($sql);
-        $config = array();
-        $this->config = $config;
     }
 
     /**
@@ -61,10 +53,11 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testExecute() {
-        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ? LIMIT ?';
         $statement = $this->db->prepare($sql);
         $statement->appendBindValueArray(3);
-        $statement->appendBindValueArray(5);
+        $statement->appendBindValueArray(6);
+        $statement->appendExtraBindValueArray(2);
         $result = $statement->execute();
         $this->assertTrue(is_array($result));
         $this->assertEquals(2, count($result));

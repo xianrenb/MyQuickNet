@@ -191,9 +191,55 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         new \String($sql);
         $statement = $this->mysqli->stmt_init();
         $statement->prepare($sql);
-        $config = array();
-        $config['statement'] = $statement;
-        $statement = new MQNDatabaseMySQLiStatement($config);
+        $statement = new MQNDatabaseMySQLiStatement($statement);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareForUpdate($sql) {
+        new \String($sql);
+        $sql = (string) ($sql . ' FOR UPDATE');
+        $statement = $this->prepare($sql);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimit($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $sql = (string) ($sql . ' LIMIT ? , ?');
+        $statement = $this->prepare($sql);
+        $statement->appendExtraBindValueArray($offset);
+        $statement->appendExtraBindValueArray($rowCount);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $sql = (string) ($sql . ' LIMIT ? , ? FOR UPDATE');
+        $statement = $this->prepare($sql);
+        $statement->appendExtraBindValueArray($offset);
+        $statement->appendExtraBindValueArray($rowCount);
         return $statement;
     }
 
@@ -238,7 +284,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      */
     public function queryForUpdate($sql) {
         new \String($sql);
-        $sql = (string) ('' . $sql . ' FOR UPDATE');
+        $sql = (string) ($sql . ' FOR UPDATE');
         $result = $this->query($sql);
         return $result;
     }
@@ -254,7 +300,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         new \String($sql);
         new \Int($rowCount);
         new \Int($offset);
-        $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount);
+        $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount);
         $result = $this->query($sql);
         return $result;
     }
@@ -270,7 +316,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         new \String($sql);
         new \Int($rowCount);
         new \Int($offset);
-        $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount . ' FOR UPDATE');
+        $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount . ' FOR UPDATE');
         $result = $this->query($sql);
         return $result;
     }

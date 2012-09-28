@@ -70,8 +70,44 @@ class MQNDatabaseTest extends \PHPUnit_Framework_TestCase {
 
     public function testPrepare() {
         $o = new MQNDatabase($this->config);
-        $statement = $o->prepare('SELECT 1');
+        $sql = 'string';
+        $statement = $o->prepare($sql);
         $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
+    }
+
+    public function testPrepareForUpdate() {
+        $o = new MQNDatabase($this->config);
+        $sql = 'string';
+        $statement = $o->prepareForUpdate($sql);
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
+    }
+
+    public function testPrepareLimit() {
+        $o = new MQNDatabase($this->config);
+        $sql = 'string';
+        $row_count = 2;
+        $offset = 3;
+        $statement = $o->prepareLimit($sql, $row_count);
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
+        $statement = $o->prepareLimit($sql, $row_count, $offset);
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
+    }
+
+    public function testPrepareLimitForUpdate() {
+        $o = new MQNDatabase($this->config);
+        $sql = 'string';
+        $row_count = 2;
+        $offset = 3;
+        $statement = $o->prepareLimitForUpdate($sql, $row_count);
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
+        $statement = $o->prepareLimitForUpdate($sql, $row_count, $offset);
+        $this->assertTrue($statement instanceof MQNDatabaseStatement);
+        $statement = null;
     }
 
     public function testQuery() {

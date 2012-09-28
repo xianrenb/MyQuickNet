@@ -25,17 +25,24 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
 
     /**
      *
+     * @var array
+     */
+    private $extraBindValueArray;
+
+    /**
+     *
      * @var SQLite3Stmt
      */
     private $statement;
 
     /**
-     *
-     * @param array $config
+     * 
+     * @param \SQLite3Stmt $statement
      */
-    public function __construct(array $config) {
+    public function __construct(\SQLite3Stmt $statement) {
         $this->bindValueArray = array();
-        $this->statement = $config['statement'];
+        $this->extraBindValueArray = array();
+        $this->statement = $statement;
     }
 
     /**
@@ -63,12 +70,44 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
 
     /**
      * 
+     * @param bool|float|int|string|MQNAutoRecord $value
+     */
+    public function appendExtraBindValueArray($value) {
+        if (is_scalar($value)) {
+            $this->extraBindValueArray[] = $value;
+        } else if ($value instanceof MQNAutoRecord) {
+            $this->extraBindValueArray[] = (int) $value->getId();
+        } else {
+            throw new \InvalidArgumentException();
+        }
+    }
+
+    /**
+     * 
      * @return array
      */
     public function execute() {
         $i = 1;
 
         foreach ($this->bindValueArray as $value) {
+            if (is_bool($value)) {
+                $type = SQLITE3_INTEGER;
+                $value = (int) $value;
+            } else if (is_float($value)) {
+                $type = SQLITE3_FLOAT;
+            } else if (is_int($value)) {
+                $type = SQLITE3_INTEGER;
+            } else if (is_string($value)) {
+                $type = SQLITE3_TEXT;
+            } else {
+                throw new \UnexpectedValueException();
+            }
+
+            $this->statement->bindValue($i, $value, $type);
+            $i += 1;
+        }
+
+        foreach ($this->extraBindValueArray as $value) {
             if (is_bool($value)) {
                 $type = SQLITE3_INTEGER;
                 $value = (int) $value;

@@ -80,7 +80,48 @@ class MQNDatabase {
      */
     public function prepare($sql) {
         new \String($sql);
-        $statement = new MQNDatabaseStatement(array());
+        $statement = new MQNDatabaseStatement(null);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareForUpdate($sql) {
+        new \String($sql);
+        $statement = new MQNDatabaseStatement(null);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimit($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $statement = new MQNDatabaseStatement(null);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $statement = new MQNDatabaseStatement(null);
         return $statement;
     }
 

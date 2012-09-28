@@ -152,9 +152,51 @@ class MQNDatabaseSQLite extends MQNDatabase {
     public function prepare($sql) {
         new \String($sql);
         $statement = $this->sqlite3->prepare($sql);
-        $config = array();
-        $config['statement'] = $statement;
-        $statement = new MQNDatabaseSQLiteStatement($config);
+        $statement = new MQNDatabaseSQLiteStatement($statement);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareForUpdate($sql) {
+        new \String($sql);
+        $statement = $this->prepare($sql);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimit($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $sql = (string) ($sql . ' LIMIT ? , ?');
+        $statement = $this->prepare($sql);
+        $statement->appendExtraBindValueArray($offset);
+        $statement->appendExtraBindValueArray($rowCount);
+        return $statement;
+    }
+
+    /**
+     * 
+     * @param string $sql
+     * @param int $rowCount
+     * @param int $offset
+     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     */
+    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
+        new \String($sql);
+        new \Int($rowCount);
+        new \Int($offset);
+        $statement = $this->prepareLimit($sql, $rowCount, $offset);
         return $statement;
     }
 
@@ -226,7 +268,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
         new \String($sql);
         new \Int($rowCount);
         new \Int($offset);
-        $sql = (string) ('' . $sql . ' LIMIT ' . (int) $offset . ' , ' . (int) $rowCount);
+        $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount);
         $result = $this->query($sql);
         return $result;
     }

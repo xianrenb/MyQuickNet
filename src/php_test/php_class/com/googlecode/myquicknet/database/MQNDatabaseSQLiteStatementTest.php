@@ -17,12 +17,6 @@ class MQNDatabaseSQLiteStatementTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *
-     * @var array
-     */
-    private $config;
-
-    /**
-     *
      * @var MQNDatabaseSQLite;
      */
     private $db;
@@ -41,9 +35,6 @@ class MQNDatabaseSQLiteStatementTest extends \PHPUnit_Framework_TestCase {
             $sql = 'INSERT INTO `test` ( `data` ) VALUES ( ' . (int) $i . ' )';
             $this->db->query($sql);
         }
-
-        $config = array();
-        $this->config = $config;
     }
 
     /**
@@ -55,10 +46,11 @@ class MQNDatabaseSQLiteStatementTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testExecute() {
-        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ?';
+        $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ? LIMIT ?';
         $statement = $this->db->prepare($sql);
         $statement->appendBindValueArray(3);
-        $statement->appendBindValueArray(5);
+        $statement->appendBindValueArray(6);
+        $statement->appendExtraBindValueArray(2);
         $result = $statement->execute();
         $this->assertTrue(is_array($result));
         $this->assertEquals(2, count($result));
