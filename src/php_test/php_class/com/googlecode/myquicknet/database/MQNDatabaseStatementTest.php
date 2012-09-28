@@ -40,7 +40,9 @@ class MQNDatabaseStatementTest extends \PHPUnit_Framework_TestCase {
 
     public function testExecute() {
         $statement = new MQNDatabaseStatement($this->config);
-        $this->assertFalse($statement->execute());
+        $result = $statement->execute();
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(0, count($result));
     }
 
 }

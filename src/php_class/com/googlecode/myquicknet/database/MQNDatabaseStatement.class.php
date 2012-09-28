@@ -33,10 +33,10 @@ class MQNDatabaseStatement {
 
     /**
      * 
-     * @return array|boolean
+     * @return array
      */
     public function execute() {
-        return false;
+        return array();
     }
 
 }

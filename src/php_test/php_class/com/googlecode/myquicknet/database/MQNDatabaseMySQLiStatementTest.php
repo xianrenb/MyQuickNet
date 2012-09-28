@@ -66,6 +66,7 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
         $statement->appendBindValueArray(3);
         $statement->appendBindValueArray(5);
         $result = $statement->execute();
+        $this->assertTrue(is_array($result));
         $this->assertEquals(2, count($result));
         $this->assertEquals(4, $result[0]['data']);
         $this->assertEquals(5, $result[1]['data']);

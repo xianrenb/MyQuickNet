@@ -15,7 +15,7 @@ use com\googlecode\myquicknet\autorecord\MQNAutoRecord;
 /**
  *
  */
-class MQNDatabaseSQLiteStatement {
+class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
 
     /**
      *
@@ -63,7 +63,7 @@ class MQNDatabaseSQLiteStatement {
 
     /**
      * 
-     * @return array|boolean
+     * @return array
      */
     public function execute() {
         $i = 1;
