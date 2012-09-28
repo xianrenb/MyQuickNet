@@ -161,11 +161,13 @@ class MQNAutoRecord {
             $id = (int) $rows[0]['id'];
             $sql = 'UPDATE `';
             $sql .= (string) $this->table;
-            $sql .= '` SET `valid` = ';
-            $sql .= (int) $newValid;
-            $sql .= ' WHERE `id` = ';
-            $sql .= (int) $id;
-            $this->database->query($sql);
+            $sql .= '` SET `valid` = ?';
+            $sql .= ' WHERE `id` = ?';
+            $statement = $this->database->prepare($sql);
+            $statement->appendBindValueArray($newValid);
+            $statement->appendBindValueArray($id);
+            $statement->execute();
+            $statement = null;
             return $id;
         }
 
@@ -212,6 +214,7 @@ class MQNAutoRecord {
         }
 
         $statement->execute();
+        $statement = null;
         return $id;
     }
 
@@ -325,14 +328,15 @@ class MQNAutoRecord {
         $this->dirty = false;
         $this->id = (int) $id;
         $this->valid = true;
-
         $sql = 'SELECT * FROM `';
         $sql .= (string) $this->table;
         $sql .= '` WHERE ';
-        $sql .= '`id` = ';
-        $sql .= (int) $this->id;
+        $sql .= '`id` = ?';
         $sql .= ' AND `valid` = 1';
-        $rows = $this->database->queryLimitForUpdate($sql, 1);
+        $statement = $this->database->prepareLimitForUpdate($sql, 1);
+        $statement->appendBindValueArray($this->id);
+        $rows = $statement->execute();
+        $statement = null;
 
         if (count($rows)) {
             foreach ($this->fieldArray as $name => $oldValue) {
@@ -387,6 +391,7 @@ class MQNAutoRecord {
 
         $statement->appendBindValueArray($id);
         $statement->execute();
+        $statement = null;
         $this->dirty = false;
     }
 

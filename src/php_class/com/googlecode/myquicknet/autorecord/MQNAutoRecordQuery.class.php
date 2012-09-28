@@ -67,6 +67,12 @@ class MQNAutoRecordQuery {
      *
      * @var array
      */
+    private $whereBindValueArray;
+
+    /**
+     *
+     * @var array
+     */
     private $whereConditionArray;
 
     public function __construct() {
@@ -78,6 +84,7 @@ class MQNAutoRecordQuery {
         $this->orderArray = array();
         $this->tableArray = array();
         $this->useLimit = false;
+        $this->whereBindValueArray = array();
         $this->whereConditionArray = array();
     }
 
@@ -199,18 +206,9 @@ class MQNAutoRecordQuery {
                     $sql .= '`.`';
                     $sql .= (string) $value1->getName();
                     $sql .= '`';
-                } else if (is_bool($value1)) {
-                    $sql .= (int) $value1;
-                } else if (is_float($value1)) {
-                    $sql .= (float) $value1;
-                } else if (is_int($value1)) {
-                    $sql .= (int) $value1;
-                } else if (is_string($value1)) {
-                    $sql .= '\'';
-                    $sql .= (string) $this->database->escapeString($value1);
-                    $sql .= '\'';
                 } else {
-                    throw new \Exception('Type not supported.');
+                    $sql .= '?';
+                    $this->whereBindValueArray[] = $value1;
                 }
 
                 $sql .= ' ';
@@ -223,18 +221,9 @@ class MQNAutoRecordQuery {
                     $sql .= '`.`';
                     $sql .= (string) $value2->getName();
                     $sql .= '`';
-                } else if (is_bool($value2)) {
-                    $sql .= (int) $value2;
-                } else if (is_float($value2)) {
-                    $sql .= (float) $value2;
-                } else if (is_int($value2)) {
-                    $sql .= (int) $value2;
-                } else if (is_string($value2)) {
-                    $sql .= '\'';
-                    $sql .= (string) $this->database->escapeString($value2);
-                    $sql .= '\'';
                 } else {
-                    throw new \Exception('Type not supported.');
+                    $sql .= '?';
+                    $this->whereBindValueArray[] = $value2;
                 }
 
                 if ($lastOrNext && !$orNext) {
@@ -349,7 +338,6 @@ class MQNAutoRecordQuery {
      * @return MQNAutoRecordQueryResultArray
      */
     public function execute() {
-        $resultArray = new MQNAutoRecordQueryResultArray();
         $n = (int) count($this->tableArray);
         $sql = 'SELECT ';
 
@@ -381,11 +369,19 @@ class MQNAutoRecordQuery {
         $sql .= (string) $this->_buildOrderSql();
 
         if ($this->useLimit) {
-            $resultArray->setResultArray($this->database->queryLimitForUpdate($sql, $this->limitRowCount, $this->limitOffset));
+            $statement = $this->database->prepareLimitForUpdate($sql, $this->limitRowCount, $this->limitOffset);
         } else {
-            $resultArray->setResultArray($this->database->queryForUpdate($sql));
+            $statement = $this->database->prepareForUpdate($sql);
         }
 
+        foreach ($this->whereBindValueArray as $value) {
+            $statement->appendBindValueArray($value);
+        }
+
+        $result = $statement->execute();
+        $statement = null;
+        $resultArray = new MQNAutoRecordQueryResultArray();
+        $resultArray->setResultArray($result);
         return $resultArray;
     }
 

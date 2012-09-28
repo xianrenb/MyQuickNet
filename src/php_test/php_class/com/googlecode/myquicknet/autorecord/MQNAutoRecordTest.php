@@ -58,7 +58,8 @@ class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase {
         $record2 = new $this->testingAutoRecordClass();
         $record2->read($id);
         $this->assertTrue($record2->getMyA() == false);
-        $this->assertTrue($record2->getMyB() == 1.1);
+        $this->assertTrue(is_float($record2->getMyB()));
+        $this->assertTrue(round($record2->getMyB(), 1) == 1.1);
         $this->assertTrue($record2->getMyC() == 2);
         $this->assertTrue($record2->getMyD() == 'abc');
         $this->assertTrue($record2->getMyE() == $record1->getId());

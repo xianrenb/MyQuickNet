@@ -129,10 +129,13 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
             $refBindValueArray[] = &$this->extraBindValueArray[$i];
         }
 
-        $args = array();
-        array_push($args, $types);
-        $args = array_merge($args, $refBindValueArray);
-        call_user_func_array(array($this->statement, 'bind_param'), $args);
+        if ($types !== '') {
+            $args = array();
+            array_push($args, $types);
+            $args = array_merge($args, $refBindValueArray);
+            call_user_func_array(array($this->statement, 'bind_param'), $args);
+        }
+
         $result = (bool) $this->statement->execute();
 
         if (!$result) {
