@@ -160,7 +160,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseSQLiteStatement
      */
     public function prepareForUpdate($sql) {
         new \String($sql);
@@ -173,7 +173,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseSQLiteStatement
      */
     public function prepareLimit($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -191,7 +191,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseSQLiteStatement
      */
     public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
         new \String($sql);

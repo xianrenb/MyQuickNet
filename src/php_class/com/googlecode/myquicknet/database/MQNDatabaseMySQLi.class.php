@@ -200,7 +200,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseMySQLiStatement
      */
     public function prepareForUpdate($sql) {
         new \String($sql);
@@ -214,7 +214,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseMySQLiStatement
      */
     public function prepareLimit($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -232,7 +232,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return MQNDatabaseStatement
+     * @return MQNDatabaseMySQLiStatement
      */
     public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
         new \String($sql);
