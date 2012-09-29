@@ -72,8 +72,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
     }
 
     /**
-     *
-     * @return bool
+     * 
+     * @return boolean
+     * @throws \Exception
      */
     public function close() {
         if ($this->sqlite3) {
@@ -147,7 +148,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseSQLiteStatement
+     * @return MQNDatabaseSQLiteStatement
      */
     public function prepare($sql) {
         new \String($sql);
@@ -159,7 +160,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareForUpdate($sql) {
         new \String($sql);
@@ -172,7 +173,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareLimit($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -190,7 +191,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -201,9 +202,10 @@ class MQNDatabaseSQLite extends MQNDatabase {
     }
 
     /**
-     *
+     * 
      * @param string $sql
      * @return array|bool
+     * @throws \Exception
      */
     public function query($sql) {
         new \String($sql);
@@ -224,7 +226,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
 
             while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 $rowList[$i] = $row;
-                ++$i;
+                $i += 1;
             }
 
             $result->finalize();

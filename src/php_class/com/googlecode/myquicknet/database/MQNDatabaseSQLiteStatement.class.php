@@ -57,6 +57,7 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
     /**
      * 
      * @param bool|float|int|string|MQNAutoRecord $value
+     * @throws \InvalidArgumentException
      */
     public function appendBindValueArray($value) {
         if (is_scalar($value)) {
@@ -71,6 +72,7 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
     /**
      * 
      * @param bool|float|int|string|MQNAutoRecord $value
+     * @throws \InvalidArgumentException
      */
     public function appendExtraBindValueArray($value) {
         if (is_scalar($value)) {
@@ -85,6 +87,8 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
     /**
      * 
      * @return array
+     * @throws \UnexpectedValueException
+     * @throws \Exception
      */
     public function execute() {
         $i = 1;
@@ -136,7 +140,7 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
 
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $rowList[$i] = $row;
-            ++$i;
+            $i += 1;
         }
 
         $result->finalize();

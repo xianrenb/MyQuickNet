@@ -103,8 +103,9 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
-     *
-     * @return bool
+     * 
+     * @return boolean
+     * @throws \Exception
      */
     public function close() {
         if ($this->mysqli) {
@@ -143,8 +144,9 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
-     *
-     * @return bool
+     * 
+     * @return boolean
+     * @throws \Exception
      */
     public function connect() {
         $this->close();
@@ -185,7 +187,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseMySQLiStatement
+     * @return MQNDatabaseMySQLiStatement
      */
     public function prepare($sql) {
         new \String($sql);
@@ -198,7 +200,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     /**
      * 
      * @param string $sql
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareForUpdate($sql) {
         new \String($sql);
@@ -212,7 +214,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareLimit($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -230,7 +232,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      * @param string $sql
      * @param int $rowCount
      * @param int $offset
-     * @return \com\googlecode\myquicknet\database\MQNDatabaseStatement
+     * @return MQNDatabaseStatement
      */
     public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
         new \String($sql);
@@ -244,9 +246,10 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
-     *
+     * 
      * @param string $sql
      * @return array|bool
+     * @throws \Exception
      */
     public function query($sql) {
         new \String($sql);
@@ -267,7 +270,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
 
             while ($row = $result->fetch_assoc()) {
                 $rowList[$i] = $row;
-                ++$i;
+                $i += 1;
             }
 
             $result->free();
