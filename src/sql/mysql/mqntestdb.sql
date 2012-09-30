@@ -91,13 +91,14 @@ CREATE TABLE `testing_auto_record` (
   `my_c` int(11) NOT NULL,
   `my_d` varchar(255) COLLATE utf8_bin NOT NULL,
   `my_e` int(11) NOT NULL,
+  `my_blob` tinyblob NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `valid` (`valid`,`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `testing_auto_record` (`id`, `valid`, `my_a`, `my_b`, `my_c`, `my_d`, `my_e`) VALUES
-(1, 0, 1, 2.2, 3, 'string', 0),
-(2, 0, 0, 1.1, 2, 'abc', 1);
+INSERT INTO `testing_auto_record` (`id`, `valid`, `my_a`, `my_b`, `my_c`, `my_d`, `my_e`, `my_blob`) VALUES
+(1, 0, 1, 2.2, 3, 'string', 0, 0x626c6f62),
+(2, 0, 0, 1.1, 2, 'abc', 1, 0x6e657720626c6f62);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

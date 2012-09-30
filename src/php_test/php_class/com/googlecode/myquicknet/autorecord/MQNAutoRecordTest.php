@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\database\MQNBlob;
+
 /**
  * Test class for MQNAutoRecord.
  */
@@ -53,6 +55,8 @@ class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase {
         $record2->setMyC(2);
         $record2->setMyD('abc');
         $record2->setMyE($record1);
+        $blob = new MQNBlob('new blob');
+        $record2->setMyBlob($blob);
         $id = (int) $record2->getId();
         $record2 = null;
         $record2 = new $this->testingAutoRecordClass();
@@ -63,6 +67,9 @@ class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($record2->getMyC() == 2);
         $this->assertTrue($record2->getMyD() == 'abc');
         $this->assertTrue($record2->getMyE() == $record1->getId());
+        $blob = $record2->getMyBlob();
+        $this->assertTrue($blob instanceof MQNBlob);
+        $this->assertTrue($blob->getBlob() == 'new blob');
         $record2->delete();
         $this->assertTrue($record2->getId() == 0);
         $this->assertFalse($record2->isValid());

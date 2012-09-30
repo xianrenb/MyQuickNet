@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\database\MQNBlob;
+
 /**
  *
  */
@@ -70,8 +72,9 @@ class MQNAutoRecord {
     private $valid;
 
     /**
-     *
+     * 
      * @param array $config
+     * @throws \UnexpectedValueException
      */
     public function __construct(array $config = array()) {
         $autoRecordManagerClass = (string) $config['auto_record_manager_class'];
@@ -80,7 +83,18 @@ class MQNAutoRecord {
         $this->database = $this->autoRecordManager->getDatabase();
         $this->defaultFieldArray = $config['field_array'];
         $this->dirty = false;
-        $this->fieldArray = $this->defaultFieldArray;
+        $this->fieldArray = array();
+
+        foreach ($this->defaultFieldArray as $name => $value) {
+            if (is_scalar($value)) {
+                $this->fieldArray[$name] = $value;
+            } else if ($value instanceof MQNBlob) {
+                $this->fieldArray[$name] = clone $value;
+            } else {
+                throw new \UnexpectedValueException();
+            }
+        }
+
         $this->id = 0;
         $this->table = (string) $config['table'];
         $this->valid = false;
@@ -246,6 +260,12 @@ class MQNAutoRecord {
             } else {
                 throw new \Exception('Type not supported.');
             }
+        } else if ($value instanceof MQNBlob) {
+            if ($this->fieldArray[$name] instanceof MQNBlob) {
+                $this->fieldArray[$name] = clone $value;
+            } else {
+                throw new \Exception('Type not supported.');
+            }
         } else if ($value instanceof MQNAutoRecord) {
             if (is_int($this->fieldArray[$name])) {
                 $this->fieldArray[$name] = (int) $value->getId();
@@ -261,13 +281,24 @@ class MQNAutoRecord {
 
     /**
      * 
+     * @throws \UnexpectedValueException
      */
     public function create() {
         $this->autoUpdate = true;
         $this->dirty = true;
         $this->id = (int) $this->_getNewId(true);
         $this->valid = true;
-        $this->fieldArray = $this->defaultFieldArray;
+        $this->fieldArray = array();
+
+        foreach ($this->defaultFieldArray as $name => $value) {
+            if (is_scalar($value)) {
+                $this->fieldArray[$name] = $value;
+            } else if ($value instanceof MQNBlob) {
+                $this->fieldArray[$name] = clone $value;
+            } else {
+                throw new \UnexpectedValueException();
+            }
+        }
     }
 
     /**
@@ -314,8 +345,9 @@ class MQNAutoRecord {
     }
 
     /**
-     *
+     * 
      * @param int $id
+     * @throws \Exception
      */
     public function read($id) {
         new \Int($id);
@@ -348,6 +380,9 @@ class MQNAutoRecord {
                     $this->fieldArray[$name] = (int) $rows[0][$name];
                 } else if (is_string($oldValue)) {
                     $this->fieldArray[$name] = (string) $rows[0][$name];
+                } else if ($oldValue instanceof MQNBlob) {
+                    $blob = (string) $rows[0][$name];
+                    $this->fieldArray[$name] = new MQNBlob($blob);
                 } else {
                     throw new \Exception('Type not supported.');
                 }

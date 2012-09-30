@@ -60,7 +60,7 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
      * @throws \InvalidArgumentException
      */
     public function appendBindValueArray($value) {
-        if (is_scalar($value)) {
+        if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->bindValueArray[] = $value;
         } else if ($value instanceof MQNAutoRecord) {
             $this->bindValueArray[] = (int) $value->getId();
@@ -75,7 +75,7 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
      * @throws \InvalidArgumentException
      */
     public function appendExtraBindValueArray($value) {
-        if (is_scalar($value)) {
+        if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->extraBindValueArray[] = $value;
         } else if ($value instanceof MQNAutoRecord) {
             $this->extraBindValueArray[] = (int) $value->getId();
@@ -103,6 +103,9 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
                 $type = SQLITE3_INTEGER;
             } else if (is_string($value)) {
                 $type = SQLITE3_TEXT;
+            } else if ($value instanceof MQNBlob) {
+                $type = SQLITE3_BLOB;
+                $value = (string) $value->getBlob();
             } else {
                 throw new \UnexpectedValueException();
             }
@@ -121,6 +124,9 @@ class MQNDatabaseSQLiteStatement extends MQNDatabaseStatement {
                 $type = SQLITE3_INTEGER;
             } else if (is_string($value)) {
                 $type = SQLITE3_TEXT;
+            } else if ($value instanceof MQNBlob) {
+                $type = SQLITE3_BLOB;
+                $value = (string) $value->getBlob();
             } else {
                 throw new \UnexpectedValueException();
             }

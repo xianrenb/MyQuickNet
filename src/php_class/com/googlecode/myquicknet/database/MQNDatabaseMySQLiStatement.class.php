@@ -111,7 +111,7 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
      * @throws \InvalidArgumentException
      */
     public function appendBindValueArray($value) {
-        if (is_scalar($value)) {
+        if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->bindValueArray[] = $value;
         } else if ($value instanceof MQNAutoRecord) {
             $this->bindValueArray[] = (int) $value->getId();
@@ -126,7 +126,7 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
      * @throws \InvalidArgumentException
      */
     public function appendExtraBindValueArray($value) {
-        if (is_scalar($value)) {
+        if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->extraBindValueArray[] = $value;
         } else if ($value instanceof MQNAutoRecord) {
             $this->extraBindValueArray[] = (int) $value->getId();
@@ -144,6 +144,7 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     public function execute() {
         $types = '';
         $refBindValueArray = array();
+        $longData = array();
         $bindValueArrayCount = (int) count($this->bindValueArray);
 
         for ($i = 0; $i < $bindValueArrayCount; ++$i) {
@@ -156,6 +157,11 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
                 $types .= 'i';
             } else if (is_string($this->bindValueArray[$i])) {
                 $types .= 's';
+            } else if ($this->bindValueArray[$i] instanceof MQNBlob) {
+                $types .= 'b';
+                $blob = $this->bindValueArray[$i];
+                $this->bindValueArray[$i] = null;
+                $longData[$i] = (string) $blob->getBlob();
             } else {
                 throw new \UnexpectedValueException();
             }
@@ -175,6 +181,11 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
                 $types .= 'i';
             } else if (is_string($this->extraBindValueArray[$i])) {
                 $types .= 's';
+            } else if ($this->bindValueArray[$i] instanceof MQNBlob) {
+                $types .= 'b';
+                $blob = $this->bindValueArray[$i];
+                $this->bindValueArray[$i] = null;
+                $longData[$bindValueArrayCount + $i] = (string) $blob->getBlob();
             } else {
                 throw new \UnexpectedValueException();
             }
@@ -187,6 +198,10 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
             array_push($args, $types);
             $args = array_merge($args, $refBindValueArray);
             call_user_func_array(array($this->statement, 'bind_param'), $args);
+
+            foreach ($longData as $key => $value) {
+                $this->statement->send_long_data($key, $value);
+            }
         }
 
         $result = (bool) $this->statement->execute();

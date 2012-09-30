@@ -57,6 +57,7 @@ CREATE TABLE "testing_auto_record" (
   "my_c" int(11) NOT NULL,
   "my_d" varchar(255) /* COLLATE utf8_bin */ NOT NULL,
   "my_e" int(11) NOT NULL,
+  "my_blob" /* tinyblob */ blob NOT NULL,
   PRIMARY KEY ("id"),
   UNIQUE /* KEY "valid" */ ("valid","id")
 );

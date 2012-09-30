@@ -11,6 +11,7 @@
 namespace com\googlecode\myquicknet\testing_config;
 
 use com\googlecode\myquicknet\autorecord\MQNAutoRecord;
+use com\googlecode\myquicknet\database\MQNBlob;
 
 /**
  *
@@ -30,6 +31,7 @@ class TestingAutoRecordConfig extends MQNAutoRecord {
             'my_c' => 3,
             'my_d' => 'string',
             'my_e' => 0,
+            'my_blob' => new MQNBlob('blob')
         );
 
         $config['table'] = 'testing_auto_record';

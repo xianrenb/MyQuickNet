@@ -158,6 +158,8 @@ class MQNDatabaseMySQLi extends MQNDatabase {
 
         $this->closed = false;
         $this->mysqli->set_charset('utf8');
+        $this->query('SET SESSION sql_mode = \'TRADITIONAL\'');
+        $this->query('SET SESSION innodb_strict_mode = ON');
         $this->query('SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED');
         $this->mysqli->autocommit(false);
         $this->transactionStarted = true;
