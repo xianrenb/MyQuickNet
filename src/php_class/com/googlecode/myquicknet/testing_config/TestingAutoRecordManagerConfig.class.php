@@ -30,11 +30,11 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
         /*
           if (array_key_exists('OPENSHIFT_APP_NAME', $_ENV)) {
           $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseMySQLi';
-          $config['db_host'] = (string) $_ENV['OPENSHIFT_DB_HOST'];
-          $config['db_port'] = (string) $_ENV['OPENSHIFT_DB_PORT'];
+          $config['db_host'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_HOST'];
+          $config['db_port'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_PORT'];
           $config['db_name'] = (string) $_ENV['OPENSHIFT_APP_NAME'];
-          $config['db_user'] = (string) $_ENV['OPENSHIFT_DB_USERNAME'];
-          $config['db_password'] = (string) $_ENV['OPENSHIFT_DB_PASSWORD'];
+          $config['db_user'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_USERNAME'];
+          $config['db_password'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_PASSWORD'];
           } else {
           $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseMySQLi';
           $config['db_host'] = 'localhost';
