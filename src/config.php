@@ -29,7 +29,7 @@ call_user_func(function () {
 
             spl_autoload_register(function ($className) {
                         $className = (string) str_replace('\\', DIRECTORY_SEPARATOR, $className);
-                        include_once($className . '.class.php');
+                        include_once($className . '.php');
                     });
         });
 ?>
