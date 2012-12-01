@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 3.0.2.
+This is the README file for MyQuickNet 4.0.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -36,8 +36,8 @@ Notes:
 1. You should modify "config.php" to add/change path(s) for PHP class files,
 change default timezone settings, etc., and modify "index.php" to use your own
 controller.
-2. Files "php_class/com/googlecode/myquicknet/testing/*.class.php",
-"php_class/com/googlecode/myquicknet/testing_config/*.class.php",
+2. Files "php_class/com/googlecode/myquicknet/testing/*.php",
+"php_class/com/googlecode/myquicknet/testing_config/*.php",
 "js_object/com/googlecode/myquicknet/testing/*.js",
 "js_object/com/googlecode/myquicknet/testing_config/*.js" are example
 configurations/uses.
@@ -102,6 +102,10 @@ instead of "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" to build a
 practical system, as this would handle the data better and avoid unexpected
 problems.
 
+Major changes from version 3.0.2:
+* updated jQuery
+* renamed PHP class files to match PHP-FIG PSR-0
+
 Major changes from version 3.0.1:
 * fixed some bugs and improved code quality
 * improved database related code
@@ -137,16 +141,5 @@ Major changes from version 2.0.2:
 
 Major changes from version 2.0.1:
 * fixed a bug related to MQNAutoRecordQuery.
-
-Major changes from version 1.0.0:
-* MyQuickNet uses PHP 5.3+.
-* All PHP and JavaScript files in paths like ".../com/myquicknet/..." moves to
-".../com/googlecode/myquicknet/...".
-* All PHP files, except "config.php" and "index.php", have no include() or
-require() statements.
-* "config.php" defines MyQuickNet base path constant "MQN_BASE_PATH".
-* All JavaScript files (jQuery and QUnit not checked), have 'use strict'
-statements.
-* MyQuickNet supports SQLite ("MQNDatabaseSQlite.class.php").
 
 For any inquiries, please visit "http://myquicknet.googlecode.com/".
