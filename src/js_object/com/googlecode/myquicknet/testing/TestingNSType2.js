@@ -1,7 +1,7 @@
 /**
  * TestingNSType2
  * @package MyQuickNet
- * @version 3.0
+ * @version 4.0
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
