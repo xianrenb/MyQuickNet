@@ -126,6 +126,8 @@ class MQNStaticFileView extends MQNView {
                 return false;
             }
 
+            $modified = true;
+
             if (!flock($file, LOCK_SH)) {
                 throw new \Exception('Could not acquire file lock.');
             }
@@ -140,7 +142,6 @@ class MQNStaticFileView extends MQNView {
                 if (function_exists('getallheaders')) {
                     $headers = getallheaders();
                     $headers = array_change_key_case($headers, CASE_LOWER);
-                    $modified = true;
 
                     if (key_exists('if-none-match', $headers)) {
                         if (trim($headers['if-none-match']) === $eTag) {
@@ -155,22 +156,25 @@ class MQNStaticFileView extends MQNView {
                     if (!$modified) {
                         header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
                         header('Status: 304 Not Modified');
-                        return true;
                     }
                 }
 
-                $pathParts = pathinfo($fileName);
-                $fileExtension = (string) $pathParts['extension'];
-                header('ETag: ' . $eTag);
-                header('Last-Modified: ' . $lastModified);
-                header('Expires: ' . date(DATE_RFC1123, time() + $this->cacheMaxAge));
-                header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
-                header('Vary: Accept-Encoding');
-                header('Content-Length: ' . filesize($fileName));
-                header('Content-Type: ' . $this->_fileContentType($fileExtension));
+                if ($modified) {
+                    $pathParts = pathinfo($fileName);
+                    $fileExtension = (string) $pathParts['extension'];
+                    header('ETag: ' . $eTag);
+                    header('Last-Modified: ' . $lastModified);
+                    header('Expires: ' . date(DATE_RFC1123, time() + $this->cacheMaxAge));
+                    header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
+                    header('Vary: Accept-Encoding');
+                    header('Content-Length: ' . filesize($fileName));
+                    header('Content-Type: ' . $this->_fileContentType($fileExtension));
+                }
             }
 
-            readfile($fileName);
+            if ($modified) {
+                readfile($fileName);
+            }
 
             if (!flock($file, LOCK_UN)) {
                 throw new \Exception('Could not release file lock.');
