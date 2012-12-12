@@ -67,7 +67,7 @@ class TestingView extends TestingViewConfig {
         $dataArray = $model->outputDefaultData();
         $dataArray['s'] = (string) $s;
         $dom = new MQNDom();
-        $dom->load(MQN_BASE_PATH . 'html/testing.advance_example.html');
+        $dom->load(MQN_BASE_PATH . 'html/testing/advance_example.html');
         $this->_insertAdvanceExampleContent($dom, $dataArray);
         $doc = $dom->getDoc();
         $xhtml = (string) $doc->saveXML($doc->doctype);
