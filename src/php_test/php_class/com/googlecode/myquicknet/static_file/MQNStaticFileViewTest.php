@@ -69,7 +69,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
                 ->will($this->returnValue(array()));
 
         $view->expects($this->exactly(7))
-                ->method('_header');
+                ->method('_header')
+                ->with($this->isType('string'));
 
         $view->expects($this->once())
                 ->method('_headersSent')
@@ -142,7 +143,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
                         )));
 
         $view->expects($this->exactly(7))
-                ->method('_header');
+                ->method('_header')
+                ->with($this->isType('string'));
 
         $view->expects($this->once())
                 ->method('_headersSent')
@@ -217,7 +219,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
                         )));
 
         $view->expects($this->exactly(7))
-                ->method('_header');
+                ->method('_header')
+                ->with($this->isType('string'));
 
         $view->expects($this->once())
                 ->method('_headersSent')
