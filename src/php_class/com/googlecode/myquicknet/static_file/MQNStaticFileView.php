@@ -112,6 +112,38 @@ class MQNStaticFileView extends MQNView {
     }
 
     /**
+     * 
+     * @return array|boolean
+     */
+    protected function _getAllHeaders() {
+        $headers = false;
+
+        if (function_exists('getallheaders')) {
+            $headers = getallheaders();
+        }
+
+        return $headers;
+    }
+
+    /**
+     * 
+     * @param string $header
+     */
+    protected function _header($header) {
+        new \String($header);
+        header($header);
+    }
+
+    /**
+     * 
+     * @return boolean
+     */
+    protected function _headersSent() {
+        $headersSent = (bool) headers_sent();
+        return $headersSent;
+    }
+
+    /**
      *
      * @return boolean
      * @throws \Exception 
@@ -134,13 +166,13 @@ class MQNStaticFileView extends MQNView {
 
             //critical section started
 
-            if (!headers_sent()) {
+            if (!$this->_headersSent()) {
                 $eTag = '"' . md5_file($fileName) . '"';
                 $modifiedTime = (int) filemtime($fileName);
                 $lastModified = (string) date(DATE_RFC1123, $modifiedTime);
+                $headers = $this->_getAllHeaders();
 
-                if (function_exists('getallheaders')) {
-                    $headers = getallheaders();
+                if ($headers !== false) {
                     $headers = array_change_key_case($headers, CASE_LOWER);
 
                     if (key_exists('if-none-match', $headers)) {
@@ -154,21 +186,24 @@ class MQNStaticFileView extends MQNView {
                     }
 
                     if (!$modified) {
-                        header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-                        header('Status: 304 Not Modified');
+                        if (array_key_exists('SERVER_PROTOCOL', $_SERVER)) {
+                            $this->_header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+                        }
+
+                        $this->_header('Status: 304 Not Modified');
                     }
                 }
 
                 if ($modified) {
                     $pathParts = pathinfo($fileName);
                     $fileExtension = (string) $pathParts['extension'];
-                    header('ETag: ' . $eTag);
-                    header('Last-Modified: ' . $lastModified);
-                    header('Expires: ' . date(DATE_RFC1123, time() + $this->cacheMaxAge));
-                    header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
-                    header('Vary: Accept-Encoding');
-                    header('Content-Length: ' . filesize($fileName));
-                    header('Content-Type: ' . $this->_fileContentType($fileExtension));
+                    $this->_header('ETag: ' . $eTag);
+                    $this->_header('Last-Modified: ' . $lastModified);
+                    $this->_header('Expires: ' . date(DATE_RFC1123, time() + $this->cacheMaxAge));
+                    $this->_header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
+                    $this->_header('Vary: Accept-Encoding');
+                    $this->_header('Content-Length: ' . filesize($fileName));
+                    $this->_header('Content-Type: ' . $this->_fileContentType($fileExtension));
                 }
             }
 
