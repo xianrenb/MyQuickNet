@@ -75,46 +75,6 @@ class MQNCssView extends MQNView {
 
     /**
      *
-     * @param string $css
-     * @return bool
-     */
-    protected function _outputCss($css) {
-        new \String($css);
-
-        if (!headers_sent()) {
-            $eTag = '"' . md5($css) . '"';
-
-            if (function_exists('getallheaders')) {
-                $headers = getallheaders();
-                $headers = array_change_key_case($headers, CASE_LOWER);
-                $modified = true;
-
-                if (key_exists('if-none-match', $headers) &&
-                        (trim($headers['if-none-match']) === $eTag)
-                ) {
-                    $modified = false;
-                }
-
-                if (!$modified) {
-                    header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-                    header('Status: 304 Not Modified');
-                    return true;
-                }
-            }
-
-            header('ETag: ' . $eTag);
-            header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
-            header('Vary: Accept-Encoding');
-            header('Content-Length: ' . strlen($css));
-            header('Content-Type: text/css');
-        }
-
-        echo($css);
-        return true;
-    }
-
-    /**
-     *
      * @return string
      */
     protected function _generateLeft() {
@@ -191,6 +151,81 @@ class MQNCssView extends MQNView {
         }
 
         return $css;
+    }
+
+    /**
+     * 
+     * @return array|boolean
+     */
+    protected function _getAllHeaders() {
+        $headers = false;
+
+        if (function_exists('getallheaders')) {
+            $headers = getallheaders();
+        }
+
+        return $headers;
+    }
+
+    /**
+     * 
+     * @param string $header
+     */
+    protected function _header($header) {
+        new \String($header);
+        header($header);
+    }
+
+    /**
+     * 
+     * @return boolean
+     */
+    protected function _headersSent() {
+        $headersSent = (bool) headers_sent();
+        return $headersSent;
+    }
+
+    /**
+     *
+     * @param string $css
+     * @return bool
+     */
+    protected function _outputCss($css) {
+        new \String($css);
+
+        if (!$this->_headersSent()) {
+            $eTag = '"' . md5($css) . '"';
+            $headers = $this->_getAllHeaders();
+
+            if ($headers !== false) {
+                $headers = array_change_key_case($headers, CASE_LOWER);
+                $modified = true;
+
+                if (key_exists('if-none-match', $headers) &&
+                        (trim($headers['if-none-match']) === $eTag)
+                ) {
+                    $modified = false;
+                }
+
+                if (!$modified) {
+                    if (array_key_exists('SERVER_PROTOCOL', $_SERVER)) {
+                        $this->_header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
+                    }
+
+                    $this->_header('Status: 304 Not Modified');
+                    return true;
+                }
+            }
+
+            $this->_header('ETag: ' . $eTag);
+            $this->_header('Cache-Control: public, max-age=' . $this->cacheMaxAge);
+            $this->_header('Vary: Accept-Encoding');
+            $this->_header('Content-Length: ' . strlen($css));
+            $this->_header('Content-Type: text/css');
+        }
+
+        echo($css);
+        return true;
     }
 
     /**
