@@ -10,6 +10,7 @@
 
 namespace com\googlecode\myquicknet\static_file;
 
+use com\googlecode\myquicknet\scalar\String;
 use com\googlecode\myquicknet\view\MQNView;
 
 /**
@@ -61,7 +62,7 @@ class MQNStaticFileView extends MQNView {
      * @return string
      */
     protected function _fileContentType($fileExtension) {
-        new \String($fileExtension);
+        new String($fileExtension);
 
         switch ($fileExtension) {
             case 'css':
@@ -130,7 +131,7 @@ class MQNStaticFileView extends MQNView {
      * @param string $header
      */
     protected function _header($header) {
-        new \String($header);
+        new String($header);
         header($header);
     }
 
@@ -232,7 +233,7 @@ class MQNStaticFileView extends MQNView {
      * @param string $fileName
      */
     public function setStaticFileName($fileName) {
-        new \String($fileName);
+        new String($fileName);
         $this->staticFileName = (string) $fileName;
     }
 
@@ -241,7 +242,7 @@ class MQNStaticFileView extends MQNView {
      * @param string $filePath
      */
     public function setStaticFilePath($filePath) {
-        new \String($filePath);
+        new String($filePath);
         $this->staticFilePath = (string) $filePath;
     }
 

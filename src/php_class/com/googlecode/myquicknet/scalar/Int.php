@@ -8,6 +8,8 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\scalar;
+
 /**
  *
  */
@@ -21,7 +23,7 @@ class Int extends Scalar {
         if (is_int($v)) {
             parent::__construct($v);
         } else {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
     }
 

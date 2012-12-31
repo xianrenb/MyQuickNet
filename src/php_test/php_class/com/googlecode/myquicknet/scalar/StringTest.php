@@ -1,17 +1,19 @@
 <?php
 
 /**
- * FloatTest
+ * StringTest
  * @package MyQuickNet
  * @version 4.0
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\scalar;
+
 /**
- * Test class for Float.
+ * Test class for String.
  */
-class FloatTest extends PHPUnit_Framework_TestCase {
+class StringTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,27 +21,27 @@ class FloatTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         try {
-            new Float(true);
+            new String(true);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
-            new Float(2.2);
-        } catch (Exception $e) {
+            new String(2.2);
             $this->fail();
-        }
-        try {
-            new Float(2);
-            $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
-            new Float('string');
+            new String(2);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
+        }
+        try {
+            new String('string');
+        } catch (\Exception $e) {
+            $this->fail();
         }
     }
 
@@ -55,7 +57,7 @@ class FloatTest extends PHPUnit_Framework_TestCase {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
-            $this->assertEquals(floatval($v), Float::parse($v)->toFloat());
+            $this->assertEquals(strval($v), String::parse($v)->toString());
         }
     }
 

@@ -10,6 +10,7 @@
 
 namespace com\googlecode\myquicknet\css;
 
+use com\googlecode\myquicknet\scalar\String;
 use com\googlecode\myquicknet\view\MQNView;
 
 /**
@@ -172,7 +173,7 @@ class MQNCssView extends MQNView {
      * @param string $header
      */
     protected function _header($header) {
-        new \String($header);
+        new String($header);
         header($header);
     }
 
@@ -191,7 +192,7 @@ class MQNCssView extends MQNView {
      * @return bool
      */
     protected function _outputCss($css) {
-        new \String($css);
+        new String($css);
 
         if (!$this->_headersSent()) {
             $eTag = '"' . md5($css) . '"';

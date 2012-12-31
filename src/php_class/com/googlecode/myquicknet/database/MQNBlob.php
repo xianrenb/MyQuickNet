@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\database;
 
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -26,7 +28,7 @@ class MQNBlob {
      * @param string $blob
      */
     public function __construct($blob) {
-        new \String($blob);
+        new String($blob);
         $this->blob = (string) $blob;
     }
 

@@ -8,10 +8,12 @@
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\scalar;
+
 /**
  * Test class for Bool.
  */
-class BoolTest extends PHPUnit_Framework_TestCase {
+class BoolTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -20,25 +22,25 @@ class BoolTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         try {
             new Bool(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail();
         }
         try {
             new Bool(2.2);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
             new Bool(2);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
             new Bool('string');
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
     }

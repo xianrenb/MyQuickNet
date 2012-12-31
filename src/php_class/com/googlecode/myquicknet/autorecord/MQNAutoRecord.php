@@ -11,6 +11,9 @@
 namespace com\googlecode\myquicknet\autorecord;
 
 use com\googlecode\myquicknet\database\MQNBlob;
+use com\googlecode\myquicknet\scalar\Bool;
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
 
 /**
  *
@@ -108,7 +111,7 @@ class MQNAutoRecord {
      * @throws \BadMethodCallException 
      */
     public function __call($name, $arguments) {
-        new \String($name);
+        new String($name);
 
         try {
             if (preg_match('/^get/', $name)) {
@@ -147,7 +150,7 @@ class MQNAutoRecord {
      * @throws \InvalidArgumentException 
      */
     protected function _getField($name) {
-        new \String($name);
+        new String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
             throw new \InvalidArgumentException();
@@ -162,7 +165,7 @@ class MQNAutoRecord {
      * @return int
      */
     protected function _getNewId($newValid) {
-        new \Bool($newValid);
+        new Bool($newValid);
         // try to find the smallest invalid id, which could be reused
         $sql = 'SELECT `id` FROM `';
         $sql .= (string) $this->table;
@@ -240,7 +243,7 @@ class MQNAutoRecord {
      * @throws \InvalidArgumentException 
      */
     protected function _setField($name, $value) {
-        new \String($name);
+        new String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
             throw new \InvalidArgumentException();
@@ -350,7 +353,7 @@ class MQNAutoRecord {
      * @throws \Exception
      */
     public function read($id) {
-        new \Int($id);
+        new Int($id);
 
         if ($this->autoUpdate && $this->dirty) {
             $this->update();

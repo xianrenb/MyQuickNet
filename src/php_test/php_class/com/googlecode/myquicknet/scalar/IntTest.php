@@ -1,17 +1,19 @@
 <?php
 
 /**
- * StringTest
+ * IntTest
  * @package MyQuickNet
  * @version 4.0
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\scalar;
+
 /**
- * Test class for String.
+ * Test class for Int.
  */
-class StringTest extends PHPUnit_Framework_TestCase {
+class IntTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,27 +21,27 @@ class StringTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         try {
-            new String(true);
+            new Int(true);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
-            new String(2.2);
+            new Int(2.2);
             $this->fail();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             
         }
         try {
-            new String(2);
+            new Int(2);
+        } catch (\Exception $e) {
             $this->fail();
-        } catch (InvalidArgumentException $e) {
-            
         }
         try {
-            new String('string');
-        } catch (Exception $e) {
+            new Int('string');
             $this->fail();
+        } catch (\InvalidArgumentException $e) {
+            
         }
     }
 
@@ -55,7 +57,7 @@ class StringTest extends PHPUnit_Framework_TestCase {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
-            $this->assertEquals(strval($v), String::parse($v)->toString());
+            $this->assertEquals(intval($v), Int::parse($v)->toInt());
         }
     }
 

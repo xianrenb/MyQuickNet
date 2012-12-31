@@ -10,6 +10,10 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\Bool;
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -33,8 +37,8 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new \Int($id);
-        new \String($name);
+        new Int($id);
+        new String($name);
         parent::__construct($id, $name);
         $this->ascending = true;
         $this->field = null;
@@ -61,7 +65,7 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      * @param bool $ascending
      */
     public function setAscending($ascending) {
-        new \Bool($ascending);
+        new Bool($ascending);
         $this->ascending = (bool) $ascending;
     }
 

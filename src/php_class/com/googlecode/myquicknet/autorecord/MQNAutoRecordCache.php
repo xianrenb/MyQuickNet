@@ -10,6 +10,10 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\Bool;
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -76,7 +80,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @return mixed
      */
     public function __call($name, $arguments) {
-        new \String($name);
+        new String($name);
         $this->id = (int) $this->cache->getId();
         $result = $this->cache->__call($name, $arguments);
         return $result;
@@ -149,7 +153,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws \BadMethodCallException 
      */
     protected function _getField($name) {
-        new \String($name);
+        new String($name);
         throw new \BadMethodCallException();
     }
 
@@ -159,7 +163,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws \BadMethodCallException 
      */
     protected function _getNewId($newValid) {
-        new \Bool($newValid);
+        new Bool($newValid);
         throw new \BadMethodCallException();
     }
 
@@ -170,7 +174,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @throws \BadMethodCallException 
      */
     protected function _setField($name, $value) {
-        new \String($name);
+        new String($name);
         throw new \BadMethodCallException();
     }
 
@@ -282,7 +286,7 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      * @param int $id
      */
     public function read($id) {
-        new \Int($id);
+        new Int($id);
         $this->id = (int) $this->cache->getId();
         $this->_unbindCache();
         $this->id = (int) $id;

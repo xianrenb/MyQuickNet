@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -21,7 +23,7 @@ class MQNAutoRecordTools {
      * @return string
      */
     public static function shortFieldNameToFieldName($shortFieldName) {
-        new \String($shortFieldName);
+        new String($shortFieldName);
         $fieldName = '';
         $n = (int) strlen($shortFieldName);
 

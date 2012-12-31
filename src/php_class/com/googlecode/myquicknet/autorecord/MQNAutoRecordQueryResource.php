@@ -10,6 +10,9 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -33,8 +36,8 @@ class MQNAutoRecordQueryResource {
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new \Int($id);
-        new \String($name);
+        new Int($id);
+        new String($name);
         $this->id = (int) $id;
         $this->name = (string) $name;
     }

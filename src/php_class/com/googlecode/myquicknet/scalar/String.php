@@ -1,38 +1,40 @@
 <?php
 
 /**
- * Bool
+ * String
  * @package MyQuickNet
  * @version 4.0
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 
+namespace com\googlecode\myquicknet\scalar;
+
 /**
  *
  */
-class Bool extends Scalar {
+class String extends Scalar {
 
     /**
      *
-     * @param bool $v
+     * @param string $v
      */
     public function __construct($v) {
-        if (is_bool($v)) {
+        if (is_string($v)) {
             parent::__construct($v);
         } else {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
     }
 
     /**
      *
      * @param mixed $v
-     * @return Bool
+     * @return String
      */
     public static function parse($v) {
-        $v = (bool) $v;
-        return new Bool($v);
+        $v = strval($v);
+        return new String($v);
     }
 
 }

@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\controller;
 
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -66,7 +68,7 @@ class MQNController {
      * @return string
      */
     protected function _toShortName($longName) {
-        new \String($longName);
+        new String($longName);
         $string = (string) strtolower($longName);
         $shortName = '';
         $n = strlen($string);

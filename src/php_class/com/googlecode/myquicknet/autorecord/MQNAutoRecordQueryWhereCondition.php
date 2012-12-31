@@ -10,6 +10,10 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\Bool;
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -45,8 +49,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      * @param string $name
      */
     public function __construct($id = 0, $name = '') {
-        new \Int($id);
-        new \String($name);
+        new Int($id);
+        new String($name);
         parent::__construct($id, $name);
         $this->operator = '';
         $this->orNext = false;
@@ -91,7 +95,7 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      * @param string $operator
      */
     public function setOperator($operator) {
-        new \String($operator);
+        new String($operator);
         $this->operator = (string) $operator;
     }
 
@@ -100,7 +104,7 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      * @param bool $orNext 
      */
     public function setOrNext($orNext) {
-        new \Bool($orNext);
+        new Bool($orNext);
         $this->orNext = (bool) $orNext;
     }
 

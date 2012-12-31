@@ -10,6 +10,9 @@
 
 namespace com\googlecode\myquicknet\dom;
 
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -82,8 +85,8 @@ class MQNDom {
      * @return boolean 
      */
     public function load($filename, $options = 0) {
-        new \String($filename);
-        new \Int($options);
+        new String($filename);
+        new Int($options);
 
         if ($this->doc->load($filename, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
@@ -100,7 +103,7 @@ class MQNDom {
      * @return boolean 
      */
     public function loadHTML($source) {
-        new \String($source);
+        new String($source);
 
         if ($this->doc->loadHTML($source)) {
             $this->xPath = new \DOMXPath($this->doc);
@@ -117,7 +120,7 @@ class MQNDom {
      * @return boolean 
      */
     public function loadHTMLFile($filename) {
-        new \String($filename);
+        new String($filename);
 
         if ($this->doc->loadHTMLFile($filename)) {
             $this->xPath = new \DOMXPath($this->doc);
@@ -135,8 +138,8 @@ class MQNDom {
      * @return boolean 
      */
     public function loadXML($source, $options = 0) {
-        new \String($source);
-        new \Int($options);
+        new String($source);
+        new Int($options);
 
         if ($this->doc->loadXML($source, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
@@ -156,8 +159,8 @@ class MQNDom {
      * @throws \Exception 
      */
     public function queryAttr($query, $attrName, $attrValue = null) {
-        new \String($query);
-        new \String($attrName);
+        new String($query);
+        new String($attrName);
 
         if ($attrValue === null) {
             $node = $this->xPath->query($query)->item(0);
@@ -175,7 +178,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new \String($attrValue);
+            new String($attrValue);
 
             foreach ($this->xPath->query($query) as $node) {
                 if ($node->hasAttributes()) {
@@ -207,7 +210,7 @@ class MQNDom {
      * @return mixed
      */
     public function queryDo($query, $callback) {
-        new \String($query);
+        new String($query);
         $nodes = $this->xPath->query($query);
         return $callback($nodes, $this);
     }
@@ -219,7 +222,7 @@ class MQNDom {
      * @return string|null
      */
     public function queryText($query, $text = null) {
-        new \String($query);
+        new String($query);
 
         if ($text === null) {
             $node = $this->xPath->query($query)->item(0);
@@ -239,7 +242,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new \String($text);
+            new String($text);
 
             foreach ($this->xPath->query($query) as $node) {
                 $this->_removeChildNodes($node);
@@ -256,10 +259,10 @@ class MQNDom {
      * @return string|null
      */
     public function queryVal($query, $value = null) {
-        new \String($query);
+        new String($query);
 
         if ($value !== null) {
-            new \String($value);
+            new String($value);
         }
 
         return $this->queryAttr($query, 'value', $value);
@@ -272,7 +275,7 @@ class MQNDom {
      * @return string|null
      */
     public function queryXml($query, $xml = null) {
-        new \String($query);
+        new String($query);
 
         if ($xml === null) {
             $xml = '';
@@ -288,7 +291,7 @@ class MQNDom {
                 return null;
             }
         } else {
-            new \String($xml);
+            new String($xml);
 
             foreach ($this->xPath->query($query) as $node) {
                 $this->_removeChildNodes($node);
@@ -307,12 +310,12 @@ class MQNDom {
      * @return int|bool
      */
     public function save($filename, $options = null) {
-        new \String($filename);
+        new String($filename);
 
         if ($options === null) {
             return $this->doc->save($filename);
         } else {
-            new \Int($options);
+            new Int($options);
             return $this->doc->save($filename, $options);
         }
     }
@@ -332,7 +335,7 @@ class MQNDom {
      * @return int|bool
      */
     public function saveHTMLFile($filename) {
-        new \String($filename);
+        new String($filename);
         return $this->doc->saveHTMLFile($filename);
     }
 
@@ -350,7 +353,7 @@ class MQNDom {
         if ($options === null) {
             return $this->doc->saveXML($node);
         } else {
-            new \Int($options);
+            new Int($options);
             return $this->doc->saveXML($node, $options);
         }
     }

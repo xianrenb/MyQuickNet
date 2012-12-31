@@ -10,6 +10,9 @@
 
 namespace com\googlecode\myquicknet\database;
 
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -131,7 +134,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return string
      */
     public function escapeString($string) {
-        new \String($string);
+        new String($string);
         $result = (string) $this->sqlite3->escapeString($string);
         return $result;
     }
@@ -151,7 +154,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return MQNDatabaseSQLiteStatement
      */
     public function prepare($sql) {
-        new \String($sql);
+        new String($sql);
         $statement = $this->sqlite3->prepare($sql);
         $statement = new MQNDatabaseSQLiteStatement($statement);
         return $statement;
@@ -163,7 +166,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return MQNDatabaseSQLiteStatement
      */
     public function prepareForUpdate($sql) {
-        new \String($sql);
+        new String($sql);
         $statement = $this->prepare($sql);
         return $statement;
     }
@@ -176,9 +179,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return MQNDatabaseSQLiteStatement
      */
     public function prepareLimit($sql, $rowCount, $offset = 0) {
-        new \String($sql);
-        new \Int($rowCount);
-        new \Int($offset);
+        new String($sql);
+        new Int($rowCount);
+        new Int($offset);
         $sql = (string) ($sql . ' LIMIT ? , ?');
         $statement = $this->prepare($sql);
         $statement->appendExtraBindValueArray($offset);
@@ -194,9 +197,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return MQNDatabaseSQLiteStatement
      */
     public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
-        new \String($sql);
-        new \Int($rowCount);
-        new \Int($offset);
+        new String($sql);
+        new Int($rowCount);
+        new Int($offset);
         $statement = $this->prepareLimit($sql, $rowCount, $offset);
         return $statement;
     }
@@ -208,7 +211,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @throws \Exception
      */
     public function query($sql) {
-        new \String($sql);
+        new String($sql);
 
         if (preg_match('/^select/i', $sql)) {
             if ($this->sqlite3) {
@@ -254,7 +257,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryForUpdate($sql) {
-        new \String($sql);
+        new String($sql);
         $result = $this->query($sql);
         return $result;
     }
@@ -267,9 +270,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimit($sql, $rowCount, $offset = 0) {
-        new \String($sql);
-        new \Int($rowCount);
-        new \Int($offset);
+        new String($sql);
+        new Int($rowCount);
+        new Int($offset);
         $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount);
         $result = $this->query($sql);
         return $result;
@@ -283,9 +286,9 @@ class MQNDatabaseSQLite extends MQNDatabase {
      * @return array|bool
      */
     public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
-        new \String($sql);
-        new \Int($rowCount);
-        new \Int($offset);
+        new String($sql);
+        new Int($rowCount);
+        new Int($offset);
         $result = $this->queryLimit($sql, $rowCount, $offset);
         return $result;
     }

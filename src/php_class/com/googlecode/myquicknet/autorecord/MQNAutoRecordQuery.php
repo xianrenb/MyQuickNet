@@ -10,6 +10,10 @@
 
 namespace com\googlecode\myquicknet\autorecord;
 
+use com\googlecode\myquicknet\scalar\Bool;
+use com\googlecode\myquicknet\scalar\Int;
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -259,7 +263,7 @@ class MQNAutoRecordQuery {
      * @throws \InvalidArgumentException 
      */
     public function condition($value1, $operator, $value2, $orNext = false) {
-        new \String($operator);
+        new String($operator);
         $value1IsField = false;
         $value2IsField = false;
 
@@ -312,7 +316,7 @@ class MQNAutoRecordQuery {
      * @return MQNAutoRecordQueryField
      */
     public function field(MQNAutoRecordQueryTable $table, $fieldName) {
-        new \String($fieldName);
+        new String($fieldName);
         $id = (int) count($this->fieldArray);
         $field = new MQNAutoRecordQueryField($id, $fieldName);
         $field->setTable($table);
@@ -326,8 +330,8 @@ class MQNAutoRecordQuery {
      * @param int $offset
      */
     public function limit($rowCount, $offset) {
-        new \Int($rowCount);
-        new \Int($offset);
+        new Int($rowCount);
+        new Int($offset);
         $this->useLimit = true;
         $this->limitOffset = (int) $offset;
         $this->limitRowCount = (int) $rowCount;
@@ -391,7 +395,7 @@ class MQNAutoRecordQuery {
      * @param bool $ascending
      */
     public function order(MQNAutoRecordQueryField $field, $ascending = true) {
-        new \Bool($ascending);
+        new Bool($ascending);
         $order = new MQNAutoRecordQueryOrder();
         $order->setAscending($ascending);
         $order->setField($field);
@@ -406,7 +410,7 @@ class MQNAutoRecordQuery {
      * @throws \InvalidArgumentException 
      */
     public function table($autoRecordClassName) {
-        new \String($autoRecordClassName);
+        new String($autoRecordClassName);
         $autoRecord = new $autoRecordClassName();
 
         if ($this->database) {

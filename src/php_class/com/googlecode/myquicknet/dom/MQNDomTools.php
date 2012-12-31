@@ -10,6 +10,8 @@
 
 namespace com\googlecode\myquicknet\dom;
 
+use com\googlecode\myquicknet\scalar\String;
+
 /**
  *
  */
@@ -35,7 +37,7 @@ class MQNDomTools {
      * @return string 
      */
     public function convertNamedEntityToNumericEntity($html) {
-        new \String($html);
+        new String($html);
         $numericEntityArray = $this->numericEntityArray;
 
         $callback = function (array $matches) use ($numericEntityArray) {
@@ -80,8 +82,8 @@ class MQNDomTools {
      * @param string $value 
      */
     public function setNumericEntityArray($key, $value) {
-        new \String($key);
-        new \String($value);
+        new String($key);
+        new String($value);
         $this->numericEntityArray[$key] = (string) $value;
     }
 
