@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var MQNAutoRecordQueryField
@@ -32,10 +32,11 @@ class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -47,7 +48,8 @@ class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
      *
      * @return MQNAutoRecordQueryField
      */
-    public function getField1() {
+    public function getField1()
+    {
         return $this->field1;
     }
 
@@ -55,7 +57,8 @@ class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
      *
      * @return MQNAutoRecordQueryField
      */
-    public function getField2() {
+    public function getField2()
+    {
         return $this->field2;
     }
 
@@ -63,7 +66,8 @@ class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
      *
      * @param MQNAutoRecordQueryField $field
      */
-    public function setField1(MQNAutoRecordQueryField $field) {
+    public function setField1(MQNAutoRecordQueryField $field)
+    {
         $this->field1 = $field;
     }
 
@@ -71,10 +75,9 @@ class MQNAutoRecordQueryJoinCondition extends MQNAutoRecordQueryResource {
      *
      * @param MQNAutoRecordQueryField $field
      */
-    public function setField2(MQNAutoRecordQueryField $field) {
+    public function setField2(MQNAutoRecordQueryField $field)
+    {
         $this->field2 = $field;
     }
 
 }
-
-?>

@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNBlob {
-
+class MQNBlob
+{
     /**
      *
      * @var string
@@ -27,19 +27,19 @@ class MQNBlob {
      *
      * @param string $blob
      */
-    public function __construct($blob) {
+    public function __construct($blob)
+    {
         new String($blob);
         $this->blob = (string) $blob;
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public function getBlob() {
+    public function getBlob()
+    {
         return $this->blob;
     }
 
 }
-
-?>

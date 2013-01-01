@@ -15,25 +15,26 @@ use com\googlecode\myquicknet\testing\TestingStaticFileController;
 /**
  * Test class for MQNStaticFileController.
  */
-class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase {
-
+class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $controller = new MQNStaticFileController();
         $this->assertTrue($controller instanceof MQNStaticFileController);
         ob_start();
@@ -44,7 +45,8 @@ class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $controller = new TestingStaticFileController();
         $this->assertTrue($controller instanceof MQNStaticFileController);
         $_SERVER['PATH_INFO'] = (string) $controller->getUrlBasePath() . 'testing_static_file/html/default.html';
@@ -58,5 +60,3 @@ class MQNStaticFileControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  *
  */
-class Scalar {
-
+class Scalar
+{
     /**
      *
      * @var mixed
@@ -25,7 +25,8 @@ class Scalar {
      *
      * @param mixed $v
      */
-    public function __construct($v) {
+    public function __construct($v)
+    {
         $this->value = $v;
     }
 
@@ -33,8 +34,10 @@ class Scalar {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         $v = strval($this->value);
+
         return $v;
     }
 
@@ -42,8 +45,10 @@ class Scalar {
      *
      * @return bool
      */
-    public function toBool() {
+    public function toBool()
+    {
         $v = (bool) $this->value;
+
         return $v;
     }
 
@@ -51,8 +56,10 @@ class Scalar {
      *
      * @return float
      */
-    public function toFloat() {
+    public function toFloat()
+    {
         $v = floatval($this->value);
+
         return $v;
     }
 
@@ -60,8 +67,10 @@ class Scalar {
      *
      * @return int
      */
-    public function toInt() {
+    public function toInt()
+    {
         $v = intval($this->value);
+
         return $v;
     }
 
@@ -69,11 +78,11 @@ class Scalar {
      *
      * @return string
      */
-    public function toString() {
+    public function toString()
+    {
         $v = strval($this->value);
+
         return $v;
     }
 
 }
-
-?>

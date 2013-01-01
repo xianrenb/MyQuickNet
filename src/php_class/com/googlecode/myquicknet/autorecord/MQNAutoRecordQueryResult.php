@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryResult extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryResult extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var array
@@ -26,10 +26,11 @@ class MQNAutoRecordQueryResult extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -38,24 +39,28 @@ class MQNAutoRecordQueryResult extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param MQNAutoRecordQueryTable $table
+     * @param  MQNAutoRecordQueryTable $table
      * @return autoRecordClassName
      */
-    public function getAutoRecord(MQNAutoRecordQueryTable $table) {
+    public function getAutoRecord(MQNAutoRecordQueryTable $table)
+    {
         $autoRecordClassName = (string) $table->getAutoRecordClassName();
         $autoRecord = new $autoRecordClassName();
         $autoRecord->read($this->getAutoRecordId($table));
+
         return $autoRecord;
     }
 
     /**
      *
-     * @param MQNAutoRecordQueryTable $table
+     * @param  MQNAutoRecordQueryTable $table
      * @return int
      */
-    public function getAutoRecordId(MQNAutoRecordQueryTable $table) {
+    public function getAutoRecordId(MQNAutoRecordQueryTable $table)
+    {
         $tableId = (int) $table->getId();
         $autoRecordId = (int) $this->result['id' . $tableId];
+
         return $autoRecordId;
     }
 
@@ -63,10 +68,9 @@ class MQNAutoRecordQueryResult extends MQNAutoRecordQueryResource {
      *
      * @param array $result
      */
-    public function setResult(array $result) {
+    public function setResult(array $result)
+    {
         $this->result = $result;
     }
 
 }
-
-?>

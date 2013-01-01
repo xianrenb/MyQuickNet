@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\database\MQNDatabase;
 /**
  *
  */
-class MQNAutoRecordManager {
-
+class MQNAutoRecordManager
+{
     /**
      *
      * @var MQNDatabase
@@ -39,7 +39,8 @@ class MQNAutoRecordManager {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         if (!self::$instance_created_count) {
             $dbClass = (string) $config['db_class'];
             self::$database = new $dbClass($config);
@@ -55,7 +56,8 @@ class MQNAutoRecordManager {
         self::$instance_created_count += 1;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         self::$instance_destroyed_count += 1;
 
         if (self::$instance_created_count == self::$instance_destroyed_count) {
@@ -76,10 +78,9 @@ class MQNAutoRecordManager {
      *
      * @return MQNDatabase
      */
-    public function getDatabase() {
+    public function getDatabase()
+    {
         return self::$database;
     }
 
 }
-
-?>

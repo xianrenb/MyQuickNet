@@ -13,24 +13,25 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  * Test class for Int.
  */
-class IntTest extends \PHPUnit_Framework_TestCase {
-
+class IntTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         try {
             new Int(true);
             $this->fail();
         } catch (\InvalidArgumentException $e) {
-            
+
         }
         try {
             new Int(2.2);
             $this->fail();
         } catch (\InvalidArgumentException $e) {
-            
+
         }
         try {
             new Int(2);
@@ -41,7 +42,7 @@ class IntTest extends \PHPUnit_Framework_TestCase {
             new Int('string');
             $this->fail();
         } catch (\InvalidArgumentException $e) {
-            
+
         }
     }
 
@@ -49,11 +50,12 @@ class IntTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function testParse() {
+    public function testParse()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -62,5 +64,3 @@ class IntTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

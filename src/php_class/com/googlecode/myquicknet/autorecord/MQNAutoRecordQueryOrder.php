@@ -17,8 +17,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var bool
@@ -33,10 +33,11 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -48,7 +49,8 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      *
      * @return MQNAutoRecordQueryField
      */
-    public function getField() {
+    public function getField()
+    {
         return $this->field;
     }
 
@@ -56,7 +58,8 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      *
      * @return bool
      */
-    public function isAscending() {
+    public function isAscending()
+    {
         return $this->ascending;
     }
 
@@ -64,7 +67,8 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      *
      * @param bool $ascending
      */
-    public function setAscending($ascending) {
+    public function setAscending($ascending)
+    {
         new Bool($ascending);
         $this->ascending = (bool) $ascending;
     }
@@ -73,10 +77,9 @@ class MQNAutoRecordQueryOrder extends MQNAutoRecordQueryResource {
      *
      * @param MQNAutoRecordQueryField $field
      */
-    public function setField(MQNAutoRecordQueryField $field) {
+    public function setField(MQNAutoRecordQueryField $field)
+    {
         $this->field = $field;
     }
 
 }
-
-?>

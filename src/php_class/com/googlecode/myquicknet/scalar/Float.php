@@ -13,13 +13,14 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  *
  */
-class Float extends Scalar {
-
+class Float extends Scalar
+{
     /**
      *
      * @param float $v
      */
-    public function __construct($v) {
+    public function __construct($v)
+    {
         if (is_float($v)) {
             parent::__construct($v);
         } else {
@@ -29,14 +30,14 @@ class Float extends Scalar {
 
     /**
      *
-     * @param mixed $v
+     * @param  mixed $v
      * @return Float
      */
-    public static function parse($v) {
+    public static function parse($v)
+    {
         $v = floatval($v);
+
         return new Float($v);
     }
 
 }
-
-?>

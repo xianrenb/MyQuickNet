@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\testing_config\TestingAutoRecordConfig;
 /**
  *
  */
-class TestingAutoRecord extends TestingAutoRecordConfig {
-
+class TestingAutoRecord extends TestingAutoRecordConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct();
     }
 
@@ -29,10 +30,9 @@ class TestingAutoRecord extends TestingAutoRecordConfig {
      *
      * @return string
      */
-    public function methodA() {
+    public function methodA()
+    {
         return 'TestingAutoRecord';
     }
 
 }
-
-?>

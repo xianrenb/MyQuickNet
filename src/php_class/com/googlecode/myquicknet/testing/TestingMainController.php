@@ -15,16 +15,15 @@ use com\googlecode\myquicknet\testing_config\TestingMainControllerConfig;
 /**
  *
  */
-class TestingMainController extends TestingMainControllerConfig {
-
+class TestingMainController extends TestingMainControllerConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
     }
 
 }
-
-?>

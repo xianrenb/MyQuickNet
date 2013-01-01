@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\autorecord\MQNAutoRecordManager;
 /**
  *
  */
-class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
-
+class TestingAutoRecordManagerConfig extends MQNAutoRecordManager
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         //Settings for using SQLite3
         $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseSQLite';
         $config['db_filename'] = (string) (MQN_BASE_PATH . 'sqlite/mqntestdb.sqlite3');
@@ -43,12 +44,10 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager {
           $config['db_user'] = 'mqntestdbuser';
           $config['db_password'] = 'mqntest';
           }
-         * 
+         *
          */
 
         parent::__construct($config);
     }
 
 }
-
-?>

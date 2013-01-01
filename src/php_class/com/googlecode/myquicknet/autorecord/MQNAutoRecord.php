@@ -18,8 +18,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecord {
-
+class MQNAutoRecord
+{
     /**
      *
      * @var MQNAutoRecordManager
@@ -75,11 +75,12 @@ class MQNAutoRecord {
     private $valid;
 
     /**
-     * 
-     * @param array $config
+     *
+     * @param  array                     $config
      * @throws \UnexpectedValueException
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $autoRecordManagerClass = (string) $config['auto_record_manager_class'];
         $this->autoRecordManager = new $autoRecordManagerClass($config);
         $this->autoUpdate = true;
@@ -91,7 +92,7 @@ class MQNAutoRecord {
         foreach ($this->defaultFieldArray as $name => $value) {
             if (is_scalar($value)) {
                 $this->fieldArray[$name] = $value;
-            } else if ($value instanceof MQNBlob) {
+            } elseif ($value instanceof MQNBlob) {
                 $this->fieldArray[$name] = clone $value;
             } else {
                 throw new \UnexpectedValueException();
@@ -105,20 +106,22 @@ class MQNAutoRecord {
 
     /**
      *
-     * @param string $name
-     * @param array $arguments
+     * @param  string                  $name
+     * @param  array                   $arguments
      * @return mixed
-     * @throws \BadMethodCallException 
+     * @throws \BadMethodCallException
      */
-    public function __call($name, $arguments) {
+    public function __call($name, $arguments)
+    {
         new String($name);
 
         try {
             if (preg_match('/^get/', $name)) {
                 sscanf($name, 'get%s', $shortFieldName);
                 $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
+
                 return $this->_getField($fieldName);
-            } else if (preg_match('/^set/', $name)) {
+            } elseif (preg_match('/^set/', $name)) {
                 sscanf($name, 'set%s', $shortFieldName);
                 $fieldName = (string) MQNAutoRecordTools::shortFieldNameToFieldName($shortFieldName);
                 $value = $arguments[0];
@@ -132,9 +135,10 @@ class MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->autoUpdate && $this->dirty) {
             $this->update();
         }
@@ -145,11 +149,12 @@ class MQNAutoRecord {
 
     /**
      *
-     * @param string $name
+     * @param  string                    $name
      * @return bool|float|int|string
-     * @throws \InvalidArgumentException 
+     * @throws \InvalidArgumentException
      */
-    protected function _getField($name) {
+    protected function _getField($name)
+    {
         new String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
@@ -161,10 +166,11 @@ class MQNAutoRecord {
 
     /**
      *
-     * @param bool $newValid
+     * @param  bool $newValid
      * @return int
      */
-    protected function _getNewId($newValid) {
+    protected function _getNewId($newValid)
+    {
         new Bool($newValid);
         // try to find the smallest invalid id, which could be reused
         $sql = 'SELECT `id` FROM `';
@@ -185,6 +191,7 @@ class MQNAutoRecord {
             $statement->appendBindValueArray($id);
             $statement->execute();
             $statement = null;
+
             return $id;
         }
 
@@ -232,17 +239,19 @@ class MQNAutoRecord {
 
         $statement->execute();
         $statement = null;
+
         return $id;
     }
 
     /**
      *
-     * @param string $name
-     * @param bool|float|int|string|MQNAutoRecord $value
+     * @param  string                              $name
+     * @param  bool|float|int|string|MQNAutoRecord $value
      * @throws \Exception
-     * @throws \InvalidArgumentException 
+     * @throws \InvalidArgumentException
      */
-    protected function _setField($name, $value) {
+    protected function _setField($name, $value)
+    {
         new String($name);
 
         if (!array_key_exists($name, $this->fieldArray)) {
@@ -254,22 +263,22 @@ class MQNAutoRecord {
 
             if (is_bool($oldValue)) {
                 $this->fieldArray[$name] = (bool) $value;
-            } else if (is_float($oldValue)) {
+            } elseif (is_float($oldValue)) {
                 $this->fieldArray[$name] = (float) $value;
-            } else if (is_int($oldValue)) {
+            } elseif (is_int($oldValue)) {
                 $this->fieldArray[$name] = (int) $value;
-            } else if (is_string($oldValue)) {
+            } elseif (is_string($oldValue)) {
                 $this->fieldArray[$name] = (string) $value;
             } else {
                 throw new \Exception('Type not supported.');
             }
-        } else if ($value instanceof MQNBlob) {
+        } elseif ($value instanceof MQNBlob) {
             if ($this->fieldArray[$name] instanceof MQNBlob) {
                 $this->fieldArray[$name] = clone $value;
             } else {
                 throw new \Exception('Type not supported.');
             }
-        } else if ($value instanceof MQNAutoRecord) {
+        } elseif ($value instanceof MQNAutoRecord) {
             if (is_int($this->fieldArray[$name])) {
                 $this->fieldArray[$name] = (int) $value->getId();
             } else {
@@ -283,10 +292,11 @@ class MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      * @throws \UnexpectedValueException
      */
-    public function create() {
+    public function create()
+    {
         $this->autoUpdate = true;
         $this->dirty = true;
         $this->id = (int) $this->_getNewId(true);
@@ -296,7 +306,7 @@ class MQNAutoRecord {
         foreach ($this->defaultFieldArray as $name => $value) {
             if (is_scalar($value)) {
                 $this->fieldArray[$name] = $value;
-            } else if ($value instanceof MQNBlob) {
+            } elseif ($value instanceof MQNBlob) {
                 $this->fieldArray[$name] = clone $value;
             } else {
                 throw new \UnexpectedValueException();
@@ -305,9 +315,10 @@ class MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      */
-    public function delete() {
+    public function delete()
+    {
         $this->valid = false;
         $this->update();
         $this->autoUpdate = true;
@@ -319,7 +330,8 @@ class MQNAutoRecord {
      *
      * @return MQNDatabase
      */
-    public function getDatabase() {
+    public function getDatabase()
+    {
         return $this->database;
     }
 
@@ -327,7 +339,8 @@ class MQNAutoRecord {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -335,7 +348,8 @@ class MQNAutoRecord {
      *
      * @return string
      */
-    public function getTable() {
+    public function getTable()
+    {
         return $this->table;
     }
 
@@ -343,16 +357,18 @@ class MQNAutoRecord {
      *
      * @return bool
      */
-    public function isValid() {
+    public function isValid()
+    {
         return $this->valid;
     }
 
     /**
-     * 
-     * @param int $id
+     *
+     * @param  int        $id
      * @throws \Exception
      */
-    public function read($id) {
+    public function read($id)
+    {
         new Int($id);
 
         if ($this->autoUpdate && $this->dirty) {
@@ -377,13 +393,13 @@ class MQNAutoRecord {
             foreach ($this->fieldArray as $name => $oldValue) {
                 if (is_bool($oldValue)) {
                     $this->fieldArray[$name] = (bool) $rows[0][$name];
-                } else if (is_float($oldValue)) {
+                } elseif (is_float($oldValue)) {
                     $this->fieldArray[$name] = (float) $rows[0][$name];
-                } else if (is_int($oldValue)) {
+                } elseif (is_int($oldValue)) {
                     $this->fieldArray[$name] = (int) $rows[0][$name];
-                } else if (is_string($oldValue)) {
+                } elseif (is_string($oldValue)) {
                     $this->fieldArray[$name] = (string) $rows[0][$name];
-                } else if ($oldValue instanceof MQNBlob) {
+                } elseif ($oldValue instanceof MQNBlob) {
                     $blob = (string) $rows[0][$name];
                     $this->fieldArray[$name] = new MQNBlob($blob);
                 } else {
@@ -399,9 +415,10 @@ class MQNAutoRecord {
     /**
      *
      * @return null
-     * @throws \Exception 
+     * @throws \Exception
      */
-    public function update() {
+    public function update()
+    {
         $id = (int) $this->getId();
         $valid = (bool) $this->isValid();
 
@@ -434,5 +451,3 @@ class MQNAutoRecord {
     }
 
 }
-
-?>

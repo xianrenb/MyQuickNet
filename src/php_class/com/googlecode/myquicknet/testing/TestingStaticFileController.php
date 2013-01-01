@@ -15,16 +15,15 @@ use com\googlecode\myquicknet\testing_config\TestingStaticFileControllerConfig;
 /**
  *
  */
-class TestingStaticFileController extends TestingStaticFileControllerConfig {
-
+class TestingStaticFileController extends TestingStaticFileControllerConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
     }
 
 }
-
-?>

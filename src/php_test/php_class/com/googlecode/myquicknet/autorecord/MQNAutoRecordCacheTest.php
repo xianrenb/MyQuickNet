@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordCache.
  */
-class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var string
@@ -25,7 +25,8 @@ class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingAutoRecordCacheClass = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordCache';
     }
 
@@ -33,11 +34,12 @@ class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $record1 = new $this->testingAutoRecordCacheClass();
         $this->assertTrue($record1 instanceof MQNAutoRecordCache);
         $this->assertTrue($record1->methodA() == 'TestingAutoRecordCache');
@@ -98,7 +100,8 @@ class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase {
         $record2 = null;
     }
 
-    public function test2() {
+    public function test2()
+    {
         $record1 = new $this->testingAutoRecordCacheClass();
         $record1->create();
         $id = (int) $record1->getId();
@@ -153,5 +156,3 @@ class MQNAutoRecordCacheTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

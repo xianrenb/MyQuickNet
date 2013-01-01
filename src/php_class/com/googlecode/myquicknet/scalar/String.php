@@ -13,13 +13,14 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  *
  */
-class String extends Scalar {
-
+class String extends Scalar
+{
     /**
      *
      * @param string $v
      */
-    public function __construct($v) {
+    public function __construct($v)
+    {
         if (is_string($v)) {
             parent::__construct($v);
         } else {
@@ -29,14 +30,14 @@ class String extends Scalar {
 
     /**
      *
-     * @param mixed $v
+     * @param  mixed  $v
      * @return String
      */
-    public static function parse($v) {
+    public static function parse($v)
+    {
         $v = strval($v);
+
         return new String($v);
     }
 
 }
-
-?>

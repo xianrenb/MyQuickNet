@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordQuery.
  */
-class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var array
@@ -61,7 +61,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingAutoRecordAClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordA';
         $this->testingAutoRecordBClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordB';
         $this->testingAutoRecordCClassName = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordC';
@@ -91,7 +92,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         for ($i = 0; $i < 10; ++$i) {
             $this->autoRecordAArray[$i]->delete();
             $this->autoRecordBArray[$i]->delete();
@@ -102,13 +104,15 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function test1() {
+    public function test1()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $query = null;
     }
 
-    public function test2() {
+    public function test2()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $table = $query->table($this->testingAutoRecordClassName);
@@ -119,7 +123,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $table = null;
     }
 
-    public function test3() {
+    public function test3()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -142,7 +147,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $autoRecordA = null;
     }
 
-    public function test4() {
+    public function test4()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -155,7 +161,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $tableB = null;
     }
 
-    public function test5() {
+    public function test5()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -193,7 +200,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test6() {
+    public function test6()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -236,7 +244,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test7() {
+    public function test7()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -280,7 +289,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $autoRecordC = null;
     }
 
-    public function test8() {
+    public function test8()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -299,7 +309,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $tableA = null;
     }
 
-    public function test9() {
+    public function test9()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -312,7 +323,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $tableA = null;
     }
 
-    public function test10() {
+    public function test10()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -334,7 +346,8 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
         $tableB = null;
     }
 
-    public function test11() {
+    public function test11()
+    {
         $query = new MQNAutoRecordQuery();
         $this->assertTrue($query instanceof MQNAutoRecordQuery);
         $tableA = $query->table($this->testingAutoRecordAClassName);
@@ -357,5 +370,3 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

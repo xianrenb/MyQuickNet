@@ -15,14 +15,15 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordTools {
-
+class MQNAutoRecordTools
+{
     /**
      *
-     * @param string $shortFieldName
+     * @param  string $shortFieldName
      * @return string
      */
-    public static function shortFieldNameToFieldName($shortFieldName) {
+    public static function shortFieldNameToFieldName($shortFieldName)
+    {
         new String($shortFieldName);
         $fieldName = '';
         $n = (int) strlen($shortFieldName);
@@ -42,5 +43,3 @@ class MQNAutoRecordTools {
     }
 
 }
-
-?>

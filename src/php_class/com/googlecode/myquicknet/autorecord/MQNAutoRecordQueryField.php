@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryField extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryField extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var MQNAutoRecordQueryTable
@@ -26,10 +26,11 @@ class MQNAutoRecordQueryField extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -40,7 +41,8 @@ class MQNAutoRecordQueryField extends MQNAutoRecordQueryResource {
      *
      * @return MQNAutoRecordQueryTable
      */
-    public function getTable() {
+    public function getTable()
+    {
         return $this->table;
     }
 
@@ -48,10 +50,9 @@ class MQNAutoRecordQueryField extends MQNAutoRecordQueryResource {
      *
      * @param MQNAutoRecordQueryTable $table
      */
-    public function setTable(MQNAutoRecordQueryTable $table) {
+    public function setTable(MQNAutoRecordQueryTable $table)
+    {
         $this->table = $table;
     }
 
 }
-
-?>

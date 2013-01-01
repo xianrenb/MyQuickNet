@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\dom;
 /**
  * Test class for MQNDom.
  */
-class MQNDomTest extends \PHPUnit_Framework_TestCase {
-
+class MQNDomTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $dom = new MQNDom();
         $doc = $dom->getDoc();
         $xPath = $dom->getXPath();
@@ -48,7 +49,8 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($input, $output);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $dom = new MQNDom();
         $dom->loadHTMLFile(__DIR__ . '/input.html');
         $dom->saveHTMLFile(__DIR__ . '/output.html');
@@ -57,7 +59,8 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($input, $output);
     }
 
-    public function test3() {
+    public function test3()
+    {
         $dom = new MQNDom();
         $input = (string) file_get_contents(__DIR__ . '/input.xml');
         $dom->loadXML($input);
@@ -65,7 +68,8 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($input, $output);
     }
 
-    public function test4() {
+    public function test4()
+    {
         $dom = new MQNDom();
         $input = (string) file_get_contents(__DIR__ . '/input.html');
         $dom->loadHTML($input);
@@ -73,7 +77,8 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($input, $output);
     }
 
-    public function test5() {
+    public function test5()
+    {
         $dom = new MQNDom();
         $dom->load(__DIR__ . '/input_template.xml');
         $attrValue = $dom->queryAttr('//attr/data', 'attr');
@@ -86,6 +91,7 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
 
                     if ($node && $node->firstChild && ($node->firstChild instanceof \DOMText)) {
                         $text = (string) $node->firstChild->wholeText;
+
                         return $text;
                     } else {
                         return null;
@@ -132,5 +138,3 @@ class MQNDomTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

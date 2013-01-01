@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\controller;
 /**
  *
  */
-class MQNMainController extends MQNController {
-
+class MQNMainController extends MQNController
+{
     /**
      *
      * @var string
@@ -31,7 +31,8 @@ class MQNMainController extends MQNController {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
 
         if (array_key_exists('controller_class_prefix', $config)) {
@@ -40,7 +41,6 @@ class MQNMainController extends MQNController {
             $this->controllerClassPrefix = '\\com\\googlecode\\myquicknet\\controller\\';
         }
 
-
         if (array_key_exists('main_controller_class', $config)) {
             $this->mainControllerClass = (string) $config['main_controller_class'];
         } else {
@@ -48,7 +48,8 @@ class MQNMainController extends MQNController {
         }
     }
 
-    public function run() {
+    public function run()
+    {
         if (key_exists('PATH_INFO', $_SERVER)) {
             $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
             $pattern = '/^' . $pattern . '([^\/]+)\/.*$/';
@@ -77,6 +78,7 @@ class MQNMainController extends MQNController {
                 if ($controllerExists) {
                     $controller = new $controllerClassName();
                     $controller->run();
+
                     return;
                 }
             }
@@ -88,5 +90,3 @@ class MQNMainController extends MQNController {
     }
 
 }
-
-?>

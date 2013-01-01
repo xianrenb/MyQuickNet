@@ -15,16 +15,15 @@ use com\googlecode\myquicknet\testing_config\TestingCssViewConfig;
 /**
  *
  */
-class TestingCssView extends TestingCssViewConfig {
-
+class TestingCssView extends TestingCssViewConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
     }
 
 }
-
-?>

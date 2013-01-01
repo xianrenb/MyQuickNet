@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\view\MQNView;
 /**
  *
  */
-class MQNCssView extends MQNView {
-
+class MQNCssView extends MQNView
+{
     /**
      *
      * @var int
@@ -46,7 +46,8 @@ class MQNCssView extends MQNView {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         if (key_exists('cache_max_age', $config)) {
             $this->cacheMaxAge = (int) $config['cache_max_age'];
         } else {
@@ -78,7 +79,8 @@ class MQNCssView extends MQNView {
      *
      * @return string
      */
-    protected function _generateLeft() {
+    protected function _generateLeft()
+    {
         $css = '';
 
         for ($column = 0; $column <= $this->columnCount; ++$column) {
@@ -94,7 +96,8 @@ class MQNCssView extends MQNView {
      *
      * @return string
      */
-    protected function _generateMLeft() {
+    protected function _generateMLeft()
+    {
         $css = '';
 
         for ($column = 0; $column <= $this->columnCount; ++$column) {
@@ -110,7 +113,8 @@ class MQNCssView extends MQNView {
      *
      * @return string
      */
-    protected function _generatePLeft() {
+    protected function _generatePLeft()
+    {
         $css = '';
 
         for ($column = 0; $column <= $this->columnCount; ++$column) {
@@ -126,7 +130,8 @@ class MQNCssView extends MQNView {
      *
      * @return string
      */
-    protected function _generatePRight() {
+    protected function _generatePRight()
+    {
         $css = '';
 
         for ($column = 0; $column <= $this->columnCount; ++$column) {
@@ -142,7 +147,8 @@ class MQNCssView extends MQNView {
      *
      * @return string
      */
-    protected function _generateWidth() {
+    protected function _generateWidth()
+    {
         $css = '';
 
         for ($column = 0; $column <= $this->columnCount; ++$column) {
@@ -155,10 +161,11 @@ class MQNCssView extends MQNView {
     }
 
     /**
-     * 
+     *
      * @return array|boolean
      */
-    protected function _getAllHeaders() {
+    protected function _getAllHeaders()
+    {
         $headers = false;
 
         if (function_exists('getallheaders')) {
@@ -169,29 +176,33 @@ class MQNCssView extends MQNView {
     }
 
     /**
-     * 
+     *
      * @param string $header
      */
-    protected function _header($header) {
+    protected function _header($header)
+    {
         new String($header);
         header($header);
     }
 
     /**
-     * 
+     *
      * @return boolean
      */
-    protected function _headersSent() {
+    protected function _headersSent()
+    {
         $headersSent = (bool) headers_sent();
+
         return $headersSent;
     }
 
     /**
      *
-     * @param string $css
+     * @param  string $css
      * @return bool
      */
-    protected function _outputCss($css) {
+    protected function _outputCss($css)
+    {
         new String($css);
 
         if (!$this->_headersSent()) {
@@ -214,6 +225,7 @@ class MQNCssView extends MQNView {
                     }
 
                     $this->_header('Status: 304 Not Modified');
+
                     return true;
                 }
             }
@@ -226,6 +238,7 @@ class MQNCssView extends MQNView {
         }
 
         echo($css);
+
         return true;
     }
 
@@ -233,7 +246,8 @@ class MQNCssView extends MQNView {
      *
      * @return bool
      */
-    public function output() {
+    public function output()
+    {
         return $this->outputReset();
     }
 
@@ -241,7 +255,8 @@ class MQNCssView extends MQNView {
      *
      * @return bool
      */
-    public function outputGrid() {
+    public function outputGrid()
+    {
         $css = ".clear {\n";
         $css .= "clear: both;\n";
         $css .= "display: block;\n";
@@ -314,6 +329,7 @@ class MQNCssView extends MQNView {
         $css .= $this->_generatePRight();
         $css .= $this->_generateWidth();
         $this->_outputCss($css);
+
         return true;
     }
 
@@ -321,7 +337,8 @@ class MQNCssView extends MQNView {
      *
      * @return bool
      */
-    public function outputReset() {
+    public function outputReset()
+    {
         $css = "* {\n";
         $css .= "background: none repeat scroll 0 0 transparent;\n";
         $css .= "border: 0 none;\n";
@@ -340,9 +357,8 @@ class MQNCssView extends MQNView {
         $css .= "border-spacing: 0;\n";
         $css .= "}\n";
         $this->_outputCss($css);
+
         return true;
     }
 
 }
-
-?>

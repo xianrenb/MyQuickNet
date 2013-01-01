@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordQueryResultArray.
  */
-class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var string
@@ -25,7 +25,8 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingAutoRecordClass = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecord';
     }
 
@@ -33,23 +34,26 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $resultArray = new MQNAutoRecordQueryResultArray();
         $this->assertTrue($resultArray instanceof MQNAutoRecordQueryResultArray);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $resultArray = new MQNAutoRecordQueryResultArray(1, 'name');
         $this->assertTrue($resultArray instanceof MQNAutoRecordQueryResultArray);
         $this->assertTrue($resultArray->getId() == 1);
         $this->assertTrue($resultArray->getName() == 'name');
     }
 
-    public function test3() {
+    public function test3()
+    {
         $resultArray = new MQNAutoRecordQueryResultArray(1, 'result');
         $this->assertTrue($resultArray instanceof MQNAutoRecordQueryResultArray);
         $a = array();
@@ -95,7 +99,8 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
         $expectedAutoRecord2 = null;
     }
 
-    public function test4() {
+    public function test4()
+    {
         $resultArray = new MQNAutoRecordQueryResultArray(1, 'result');
         $this->assertTrue($resultArray instanceof MQNAutoRecordQueryResultArray);
         $a = array();
@@ -136,7 +141,7 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
             $exceptionMessage = '';
 
             foreach ($resultArray as $result) {
-                
+
             }
         } catch (\Exception $e) {
             $noException = false;
@@ -154,5 +159,3 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

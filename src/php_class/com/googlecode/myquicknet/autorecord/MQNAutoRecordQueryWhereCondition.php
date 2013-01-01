@@ -17,8 +17,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var string
@@ -45,10 +45,11 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -62,7 +63,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @return string
      */
-    public function getOperator() {
+    public function getOperator()
+    {
         return $this->operator;
     }
 
@@ -70,7 +72,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @return bool
      */
-    public function getOrNext() {
+    public function getOrNext()
+    {
         return $this->orNext;
     }
 
@@ -78,7 +81,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @return bool|float|int|string|MQNAutoRecordQueryField
      */
-    public function getValue1() {
+    public function getValue1()
+    {
         return $this->value1;
     }
 
@@ -86,7 +90,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @return bool|float|int|string|MQNAutoRecordQueryField
      */
-    public function getValue2() {
+    public function getValue2()
+    {
         return $this->value2;
     }
 
@@ -94,16 +99,18 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @param string $operator
      */
-    public function setOperator($operator) {
+    public function setOperator($operator)
+    {
         new String($operator);
         $this->operator = (string) $operator;
     }
 
     /**
      *
-     * @param bool $orNext 
+     * @param bool $orNext
      */
-    public function setOrNext($orNext) {
+    public function setOrNext($orNext)
+    {
         new Bool($orNext);
         $this->orNext = (bool) $orNext;
     }
@@ -112,7 +119,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @param bool|float|int|string|MQNAutoRecordQueryField $value
      */
-    public function setValue1($value) {
+    public function setValue1($value)
+    {
         if (!is_scalar($value)) {
             if (!($value instanceof MQNAutoRecordQueryField)) {
                 throw new \InvalidArgumentException();
@@ -126,7 +134,8 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
      *
      * @param bool|float|int|string|MQNAutoRecordQueryField $value
      */
-    public function setValue2($value) {
+    public function setValue2($value)
+    {
         if (!is_scalar($value)) {
             if (!($value instanceof MQNAutoRecordQueryField)) {
                 throw new \InvalidArgumentException();
@@ -137,5 +146,3 @@ class MQNAutoRecordQueryWhereCondition extends MQNAutoRecordQueryResource {
     }
 
 }
-
-?>

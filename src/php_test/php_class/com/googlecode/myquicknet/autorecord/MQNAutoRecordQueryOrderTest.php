@@ -13,37 +13,40 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordQueryOrder.
  */
-class MQNAutoRecordQueryOrderTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordQueryOrderTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $order = new MQNAutoRecordQueryOrder();
         $this->assertTrue($order instanceof MQNAutoRecordQueryOrder);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $order = new MQNAutoRecordQueryOrder(1, 'name');
         $this->assertTrue($order instanceof MQNAutoRecordQueryOrder);
         $this->assertTrue($order->getId() == 1);
         $this->assertTrue($order->getName() == 'name');
     }
 
-    public function test3() {
+    public function test3()
+    {
         $order = new MQNAutoRecordQueryOrder(1, 'order');
         $this->assertTrue($order instanceof MQNAutoRecordQueryOrder);
         $field = new MQNAutoRecordQueryField(2, 'field');
@@ -55,5 +58,3 @@ class MQNAutoRecordQueryOrderTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

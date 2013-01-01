@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordQueryWhereCondition.
  */
-class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition();
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $this->assertFalse($whereCondition->getOrNext());
@@ -41,14 +42,16 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($whereCondition->getOrNext());
     }
 
-    public function test2() {
+    public function test2()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'name');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $this->assertTrue($whereCondition->getId() == 1);
         $this->assertTrue($whereCondition->getName() == 'name');
     }
 
-    public function test3() {
+    public function test3()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'field');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $operator = '=';
@@ -62,7 +65,8 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($value2, $whereCondition->getValue2());
     }
 
-    public function test4() {
+    public function test4()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'field');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $operator = '=';
@@ -76,7 +80,8 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($value2, $whereCondition->getValue2());
     }
 
-    public function test5() {
+    public function test5()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'field');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $operator = '=';
@@ -90,7 +95,8 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($value2, $whereCondition->getValue2());
     }
 
-    public function test6() {
+    public function test6()
+    {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'field');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
         $operator = '=';
@@ -105,5 +111,3 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

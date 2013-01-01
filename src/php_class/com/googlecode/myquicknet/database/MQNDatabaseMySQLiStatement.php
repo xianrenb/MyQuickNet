@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\autorecord\MQNAutoRecord;
 /**
  *
  */
-class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
-
+class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement
+{
     /**
      *
      * @var array
@@ -36,20 +36,22 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     private $statement;
 
     /**
-     * 
+     *
      * @param \mysqli_stmt $statement
      */
-    public function __construct(\mysqli_stmt $statement) {
+    public function __construct(\mysqli_stmt $statement)
+    {
         $this->bindValueArray = array();
         $this->extraBindValueArray = array();
         $this->statement = $statement;
     }
 
     /**
-     * 
+     *
      * @throws \Exception
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->statement) {
             if (!$this->statement->close()) {
                 throw new \Exception('Could not close database statement.');
@@ -58,11 +60,12 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     }
 
     /**
-     * 
+     *
      * @return array
      * @throws \UnexpectedValueException
      */
-    protected function _getResult() {
+    protected function _getResult()
+    {
         $rowList = array();
         $resultMetaData = $this->statement->result_metadata();
 
@@ -102,18 +105,20 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
         }
 
         $resultMetaData->free();
+
         return $rowList;
     }
 
     /**
-     * 
-     * @param bool|float|int|string|MQNAutoRecord $value
+     *
+     * @param  bool|float|int|string|MQNAutoRecord $value
      * @throws \InvalidArgumentException
      */
-    public function appendBindValueArray($value) {
+    public function appendBindValueArray($value)
+    {
         if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->bindValueArray[] = $value;
-        } else if ($value instanceof MQNAutoRecord) {
+        } elseif ($value instanceof MQNAutoRecord) {
             $this->bindValueArray[] = (int) $value->getId();
         } else {
             throw new \InvalidArgumentException();
@@ -121,14 +126,15 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     }
 
     /**
-     * 
-     * @param bool|float|int|string|MQNAutoRecord $value
+     *
+     * @param  bool|float|int|string|MQNAutoRecord $value
      * @throws \InvalidArgumentException
      */
-    public function appendExtraBindValueArray($value) {
+    public function appendExtraBindValueArray($value)
+    {
         if (is_scalar($value) || $value instanceof MQNBlob) {
             $this->extraBindValueArray[] = $value;
-        } else if ($value instanceof MQNAutoRecord) {
+        } elseif ($value instanceof MQNAutoRecord) {
             $this->extraBindValueArray[] = (int) $value->getId();
         } else {
             throw new \InvalidArgumentException();
@@ -136,12 +142,13 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     }
 
     /**
-     * 
+     *
      * @return array
      * @throws \UnexpectedValueException
      * @throws \Exception
      */
-    public function execute() {
+    public function execute()
+    {
         $types = '';
         $refBindValueArray = array();
         $longData = array();
@@ -151,13 +158,13 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
             if (is_bool($this->bindValueArray[$i])) {
                 $types .= 'i';
                 $this->bindValueArray[$i] = (int) $this->bindValueArray[$i];
-            } else if (is_float($this->bindValueArray[$i])) {
+            } elseif (is_float($this->bindValueArray[$i])) {
                 $types .= 'd';
-            } else if (is_int($this->bindValueArray[$i])) {
+            } elseif (is_int($this->bindValueArray[$i])) {
                 $types .= 'i';
-            } else if (is_string($this->bindValueArray[$i])) {
+            } elseif (is_string($this->bindValueArray[$i])) {
                 $types .= 's';
-            } else if ($this->bindValueArray[$i] instanceof MQNBlob) {
+            } elseif ($this->bindValueArray[$i] instanceof MQNBlob) {
                 $types .= 'b';
                 $blob = $this->bindValueArray[$i];
                 $this->bindValueArray[$i] = null;
@@ -175,13 +182,13 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
             if (is_bool($this->extraBindValueArray[$i])) {
                 $types .= 'i';
                 $this->extraBindValueArray[$i] = (int) $this->extraBindValueArray[$i];
-            } else if (is_float($this->extraBindValueArray[$i])) {
+            } elseif (is_float($this->extraBindValueArray[$i])) {
                 $types .= 'd';
-            } else if (is_int($this->extraBindValueArray[$i])) {
+            } elseif (is_int($this->extraBindValueArray[$i])) {
                 $types .= 'i';
-            } else if (is_string($this->extraBindValueArray[$i])) {
+            } elseif (is_string($this->extraBindValueArray[$i])) {
                 $types .= 's';
-            } else if ($this->bindValueArray[$i] instanceof MQNBlob) {
+            } elseif ($this->bindValueArray[$i] instanceof MQNBlob) {
                 $types .= 'b';
                 $blob = $this->bindValueArray[$i];
                 $this->bindValueArray[$i] = null;
@@ -232,5 +239,3 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement {
     }
 
 }
-
-?>

@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\css\MQNCssView;
 /**
  *
  */
-class TestingCssViewConfig extends MQNCssView {
-
+class TestingCssViewConfig extends MQNCssView
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $config['cache_max_age'] = 20 * 60;
         $config['column_count'] = 12;
         $config['column_width'] = 60;
@@ -30,5 +31,3 @@ class TestingCssViewConfig extends MQNCssView {
     }
 
 }
-
-?>

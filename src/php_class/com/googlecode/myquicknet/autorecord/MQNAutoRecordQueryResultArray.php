@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implements \Iterator {
-
+class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implements \Iterator
+{
     /**
      *
      * @var int
@@ -32,10 +32,11 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -47,18 +48,22 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      *
      * @return int
      */
-    public function count() {
+    public function count()
+    {
         $n = (int) count($this->resultArray);
+
         return $n;
     }
 
     /**
      *
-     * @return MQNAutoRecordQueryResult 
+     * @return MQNAutoRecordQueryResult
      */
-    public function current() {
+    public function current()
+    {
         $result = new MQNAutoRecordQueryResult();
         $result->setResult($this->resultArray[$this->index]);
+
         return $result;
     }
 
@@ -66,15 +71,18 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      *
      * @return int
      */
-    public function key() {
+    public function key()
+    {
         $key = (int) $this->index;
+
         return $key;
     }
 
     /**
-     * 
+     *
      */
-    public function next() {
+    public function next()
+    {
         $this->index += 1;
     }
 
@@ -82,7 +90,8 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      *
      * @return MQNAutoRecordResult
      */
-    public function nextResult() {
+    public function nextResult()
+    {
         if ($this->index >= count($this->resultArray)) {
             return null;
         }
@@ -90,13 +99,15 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
         $result = new MQNAutoRecordQueryResult();
         $result->setResult($this->resultArray[$this->index]);
         $this->index += 1;
+
         return $result;
     }
 
     /**
-     * 
+     *
      */
-    public function rewind() {
+    public function rewind()
+    {
         if ($this->index) {
             throw new \Exception('Could not rewind.');
         }
@@ -106,7 +117,8 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      *
      * @param array $resultArray
      */
-    public function setResultArray(array $resultArray) {
+    public function setResultArray(array $resultArray)
+    {
         $this->resultArray = $resultArray;
     }
 
@@ -114,11 +126,11 @@ class MQNAutoRecordQueryResultArray extends MQNAutoRecordQueryResource implement
      *
      * @return bool
      */
-    public function valid() {
+    public function valid()
+    {
         $valid = (bool) array_key_exists($this->index, $this->resultArray);
+
         return $valid;
     }
 
 }
-
-?>

@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
-
+class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource
+{
     /**
      *
      * @var MQNAutoRecord
@@ -32,10 +32,11 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
 
     /**
      *
-     * @param int $id
+     * @param int    $id
      * @param string $name
      */
-    public function __construct($id = 0, $name = '') {
+    public function __construct($id = 0, $name = '')
+    {
         new Int($id);
         new String($name);
         parent::__construct($id, $name);
@@ -43,7 +44,8 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
         $this->autoRecordClassName = '';
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->autoRecord = null;
     }
 
@@ -51,7 +53,8 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
      *
      * @return string
      */
-    public function getAutoRecordClassName() {
+    public function getAutoRecordClassName()
+    {
         return $this->autoRecordClassName;
     }
 
@@ -59,7 +62,8 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
      *
      * @param MQNAutoRecord $autoRecord
      */
-    public function setAutoRecord(MQNAutoRecord $autoRecord) {
+    public function setAutoRecord(MQNAutoRecord $autoRecord)
+    {
         $this->autoRecord = $autoRecord;
     }
 
@@ -67,11 +71,10 @@ class MQNAutoRecordQueryTable extends MQNAutoRecordQueryResource {
      *
      * @param string $autoRecordClassName
      */
-    public function setAutoRecordClassName($autoRecordClassName) {
+    public function setAutoRecordClassName($autoRecordClassName)
+    {
         new String($autoRecordClassName);
         $this->autoRecordClassName = (string) $autoRecordClassName;
     }
 
 }
-
-?>

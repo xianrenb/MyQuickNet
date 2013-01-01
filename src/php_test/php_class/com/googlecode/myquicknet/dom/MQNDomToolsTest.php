@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\dom;
 /**
  * Test class for MQNDomTools.
  */
-class MQNDomToolsTest extends \PHPUnit_Framework_TestCase {
-
+class MQNDomToolsTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $domTools = new MQNDomTools();
         $this->assertTrue($domTools instanceof MQNDomTools);
         $html = 'abc abc&quot;abc&nbsp;abc&yuml;abc&badnamedentity;abc';
@@ -50,5 +51,3 @@ class MQNDomToolsTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

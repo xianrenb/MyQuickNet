@@ -13,40 +13,39 @@ namespace com\googlecode\myquicknet\database;
 /**
  *
  */
-class MQNDatabaseStatement {
-
+class MQNDatabaseStatement
+{
     /**
-     * 
+     *
      * @param mixed $statement
      */
-    public function __construct($statement) {
-        
+    public function __construct($statement)
+    {
     }
 
     /**
-     * 
+     *
      * @param bool|float|int|string|MQNAutoRecord $value
      */
-    public function appendBindValueArray($value) {
-        
+    public function appendBindValueArray($value)
+    {
     }
 
     /**
-     * 
+     *
      * @param bool|float|int|string|MQNAutoRecord $value
      */
-    public function appendExtraBindValueArray($value) {
-        
+    public function appendExtraBindValueArray($value)
+    {
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function execute() {
+    public function execute()
+    {
         return array();
     }
 
 }
-
-?>

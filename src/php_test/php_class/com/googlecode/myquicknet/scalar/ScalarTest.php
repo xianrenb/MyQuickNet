@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  * Test class for Scalar.
  */
-class ScalarTest extends \PHPUnit_Framework_TestCase {
-
+class ScalarTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test__toString() {
+    public function test__toString()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -40,7 +41,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testToBool() {
+    public function testToBool()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -49,7 +51,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testToFloat() {
+    public function testToFloat()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -58,7 +61,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testToInt() {
+    public function testToInt()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -67,7 +71,8 @@ class ScalarTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testToString() {
+    public function testToString()
+    {
         $a = array(true, false, 2.2, 0.0, 2, 0, 'string', '');
 
         foreach ($a as $v) {
@@ -77,5 +82,3 @@ class ScalarTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

@@ -10,7 +10,8 @@
 /**
  *
  */
-call_user_func(function () {
+call_user_func(
+        function () {
             require_once(__DIR__ . '/config.php');
 
             try {
@@ -38,7 +39,7 @@ call_user_func(function () {
 
                     fclose($errorLog);
                 } catch (\Exception $e) {
-                    
+
                 }
 
                 if (array_key_exists('SERVER_PROTOCOL', $_SERVER)) {
@@ -51,5 +52,5 @@ call_user_func(function () {
                     echo('Status: 500 Internal Server Error');
                 }
             }
-        });
-?>
+        }
+);

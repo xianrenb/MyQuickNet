@@ -19,22 +19,24 @@ use com\googlecode\myquicknet\testing_config\TestingViewConfig;
 /**
  *
  */
-class TestingView extends TestingViewConfig {
-
+class TestingView extends TestingViewConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
     }
 
     /**
      *
      * @param MQNDom $dom
-     * @param array $dataArray 
+     * @param array  $dataArray
      */
-    protected function _insertAdvanceExampleContent(MQNDom $dom, array $dataArray) {
+    protected function _insertAdvanceExampleContent(MQNDom $dom, array $dataArray)
+    {
         $domTools = new MQNDomTools();
         $query = '//_:span[@id=\'data_a\']';
         $text = (string) $dataArray['data_a'] ? 'true' : 'false';
@@ -59,11 +61,12 @@ class TestingView extends TestingViewConfig {
 
     /**
      *
-     * @param MQNAutoRecord $model
-     * @param string $s
-     * @return boolean 
+     * @param  MQNAutoRecord $model
+     * @param  string        $s
+     * @return boolean
      */
-    public function advanceExample(MQNAutoRecord $model, $s) {
+    public function advanceExample(MQNAutoRecord $model, $s)
+    {
         new String($s);
         $dataArray = $model->outputDefaultData();
         $dataArray['s'] = (string) $s;
@@ -75,15 +78,17 @@ class TestingView extends TestingViewConfig {
         $xhtml .= "\n";
         $xhtml .= (string) $doc->saveXML($doc->documentElement);
         echo($xhtml);
+
         return true;
     }
 
     /**
      *
-     * @param MQNAutoRecord $model
+     * @param  MQNAutoRecord $model
      * @return boolean
      */
-    public function getData(MQNAutoRecord $model) {
+    public function getData(MQNAutoRecord $model)
+    {
         $model->create();
         $dataArray = array();
         $dataArray['a'] = $model->getMyA();
@@ -92,6 +97,7 @@ class TestingView extends TestingViewConfig {
         $dataArray['d'] = $model->getMyD();
         $this->setJSONString(json_encode($dataArray));
         $model->delete();
+
         return $this->outputJSON();
     }
 
@@ -99,7 +105,8 @@ class TestingView extends TestingViewConfig {
      *
      * @return boolean
      */
-    public function outputJSON() {
+    public function outputJSON()
+    {
         if (!headers_sent()) {
             header('Content-Type: application/json');
         }
@@ -111,10 +118,9 @@ class TestingView extends TestingViewConfig {
      *
      * @return boolean
      */
-    public function outputHTML() {
+    public function outputHTML()
+    {
         return $this->_outputHTML();
     }
 
 }
-
-?>

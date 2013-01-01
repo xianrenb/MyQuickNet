@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\testing_config\TestingAutoRecordCacheConfig;
 /**
  *
  */
-class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
-
+class TestingAutoRecordCache extends TestingAutoRecordCacheConfig
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct();
     }
 
@@ -29,9 +30,11 @@ class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
      *
      * @return boolean
      */
-    public function getMyA() {
+    public function getMyA()
+    {
         $myA = (bool) parent::getMyA();
         $this->methodB();
+
         return $myA;
     }
 
@@ -39,22 +42,24 @@ class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
      *
      * @return string
      */
-    public function methodA() {
+    public function methodA()
+    {
         return 'TestingAutoRecordCache';
     }
 
     /**
-     * 
+     *
      */
-    public function methodB() {
-        
+    public function methodB()
+    {
     }
 
     /**
      *
      * @return array
      */
-    public function outputDefaultData() {
+    public function outputDefaultData()
+    {
         $this->create();
         $dataArray = array();
         $dataArray['data_a'] = (bool) $this->getMyA();
@@ -62,9 +67,8 @@ class TestingAutoRecordCache extends TestingAutoRecordCacheConfig {
         $dataArray['data_c'] = (int) $this->getMyC();
         $dataArray['data_d'] = (string) $this->getMyD();
         $this->delete();
+
         return $dataArray;
     }
 
 }
-
-?>

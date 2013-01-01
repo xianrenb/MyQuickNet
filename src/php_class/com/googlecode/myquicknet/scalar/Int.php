@@ -13,13 +13,14 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  *
  */
-class Int extends Scalar {
-
+class Int extends Scalar
+{
     /**
      *
      * @param int $v
      */
-    public function __construct($v) {
+    public function __construct($v)
+    {
         if (is_int($v)) {
             parent::__construct($v);
         } else {
@@ -29,14 +30,14 @@ class Int extends Scalar {
 
     /**
      *
-     * @param mixed $v
+     * @param  mixed $v
      * @return Int
      */
-    public static function parse($v) {
+    public static function parse($v)
+    {
         $v = intval($v);
+
         return new Int($v);
     }
 
 }
-
-?>

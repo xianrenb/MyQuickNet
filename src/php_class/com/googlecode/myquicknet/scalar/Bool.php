@@ -13,13 +13,14 @@ namespace com\googlecode\myquicknet\scalar;
 /**
  *
  */
-class Bool extends Scalar {
-
+class Bool extends Scalar
+{
     /**
      *
      * @param bool $v
      */
-    public function __construct($v) {
+    public function __construct($v)
+    {
         if (is_bool($v)) {
             parent::__construct($v);
         } else {
@@ -29,14 +30,14 @@ class Bool extends Scalar {
 
     /**
      *
-     * @param mixed $v
+     * @param  mixed $v
      * @return Bool
      */
-    public static function parse($v) {
+    public static function parse($v)
+    {
         $v = (bool) $v;
+
         return new Bool($v);
     }
 
 }
-
-?>

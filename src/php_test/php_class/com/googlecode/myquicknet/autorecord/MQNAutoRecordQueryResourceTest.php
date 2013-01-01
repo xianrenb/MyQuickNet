@@ -13,30 +13,32 @@ namespace com\googlecode\myquicknet\autorecord;
 /**
  * Test class for MQNAutoRecordQueryResource.
  */
-class MQNAutoRecordQueryResourceTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordQueryResourceTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $resource = new MQNAutoRecordQueryResource();
         $this->assertTrue($resource instanceof MQNAutoRecordQueryResource);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $resource = new MQNAutoRecordQueryResource(1, 'name');
         $this->assertTrue($resource instanceof MQNAutoRecordQueryResource);
         $this->assertTrue($resource->getId() == 1);
@@ -44,5 +46,3 @@ class MQNAutoRecordQueryResourceTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

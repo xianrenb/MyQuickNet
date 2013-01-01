@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\controller\MQNMainController;
 /**
  *
  */
-class TestingMainControllerConfig extends MQNMainController {
-
+class TestingMainControllerConfig extends MQNMainController
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $config['controller_class_prefix'] = '\\com\\googlecode\\myquicknet\\testing\\';
         $config['main_controller_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingMainController';
         $config['url_base_path'] = (string) TestingCommonConfig::getUrlBasePath();
@@ -29,5 +30,3 @@ class TestingMainControllerConfig extends MQNMainController {
     }
 
 }
-
-?>

@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\static_file;
 /**
  * Test class for MQNStaticFileView.
  */
-class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
-
+class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $view = new MQNStaticFileView();
         $this->assertTrue($view instanceof MQNStaticFileView);
         ob_start();
@@ -40,7 +41,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         ob_end_clean();
     }
 
-    public function test2() {
+    public function test2()
+    {
         $view = new MQNStaticFileView();
         $this->assertTrue($view instanceof MQNStaticFileView);
         $view->setStaticFilePath(MQN_BASE_PATH);
@@ -53,7 +55,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test3() {
+    public function test3()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\static_file\\MQNStaticFileView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -86,7 +89,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test4() {
+    public function test4()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\static_file\\MQNStaticFileView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -123,7 +127,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test5() {
+    public function test5()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\static_file\\MQNStaticFileView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -160,7 +165,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test6() {
+    public function test6()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\static_file\\MQNStaticFileView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -198,7 +204,8 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test7() {
+    public function test7()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\static_file\\MQNStaticFileView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -237,5 +244,3 @@ class MQNStaticFileViewTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\view\MQNView;
 /**
  * Test class for MQNMainController.
  */
-class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
-
+class MQNMainControllerTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var MQNMainController
@@ -27,7 +27,8 @@ class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingMainControllerClass = '\\com\\googlecode\\myquicknet\\testing\\TestingMainController';
     }
 
@@ -35,11 +36,12 @@ class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $controller = new MQNMainController();
         $this->assertTrue($controller instanceof MQNMainController);
         $this->isNull($controller->getModel());
@@ -53,7 +55,8 @@ class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $controller = new $this->testingMainControllerClass();
         $this->assertTrue($controller instanceof MQNMainController);
         $this->isNull($controller->getModel());
@@ -62,5 +65,3 @@ class MQNMainControllerTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

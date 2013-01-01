@@ -15,13 +15,14 @@ use com\googlecode\myquicknet\controller\MQNController;
 /**
  *
  */
-class TestingControllerConfig extends MQNController {
-
+class TestingControllerConfig extends MQNController
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $config['model_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordCache';
         $config['url_base_path'] = (string) TestingCommonConfig::getUrlBasePath();
         $config['view_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingView';
@@ -29,5 +30,3 @@ class TestingControllerConfig extends MQNController {
     }
 
 }
-
-?>

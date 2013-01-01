@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\testing_config;
 /**
  *
  */
-class TestingCommonConfig {
-
+class TestingCommonConfig
+{
     /**
      *
      * @var string
@@ -22,20 +22,19 @@ class TestingCommonConfig {
     private static $urlBasePath = '/MyQuickNet/';
 
     /**
-     * 
+     *
      */
-    public function __construct() {
-        
+    public function __construct()
+    {
     }
 
     /**
-     * 
+     *
      * @return string
      */
-    public static function getUrlBasePath() {
+    public static function getUrlBasePath()
+    {
         return self::$urlBasePath;
     }
 
 }
-
-?>

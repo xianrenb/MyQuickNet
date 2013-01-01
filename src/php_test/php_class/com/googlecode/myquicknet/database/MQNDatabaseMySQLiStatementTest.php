@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\database;
 /**
  * Test class for MQNDatabaseMySQLiStatement.
  */
-class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
-
+class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var MQNDatabaseMySQLi;
@@ -25,7 +25,8 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $config = array();
         $config['db_host'] = 'localhost';
         $config['db_port'] = '';
@@ -48,11 +49,13 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         $this->db = null;
     }
 
-    public function testExecute() {
+    public function testExecute()
+    {
         $sql = 'SELECT `data` FROM `test` WHERE `data` > ? AND `data` <= ? LIMIT ?';
         $statement = $this->db->prepare($sql);
         $statement->appendBindValueArray(3);
@@ -66,5 +69,3 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

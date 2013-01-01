@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\database;
 /**
  * Test class for MQNDatabaseSQLite.
  */
-class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
-
+class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var array
@@ -25,7 +25,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $config['db_filename'] = (string) (MQN_BASE_PATH . 'sqlite/mqntestdb.sqlite3');
         $this->config = $config;
     }
@@ -34,11 +35,12 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function testBegin() {
+    public function testBegin()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $this->assertFalse($o->begin());
         $o = new MQNDatabaseSQLite($this->config);
@@ -46,13 +48,15 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($o->begin());
     }
 
-    public function testClose() {
+    public function testClose()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
         $this->assertTrue($o->close());
     }
 
-    public function testCommit() {
+    public function testCommit()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $this->assertFalse($o->commit());
         $o = new MQNDatabaseSQLite($this->config);
@@ -60,12 +64,14 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($o->commit());
     }
 
-    public function testConnect() {
+    public function testConnect()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $this->assertTrue($o->connect());
     }
 
-    public function testEscapeString() {
+    public function testEscapeString()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
         $this->assertEquals('abc', $o->escapeString('abc'));
@@ -82,7 +88,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('\'\'\'\'\'\'', $o->escapeString('\'\'\''));
     }
 
-    public function testIsReady() {
+    public function testIsReady()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $this->assertFalse($o->isReady());
         $o->connect();
@@ -91,7 +98,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($o->isReady());
     }
 
-    public function testPrepare() {
+    public function testPrepare()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -113,7 +121,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(5, $result[1]['data']);
     }
 
-    public function testPrepareForUpdate() {
+    public function testPrepareForUpdate()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -135,7 +144,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(5, $result[1]['data']);
     }
 
-    public function testPrepareLimit() {
+    public function testPrepareLimit()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -167,7 +177,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(6, $result[1]['data']);
     }
 
-    public function testPrepareLimitForUpdate() {
+    public function testPrepareLimitForUpdate()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -199,7 +210,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(6, $result[1]['data']);
     }
 
-    public function testQuery() {
+    public function testQuery()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
         $sql = 'SELECT `data` FROM `test`';
@@ -207,7 +219,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, count($result));
     }
 
-    public function testQueryForUpdate() {
+    public function testQueryForUpdate()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
         $sql = 'SELECT `data` FROM `test`';
@@ -215,7 +228,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, count($result));
     }
 
-    public function testQueryLimit() {
+    public function testQueryLimit()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -237,7 +251,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(4, $result[1]['data']);
     }
 
-    public function testQueryLimitForUpdate() {
+    public function testQueryLimitForUpdate()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $o->connect();
 
@@ -259,7 +274,8 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(4, $result[1]['data']);
     }
 
-    public function testRollback() {
+    public function testRollback()
+    {
         $o = new MQNDatabaseSQLite($this->config);
         $this->assertFalse($o->rollback());
         $o = new MQNDatabaseSQLite($this->config);
@@ -268,5 +284,3 @@ class MQNDatabaseSQLiteTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

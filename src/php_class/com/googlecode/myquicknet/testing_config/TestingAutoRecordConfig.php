@@ -16,13 +16,14 @@ use com\googlecode\myquicknet\database\MQNBlob;
 /**
  *
  */
-class TestingAutoRecordConfig extends MQNAutoRecord {
-
+class TestingAutoRecordConfig extends MQNAutoRecord
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $config['auto_record_manager_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordManager';
 
         $config['field_array'] = array(
@@ -39,5 +40,3 @@ class TestingAutoRecordConfig extends MQNAutoRecord {
     }
 
 }
-
-?>

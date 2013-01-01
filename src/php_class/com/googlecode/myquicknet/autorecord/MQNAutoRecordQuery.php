@@ -17,8 +17,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordQuery {
-
+class MQNAutoRecordQuery
+{
     /**
      *
      * @var MQNDatabase
@@ -79,7 +79,8 @@ class MQNAutoRecordQuery {
      */
     private $whereConditionArray;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->database = null;
         $this->fieldArray = array();
         $this->joinConditionArray = array();
@@ -92,7 +93,8 @@ class MQNAutoRecordQuery {
         $this->whereConditionArray = array();
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->database = null;
 
         foreach ($this->tableArray as $k => $v) {
@@ -104,7 +106,8 @@ class MQNAutoRecordQuery {
      *
      * @return string
      */
-    protected function _buildJoinConditionSql() {
+    protected function _buildJoinConditionSql()
+    {
         $sql = '';
         $n = (int) count($this->joinConditionArray);
 
@@ -130,7 +133,8 @@ class MQNAutoRecordQuery {
      *
      * @return string
      */
-    protected function _buildOrderSql() {
+    protected function _buildOrderSql()
+    {
         $sql = ' ORDER BY ';
         $countOrderArray = (int) count($this->orderArray);
 
@@ -163,9 +167,10 @@ class MQNAutoRecordQuery {
     /**
      *
      * @return string
-     * @throws \Exception 
+     * @throws \Exception
      */
-    protected function _buildWhereConditionSql() {
+    protected function _buildWhereConditionSql()
+    {
         $sql = '';
         $countWhereConditionArray = (int) count($this->whereConditionArray);
 
@@ -256,13 +261,14 @@ class MQNAutoRecordQuery {
 
     /**
      *
-     * @param bool|float|int|string|MQNAutoRecordQueryField $value1
-     * @param string $operator
-     * @param bool|float|int|string|MQNAutoRecordQueryField $value2
-     * @param bool $orNext
-     * @throws \InvalidArgumentException 
+     * @param  bool|float|int|string|MQNAutoRecordQueryField $value1
+     * @param  string                                        $operator
+     * @param  bool|float|int|string|MQNAutoRecordQueryField $value2
+     * @param  bool                                          $orNext
+     * @throws \InvalidArgumentException
      */
-    public function condition($value1, $operator, $value2, $orNext = false) {
+    public function condition($value1, $operator, $value2, $orNext = false)
+    {
         new String($operator);
         $value1IsField = false;
         $value2IsField = false;
@@ -311,16 +317,18 @@ class MQNAutoRecordQuery {
 
     /**
      *
-     * @param MQNAutoRecordQueryTable $table
-     * @param string $fieldName
+     * @param  MQNAutoRecordQueryTable $table
+     * @param  string                  $fieldName
      * @return MQNAutoRecordQueryField
      */
-    public function field(MQNAutoRecordQueryTable $table, $fieldName) {
+    public function field(MQNAutoRecordQueryTable $table, $fieldName)
+    {
         new String($fieldName);
         $id = (int) count($this->fieldArray);
         $field = new MQNAutoRecordQueryField($id, $fieldName);
         $field->setTable($table);
         $this->fieldArray[$id] = $field;
+
         return $field;
     }
 
@@ -329,7 +337,8 @@ class MQNAutoRecordQuery {
      * @param int $rowCount
      * @param int $offset
      */
-    public function limit($rowCount, $offset) {
+    public function limit($rowCount, $offset)
+    {
         new Int($rowCount);
         new Int($offset);
         $this->useLimit = true;
@@ -341,7 +350,8 @@ class MQNAutoRecordQuery {
      *
      * @return MQNAutoRecordQueryResultArray
      */
-    public function execute() {
+    public function execute()
+    {
         $n = (int) count($this->tableArray);
         $sql = 'SELECT ';
 
@@ -386,15 +396,17 @@ class MQNAutoRecordQuery {
         $statement = null;
         $resultArray = new MQNAutoRecordQueryResultArray();
         $resultArray->setResultArray($result);
+
         return $resultArray;
     }
 
     /**
      *
      * @param MQNAutoRecordQueryField $field
-     * @param bool $ascending
+     * @param bool                    $ascending
      */
-    public function order(MQNAutoRecordQueryField $field, $ascending = true) {
+    public function order(MQNAutoRecordQueryField $field, $ascending = true)
+    {
         new Bool($ascending);
         $order = new MQNAutoRecordQueryOrder();
         $order->setAscending($ascending);
@@ -405,11 +417,12 @@ class MQNAutoRecordQuery {
 
     /**
      *
-     * @param string $autoRecordClassName
+     * @param  string                    $autoRecordClassName
      * @return MQNAutoRecordQueryTable
-     * @throws \InvalidArgumentException 
+     * @throws \InvalidArgumentException
      */
-    public function table($autoRecordClassName) {
+    public function table($autoRecordClassName)
+    {
         new String($autoRecordClassName);
         $autoRecord = new $autoRecordClassName();
 
@@ -426,9 +439,8 @@ class MQNAutoRecordQuery {
         $table->setAutoRecord($autoRecord);
         $table->setAutoRecordClassName($autoRecordClassName);
         $this->tableArray[$id] = $table;
+
         return $table;
     }
 
 }
-
-?>

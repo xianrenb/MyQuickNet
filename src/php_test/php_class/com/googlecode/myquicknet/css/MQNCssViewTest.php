@@ -13,25 +13,26 @@ namespace com\googlecode\myquicknet\css;
 /**
  * Test class for MQNCssView.
  */
-class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
-
+class MQNCssViewTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
-        
+    protected function setUp()
+    {
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test01() {
+    public function test01()
+    {
         $view = new MQNCssView();
         $this->assertTrue($view instanceof MQNCssView);
         ob_start();
@@ -42,7 +43,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test02() {
+    public function test02()
+    {
         $view = new MQNCssView();
         $this->assertTrue($view instanceof MQNCssView);
         ob_start();
@@ -53,7 +55,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test03() {
+    public function test03()
+    {
         $view = new MQNCssView();
         $this->assertTrue($view instanceof MQNCssView);
         ob_start();
@@ -64,7 +67,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test04() {
+    public function test04()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -95,7 +99,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test05() {
+    public function test05()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -126,7 +131,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test06() {
+    public function test06()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -157,7 +163,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test07() {
+    public function test07()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -191,7 +198,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test08() {
+    public function test08()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -225,7 +233,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test09() {
+    public function test09()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -259,7 +268,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test10() {
+    public function test10()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -293,7 +303,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test11() {
+    public function test11()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -327,7 +338,8 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test12() {
+    public function test12()
+    {
         $view = $this->getMockBuilder('\\com\\googlecode\\myquicknet\\css\\MQNCssView')
                 ->setMethods(array(
                     '_getAllHeaders',
@@ -362,5 +374,3 @@ class MQNCssViewTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

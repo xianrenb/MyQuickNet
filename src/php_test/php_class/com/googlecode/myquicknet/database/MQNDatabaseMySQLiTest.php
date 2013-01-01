@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\database;
 /**
  * Test class for MQNDatabaseMySQLi.
  */
-class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
-
+class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var array
@@ -25,7 +25,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $config['db_host'] = 'localhost';
         $config['db_port'] = '';
         $config['db_name'] = 'mqntestdb';
@@ -38,11 +39,12 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function testBegin() {
+    public function testBegin()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $this->assertFalse($o->begin());
         $o = new MQNDatabaseMySQLi($this->config);
@@ -50,13 +52,15 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($o->begin());
     }
 
-    public function testClose() {
+    public function testClose()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $this->assertTrue($o->close());
     }
 
-    public function testCommit() {
+    public function testCommit()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $this->assertFalse($o->commit());
         $o = new MQNDatabaseMySQLi($this->config);
@@ -64,12 +68,14 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($o->commit());
     }
 
-    public function testConnect() {
+    public function testConnect()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $this->assertTrue($o->connect());
     }
 
-    public function testEscapeString() {
+    public function testEscapeString()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $a = array(chr(0), "\n", "\r", "\\", "\'", "\"", chr(26));
@@ -79,7 +85,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testIsReady() {
+    public function testIsReady()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $this->assertFalse($o->isReady());
         $o->connect();
@@ -88,7 +95,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($o->isReady());
     }
 
-    public function testPrepare() {
+    public function testPrepare()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -112,7 +120,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(5, $result[1]['data']);
     }
 
-    public function testPrepareForUpdate() {
+    public function testPrepareForUpdate()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -136,7 +145,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(5, $result[1]['data']);
     }
 
-    public function testPrepareLimit() {
+    public function testPrepareLimit()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -170,7 +180,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(6, $result[1]['data']);
     }
 
-    public function testPrepareLimitForUpdate() {
+    public function testPrepareLimitForUpdate()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -204,7 +215,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(6, $result[1]['data']);
     }
 
-    public function testQuery() {
+    public function testQuery()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'SELECT `data` FROM `test`';
@@ -212,7 +224,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, count($result));
     }
 
-    public function testQueryForUpdate() {
+    public function testQueryForUpdate()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'SELECT `data` FROM `test`';
@@ -220,7 +233,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, count($result));
     }
 
-    public function testQueryLimit() {
+    public function testQueryLimit()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -244,7 +258,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(4, $result[1]['data']);
     }
 
-    public function testQueryLimitForUpdate() {
+    public function testQueryLimitForUpdate()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $o->connect();
         $sql = 'INSERT INTO `test` ( `data` ) VALUES ';
@@ -268,7 +283,8 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(4, $result[1]['data']);
     }
 
-    public function testRollback() {
+    public function testRollback()
+    {
         $o = new MQNDatabaseMySQLi($this->config);
         $this->assertFalse($o->rollback());
         $o = new MQNDatabaseMySQLi($this->config);
@@ -277,5 +293,3 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

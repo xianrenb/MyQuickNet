@@ -15,18 +15,17 @@ use com\googlecode\myquicknet\css\MQNCssController;
 /**
  *
  */
-class TestingCssControllerConfig extends MQNCssController {
-
+class TestingCssControllerConfig extends MQNCssController
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $config['url_base_path'] = (string) TestingCommonConfig::getUrlBasePath();
         $config['view_class'] = '\\com\\googlecode\\myquicknet\\testing\\TestingCssView';
         parent::__construct($config);
     }
 
 }
-
-?>

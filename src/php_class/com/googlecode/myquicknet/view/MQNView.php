@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNView {
-
+class MQNView
+{
     /**
      *
      * @var string
@@ -33,7 +33,8 @@ class MQNView {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         if (key_exists('json_string', $config)) {
             $this->jsonString = (string) $config['json_string'];
         } else {
@@ -51,8 +52,10 @@ class MQNView {
      *
      * @return bool
      */
-    protected function _outputJSON() {
+    protected function _outputJSON()
+    {
         echo($this->jsonString);
+
         return true;
     }
 
@@ -60,8 +63,10 @@ class MQNView {
      *
      * @return bool
      */
-    protected function _outputHTML() {
+    protected function _outputHTML()
+    {
         readfile($this->htmlFileName);
+
         return true;
     }
 
@@ -69,7 +74,8 @@ class MQNView {
      *
      * @return bool
      */
-    public function output() {
+    public function output()
+    {
         return $this->_outputHTML();
     }
 
@@ -77,7 +83,8 @@ class MQNView {
      *
      * @param string $jsonString
      */
-    public function setJSONString($jsonString) {
+    public function setJSONString($jsonString)
+    {
         new String($jsonString);
         $this->jsonString = (string) $jsonString;
     }
@@ -86,11 +93,10 @@ class MQNView {
      *
      * @param string $fileName
      */
-    public function setHTMLFileName($fileName) {
+    public function setHTMLFileName($fileName)
+    {
         new String($fileName);
         $this->htmlFileName = (string) $fileName;
     }
 
 }
-
-?>

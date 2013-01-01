@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNDomTools {
-
+class MQNDomTools
+{
     /**
      *
      * @var array|null
@@ -25,18 +25,20 @@ class MQNDomTools {
 
     /**
      *
-     * @param array $config 
+     * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $this->resetNumericEntityArray();
     }
 
     /**
      *
-     * @param string $html
-     * @return string 
+     * @param  string $html
+     * @return string
      */
-    public function convertNamedEntityToNumericEntity($html) {
+    public function convertNamedEntityToNumericEntity($html)
+    {
         new String($html);
         $numericEntityArray = $this->numericEntityArray;
 
@@ -53,13 +55,15 @@ class MQNDomTools {
                 };
 
         $html = (string) preg_replace_callback('/&[A-Za-z][0-9A-Za-z]+;/', $callback, $html);
+
         return $html;
     }
 
     /**
-     * 
+     *
      */
-    public function resetNumericEntityArray() {
+    public function resetNumericEntityArray()
+    {
         $this->numericEntityArray = array();
         $translationTable = get_html_translation_table(HTML_ENTITIES);
 
@@ -79,14 +83,13 @@ class MQNDomTools {
     /**
      *
      * @param string $key
-     * @param string $value 
+     * @param string $value
      */
-    public function setNumericEntityArray($key, $value) {
+    public function setNumericEntityArray($key, $value)
+    {
         new String($key);
         new String($value);
         $this->numericEntityArray[$key] = (string) $value;
     }
 
 }
-
-?>

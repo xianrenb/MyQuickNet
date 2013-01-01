@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNDom {
-
+class MQNDom
+{
     /**
      *
      * @var DOMDocument
@@ -32,27 +32,30 @@ class MQNDom {
 
     /**
      *
-     * @param array $config 
+     * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $this->doc = new \DOMDocument();
         $this->doc->formatOutput = true;
         $this->xPath = null;
     }
 
     /**
-     * 
+     *
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->xPath = null;
         $this->doc = null;
     }
 
     /**
      *
-     * @param DOMNode $node 
+     * @param DOMNode $node
      */
-    protected function _removeChildNodes(\DOMNode $node) {
+    protected function _removeChildNodes(\DOMNode $node)
+    {
         while ($node->firstChild) {
             while ($node->firstChild->firstChild) {
                 $this->_removeChildNodes($node->firstChild);
@@ -66,7 +69,8 @@ class MQNDom {
      *
      * @return DOMDocument
      */
-    public function getDoc() {
+    public function getDoc()
+    {
         return $this->doc;
     }
 
@@ -74,23 +78,26 @@ class MQNDom {
      *
      * @return DOMXPath|null
      */
-    public function getXPath() {
+    public function getXPath()
+    {
         return $this->xPath;
     }
 
     /**
      *
-     * @param string $filename
-     * @param int $options 
-     * @return boolean 
+     * @param  string  $filename
+     * @param  int     $options
+     * @return boolean
      */
-    public function load($filename, $options = 0) {
+    public function load($filename, $options = 0)
+    {
         new String($filename);
         new Int($options);
 
         if ($this->doc->load($filename, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
             $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
+
             return true;
         } else {
             return false;
@@ -99,15 +106,17 @@ class MQNDom {
 
     /**
      *
-     * @param string $source
-     * @return boolean 
+     * @param  string  $source
+     * @return boolean
      */
-    public function loadHTML($source) {
+    public function loadHTML($source)
+    {
         new String($source);
 
         if ($this->doc->loadHTML($source)) {
             $this->xPath = new \DOMXPath($this->doc);
             $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
+
             return true;
         } else {
             return false;
@@ -116,15 +125,17 @@ class MQNDom {
 
     /**
      *
-     * @param string $filename
-     * @return boolean 
+     * @param  string  $filename
+     * @return boolean
      */
-    public function loadHTMLFile($filename) {
+    public function loadHTMLFile($filename)
+    {
         new String($filename);
 
         if ($this->doc->loadHTMLFile($filename)) {
             $this->xPath = new \DOMXPath($this->doc);
             $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
+
             return true;
         } else {
             return false;
@@ -133,17 +144,19 @@ class MQNDom {
 
     /**
      *
-     * @param string $source
-     * @param int $options
-     * @return boolean 
+     * @param  string  $source
+     * @param  int     $options
+     * @return boolean
      */
-    public function loadXML($source, $options = 0) {
+    public function loadXML($source, $options = 0)
+    {
         new String($source);
         new Int($options);
 
         if ($this->doc->loadXML($source, $options)) {
             $this->xPath = new \DOMXPath($this->doc);
             $this->xPath->registerNamespace('_', $this->doc->lookupNamespaceUri(null));
+
             return true;
         } else {
             return false;
@@ -152,13 +165,14 @@ class MQNDom {
 
     /**
      *
-     * @param string $query
-     * @param string $attrName
-     * @param string|null $attrValue
+     * @param  string      $query
+     * @param  string      $attrName
+     * @param  string|null $attrValue
      * @return string|null
-     * @throws \Exception 
+     * @throws \Exception
      */
-    public function queryAttr($query, $attrName, $attrValue = null) {
+    public function queryAttr($query, $attrName, $attrValue = null)
+    {
         new String($query);
         new String($attrName);
 
@@ -170,6 +184,7 @@ class MQNDom {
 
                 if ($attr && ($attr instanceof \DOMAttr)) {
                     $attrValue = (string) $attr->value;
+
                     return $attrValue;
                 } else {
                     return null;
@@ -205,23 +220,26 @@ class MQNDom {
 
     /**
      *
-     * @param string $query
-     * @param callable $callback
+     * @param  string   $query
+     * @param  callable $callback
      * @return mixed
      */
-    public function queryDo($query, $callback) {
+    public function queryDo($query, $callback)
+    {
         new String($query);
         $nodes = $this->xPath->query($query);
+
         return $callback($nodes, $this);
     }
 
     /**
      *
-     * @param string $query
-     * @param string|null $text
+     * @param  string      $query
+     * @param  string|null $text
      * @return string|null
      */
-    public function queryText($query, $text = null) {
+    public function queryText($query, $text = null)
+    {
         new String($query);
 
         if ($text === null) {
@@ -233,6 +251,7 @@ class MQNDom {
                 foreach ($node->childNodes as $child) {
                     if ($child instanceof \DOMText) {
                         $text = (string) $child->wholeText;
+
                         return $text;
                     }
                 }
@@ -254,11 +273,12 @@ class MQNDom {
 
     /**
      *
-     * @param string $query
-     * @param string|null $value
+     * @param  string      $query
+     * @param  string|null $value
      * @return string|null
      */
-    public function queryVal($query, $value = null) {
+    public function queryVal($query, $value = null)
+    {
         new String($query);
 
         if ($value !== null) {
@@ -270,11 +290,12 @@ class MQNDom {
 
     /**
      *
-     * @param string $query
-     * @param string|null $xml
+     * @param  string      $query
+     * @param  string|null $xml
      * @return string|null
      */
-    public function queryXml($query, $xml = null) {
+    public function queryXml($query, $xml = null)
+    {
         new String($query);
 
         if ($xml === null) {
@@ -305,47 +326,53 @@ class MQNDom {
 
     /**
      *
-     * @param string $filename
-     * @param int|null $options
+     * @param  string   $filename
+     * @param  int|null $options
      * @return int|bool
      */
-    public function save($filename, $options = null) {
+    public function save($filename, $options = null)
+    {
         new String($filename);
 
         if ($options === null) {
             return $this->doc->save($filename);
         } else {
             new Int($options);
+
             return $this->doc->save($filename, $options);
         }
     }
 
     /**
      *
-     * @param DOMNode|null $node
+     * @param  DOMNode|null $node
      * @return string|bool
      */
-    public function saveHTML(\DOMNode $node = null) {
+    public function saveHTML(\DOMNode $node = null)
+    {
         return $this->doc->saveHTML($node);
     }
 
     /**
      *
-     * @param string $filename
+     * @param  string   $filename
      * @return int|bool
      */
-    public function saveHTMLFile($filename) {
+    public function saveHTMLFile($filename)
+    {
         new String($filename);
+
         return $this->doc->saveHTMLFile($filename);
     }
 
     /**
      *
-     * @param DOMNode|null $node
-     * @param int|null $options
+     * @param  DOMNode|null $node
+     * @param  int|null     $options
      * @return string|bool
      */
-    public function saveXML(\DOMNode $node = null, $options = null) {
+    public function saveXML(\DOMNode $node = null, $options = null)
+    {
         if ($node === null) {
             return $this->doc->saveXML();
         }
@@ -354,10 +381,9 @@ class MQNDom {
             return $this->doc->saveXML($node);
         } else {
             new Int($options);
+
             return $this->doc->saveXML($node, $options);
         }
     }
 
 }
-
-?>

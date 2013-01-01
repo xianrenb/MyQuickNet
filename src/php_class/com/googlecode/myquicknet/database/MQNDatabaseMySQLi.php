@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNDatabaseMySQLi extends MQNDatabase {
-
+class MQNDatabaseMySQLi extends MQNDatabase
+{
     /**
      *
      * @var bool
@@ -70,7 +70,8 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      *
      * @param array $config
      */
-    public function __construct(array $config) {
+    public function __construct(array $config)
+    {
         $this->closed = true;
         $this->host = (string) $config['db_host'];
         $this->mysqli = null;
@@ -88,7 +89,8 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         $this->user = (string) $config['db_user'];
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->close();
     }
 
@@ -96,9 +98,11 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      *
      * @return bool
      */
-    public function begin() {
+    public function begin()
+    {
         if ($this->isReady()) {
             $this->transactionStarted = true;
+
             return true;
         }
 
@@ -106,11 +110,12 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
-     * 
+     *
      * @return boolean
      * @throws \Exception
      */
-    public function close() {
+    public function close()
+    {
         if ($this->mysqli) {
             if (!$this->closed) {
                 if ($this->transactionStarted) {
@@ -136,10 +141,12 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      *
      * @return bool
      */
-    public function commit() {
+    public function commit()
+    {
         if ($this->isReady() && $this->transactionStarted) {
             $result = (bool) $this->mysqli->commit();
             $this->transactionStarted = false;
+
             return $result;
         }
 
@@ -147,11 +154,12 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
     /**
-     * 
+     *
      * @return boolean
      * @throws \Exception
      */
-    public function connect() {
+    public function connect()
+    {
         $this->close();
         $this->mysqli = new \mysqli($this->host, $this->user, $this->password, $this->name, $this->port);
 
@@ -166,17 +174,20 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         $this->query('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
         $this->mysqli->autocommit(false);
         $this->transactionStarted = true;
+
         return true;
     }
 
     /**
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
-    public function escapeString($string) {
+    public function escapeString($string)
+    {
         new String($string);
         $result = (string) $this->mysqli->real_escape_string($string);
+
         return $result;
     }
 
@@ -184,44 +195,51 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      *
      * @return bool
      */
-    public function isReady() {
+    public function isReady()
+    {
         $result = (bool) ($this->mysqli && !$this->closed);
+
         return $result;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string                     $sql
      * @return MQNDatabaseMySQLiStatement
      */
-    public function prepare($sql) {
+    public function prepare($sql)
+    {
         new String($sql);
         $statement = $this->mysqli->stmt_init();
         $statement->prepare($sql);
         $statement = new MQNDatabaseMySQLiStatement($statement);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string                     $sql
      * @return MQNDatabaseMySQLiStatement
      */
-    public function prepareForUpdate($sql) {
+    public function prepareForUpdate($sql)
+    {
         new String($sql);
         $sql = (string) ($sql . ' FOR UPDATE');
         $statement = $this->prepare($sql);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     *
+     * @param  string                     $sql
+     * @param  int                        $rowCount
+     * @param  int                        $offset
      * @return MQNDatabaseMySQLiStatement
      */
-    public function prepareLimit($sql, $rowCount, $offset = 0) {
+    public function prepareLimit($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
@@ -229,17 +247,19 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         $statement = $this->prepare($sql);
         $statement->appendExtraBindValueArray($offset);
         $statement->appendExtraBindValueArray($rowCount);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     *
+     * @param  string                     $sql
+     * @param  int                        $rowCount
+     * @param  int                        $offset
      * @return MQNDatabaseMySQLiStatement
      */
-    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
+    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
@@ -247,16 +267,18 @@ class MQNDatabaseMySQLi extends MQNDatabase {
         $statement = $this->prepare($sql);
         $statement->appendExtraBindValueArray($offset);
         $statement->appendExtraBindValueArray($rowCount);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string     $sql
      * @return array|bool
      * @throws \Exception
      */
-    public function query($sql) {
+    public function query($sql)
+    {
         new String($sql);
 
         if ($this->mysqli) {
@@ -279,6 +301,7 @@ class MQNDatabaseMySQLi extends MQNDatabase {
             }
 
             $result->free();
+
             return $rowList;
         }
 
@@ -287,45 +310,51 @@ class MQNDatabaseMySQLi extends MQNDatabase {
 
     /**
      *
-     * @param string $sql
+     * @param  string     $sql
      * @return array|bool
      */
-    public function queryForUpdate($sql) {
+    public function queryForUpdate($sql)
+    {
         new String($sql);
         $sql = (string) ($sql . ' FOR UPDATE');
         $result = $this->query($sql);
+
         return $result;
     }
 
     /**
      *
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     * @param  string     $sql
+     * @param  int        $rowCount
+     * @param  int        $offset
      * @return array|bool
      */
-    public function queryLimit($sql, $rowCount, $offset = 0) {
+    public function queryLimit($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
         $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount);
         $result = $this->query($sql);
+
         return $result;
     }
 
     /**
      *
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     * @param  string     $sql
+     * @param  int        $rowCount
+     * @param  int        $offset
      * @return array|bool
      */
-    public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
+    public function queryLimitForUpdate($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
         $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount . ' FOR UPDATE');
         $result = $this->query($sql);
+
         return $result;
     }
 
@@ -333,10 +362,12 @@ class MQNDatabaseMySQLi extends MQNDatabase {
      *
      * @return bool
      */
-    public function rollback() {
+    public function rollback()
+    {
         if ($this->isReady() && $this->transactionStarted) {
             $result = (bool) $this->mysqli->rollback();
             $this->transactionStarted = false;
+
             return $result;
         }
 
@@ -344,5 +375,3 @@ class MQNDatabaseMySQLi extends MQNDatabase {
     }
 
 }
-
-?>

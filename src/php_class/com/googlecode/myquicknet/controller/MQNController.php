@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNController {
-
+class MQNController
+{
     /**
      *
      * @var MQNAutoRecord
@@ -39,7 +39,8 @@ class MQNController {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         if (key_exists('url_base_path', $config)) {
             $this->urlBasePath = (string) $config['url_base_path'];
         } else {
@@ -64,10 +65,11 @@ class MQNController {
 
     /**
      *
-     * @param string $longName
+     * @param  string $longName
      * @return string
      */
-    protected function _toShortName($longName) {
+    protected function _toShortName($longName)
+    {
         new String($longName);
         $string = (string) strtolower($longName);
         $shortName = '';
@@ -103,7 +105,8 @@ class MQNController {
      *
      * @return MQNAutoRecord
      */
-    public function getModel() {
+    public function getModel()
+    {
         return $this->model;
     }
 
@@ -111,7 +114,8 @@ class MQNController {
      *
      * @return string
      */
-    public function getUrlBasePath() {
+    public function getUrlBasePath()
+    {
         return $this->urlBasePath;
     }
 
@@ -119,11 +123,13 @@ class MQNController {
      *
      * @return MQNView
      */
-    public function getView() {
+    public function getView()
+    {
         return $this->view;
     }
 
-    public function run() {
+    public function run()
+    {
         if (key_exists('PATH_INFO', $_SERVER)) {
             if ($_SERVER['PATH_INFO'] != $this->getUrlBasePath()) {
                 if (key_exists('SERVER_PROTOCOL', $_SERVER)) {
@@ -131,6 +137,7 @@ class MQNController {
                 }
 
                 header('Status: 404 Not Found');
+
                 return;
             }
         }
@@ -139,5 +146,3 @@ class MQNController {
     }
 
 }
-
-?>

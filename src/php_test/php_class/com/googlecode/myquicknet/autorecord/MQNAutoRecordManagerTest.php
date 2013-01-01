@@ -15,8 +15,8 @@ use com\googlecode\myquicknet\database\MQNDatabase;
 /**
  * Test class for MQNAutoRecordManager.
  */
-class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase {
-
+class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var string
@@ -27,7 +27,8 @@ class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingAutoRecordManagerClass = '\\com\\googlecode\\myquicknet\\testing\\TestingAutoRecordManager';
     }
 
@@ -35,11 +36,12 @@ class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $manager = new $this->testingAutoRecordManagerClass();
         $this->assertTrue($manager instanceof MQNAutoRecordManager);
         $this->assertTrue($manager->methodA() == 'TestingAutoRecordManager');
@@ -48,5 +50,3 @@ class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

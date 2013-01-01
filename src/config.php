@@ -7,11 +7,14 @@
  * @copyright (c) 2012 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-call_user_func(function () {
+call_user_func(
+        function () {
             // Settings for PHP
-            set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+            set_error_handler(
+                    function ($errno, $errstr, $errfile, $errline) {
                         throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-                    });
+                    }
+            );
 
             mb_internal_encoding('UTF-8');
             mb_regex_encoding('UTF-8');
@@ -27,9 +30,11 @@ call_user_func(function () {
             // $path .= (string) (PATH_SEPARATOR . 'additional/path/');
             set_include_path($path);
 
-            spl_autoload_register(function ($className) {
+            spl_autoload_register(
+                    function ($className) {
                         $className = (string) str_replace('\\', DIRECTORY_SEPARATOR, $className);
                         include_once($className . '.php');
-                    });
-        });
-?>
+                    }
+            );
+        }
+);

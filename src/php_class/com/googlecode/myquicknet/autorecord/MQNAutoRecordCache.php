@@ -17,8 +17,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNAutoRecordCache extends MQNAutoRecord {
-
+class MQNAutoRecordCache extends MQNAutoRecord
+{
     /**
      *
      * @var string
@@ -65,7 +65,8 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         $this->autoRecordManagerClass = (string) $config['auto_record_manager_class'];
         $this->config = $config;
         $this->id = 0;
@@ -75,21 +76,24 @@ class MQNAutoRecordCache extends MQNAutoRecord {
 
     /**
      *
-     * @param string $name
-     * @param array $arguments
+     * @param  string $name
+     * @param  array  $arguments
      * @return mixed
      */
-    public function __call($name, $arguments) {
+    public function __call($name, $arguments)
+    {
         new String($name);
         $this->id = (int) $this->cache->getId();
         $result = $this->cache->__call($name, $arguments);
+
         return $result;
     }
 
     /**
-     * 
+     *
      */
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->id = (int) $this->cache->getId();
         $this->_unbindCache();
         $this->cache = null;
@@ -97,9 +101,10 @@ class MQNAutoRecordCache extends MQNAutoRecord {
 
     /**
      *
-     * @return boolean 
+     * @return boolean
      */
-    protected function _bindCache() {
+    protected function _bindCache()
+    {
         if ($this->id) {
             if (!array_key_exists($this->autoRecordManagerClass, self::$refCountArray)) {
                 self::$refCountArray[$this->autoRecordManagerClass] = array();
@@ -125,9 +130,10 @@ class MQNAutoRecordCache extends MQNAutoRecord {
 
     /**
      *
-     * @param MQNAutoRecord $cache 
+     * @param MQNAutoRecord $cache
      */
-    protected function _createCache($cache) {
+    protected function _createCache($cache)
+    {
         $this->id = $cache->getId();
         $this->cache = $cache;
 
@@ -149,39 +155,43 @@ class MQNAutoRecordCache extends MQNAutoRecord {
 
     /**
      *
-     * @param string $name
-     * @throws \BadMethodCallException 
+     * @param  string                  $name
+     * @throws \BadMethodCallException
      */
-    protected function _getField($name) {
+    protected function _getField($name)
+    {
         new String($name);
         throw new \BadMethodCallException();
     }
 
     /**
      *
-     * @param bool $newValid
-     * @throws \BadMethodCallException 
+     * @param  bool                    $newValid
+     * @throws \BadMethodCallException
      */
-    protected function _getNewId($newValid) {
+    protected function _getNewId($newValid)
+    {
         new Bool($newValid);
         throw new \BadMethodCallException();
     }
 
     /**
      *
-     * @param string $name
-     * @param mixed $value
-     * @throws \BadMethodCallException 
+     * @param  string                  $name
+     * @param  mixed                   $value
+     * @throws \BadMethodCallException
      */
-    protected function _setField($name, $value) {
+    protected function _setField($name, $value)
+    {
         new String($name);
         throw new \BadMethodCallException();
     }
 
     /**
-     * 
+     *
      */
-    protected function _unbindCache() {
+    protected function _unbindCache()
+    {
         $this->id = (int) $this->cache->getId();
 
         if ($this->id) {
@@ -206,9 +216,10 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      */
-    public function create() {
+    public function create()
+    {
         $this->id = (int) $this->cache->getId();
         $this->_unbindCache();
         $cache = new parent($this->config);
@@ -217,9 +228,10 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      */
-    public function delete() {
+    public function delete()
+    {
         $this->id = (int) $this->cache->getId();
 
         if ($this->id) {
@@ -245,9 +257,11 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @return MQNDatabase
      */
-    public function getDatabase() {
+    public function getDatabase()
+    {
         $this->id = (int) $this->cache->getId();
         $database = $this->cache->getDatabase();
+
         return $database;
     }
 
@@ -255,9 +269,11 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         $this->id = (int) $this->cache->getId();
         $id = (int) $this->cache->getId();
+
         return $id;
     }
 
@@ -265,9 +281,11 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @return string
      */
-    public function getTable() {
+    public function getTable()
+    {
         $this->id = (int) $this->cache->getId();
         $table = (string) $this->cache->getTable();
+
         return $table;
     }
 
@@ -275,9 +293,11 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @return bool
      */
-    public function isValid() {
+    public function isValid()
+    {
         $this->id = (int) $this->cache->getId();
         $isValid = (bool) $this->cache->isValid();
+
         return $isValid;
     }
 
@@ -285,7 +305,8 @@ class MQNAutoRecordCache extends MQNAutoRecord {
      *
      * @param int $id
      */
-    public function read($id) {
+    public function read($id)
+    {
         new Int($id);
         $this->id = (int) $this->cache->getId();
         $this->_unbindCache();
@@ -299,13 +320,12 @@ class MQNAutoRecordCache extends MQNAutoRecord {
     }
 
     /**
-     * 
+     *
      */
-    public function update() {
+    public function update()
+    {
         $this->id = (int) $this->cache->getId();
         $this->cache->update();
     }
 
 }
-
-?>

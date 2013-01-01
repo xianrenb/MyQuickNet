@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\view\MQNView;
 /**
  *
  */
-class MQNStaticFileView extends MQNView {
-
+class MQNStaticFileView extends MQNView
+{
     /**
      *
      * @var int
@@ -40,7 +40,8 @@ class MQNStaticFileView extends MQNView {
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         if (key_exists('cache_max_age', $config)) {
             $this->cacheMaxAge = (int) $config['cache_max_age'];
         } else {
@@ -58,10 +59,11 @@ class MQNStaticFileView extends MQNView {
 
     /**
      *
-     * @param string $fileExtension
+     * @param  string $fileExtension
      * @return string
      */
-    protected function _fileContentType($fileExtension) {
+    protected function _fileContentType($fileExtension)
+    {
         new String($fileExtension);
 
         switch ($fileExtension) {
@@ -113,10 +115,11 @@ class MQNStaticFileView extends MQNView {
     }
 
     /**
-     * 
+     *
      * @return array|boolean
      */
-    protected function _getAllHeaders() {
+    protected function _getAllHeaders()
+    {
         $headers = false;
 
         if (function_exists('getallheaders')) {
@@ -127,29 +130,33 @@ class MQNStaticFileView extends MQNView {
     }
 
     /**
-     * 
+     *
      * @param string $header
      */
-    protected function _header($header) {
+    protected function _header($header)
+    {
         new String($header);
         header($header);
     }
 
     /**
-     * 
+     *
      * @return boolean
      */
-    protected function _headersSent() {
+    protected function _headersSent()
+    {
         $headersSent = (bool) headers_sent();
+
         return $headersSent;
     }
 
     /**
      *
      * @return boolean
-     * @throws \Exception 
+     * @throws \Exception
      */
-    public function output() {
+    public function output()
+    {
         $fileName = (string) ($this->staticFilePath . $this->staticFileName);
 
         if (file_exists($fileName) && is_file($fileName)) {
@@ -180,7 +187,7 @@ class MQNStaticFileView extends MQNView {
                         if (trim($headers['if-none-match']) === $eTag) {
                             $modified = false;
                         }
-                    } else if (key_exists('if-modified-since', $headers)) {
+                    } elseif (key_exists('if-modified-since', $headers)) {
                         if (strtotime(trim($headers['if-modified-since'])) >= $modifiedTime) {
                             $modified = false;
                         }
@@ -232,7 +239,8 @@ class MQNStaticFileView extends MQNView {
      *
      * @param string $fileName
      */
-    public function setStaticFileName($fileName) {
+    public function setStaticFileName($fileName)
+    {
         new String($fileName);
         $this->staticFileName = (string) $fileName;
     }
@@ -241,11 +249,10 @@ class MQNStaticFileView extends MQNView {
      *
      * @param string $filePath
      */
-    public function setStaticFilePath($filePath) {
+    public function setStaticFilePath($filePath)
+    {
         new String($filePath);
         $this->staticFilePath = (string) $filePath;
     }
 
 }
-
-?>

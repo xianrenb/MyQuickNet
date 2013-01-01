@@ -16,8 +16,8 @@ use com\googlecode\myquicknet\scalar\String;
 /**
  *
  */
-class MQNDatabaseSQLite extends MQNDatabase {
-
+class MQNDatabaseSQLite extends MQNDatabase
+{
     /**
      *
      * @var bool
@@ -46,14 +46,16 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @param array $config
      */
-    public function __construct(array $config) {
+    public function __construct(array $config)
+    {
         $this->closed = true;
         $this->filename = (string) $config['db_filename'];
         $this->sqlite3 = null;
         $this->transactionStarted = false;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->close();
     }
 
@@ -61,7 +63,8 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @return bool
      */
-    public function begin() {
+    public function begin()
+    {
         if ($this->isReady()) {
             if (!$this->transactionStarted) {
                 $this->query('BEGIN EXCLUSIVE');
@@ -75,11 +78,12 @@ class MQNDatabaseSQLite extends MQNDatabase {
     }
 
     /**
-     * 
+     *
      * @return boolean
      * @throws \Exception
      */
-    public function close() {
+    public function close()
+    {
         if ($this->sqlite3) {
             if (!$this->closed) {
                 if ($this->transactionStarted) {
@@ -105,10 +109,12 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @return bool
      */
-    public function commit() {
+    public function commit()
+    {
         if ($this->isReady() && $this->transactionStarted) {
             $this->query('COMMIT');
             $this->transactionStarted = false;
+
             return true;
         }
 
@@ -119,23 +125,27 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @return bool
      */
-    public function connect() {
+    public function connect()
+    {
         $this->close();
         $this->sqlite3 = new \SQLite3($this->filename);
         $this->closed = false;
         $this->query('BEGIN EXCLUSIVE');
         $this->transactionStarted = true;
+
         return true;
     }
 
     /**
      *
-     * @param string $string
+     * @param  string $string
      * @return string
      */
-    public function escapeString($string) {
+    public function escapeString($string)
+    {
         new String($string);
         $result = (string) $this->sqlite3->escapeString($string);
+
         return $result;
     }
 
@@ -143,42 +153,49 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @return bool
      */
-    public function isReady() {
+    public function isReady()
+    {
         $result = (bool) ($this->sqlite3 && !$this->closed);
+
         return $result;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string                     $sql
      * @return MQNDatabaseSQLiteStatement
      */
-    public function prepare($sql) {
+    public function prepare($sql)
+    {
         new String($sql);
         $statement = $this->sqlite3->prepare($sql);
         $statement = new MQNDatabaseSQLiteStatement($statement);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string                     $sql
      * @return MQNDatabaseSQLiteStatement
      */
-    public function prepareForUpdate($sql) {
+    public function prepareForUpdate($sql)
+    {
         new String($sql);
         $statement = $this->prepare($sql);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     *
+     * @param  string                     $sql
+     * @param  int                        $rowCount
+     * @param  int                        $offset
      * @return MQNDatabaseSQLiteStatement
      */
-    public function prepareLimit($sql, $rowCount, $offset = 0) {
+    public function prepareLimit($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
@@ -186,31 +203,35 @@ class MQNDatabaseSQLite extends MQNDatabase {
         $statement = $this->prepare($sql);
         $statement->appendExtraBindValueArray($offset);
         $statement->appendExtraBindValueArray($rowCount);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     *
+     * @param  string                     $sql
+     * @param  int                        $rowCount
+     * @param  int                        $offset
      * @return MQNDatabaseSQLiteStatement
      */
-    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0) {
+    public function prepareLimitForUpdate($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
         $statement = $this->prepareLimit($sql, $rowCount, $offset);
+
         return $statement;
     }
 
     /**
-     * 
-     * @param string $sql
+     *
+     * @param  string     $sql
      * @return array|bool
      * @throws \Exception
      */
-    public function query($sql) {
+    public function query($sql)
+    {
         new String($sql);
 
         if (preg_match('/^select/i', $sql)) {
@@ -233,6 +254,7 @@ class MQNDatabaseSQLite extends MQNDatabase {
             }
 
             $result->finalize();
+
             return $rowList;
         } else {
             if ($this->sqlite3) {
@@ -253,43 +275,49 @@ class MQNDatabaseSQLite extends MQNDatabase {
 
     /**
      *
-     * @param string $sql
+     * @param  string     $sql
      * @return array|bool
      */
-    public function queryForUpdate($sql) {
+    public function queryForUpdate($sql)
+    {
         new String($sql);
         $result = $this->query($sql);
+
         return $result;
     }
 
     /**
      *
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     * @param  string     $sql
+     * @param  int        $rowCount
+     * @param  int        $offset
      * @return array|bool
      */
-    public function queryLimit($sql, $rowCount, $offset = 0) {
+    public function queryLimit($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
         $sql = (string) ($sql . ' LIMIT ' . $offset . ' , ' . $rowCount);
         $result = $this->query($sql);
+
         return $result;
     }
 
     /**
      *
-     * @param string $sql
-     * @param int $rowCount
-     * @param int $offset
+     * @param  string     $sql
+     * @param  int        $rowCount
+     * @param  int        $offset
      * @return array|bool
      */
-    public function queryLimitForUpdate($sql, $rowCount, $offset = 0) {
+    public function queryLimitForUpdate($sql, $rowCount, $offset = 0)
+    {
         new String($sql);
         new Int($rowCount);
         new Int($offset);
         $result = $this->queryLimit($sql, $rowCount, $offset);
+
         return $result;
     }
 
@@ -297,10 +325,12 @@ class MQNDatabaseSQLite extends MQNDatabase {
      *
      * @return bool
      */
-    public function rollback() {
+    public function rollback()
+    {
         if ($this->isReady() && $this->transactionStarted) {
             $this->query('ROLLBACK');
             $this->transactionStarted = false;
+
             return true;
         }
 
@@ -308,5 +338,3 @@ class MQNDatabaseSQLite extends MQNDatabase {
     }
 
 }
-
-?>

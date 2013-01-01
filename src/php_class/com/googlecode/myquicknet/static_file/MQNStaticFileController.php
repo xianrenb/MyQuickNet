@@ -15,17 +15,19 @@ use com\googlecode\myquicknet\controller\MQNController;
 /**
  *
  */
-class MQNStaticFileController extends MQNController {
-
+class MQNStaticFileController extends MQNController
+{
     /**
      *
      * @param array $config
      */
-    public function __construct(array $config = array()) {
+    public function __construct(array $config = array())
+    {
         parent::__construct($config);
     }
 
-    public function run() {
+    public function run()
+    {
         if (key_exists('PATH_INFO', $_SERVER)) {
             $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
             $pattern = '/^' . $pattern . '[^\/]+\/(.*)$/';
@@ -46,5 +48,3 @@ class MQNStaticFileController extends MQNController {
     }
 
 }
-
-?>

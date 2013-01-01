@@ -13,8 +13,8 @@ namespace com\googlecode\myquicknet\view;
 /**
  * Test class for MQNView.
  */
-class MQNViewTest extends \PHPUnit_Framework_TestCase {
-
+class MQNViewTest extends \PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var MQNView
@@ -25,7 +25,8 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testingViewClass = '\\com\\googlecode\\myquicknet\\testing\\TestingView';
     }
 
@@ -33,11 +34,12 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
 
-    public function test1() {
+    public function test1()
+    {
         $view = new $this->testingViewClass();
         $this->assertTrue($view instanceof MQNView);
         $view->setHTMLFileName(MQN_BASE_PATH . 'html/default.html');
@@ -49,7 +51,8 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test2() {
+    public function test2()
+    {
         $view = new $this->testingViewClass();
         $this->assertTrue($view instanceof MQNView);
         $view->setJSONString(json_encode(array('abc' => 123)));
@@ -61,7 +64,8 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function test3() {
+    public function test3()
+    {
         $view = new $this->testingViewClass();
         $this->assertTrue($view instanceof MQNView);
         $view->setHTMLFileName(MQN_BASE_PATH . 'html/default.html');
@@ -74,5 +78,3 @@ class MQNViewTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>
