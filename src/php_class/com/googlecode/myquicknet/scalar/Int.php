@@ -3,8 +3,8 @@
 /**
  * Int
  * @package MyQuickNet
- * @version 4.0
- * @copyright (c) 2012 MyQuickNet Development Group
+ * @version 4.5
+ * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 
