@@ -30,7 +30,7 @@ class MQNCssController extends MQNController
     {
         if (key_exists('PATH_INFO', $_SERVER)) {
             $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
-            $pattern = '/^' . $pattern . '[^\/]+\/(.*).css$/';
+            $pattern = '/^' . $pattern . '[^\/]+\/(.*)\.css$/';
             $subject = (string) $_SERVER['PATH_INFO'];
 
             if (preg_match($pattern, $subject, $matches)) {
