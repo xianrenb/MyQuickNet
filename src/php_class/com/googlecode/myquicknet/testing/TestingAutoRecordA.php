@@ -23,7 +23,7 @@ class TestingAutoRecordA extends TestingAutoRecordAConfig
      */
     public function __construct(array $config = array())
     {
-        parent::__construct();
+        parent::__construct($config);
     }
 
 }

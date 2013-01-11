@@ -23,7 +23,7 @@ class TestingAutoRecordManager extends TestingAutoRecordManagerConfig
      */
     public function __construct(array $config = array())
     {
-        parent::__construct();
+        parent::__construct($config);
     }
 
     /**
