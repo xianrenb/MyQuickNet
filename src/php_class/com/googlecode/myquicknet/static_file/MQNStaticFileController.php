@@ -28,7 +28,7 @@ class MQNStaticFileController extends MQNController
 
     public function run()
     {
-        if (key_exists('PATH_INFO', $_SERVER)) {
+        if (array_key_exists('PATH_INFO', $_SERVER)) {
             $pattern = (string) preg_quote($this->getUrlBasePath(), '/');
             $pattern = '/^' . $pattern . '[^\/]+\/(.*)$/';
             $subject = (string) $_SERVER['PATH_INFO'];

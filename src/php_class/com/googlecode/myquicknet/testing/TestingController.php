@@ -46,7 +46,7 @@ class TestingController extends TestingControllerConfig
      */
     public function run()
     {
-        if (key_exists('PATH_INFO', $_SERVER)) {
+        if (array_key_exists('PATH_INFO', $_SERVER)) {
             $urlBasePath = (string) preg_quote($this->getUrlBasePath(), '/');
             $subject = (string) $_SERVER['PATH_INFO'];
             $pattern = '/^' . $urlBasePath . 'testing\/advance_example_(.+)\.html$/';

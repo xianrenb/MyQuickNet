@@ -42,13 +42,13 @@ class MQNStaticFileView extends MQNView
      */
     public function __construct(array $config = array())
     {
-        if (key_exists('cache_max_age', $config)) {
+        if (array_key_exists('cache_max_age', $config)) {
             $this->cacheMaxAge = (int) $config['cache_max_age'];
         } else {
             $this->cacheMaxAge = 60 * 20;
         }
 
-        if (key_exists('static_file_path', $config)) {
+        if (array_key_exists('static_file_path', $config)) {
             $this->staticFilePath = (string) $config['static_file_path'];
         } else {
             $this->staticFilePath = (string) MQN_BASE_PATH;
@@ -183,11 +183,11 @@ class MQNStaticFileView extends MQNView
                 if ($headers !== false) {
                     $headers = array_change_key_case($headers, CASE_LOWER);
 
-                    if (key_exists('if-none-match', $headers)) {
+                    if (array_key_exists('if-none-match', $headers)) {
                         if (trim($headers['if-none-match']) === $eTag) {
                             $modified = false;
                         }
-                    } elseif (key_exists('if-modified-since', $headers)) {
+                    } elseif (array_key_exists('if-modified-since', $headers)) {
                         if (strtotime(trim($headers['if-modified-since'])) >= $modifiedTime) {
                             $modified = false;
                         }

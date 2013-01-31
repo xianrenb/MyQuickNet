@@ -41,20 +41,20 @@ class MQNController
      */
     public function __construct(array $config = array())
     {
-        if (key_exists('url_base_path', $config)) {
+        if (array_key_exists('url_base_path', $config)) {
             $this->urlBasePath = (string) $config['url_base_path'];
         } else {
             $this->urlBasePath = '/';
         }
 
-        if (key_exists('model_class', $config)) {
+        if (array_key_exists('model_class', $config)) {
             $modelClass = (string) $config['model_class'];
             $this->model = new $modelClass();
         } else {
             $this->model = null;
         }
 
-        if (key_exists('view_class', $config)) {
+        if (array_key_exists('view_class', $config)) {
             $viewClass = (string) $config['view_class'];
         } else {
             $viewClass = '\\com\\googlecode\\myquicknet\\view\\MQNView';
@@ -130,9 +130,9 @@ class MQNController
 
     public function run()
     {
-        if (key_exists('PATH_INFO', $_SERVER)) {
+        if (array_key_exists('PATH_INFO', $_SERVER)) {
             if ($_SERVER['PATH_INFO'] != $this->getUrlBasePath()) {
-                if (key_exists('SERVER_PROTOCOL', $_SERVER)) {
+                if (array_key_exists('SERVER_PROTOCOL', $_SERVER)) {
                     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
                 }
 

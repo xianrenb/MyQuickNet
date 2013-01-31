@@ -35,13 +35,13 @@ class MQNView
      */
     public function __construct(array $config = array())
     {
-        if (key_exists('json_string', $config)) {
+        if (array_key_exists('json_string', $config)) {
             $this->jsonString = (string) $config['json_string'];
         } else {
             $this->jsonString = '{}';
         }
 
-        if (key_exists('html_file_name', $config)) {
+        if (array_key_exists('html_file_name', $config)) {
             $this->htmlFileName = (string) $config['html_file_name'];
         } else {
             $this->htmlFileName = (string) (MQN_BASE_PATH . 'html/default.html');

@@ -48,25 +48,25 @@ class MQNCssView extends MQNView
      */
     public function __construct(array $config = array())
     {
-        if (key_exists('cache_max_age', $config)) {
+        if (array_key_exists('cache_max_age', $config)) {
             $this->cacheMaxAge = (int) $config['cache_max_age'];
         } else {
             $this->cacheMaxAge = 20 * 60;
         }
 
-        if (key_exists('column_count', $config)) {
+        if (array_key_exists('column_count', $config)) {
             $this->columnCount = (int) $config['column_count'];
         } else {
             $this->columnCount = 12;
         }
 
-        if (key_exists('column_width', $config)) {
+        if (array_key_exists('column_width', $config)) {
             $this->columnWidth = (int) $config['column_width'];
         } else {
             $this->columnWidth = 60;
         }
 
-        if (key_exists('gutter_width', $config)) {
+        if (array_key_exists('gutter_width', $config)) {
             $this->gutterWidth = (int) $config['gutter_width'];
         } else {
             $this->gutterWidth = 20;
@@ -213,7 +213,7 @@ class MQNCssView extends MQNView
                 $headers = array_change_key_case($headers, CASE_LOWER);
                 $modified = true;
 
-                if (key_exists('if-none-match', $headers) &&
+                if (array_key_exists('if-none-match', $headers) &&
                         (trim($headers['if-none-match']) === $eTag)
                 ) {
                     $modified = false;
