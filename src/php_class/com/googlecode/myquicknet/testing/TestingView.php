@@ -39,7 +39,7 @@ class TestingView extends TestingViewConfig
     {
         $domTools = new MQNDomTools();
         $query = '//_:span[@id=\'data_a\']';
-        $text = (string) $dataArray['data_a'] ? 'true' : 'false';
+        $text = $dataArray['data_a'] ? 'true' : 'false';
         $dom->queryText($query, $text);
         $query = '//_:span[@id=\'data_b\']';
         $text = (string) $dataArray['data_b'];
