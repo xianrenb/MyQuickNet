@@ -19,21 +19,33 @@ class MQNAutoRecordManager
 {
     /**
      *
+     * @var int
+     */
+    private $bindedCount;
+
+    /**
+     *
+     * @var array
+     */
+    private $config;
+
+    /**
+     *
      * @var MQNDatabase
      */
-    private static $database = null;
+    private $database;
+
+    /**
+     *
+     * @var array
+     */
+    private static $instanceArray = array();
 
     /**
      *
      * @var int
      */
-    private static $instance_created_count = 0;
-
-    /**
-     *
-     * @var int
-     */
-    private static $instance_destroyed_count = 0;
+    private $unBindedCount;
 
     /**
      *
@@ -41,34 +53,50 @@ class MQNAutoRecordManager
      */
     public function __construct(array $config = array())
     {
-        if (!self::$instance_created_count) {
-            $dbClass = (string) $config['db_class'];
-            self::$database = new $dbClass($config);
+        $this->bindedCount = 0;
+        $this->config = $config;
+        $this->database = null;
+        $this->unBindedCount = 0;
+    }
 
-            if (self::$database instanceof MQNDatabase) {
-                self::$database->connect();
+    /**
+     *
+     * @throws \UnexpectedValueException
+     */
+    public function bind()
+    {
+        if (!$this->bindedCount) {
+            $dbClass = (string) $this->config['db_class'];
+            $this->database = new $dbClass($this->config);
+
+            if ($this->database instanceof MQNDatabase) {
+                $this->database->connect();
             } else {
-                self::$database = null;
+                $this->database = null;
                 throw new \UnexpectedValueException();
             }
         }
 
-        self::$instance_created_count += 1;
+        $this->bindedCount += 1;
     }
 
-    public function __destruct()
+    /**
+     *
+     * @throws \Exception
+     */
+    public function unbind()
     {
-        self::$instance_destroyed_count += 1;
+        $this->unBindedCount += 1;
 
-        if (self::$instance_created_count == self::$instance_destroyed_count) {
-            self::$instance_created_count = 0;
-            self::$instance_destroyed_count = 0;
+        if ($this->bindedCount == $this->unBindedCount) {
+            $this->bindedCount = 0;
+            $this->unBindedCount = 0;
 
-            if (self::$database->commit()) {
-                self::$database->close();
-                self::$database = null;
+            if ($this->database->commit()) {
+                $this->database->close();
+                $this->database = null;
             } else {
-                self::$database = null;
+                $this->database = null;
                 throw new \Exception('Could not commit database.');
             }
         }
@@ -80,7 +108,22 @@ class MQNAutoRecordManager
      */
     public function getDatabase()
     {
-        return self::$database;
+        return $this->database;
+    }
+
+    /**
+     *
+     * @return MQNAutoRecordManager
+     */
+    public static function getInstance()
+    {
+        $calledClass = (string) get_called_class();
+
+        if (!array_key_exists($calledClass, self::$instanceArray)) {
+            self::$instanceArray[$calledClass] = new $calledClass;
+        }
+
+        return self::$instanceArray[$calledClass];
     }
 
 }

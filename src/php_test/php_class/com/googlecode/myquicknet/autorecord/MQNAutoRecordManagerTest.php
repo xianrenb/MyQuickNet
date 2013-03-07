@@ -42,11 +42,15 @@ class MQNAutoRecordManagerTest extends \PHPUnit_Framework_TestCase
 
     public function test1()
     {
-        $manager = new $this->testingAutoRecordManagerClass();
+        $managerClass = (string) $this->testingAutoRecordManagerClass;
+        $manager = $managerClass::getInstance();
         $this->assertTrue($manager instanceof MQNAutoRecordManager);
         $this->assertTrue($manager->methodA() == 'TestingAutoRecordManager');
+        $manager->bind();
         $database = $manager->getDatabase();
         $this->assertTrue($database instanceof MQNDatabase);
+        $manager->unbind();
+        $manager = null;
     }
 
 }

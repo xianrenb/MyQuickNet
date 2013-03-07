@@ -82,7 +82,8 @@ class MQNAutoRecord
     public function __construct(array $config = array())
     {
         $autoRecordManagerClass = (string) $config['auto_record_manager_class'];
-        $this->autoRecordManager = new $autoRecordManagerClass($config);
+        $this->autoRecordManager = $autoRecordManagerClass::getInstance();
+        $this->autoRecordManager->bind();
         $this->autoUpdate = true;
         $this->database = $this->autoRecordManager->getDatabase();
         $this->defaultFieldArray = $config['field_array'];
@@ -144,6 +145,7 @@ class MQNAutoRecord
         }
 
         $this->database = null;
+        $this->autoRecordManager->unbind();
         $this->autoRecordManager = null;
     }
 
