@@ -1,7 +1,7 @@
 /**
  * TestingType1
  * @package MyQuickNet
- * @version 4.5
+ * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
