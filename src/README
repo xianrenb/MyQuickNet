@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 4.5.1.
+This is the README file for MyQuickNet 4.6.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -101,6 +101,11 @@ Browser/User
 instead of "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" to build a
 practical system, as this would handle the data better and avoid unexpected
 problems.
+
+Major changes from version 4.5.1:
+* updated jQuery
+* changed MQNAutoRecordManager
+* fixed bugs
 
 Major changes from version 4.5.0:
 * added language tags in HTML files
