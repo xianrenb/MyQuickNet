@@ -188,10 +188,10 @@ class MQNDatabaseMySQLiStatement extends MQNDatabaseStatement
                 $types .= 'i';
             } elseif (is_string($this->extraBindValueArray[$i])) {
                 $types .= 's';
-            } elseif ($this->bindValueArray[$i] instanceof MQNBlob) {
+            } elseif ($this->extraBindValueArray[$i] instanceof MQNBlob) {
                 $types .= 'b';
-                $blob = $this->bindValueArray[$i];
-                $this->bindValueArray[$i] = null;
+                $blob = $this->extraBindValueArray[$i];
+                $this->extraBindValueArray[$i] = null;
                 $longData[$bindValueArrayCount + $i] = (string) $blob->getBlob();
             } else {
                 throw new \UnexpectedValueException();

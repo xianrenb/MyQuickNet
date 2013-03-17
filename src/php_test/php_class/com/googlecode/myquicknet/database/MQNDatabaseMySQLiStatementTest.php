@@ -66,6 +66,14 @@ class MQNDatabaseMySQLiStatementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($result));
         $this->assertEquals(4, $result[0]['data']);
         $this->assertEquals(5, $result[1]['data']);
+        $sql = 'SELECT `id` FROM `testing_auto_record` WHERE `my_blob` = ? AND `my_blob` = ?';
+        $statement = $this->db->prepare($sql);
+        $statement->appendBindValueArray(new MQNBlob(hex2bin('626c6f62')));
+        $statement->appendExtraBindValueArray(new MQNBlob(hex2bin('626c6f62')));
+        $result = $statement->execute();
+        $this->assertTrue(is_array($result));
+        $this->assertEquals(1, count($result));
+        $this->assertEquals(1, $result[0]['id']);
     }
 
 }
