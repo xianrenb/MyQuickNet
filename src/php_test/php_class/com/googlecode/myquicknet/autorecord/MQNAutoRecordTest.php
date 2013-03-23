@@ -44,13 +44,13 @@ class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase
     {
         $record1 = new $this->testingAutoRecordClass();
         $this->assertTrue($record1 instanceof MQNAutoRecord);
-        $this->assertTrue($record1->methodA() == 'TestingAutoRecord');
+        $this->assertTrue($record1->methodA() === 'TestingAutoRecord');
         $record1->create();
-        $this->assertTrue($record1->getId() == 1);
+        $this->assertTrue($record1->getId() === 1);
         $this->assertTrue($record1->isValid());
         $record2 = new $this->testingAutoRecordClass();
         $record2->create();
-        $this->assertTrue($record2->getId() == 2);
+        $this->assertTrue($record2->getId() === 2);
         $this->assertTrue($record2->isValid());
         $record2->setMyA(false);
         $record2->setMyB(1.1);
@@ -63,17 +63,17 @@ class MQNAutoRecordTest extends \PHPUnit_Framework_TestCase
         $record2 = null;
         $record2 = new $this->testingAutoRecordClass();
         $record2->read($id);
-        $this->assertTrue($record2->getMyA() == false);
+        $this->assertTrue($record2->getMyA() === false);
         $this->assertTrue(is_float($record2->getMyB()));
-        $this->assertTrue(round($record2->getMyB(), 1) == 1.1);
-        $this->assertTrue($record2->getMyC() == 2);
-        $this->assertTrue($record2->getMyD() == 'abc');
-        $this->assertTrue($record2->getMyE() == $record1->getId());
+        $this->assertTrue(round($record2->getMyB(), 1) === 1.1);
+        $this->assertTrue($record2->getMyC() === 2);
+        $this->assertTrue($record2->getMyD() === 'abc');
+        $this->assertTrue($record2->getMyE() === $record1->getId());
         $blob = $record2->getMyBlob();
         $this->assertTrue($blob instanceof MQNBlob);
-        $this->assertTrue($blob->getBlob() == 'new blob');
+        $this->assertTrue($blob->getBlob() === 'new blob');
         $record2->delete();
-        $this->assertTrue($record2->getId() == 0);
+        $this->assertTrue($record2->getId() === 0);
         $this->assertFalse($record2->isValid());
 
         try {

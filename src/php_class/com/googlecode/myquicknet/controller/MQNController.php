@@ -80,7 +80,7 @@ class MQNController
             if ($i) {
                 $char = (string) substr($string, $i, 1);
 
-                if ($char == '_') {
+                if ($char === '_') {
                     $nextIsUpper = true;
                 } else {
                     if ($nextIsUpper) {

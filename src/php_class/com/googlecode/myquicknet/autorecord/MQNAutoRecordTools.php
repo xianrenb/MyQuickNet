@@ -32,7 +32,7 @@ class MQNAutoRecordTools
             $c = (string) substr($shortFieldName, $i, 1);
             $lc = (string) strtolower($c);
 
-            if (($c == $lc) || !$i) {
+            if (($c === $lc) || !$i) {
                 $fieldName .= $lc;
             } else {
                 $fieldName .= '_' . $lc;

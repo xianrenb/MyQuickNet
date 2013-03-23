@@ -290,7 +290,7 @@ class MQNAutoRecordQuery
         }
 
         if (
-                ($operator == '=') &&
+                ($operator === '=') &&
                 $value1IsField &&
                 $value2IsField &&
                 ($value1->getTable() !== $value2->getTable())

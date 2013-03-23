@@ -79,7 +79,7 @@ class MQNDatabaseMySQLi extends MQNDatabase
         $this->password = (string) $config['db_password'];
         $this->port = $config['db_port'];
 
-        if ($this->port == '') {
+        if ($this->port === '') {
             $this->port = 3306;
         } else {
             $this->port = (int) $this->port;

@@ -41,8 +41,8 @@ class MQNAutoRecordQueryJoinConditionTest extends \PHPUnit_Framework_TestCase
     {
         $joinCondition = new MQNAutoRecordQueryJoinCondition(1, 'name');
         $this->assertTrue($joinCondition instanceof MQNAutoRecordQueryJoinCondition);
-        $this->assertTrue($joinCondition->getId() == 1);
-        $this->assertTrue($joinCondition->getName() == 'name');
+        $this->assertTrue($joinCondition->getId() === 1);
+        $this->assertTrue($joinCondition->getName() === 'name');
     }
 
     public function test3()

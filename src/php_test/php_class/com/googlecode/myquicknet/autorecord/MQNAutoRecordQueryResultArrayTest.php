@@ -48,8 +48,8 @@ class MQNAutoRecordQueryResultArrayTest extends \PHPUnit_Framework_TestCase
     {
         $resultArray = new MQNAutoRecordQueryResultArray(1, 'name');
         $this->assertTrue($resultArray instanceof MQNAutoRecordQueryResultArray);
-        $this->assertTrue($resultArray->getId() == 1);
-        $this->assertTrue($resultArray->getName() == 'name');
+        $this->assertTrue($resultArray->getId() === 1);
+        $this->assertTrue($resultArray->getName() === 'name');
     }
 
     public function test3()

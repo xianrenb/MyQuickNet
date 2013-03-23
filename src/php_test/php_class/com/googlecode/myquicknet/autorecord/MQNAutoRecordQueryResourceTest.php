@@ -41,8 +41,8 @@ class MQNAutoRecordQueryResourceTest extends \PHPUnit_Framework_TestCase
     {
         $resource = new MQNAutoRecordQueryResource(1, 'name');
         $this->assertTrue($resource instanceof MQNAutoRecordQueryResource);
-        $this->assertTrue($resource->getId() == 1);
-        $this->assertTrue($resource->getName() == 'name');
+        $this->assertTrue($resource->getId() === 1);
+        $this->assertTrue($resource->getName() === 'name');
     }
 
 }

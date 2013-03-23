@@ -88,7 +88,7 @@ class MQNAutoRecordManager
     {
         $this->unBindedCount += 1;
 
-        if ($this->bindedCount == $this->unBindedCount) {
+        if ($this->bindedCount === $this->unBindedCount) {
             $this->bindedCount = 0;
             $this->unBindedCount = 0;
 

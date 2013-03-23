@@ -46,8 +46,8 @@ class MQNAutoRecordQueryWhereConditionTest extends \PHPUnit_Framework_TestCase
     {
         $whereCondition = new MQNAutoRecordQueryWhereCondition(1, 'name');
         $this->assertTrue($whereCondition instanceof MQNAutoRecordQueryWhereCondition);
-        $this->assertTrue($whereCondition->getId() == 1);
-        $this->assertTrue($whereCondition->getName() == 'name');
+        $this->assertTrue($whereCondition->getId() === 1);
+        $this->assertTrue($whereCondition->getName() === 'name');
     }
 
     public function test3()

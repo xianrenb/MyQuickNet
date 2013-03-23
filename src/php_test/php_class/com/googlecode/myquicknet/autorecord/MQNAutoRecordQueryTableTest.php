@@ -49,8 +49,8 @@ class MQNAutoRecordQueryTableTest extends \PHPUnit_Framework_TestCase
     {
         $table = new MQNAutoRecordQueryTable(1, 'name');
         $this->assertTrue($table instanceof MQNAutoRecordQueryTable);
-        $this->assertTrue($table->getId() == 1);
-        $this->assertTrue($table->getName() == 'name');
+        $this->assertTrue($table->getId() === 1);
+        $this->assertTrue($table->getName() === 'name');
         $table = null;
     }
 

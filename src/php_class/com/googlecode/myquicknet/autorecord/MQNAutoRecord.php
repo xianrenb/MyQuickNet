@@ -424,7 +424,7 @@ class MQNAutoRecord
         $id = (int) $this->getId();
         $valid = (bool) $this->isValid();
 
-        if ($id == 0) {
+        if (!$id) {
             return;
         }
 

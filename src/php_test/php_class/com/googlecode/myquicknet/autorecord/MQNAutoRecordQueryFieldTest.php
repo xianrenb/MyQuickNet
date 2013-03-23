@@ -41,8 +41,8 @@ class MQNAutoRecordQueryFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = new MQNAutoRecordQueryField(1, 'name');
         $this->assertTrue($field instanceof MQNAutoRecordQueryField);
-        $this->assertTrue($field->getId() == 1);
-        $this->assertTrue($field->getName() == 'name');
+        $this->assertTrue($field->getId() === 1);
+        $this->assertTrue($field->getName() === 'name');
     }
 
     public function test3()

@@ -41,8 +41,8 @@ class MQNAutoRecordQueryOrderTest extends \PHPUnit_Framework_TestCase
     {
         $order = new MQNAutoRecordQueryOrder(1, 'name');
         $this->assertTrue($order instanceof MQNAutoRecordQueryOrder);
-        $this->assertTrue($order->getId() == 1);
-        $this->assertTrue($order->getName() == 'name');
+        $this->assertTrue($order->getId() === 1);
+        $this->assertTrue($order->getName() === 'name');
     }
 
     public function test3()
