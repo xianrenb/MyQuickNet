@@ -369,4 +369,53 @@ class MQNAutoRecordQueryTest extends \PHPUnit_Framework_TestCase
         $tableB = null;
     }
 
+    public function test12()
+    {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $tableB = $query->table($this->testingAutoRecordBClassName);
+        $fieldAA = $query->field($tableA, 'my_a');
+        $fieldAX = $query->field($tableA, 'my_x');
+        $fieldBX = $query->field($tableB, 'my_x');
+        $fieldBY = $query->field($tableB, 'my_y');
+        $query->condition($fieldAA, '>', 0, true);
+
+        try {
+            $query->condition($fieldAX, '=', $fieldBX);
+            $exception = false;
+        } catch (\InvalidArgumentException $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+        $query = null;
+        $tableA = null;
+        $tableB = null;
+    }
+
+    public function test13()
+    {
+        $query = new MQNAutoRecordQuery();
+        $this->assertTrue($query instanceof MQNAutoRecordQuery);
+        $tableA = $query->table($this->testingAutoRecordAClassName);
+        $tableB = $query->table($this->testingAutoRecordBClassName);
+        $fieldAA = $query->field($tableA, 'my_a');
+        $fieldAX = $query->field($tableA, 'my_x');
+        $fieldBX = $query->field($tableB, 'my_x');
+        $fieldBY = $query->field($tableB, 'my_y');
+
+        try {
+            $query->condition($fieldAX, '=', $fieldBX, true);
+            $exception = false;
+        } catch (\InvalidArgumentException $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+        $query = null;
+        $tableA = null;
+        $tableB = null;
+    }
+
 }

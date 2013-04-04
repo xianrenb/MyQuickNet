@@ -39,6 +39,12 @@ class MQNAutoRecordQuery
 
     /**
      *
+     * @var boolean
+     */
+    private $lastConditionOrNext;
+
+    /**
+     *
      * @var int
      */
     private $limitOffset;
@@ -84,6 +90,7 @@ class MQNAutoRecordQuery
         $this->database = null;
         $this->fieldArray = array();
         $this->joinConditionArray = array();
+        $this->lastConditionOrNext = false;
         $this->limitOffset = 0;
         $this->limitRowCount = 0;
         $this->orderArray = array();
@@ -105,25 +112,56 @@ class MQNAutoRecordQuery
     /**
      *
      * @return string
+     * @throws \UnexpectedValueException
      */
     protected function _buildJoinConditionSql()
     {
         $sql = '';
-        $n = (int) count($this->joinConditionArray);
+        $countTableArray = (int) count($this->tableArray);
+        $processedTableArray = array();
+        $remainingJoinConditionArray = $this->joinConditionArray;
 
-        for ($i = 0; $i < $n; ++$i) {
-            $sql .= ( $i) ? ' AND ' : ' ON ';
-            $field1 = $this->joinConditionArray[$i]->getField1();
-            $field2 = $this->joinConditionArray[$i]->getField2();
-            $sql .= '`t';
-            $sql .= (int) $field1->getTable()->getId();
-            $sql .= '`.`';
-            $sql .= (string) $field1->getName();
-            $sql .= '` = `t';
-            $sql .= (int) $field2->getTable()->getId();
-            $sql .= '`.`';
-            $sql .= (string) $field2->getName();
+        for ($i = 0; $i < $countTableArray; ++$i) {
+            $sql .= ( $i) ? ' INNER JOIN ' : '';
             $sql .= '`';
+            $sql .= (string) $this->tableArray[$i]->getName();
+            $sql .= '` AS `t';
+            $sql .= (int) $this->tableArray[$i]->getId();
+            $sql .= '`';
+            $processedTableArray[] = $this->tableArray[$i];
+            $initialCondition = true;
+
+            foreach ($remainingJoinConditionArray as $key => $remainingJoinCondition) {
+                $field1 = $remainingJoinCondition->getField1();
+                $field2 = $remainingJoinCondition->getField2();
+                $table1 = $field1->getTable();
+                $table2 = $field2->getTable();
+
+                if (in_array($table1, $processedTableArray, true) && in_array($table2, $processedTableArray, true)) {
+                    if ($initialCondition) {
+                        $sql .= ' ON ';
+                        $initialCondition = false;
+                    } else {
+                        $sql .= ' AND ';
+                    }
+
+                    $sql .= '`t';
+                    $sql .= (int) $table1->getId();
+                    $sql .= '`.`';
+                    $sql .= (string) $field1->getName();
+                    $sql .= '` = `t';
+                    $sql .= (int) $table2->getId();
+                    $sql .= '`.`';
+                    $sql .= (string) $field2->getName();
+                    $sql .= '`';
+                    $remainingJoinConditionArray[$key] = null;
+                    unset($remainingJoinConditionArray[$key]);
+                }
+            }
+        }
+
+        if (count($remainingJoinConditionArray)) {
+            throw new \UnexpectedValueException();
         }
 
         return $sql;
@@ -295,7 +333,7 @@ class MQNAutoRecordQuery
                 $value2IsField &&
                 ($value1->getTable() !== $value2->getTable())
         ) {
-            if ($orNext) {
+            if ($orNext || $this->lastConditionOrNext) {
                 throw new \InvalidArgumentException();
             }
 
@@ -313,6 +351,8 @@ class MQNAutoRecordQuery
             $n = (int) count($this->whereConditionArray);
             $this->whereConditionArray[$n] = $whereCondition;
         }
+
+        $this->lastConditionOrNext = (bool) $orNext;
     }
 
     /**
@@ -352,10 +392,10 @@ class MQNAutoRecordQuery
      */
     public function execute()
     {
-        $n = (int) count($this->tableArray);
+        $countTableArray = (int) count($this->tableArray);
         $sql = 'SELECT ';
 
-        for ($i = 0; $i < $n; ++$i) {
+        for ($i = 0; $i < $countTableArray; ++$i) {
             $id = (int) $this->tableArray[$i]->getId();
             $sql .= ( $i) ? ' , ' : '';
             $sql .= '`t';
@@ -368,16 +408,6 @@ class MQNAutoRecordQuery
         }
 
         $sql .= ' FROM ';
-
-        for ($i = 0; $i < $n; ++$i) {
-            $sql .= ( $i) ? ' INNER JOIN ' : '';
-            $sql .= '`';
-            $sql .= (string) $this->tableArray[$i]->getName();
-            $sql .= '` AS `t';
-            $sql .= (int) $this->tableArray[$i]->getId();
-            $sql .= '`';
-        }
-
         $sql .= (string) $this->_buildJoinConditionSql();
         $sql .= (string) $this->_buildWhereConditionSql();
         $sql .= (string) $this->_buildOrderSql();
