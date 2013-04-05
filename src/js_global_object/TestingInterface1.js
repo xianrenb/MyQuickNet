@@ -19,9 +19,9 @@ var TestingInterface1;
             },
             getB: function () {
             },
-            getX: function () {
-            },
             getS: function () {
+            },
+            getX: function () {
             }
         }
     });

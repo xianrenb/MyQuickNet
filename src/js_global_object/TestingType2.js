@@ -42,11 +42,11 @@ var TestingType2;
             getB: function () {
                 return my.b;
             },
-            getX: function () {
-                return my.x;
-            },
             getS: function () {
                 return shared.s;
+            },
+            getX: function () {
+                return my.x;
             }
         },
         sharedMethods: {

@@ -82,28 +82,6 @@ class MQNAutoRecordManager
 
     /**
      *
-     * @throws \Exception
-     */
-    public function unbind()
-    {
-        $this->unBindedCount += 1;
-
-        if ($this->bindedCount === $this->unBindedCount) {
-            $this->bindedCount = 0;
-            $this->unBindedCount = 0;
-
-            if ($this->database->commit()) {
-                $this->database->close();
-                $this->database = null;
-            } else {
-                $this->database = null;
-                throw new \Exception('Could not commit database.');
-            }
-        }
-    }
-
-    /**
-     *
      * @return MQNDatabase
      */
     public function getDatabase()
@@ -124,6 +102,28 @@ class MQNAutoRecordManager
         }
 
         return self::$instanceArray[$calledClass];
+    }
+
+    /**
+     *
+     * @throws \Exception
+     */
+    public function unbind()
+    {
+        $this->unBindedCount += 1;
+
+        if ($this->bindedCount === $this->unBindedCount) {
+            $this->bindedCount = 0;
+            $this->unBindedCount = 0;
+
+            if ($this->database->commit()) {
+                $this->database->close();
+                $this->database = null;
+            } else {
+                $this->database = null;
+                throw new \Exception('Could not commit database.');
+            }
+        }
     }
 
 }

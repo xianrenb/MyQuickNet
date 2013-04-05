@@ -52,9 +52,9 @@ class MQNView
      *
      * @return bool
      */
-    protected function _outputJSON()
+    protected function _outputHTML()
     {
-        echo($this->jsonString);
+        readfile($this->htmlFileName);
 
         return true;
     }
@@ -63,9 +63,9 @@ class MQNView
      *
      * @return bool
      */
-    protected function _outputHTML()
+    protected function _outputJSON()
     {
-        readfile($this->htmlFileName);
+        echo($this->jsonString);
 
         return true;
     }
@@ -81,22 +81,22 @@ class MQNView
 
     /**
      *
-     * @param string $jsonString
-     */
-    public function setJSONString($jsonString)
-    {
-        new String($jsonString);
-        $this->jsonString = (string) $jsonString;
-    }
-
-    /**
-     *
      * @param string $fileName
      */
     public function setHTMLFileName($fileName)
     {
         new String($fileName);
         $this->htmlFileName = (string) $fileName;
+    }
+
+    /**
+     *
+     * @param string $jsonString
+     */
+    public function setJSONString($jsonString)
+    {
+        new String($jsonString);
+        $this->jsonString = (string) $jsonString;
     }
 
 }

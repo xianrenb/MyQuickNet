@@ -39,7 +39,7 @@ class TestingView extends TestingViewConfig
     {
         $domTools = new MQNDomTools();
         $query = '//_:span[@id=\'data_a\']';
-        $text = $dataArray['data_a'] ? 'true' : 'false';
+        $text = ( $dataArray['data_a']) ? 'true' : 'false';
         $dom->queryText($query, $text);
         $query = '//_:span[@id=\'data_b\']';
         $text = (string) $dataArray['data_b'];
@@ -105,6 +105,15 @@ class TestingView extends TestingViewConfig
      *
      * @return boolean
      */
+    public function outputHTML()
+    {
+        return $this->_outputHTML();
+    }
+
+    /**
+     *
+     * @return boolean
+     */
     public function outputJSON()
     {
         if (!headers_sent()) {
@@ -112,15 +121,6 @@ class TestingView extends TestingViewConfig
         }
 
         return $this->_outputJSON();
-    }
-
-    /**
-     *
-     * @return boolean
-     */
-    public function outputHTML()
-    {
-        return $this->_outputHTML();
     }
 
 }

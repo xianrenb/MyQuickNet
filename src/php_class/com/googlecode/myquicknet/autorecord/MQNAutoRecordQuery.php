@@ -357,37 +357,6 @@ class MQNAutoRecordQuery
 
     /**
      *
-     * @param  MQNAutoRecordQueryTable $table
-     * @param  string                  $fieldName
-     * @return MQNAutoRecordQueryField
-     */
-    public function field(MQNAutoRecordQueryTable $table, $fieldName)
-    {
-        new String($fieldName);
-        $id = (int) count($this->fieldArray);
-        $field = new MQNAutoRecordQueryField($id, $fieldName);
-        $field->setTable($table);
-        $this->fieldArray[$id] = $field;
-
-        return $field;
-    }
-
-    /**
-     *
-     * @param int $rowCount
-     * @param int $offset
-     */
-    public function limit($rowCount, $offset)
-    {
-        new Int($rowCount);
-        new Int($offset);
-        $this->useLimit = true;
-        $this->limitOffset = (int) $offset;
-        $this->limitRowCount = (int) $rowCount;
-    }
-
-    /**
-     *
      * @return MQNAutoRecordQueryResultArray
      */
     public function execute()
@@ -428,6 +397,37 @@ class MQNAutoRecordQuery
         $resultArray->setResultArray($result);
 
         return $resultArray;
+    }
+
+    /**
+     *
+     * @param  MQNAutoRecordQueryTable $table
+     * @param  string                  $fieldName
+     * @return MQNAutoRecordQueryField
+     */
+    public function field(MQNAutoRecordQueryTable $table, $fieldName)
+    {
+        new String($fieldName);
+        $id = (int) count($this->fieldArray);
+        $field = new MQNAutoRecordQueryField($id, $fieldName);
+        $field->setTable($table);
+        $this->fieldArray[$id] = $field;
+
+        return $field;
+    }
+
+    /**
+     *
+     * @param int $rowCount
+     * @param int $offset
+     */
+    public function limit($rowCount, $offset)
+    {
+        new Int($rowCount);
+        new Int($offset);
+        $this->useLimit = true;
+        $this->limitOffset = (int) $offset;
+        $this->limitRowCount = (int) $rowCount;
     }
 
     /**
