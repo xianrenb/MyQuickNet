@@ -1,25 +1,43 @@
 /**
  * TestingNSType1
- * @package MyQuickNet
+ * @module MyQuickNet
  * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
 /*global newType: false */
+/**
+ * 
+ * @class com.googlecode.myquicknet.testing.TestingNSType1
+ * @memberof! <global>
+ */
 (function () {
     'use strict';
 
     newType.def({
         namespace: 'com.googlecode.myquicknet.testing',
         name: 'TestingNSType1',
-        methods: {
-            _: function () {
-                return this;
-            },
-            fa: function () {
-                return 'ok!';
+        methods:
+            /**
+             * 
+             * @lends com.googlecode.myquicknet.testing.TestingNSType1.prototype
+             */
+            {
+                /**
+                 * 
+                 * @returns {Object}
+                 */
+                _: function () {
+                    return this;
+                },
+                /**
+                 * 
+                 * @returns {String}
+                 */
+                fa: function () {
+                    return 'ok!';
+                }
             }
-        }
     });
 }());

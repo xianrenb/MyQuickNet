@@ -1,12 +1,17 @@
 /**
  * TestingInterface3
- * @package MyQuickNet
+ * @module MyQuickNet
  * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
 /*global newType: false */
+/**
+ * 
+ * @constructor TestingInterface3
+ * @global
+ */
 var TestingInterface3;
 
 (function () {
@@ -14,9 +19,19 @@ var TestingInterface3;
 
     newType.def({
         name: 'TestingInterface3',
-        methods: {
-            fe: function () {
+        methods:
+            /**
+             * 
+             * @lends TestingInterface3.prototype
+             */
+            {
+                /**
+                 * 
+                 * @returns {Boolean}
+                 */
+                fe: function () {
+                    return false;
+                }
             }
-        }
     });
 }());

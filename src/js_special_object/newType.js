@@ -1,16 +1,51 @@
 /**
  * newType
- * @package MyQuickNet
+ * @module MyQuickNet
  * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, vars: true, browser: true */
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var _ = {};
+
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var base = {};
+
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var my = {};
+
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var self = {};
+
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var shared = {};
+
+/**
+ * 
+ * @global
+ * @type Object
+ */
 var newType;
 
 (function (global) {
@@ -18,6 +53,11 @@ var newType;
     var newTypeNamespace = 'com.googlecode.myquicknet.base';
     var newTypeTypeFullName = newTypeNamespace.toString() + '.NewType';
 
+    /**
+     * 
+     * @constructor com.googlecode.myquicknet.base.NewType
+     * @memberof! <global>
+     */
     var NewType = function () {
         this._Object = {};
         this['_' + newTypeTypeFullName.toString()] = {};
@@ -27,12 +67,23 @@ var newType;
     NewType._Function = {};
     NewType.prototype = {};
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._
+     * @returns {Object}
+     */
     NewType.prototype._ = function () {
         var my = this['_' + newTypeTypeFullName.toString()];
         my.stack = [];
         return this;
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._backup
+     * @protected
+     * @returns {undefined}
+     */
     NewType.prototype._backup = function () {
         var my = this['_' + newTypeTypeFullName.toString()];
         my.stack.push(global._);
@@ -42,6 +93,13 @@ var newType;
         my.stack.push(global.shared);
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._backupImportNames
+     * @protected
+     * @param {Array} importNames
+     * @returns {undefined}
+     */
     NewType.prototype._backupImportNames = function (importNames) {
         var i, importNamesCount;
         var my = this['_' + newTypeTypeFullName.toString()];
@@ -52,6 +110,13 @@ var newType;
         }
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._decorateMethod
+     * @protected
+     * @param {Function} method
+     * @returns {Function}
+     */
     NewType.prototype._decorateMethod = function (method) {
         var my = this['_' + newTypeTypeFullName.toString()];
         var v_ = my._;
@@ -86,6 +151,13 @@ var newType;
         };
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._decorateSharedMethod
+     * @protected
+     * @param {Function} method
+     * @returns {Function}
+     */
     NewType.prototype._decorateSharedMethod = function (method) {
         var my = this['_' + newTypeTypeFullName.toString()];
         var v_ = my._;
@@ -119,6 +191,12 @@ var newType;
         };
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._defCore
+     * @protected
+     * @returns {undefined}
+     */
     NewType.prototype._defCore = function () {
         var _;
         var my = this['_' + newTypeTypeFullName.toString()];
@@ -163,6 +241,13 @@ var newType;
         my.self = _[my.name.toString()];
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._defImports
+     * @protected
+     * @param {Array} imports
+     * @returns {undefined}
+     */
     NewType.prototype._defImports = function (imports) {
         var i, imports2, importsCount, importsItem, importFullName, importFullNameSplits, importName;
         var my = this['_' + newTypeTypeFullName.toString()];
@@ -196,6 +281,12 @@ var newType;
         }
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._restore
+     * @protected
+     * @returns {undefined}
+     */
     NewType.prototype._restore = function () {
         var my = this['_' + newTypeTypeFullName.toString()];
         global.shared = my.stack.pop();
@@ -205,6 +296,13 @@ var newType;
         global._ = my.stack.pop();
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._restoreImportNames
+     * @protected
+     * @param {Array} importNames
+     * @returns {undefined}
+     */
     NewType.prototype._restoreImportNames = function (importNames) {
         var i, importNamesCount;
         var my = this['_' + newTypeTypeFullName.toString()];
@@ -219,6 +317,12 @@ var newType;
         }
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.def
+     * @param {Object} args
+     * @returns {undefined}
+     */
     NewType.prototype.def = function (args) {
         var _, F, i, interfacesCount, interfaceName, methodName, namespaceSplits, namespaceSplitsCount;
         var my = this['_' + newTypeTypeFullName.toString()];
@@ -282,7 +386,10 @@ var newType;
         }
 
         if (my.base) {
-            F = function () {};
+            F = function () {
+                return this;
+            };
+
             F.prototype = my.base.shared;
             _[my.name.toString()].shared = new F();
         } else {
@@ -299,6 +406,12 @@ var newType;
         _[my.name.toString()]._Function.typeName = my.name.toString();
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.getTypeFromFullName
+     * @param {String} fullName
+     * @returns {Object}
+     */
     NewType.prototype.getTypeFromFullName = function (fullName) {
         var fullNameSplits, fullNameSplitsCount, i, type;
         fullName = fullName.toString();
@@ -317,6 +430,12 @@ var newType;
         return type;
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.getTypeFullName
+     * @param {Object} object
+     * @returns {String|null}
+     */
     NewType.prototype.getTypeFullName = function (object) {
         var typeFullName;
         typeFullName = null;
@@ -332,6 +451,12 @@ var newType;
         return typeFullName;
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.getTypeName
+     * @param {Object} object
+     * @returns {String|null}
+     */
     NewType.prototype.getTypeName = function (object) {
         var typeName;
         typeName = null;
@@ -347,6 +472,13 @@ var newType;
         return typeName;
     };
 
+    /**
+     * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.isInstance
+     * @param {Object} object
+     * @param {Object|String} type
+     * @returns {Boolean}
+     */
     NewType.prototype.isInstance = function (object, type) {
         var typeFullName;
 

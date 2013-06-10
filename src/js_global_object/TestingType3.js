@@ -1,12 +1,18 @@
 /**
  * TestingType3
- * @package MyQuickNet
+ * @module MyQuickNet
  * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
 /*global base: false, my: false, newType: false, self: false, shared: false, TestingInterface3: false */
+/**
+ * 
+ * @constructor TestingType3
+ * @global
+ * @augments TestingType2
+ */
 var TestingType3;
 
 (function () {
@@ -19,52 +25,111 @@ var TestingType3;
         shared: {
             s: 11
         },
-        methods: {
-            _: function (a, b) {
-                base._.call(this, b, a);
-                my.a = base.getA.call(this);
-                my.b = base.getB.call(this);
-                my.x = 12;
-                shared.s += 13;
-                return this;
+        methods:
+            /**
+             * 
+             * @lends TestingType3.prototype
+             */
+            {
+                /**
+                 * 
+                 * @param {Number} a
+                 * @param {Number} b
+                 * @returns {Object}
+                 */
+                _: function (a, b) {
+                    base._.call(this, b, a);
+                    my.a = base.getA.call(this);
+                    my.b = base.getB.call(this);
+                    my.x = 12;
+                    shared.s += 13;
+                    return this;
+                },
+                /**
+                 * 
+                 * @param {Number} a
+                 * @param {Number} b
+                 * @returns {Number}
+                 */
+                fc: function (a, b) {
+                    my.x += 14;
+                    return this._fa(a, b);
+                },
+                /**
+                 * 
+                 * @returns {Boolean}
+                 */
+                fe: function () {
+                    return true;
+                },
+                /**
+                 * 
+                 * @returns {Number}
+                 */
+                getA: function () {
+                    return my.a;
+                },
+                /**
+                 * 
+                 * @returns {Number}
+                 */
+                getB: function () {
+                    return my.b;
+                },
+                /**
+                 * 
+                 * @returns {Number}
+                 */
+                getS: function () {
+                    return shared.s;
+                },
+                /**
+                 * 
+                 * @returns {Number}
+                 */
+                getX: function () {
+                    return my.x;
+                },
+                /**
+                 * 
+                 * @returns {Object}
+                 */
+                newObj: function () {
+                    var F = self;
+                    var o = new F();
+                    o._(1, 2);
+                    return o;
+                }
             },
-            fc: function (a, b) {
-                my.x += 14;
-                return this._fa(a, b);
-            },
-            fe: function () {
-                return true;
-            },
-            getA: function () {
-                return my.a;
-            },
-            getB: function () {
-                return my.b;
-            },
-            getS: function () {
-                return shared.s;
-            },
-            getX: function () {
-                return my.x;
-            },
-            newObj: function () {
-                var F = self;
-                var o = new F();
-                o._(1, 2);
-                return o;
+        sharedMethods:
+            /**
+             * 
+             * @namespace TestingType3.shared
+             * @memberof! <global>
+             * @augments TestingType2.shared
+             */
+            {
+                /**
+                 * 
+                 * @memberof TestingType3.shared
+                 * @param {Number} a
+                 * @returns {Number}
+                 */
+                sfc: function (a) {
+                    var result = base._sfa(a) + this._sfb() + shared.s;
+                    return result;
+                },
+                /**
+                 * 
+                 * @memberof TestingType3.shared
+                 * @returns {Object}
+                 */
+                sNewObj: function () {
+                    var F = self;
+                    var o = new F();
+                    o._(1, 2);
+                    return o;
+                }
             }
-        },
-        sharedMethods: {
-            sfc: function (a) {
-                var result = base._sfa(a) + this._sfb() + shared.s;
-                return result;
-            },
-            sNewObj: function () {
-                var F = self;
-                var o = new F();
-                o._(1, 2);
-                return o;
-            }
-        }
     });
 }());

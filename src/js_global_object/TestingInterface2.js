@@ -1,12 +1,17 @@
 /**
  * TestingInterface2
- * @package MyQuickNet
+ * @module MyQuickNet
  * @version 4.6
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
 /*global newType: false */
+/**
+ * 
+ * @constructor TestingInterface2
+ * @global
+ */
 var TestingInterface2;
 
 (function () {
@@ -14,13 +19,39 @@ var TestingInterface2;
 
     newType.def({
         name: 'TestingInterface2',
-        methods: {
-            fb: function (a, b) {
-            },
-            fc: function (a, b) {
-            },
-            fd: function (a, b) {
+        methods:
+            /**
+             * 
+             * @lends TestingInterface2.prototype
+             */
+            {
+                /**
+                 * 
+                 * @param {Number} a
+                 * @param {Number} b
+                 * @returns {Number}
+                 */
+                fb: function (a, b) {
+                    return 0;
+                },
+                /**
+                 * 
+                 * @param {Number} a
+                 * @param {Number} b
+                 * @returns {Number}
+                 */
+                fc: function (a, b) {
+                    return 0;
+                },
+                /**
+                 * 
+                 * @param {Number} a
+                 * @param {Number} b
+                 * @returns {Number}
+                 */
+                fd: function (a, b) {
+                    return 0;
+                }
             }
-        }
     });
 }());
