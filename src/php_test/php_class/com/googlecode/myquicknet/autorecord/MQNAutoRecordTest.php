@@ -3,7 +3,7 @@
 /**
  * MQNAutoRecordTest
  * @package MyQuickNet
- * @version 4.6
+ * @version 4.7
  * @copyright (c) 2013 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
