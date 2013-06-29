@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 4.6.2.
+This is the README file for MyQuickNet 4.7.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -7,9 +7,11 @@ This is the README file for MyQuickNet 4.6.2.
 About MyQuickNet:
 MyQuickNet is an open-source web application framework using JavaScript
 and PHP developed by MyQuickNet Development Group.
-It uses jQuery as the JavaScript library, JSLint as the JavaScript code quality
-checking tools, MySQL as the database, PHPUnit for PHP unit testing, QUnit for
-JavaScript unit testing, and NetBeans IDE for development.
+It uses Apache as the web server, ApiGen as the PHP documentation tools, jQuery
+as the JavaScript library, JSDoc 3 as the JavaScript documentation tools,
+JSLint as the JavaScript code quality checking tools, MySQL as database,
+NetBeans IDE as the IDE for development, PHPUnit for PHP unit testing, QUnit
+for JavaScript unit testing, and SQLite as database.
 
 Files/directory structure:
 html/ --- directory that contains HTML file(s)
@@ -101,6 +103,11 @@ Browser/User
 instead of "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" to build a
 practical system, as this would handle the data better and avoid unexpected
 problems.
+
+Major changes from version 4.6.2:
+* improved JavaScript codes for JSDoc 3 and JSLint
+* updated jQuery
+* updated QUnit
 
 Major changes from version 4.6.1:
 * changed MQNAutoRecordQuery.php
