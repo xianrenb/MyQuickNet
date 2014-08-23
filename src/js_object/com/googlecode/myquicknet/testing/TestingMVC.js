@@ -31,7 +31,7 @@
                  * @returns {Object}
                  */
                 _: function (config) {
-                    base._.call(this, config);
+                    base.call(this, config);
                     return this;
                 }
             }

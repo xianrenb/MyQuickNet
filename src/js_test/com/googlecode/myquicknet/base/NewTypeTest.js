@@ -71,8 +71,7 @@
                     ok(newType.isInstance(TestingType1, 'Function'));
                     equal(newType.getTypeFullName(TestingType1), 'TestingType1');
                     equal(newType.getTypeName(TestingType1), 'TestingType1');
-                    testingType1 = new TestingType1();
-                    testingType1._(1, 2);
+                    testingType1 = new TestingType1(1, 2);
                     ok(testingType1 instanceof Object);
                     ok(testingType1 instanceof TestingType1);
                     ok(!(testingType1 instanceof TestingType2));
@@ -105,8 +104,7 @@
                     equal(testingType1.getB(), 2);
                     equal(testingType1.getX(), 11);
                     equal(testingType1.getS(), 4);
-                    testingType1a = new TestingType1();
-                    testingType1a._(1, 2);
+                    testingType1a = new TestingType1(1, 2);
                     equal(testingType1a.getA(), 1);
                     equal(testingType1a.getB(), 2);
                     equal(testingType1a.getX(), 2);
@@ -134,8 +132,7 @@
                     ok(newType.isInstance(TestingType2, 'Function'));
                     equal(newType.getTypeFullName(TestingType2), 'TestingType2');
                     equal(newType.getTypeName(TestingType2), 'TestingType2');
-                    testingType2 = new TestingType2();
-                    testingType2._(1, 2);
+                    testingType2 = new TestingType2(1, 2);
                     ok(testingType2 instanceof Object);
                     ok(testingType2 instanceof TestingType1);
                     ok(testingType2 instanceof TestingType2);
@@ -168,8 +165,7 @@
                     equal(testingType2.getB(), 1);
                     equal(testingType2.getX(), 26);
                     equal(testingType2.getS(), 14);
-                    testingType2a = new TestingType2();
-                    testingType2a._(1, 2);
+                    testingType2a = new TestingType2(1, 2);
                     equal(testingType2a.getA(), 2);
                     equal(testingType2a.getB(), 1);
                     equal(testingType2a.getX(), 7);
@@ -199,8 +195,7 @@
                     ok(newType.isInstance(TestingType3, 'Function'));
                     equal(newType.getTypeFullName(TestingType3), 'TestingType3');
                     equal(newType.getTypeName(TestingType3), 'TestingType3');
-                    testingType3 = new TestingType3();
-                    testingType3._(1, 2);
+                    testingType3 = new TestingType3(1, 2);
                     ok(testingType3 instanceof Object);
                     ok(testingType3 instanceof TestingType1);
                     ok(testingType3 instanceof TestingType2);
@@ -233,8 +228,7 @@
                     equal(testingType3.getB(), 2);
                     equal(testingType3.getX(), 26);
                     equal(testingType3.getS(), 24);
-                    testingType3a = new TestingType3();
-                    testingType3a._(1, 2);
+                    testingType3a = new TestingType3(1, 2);
                     equal(testingType3a.getA(), 1);
                     equal(testingType3a.getB(), 2);
                     equal(testingType3a.getX(), 12);
@@ -366,8 +360,7 @@
                     ok(newType.isInstance(o, 'com.googlecode.myquicknet.testing.TestingNSType1'));
                     equal(testingNSType2.testingTestingType2(), 'ok too!');
                     equal(com.googlecode.myquicknet.testing.TestingNSType2.shared.stestingTestingType2(), 'ok too!');
-                    o = new TestingType2();
-                    o._(0, 0);
+                    o = new TestingType2(0, 0);
                     equal(typeof (o.getA()), 'number');
                 });
             }

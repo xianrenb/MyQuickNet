@@ -55,7 +55,6 @@
                  */
                 new_TestingNSType1: function () {
                     var o = new _.TestingNSType1();
-                    o._();
                     return o;
                 },
                 /**
@@ -64,7 +63,6 @@
                  */
                 newT2: function () {
                     var o = new T2();
-                    o._();
                     return o;
                 },
                 /**
@@ -73,7 +71,6 @@
                  */
                 newTestingNSType1: function () {
                     var o = new TestingNSType1();
-                    o._();
                     return o;
                 },
                 /**
@@ -82,7 +79,6 @@
                  */
                 testingTestingType2: function () {
                     var o = new TestingType2();
-                    o._();
                     return o.fa().toString();
                 }
             },
@@ -101,7 +97,6 @@
                  */
                 snew_TestingNSType1: function () {
                     var o = new _.TestingNSType1();
-                    o._();
                     return o;
                 },
                 /**
@@ -111,7 +106,6 @@
                  */
                 snewT2: function () {
                     var o = new T2();
-                    o._();
                     return o;
                 },
                 /**
@@ -121,7 +115,6 @@
                  */
                 snewTestingNSType1: function () {
                     var o = new TestingNSType1();
-                    o._();
                     return o;
                 },
                 /**
@@ -131,7 +124,6 @@
                  */
                 stestingTestingType2: function () {
                     var o = new TestingType2();
-                    o._();
                     return o.fa().toString();
                 }
             }

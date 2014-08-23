@@ -38,9 +38,9 @@ var TestingType2;
                  * @returns {Object}
                  */
                 _: function (a, b) {
-                    base._.call(this, b, a);
-                    my.a = base.getA.call(this);
-                    my.b = base.getB.call(this);
+                    base.call(this, b, a);
+                    my.a = base.prototype.getA.call(this);
+                    my.b = base.prototype.getB.call(this);
                     my.x = 7;
                     shared.s += 8;
                     return this;

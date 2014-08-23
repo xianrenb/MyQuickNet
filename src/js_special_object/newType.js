@@ -61,11 +61,13 @@ var newType;
     var NewType = function () {
         this._Object = {};
         this['_' + newTypeTypeFullName.toString()] = {};
+        NewType.prototype._.apply(this, arguments);
     };
 
     NewType._Object = {};
     NewType._Function = {};
     NewType.prototype = {};
+    NewType.prototype.constructor = NewType;
 
     /**
      * 
@@ -150,7 +152,7 @@ var newType;
             vNewType._backup();
             vNewType._backupImportNames(vImportNames);
             global._ = v_;
-            global.base = (vBase && vBase.prototype) ? vBase.prototype : null;
+            global.base = vBase || null;
             global.my = this['_' + vFullName.toString()];
             global.self = vSelf;
             global.shared = vShared;
@@ -214,15 +216,15 @@ var newType;
      * @returns {undefined}
      */
     NewType.prototype._defCore = function () {
-        var _;
+        var _, baseFullName, propertyName2;
         var my = this['_' + newTypeTypeFullName.toString()];
         _ = my._;
 
         if (my.base) {
-            _[my.name.toString()] = (function (vBase, v_, vName, vFullName) {
+            _[my.name.toString()] = (function (v_, vName, vFullName) {
                 return function () {
                     var propertyName;
-                    vBase.call(this);
+                    this._Object = {};
                     this['_' + vFullName.toString()] = {};
 
                     for (propertyName in v_[vName.toString()].prototype) {
@@ -230,10 +232,22 @@ var newType;
                             this[propertyName.toString()] = v_[vName.toString()].prototype[propertyName.toString()];
                         }
                     }
-                };
-            }(my.base, _, my.name, my.fullName));
 
-            _[my.name.toString()].prototype = new (my.base)();
+                    if (typeof v_[vName.toString()].prototype._ === 'function') {
+                        v_[vName.toString()].prototype._.apply(this, arguments);
+                    }
+                };
+            }(_, my.name, my.fullName));
+
+            _[my.name.toString()].prototype = this._createPrototype(my.base.prototype);
+            baseFullName = this.getTypeFullName(my.base).toString();
+            _[my.name.toString()].prototype['_' + baseFullName.toString()] = {};
+
+            for (propertyName2 in my.base.prototype) {
+                if ((typeof my.base.prototype[propertyName2] === 'object') && (propertyName2.toString().charAt(0) === '_')) {
+                    _[my.name.toString()].prototype[propertyName2.toString()] = my.base.prototype[propertyName2.toString()];
+                }
+            }
         } else {
             _[my.name.toString()] = (function (v_, vName, vFullName) {
                 return function () {
@@ -246,12 +260,17 @@ var newType;
                             this[propertyName.toString()] = v_[vName.toString()].prototype[propertyName.toString()];
                         }
                     }
+
+                    if (typeof v_[vName.toString()].prototype._ === 'function') {
+                        v_[vName.toString()].prototype._.apply(this, arguments);
+                    }
                 };
             }(_, my.name, my.fullName));
 
             _[my.name.toString()].prototype = {};
         }
 
+        _[my.name.toString()].prototype.constructor = _[my.name.toString()];
         _[my.name.toString()]._Object = {};
         _[my.name.toString()]._Function = {};
         my.self = _[my.name.toString()];
@@ -532,5 +551,4 @@ var newType;
     }());
 
     global.newType = new global.com.googlecode.myquicknet.base.NewType();
-    global.newType._();
 }(this));

@@ -38,9 +38,9 @@ var TestingType3;
                  * @returns {Object}
                  */
                 _: function (a, b) {
-                    base._.call(this, b, a);
-                    my.a = base.getA.call(this);
-                    my.b = base.getB.call(this);
+                    base.call(this, b, a);
+                    my.a = base.prototype.getA.call(this);
+                    my.b = base.prototype.getB.call(this);
                     my.x = 12;
                     shared.s += 13;
                     return this;
@@ -96,8 +96,7 @@ var TestingType3;
                  */
                 newObj: function () {
                     var F = self;
-                    var o = new F();
-                    o._(1, 2);
+                    var o = new F(1, 2);
                     return o;
                 }
             },
@@ -126,8 +125,7 @@ var TestingType3;
                  */
                 sNewObj: function () {
                     var F = self;
-                    var o = new F();
-                    o._(1, 2);
+                    var o = new F(1, 2);
                     return o;
                 }
             }

@@ -23,7 +23,6 @@
                 test('Test1', (function (_) {
                     return function () {
                         var mqnTools = new _.MQNTools();
-                        mqnTools._();
                         equal(mqnTools.htmlspecialchars('abc', false), 'abc');
                         equal(mqnTools.htmlspecialchars('abc&abc', false), 'abc&amp;abc');
                         equal(mqnTools.htmlspecialchars('abc<abc', false), 'abc&lt;abc');
@@ -42,7 +41,6 @@
                 test('Test2', (function (_) {
                     return function () {
                         var mqnTools = new _.MQNTools();
-                        mqnTools._();
                         equal(mqnTools.nl2br('abc'), 'abc');
                         equal(mqnTools.nl2br("abc\r\nabc"), 'abc<br />abc');
                         equal(mqnTools.nl2br("abc\n\rabc"), 'abc<br />abc');
@@ -65,7 +63,6 @@
                     return function () {
                         var elementA, elementB;
                         var mqnTools = new _.MQNTools();
-                        mqnTools._();
                         mqnTools.print('MQNToolsTest-output-a', 'testing');
                         elementA = document.getElementById('MQNToolsTest-output-a');
                         elementB = document.getElementById('MQNToolsTest-output-b');

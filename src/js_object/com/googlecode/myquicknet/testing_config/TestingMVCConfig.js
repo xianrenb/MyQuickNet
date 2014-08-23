@@ -35,7 +35,7 @@
                         urlBase: 'http://localhost/MyQuickNet/'
                     };
 
-                    base._.call(this, config);
+                    base.call(this, config);
                     return this;
                 }
             }

@@ -31,7 +31,6 @@
             },
             getData: function () {
                 var mvc = new TestingMVC();
-                mvc._();
 
                 $.getJSON(
                     mvc.getUrlBase().toString() + 'testing/get_data.json',

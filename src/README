@@ -57,23 +57,22 @@ null) as in the above test files.
 "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" must have two (reserved)
 fields: "id" and "valid".
 6. It is simple to write Object-Oriented JavaScript program by using
-"newType.def()" as in the JavaScript object files. Method "_" should be called
-explicitly after using "new" to create and initialize instances. Method (other
-than "_") with name started by an underscore should be treated as protected
-method. Method with name not started by an underscore should be treated as
-public method. The first letter of public method name and the second letter
-(the letter just after the underscore) of protected method name should be
-small. The first letter of type name should be capital. Within normal methods,
-use "_" to access the current namespace, use "base" to access the base type
-prototype, use "my" to access the object holding private data member(s), use
-"self" as the type itself, and use "shared" to access the object holding static
-data member(s). Within shared/static methods, use "_" to access the current
-namespace, use "base" to access the object holding base type's shared methods,
-use "self" as the type itself, and use "shared" to access the object holding
-static data member(s). The property "shared" of a type, defined using the above
-method, is the object holding the type's shared methods. When "imports" is
-used, the corresponding type(s) would be available as short name(s) within the
-methods.
+"newType.def()" as in the JavaScript object files. Method "_" would be wrapped
+to build the actual constructor function. Method (other than "_") with name
+started by an underscore should be treated as protected method. Method with
+name not started by an underscore should be treated as public method. The first
+letter of public method name and the second letter (the letter just after the
+underscore) of protected method name should be small. The first letter of type
+name should be capital. Within normal methods, use "_" to access the current
+namespace, use "base" to access the base type, use "my" to access the object
+holding private data member(s), use "self" as the type itself, and use "shared"
+to access the object holding static data member(s). Within shared/static
+methods, use "_" to access the current namespace, use "base" to access the
+object holding base type's shared methods, use "self" as the type itself, and
+use "shared" to access the object holding static data member(s). The property
+"shared" of a type, defined using the above method, is the object holding the
+type's shared methods. When "imports" is used, the corresponding type(s) would
+be available as short name(s) within the methods.
 7. File "html/default.html" is the default html file.
 8. File ".htaccess" controls how Apache rewrites URL. The default URL for the
 default html file is "http://localhost/MyQuickNet/".
