@@ -112,6 +112,22 @@ var newType;
 
     /**
      * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype._createPrototype
+     * @protected
+     * @param {Object} proto
+     * @returns {Object}
+     */
+    NewType.prototype._createPrototype = function (proto) {
+        var Ctor = function () {
+            return this;
+        };
+
+        Ctor.prototype = proto;
+        return new Ctor();
+    };
+
+    /**
+     * 
      * @method com.googlecode.myquicknet.base.NewType.prototype._decorateMethod
      * @protected
      * @param {Function} method
@@ -324,7 +340,7 @@ var newType;
      * @returns {undefined}
      */
     NewType.prototype.def = function (args) {
-        var _, F, i, interfacesCount, interfaceName, methodName, namespaceSplits, namespaceSplitsCount;
+        var _, i, interfacesCount, interfaceName, methodName, namespaceSplits, namespaceSplitsCount;
         var my = this['_' + newTypeTypeFullName.toString()];
 
         if (args.hasOwnProperty('namespace')) {
@@ -385,13 +401,8 @@ var newType;
             }
         }
 
-        if (my.base) {
-            F = function () {
-                return this;
-            };
-
-            F.prototype = my.base.shared;
-            _[my.name.toString()].shared = new F();
+        if (my.base && my.base.shared) {
+            _[my.name.toString()].shared = this._createPrototype(my.base.shared);
         } else {
             _[my.name.toString()].shared = {};
         }
