@@ -15,7 +15,7 @@ for JavaScript unit testing, and SQLite as database.
 
 Files/directory structure:
 html/ --- directory that contains HTML file(s)
-jquery/ --- directory that contains jQuery and QUnit related file(s)
+jquery/ --- directory that contains jQuery related file(s)
 js_global_object/ --- directory that contains JavaScript (global object) file(s)
 js_object/ --- directory that contains JavaScript (object) file(s)
 js_special_object/ --- directory that contains the "newType.js" file
@@ -25,6 +25,7 @@ js_test_public/ --- directory that contains public accessible resource(s) for
 php_class/ --- directory that contains PHP class file(s)
 php_global_class/ --- directory that contains PHP global class file(s)
 php_test/ --- directory that contains PHP test file(s)
+qunit/ --- directory that contains QUnit related file(s)
 public/ --- directory that contains public accessible resource(s)
 sql/ --- directory that contains SQL file(s)
 sqlite/ --- directory that contains the default sqlite3 database
