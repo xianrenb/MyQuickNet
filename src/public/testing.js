@@ -12,10 +12,10 @@
 
     $(document).ready(function () {
         var newTypeTest = new com.googlecode.myquicknet.base.NewTypeTest();
-        newTypeTest._().run();
+        newTypeTest.run();
         var mqnToolsTest = new com.googlecode.myquicknet.base.MQNToolsTest();
-        mqnToolsTest._().run();
+        mqnToolsTest.run();
         var mqnMvcTest = new com.googlecode.myquicknet.mvc.MQNMVCTest();
-        mqnMvcTest._().run();
+        mqnMvcTest.run();
     });
 }());
