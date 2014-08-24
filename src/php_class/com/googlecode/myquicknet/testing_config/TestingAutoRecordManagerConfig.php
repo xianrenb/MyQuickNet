@@ -36,6 +36,7 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager
           $config['db_name'] = (string) $_ENV['OPENSHIFT_APP_NAME'];
           $config['db_user'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_USERNAME'];
           $config['db_password'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_PASSWORD'];
+          $config['db_socket'] = (string) $_ENV['OPENSHIFT_MYSQL_DB_SOCKET'];
           } else {
           $config['db_class'] = '\\com\\googlecode\\myquicknet\\database\\MQNDatabaseMySQLi';
           $config['db_host'] = 'localhost';
@@ -43,6 +44,7 @@ class TestingAutoRecordManagerConfig extends MQNAutoRecordManager
           $config['db_name'] = 'mqntestdb';
           $config['db_user'] = 'mqntestdbuser';
           $config['db_password'] = 'mqntest';
+          $config['db_socket'] = '';
           }
          *
          */

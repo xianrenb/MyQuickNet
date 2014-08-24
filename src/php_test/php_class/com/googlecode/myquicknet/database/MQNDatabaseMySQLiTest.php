@@ -32,6 +32,7 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase
         $config['db_name'] = 'mqntestdb';
         $config['db_user'] = 'mqntestdbuser';
         $config['db_password'] = 'mqntest';
+        $config['db_socket'] = '';
         $this->config = $config;
     }
 

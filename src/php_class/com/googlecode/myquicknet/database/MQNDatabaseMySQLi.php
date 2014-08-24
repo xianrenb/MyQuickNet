@@ -56,6 +56,12 @@ class MQNDatabaseMySQLi extends MQNDatabase
 
     /**
      *
+     * @var string|null
+     */
+    private $socket;
+
+    /**
+     *
      * @var bool
      */
     private $transactionStarted;
@@ -78,11 +84,16 @@ class MQNDatabaseMySQLi extends MQNDatabase
         $this->name = (string) $config['db_name'];
         $this->password = (string) $config['db_password'];
         $this->port = $config['db_port'];
+        $this->socket = (string) $config['db_socket'];
 
         if ($this->port === '') {
             $this->port = 3306;
         } else {
             $this->port = (int) $this->port;
+        }
+
+        if ($this->socket === '') {
+            $this->socket = null;
         }
 
         $this->transactionStarted = false;
@@ -161,7 +172,7 @@ class MQNDatabaseMySQLi extends MQNDatabase
     public function connect()
     {
         $this->close();
-        $this->mysqli = new \mysqli($this->host, $this->user, $this->password, $this->name, $this->port);
+        $this->mysqli = new \mysqli($this->host, $this->user, $this->password, $this->name, $this->port, $this->socket);
 
         if ($this->mysqli->connect_error) {
             throw new \Exception('Database Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
