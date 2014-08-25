@@ -6,7 +6,7 @@
  * @license http://opensource.org/licenses/MIT
  */
 /*jslint nomen: true, plusplus: true, unparam: true, vars: true, browser: true */
-/*global _: false, com: false, newType: false, T2: false, TestingNSType1: false, TestingType2: false */
+/*global _: false, base: false, com: false, newType: false, T2: false, TestingNSType1: false, TestingType2: false */
 /**
  * 
  * @class com.googlecode.myquicknet.testing.TestingNSType2
@@ -33,6 +33,7 @@
                  * @returns {Object}
                  */
                 _: function () {
+                    base.call(this);
                     return this;
                 },
                 /**
