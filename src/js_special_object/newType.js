@@ -224,7 +224,6 @@ var newType;
             _[my.name.toString()] = (function (v_, vName, vFullName) {
                 return function () {
                     var propertyName;
-                    this._Object = {};
                     this['_' + vFullName.toString()] = {};
 
                     for (propertyName in v_[vName.toString()].prototype) {
@@ -241,7 +240,10 @@ var newType;
 
             _[my.name.toString()].prototype = this._createPrototype(my.base.prototype);
             baseFullName = this.getTypeFullName(my.base).toString();
-            _[my.name.toString()].prototype['_' + baseFullName.toString()] = {};
+
+            if (typeof baseFullName === 'string') {
+                _[my.name.toString()].prototype['_' + baseFullName.toString()] = {};
+            }
 
             for (propertyName2 in my.base.prototype) {
                 if ((typeof my.base.prototype[propertyName2] === 'object') && (propertyName2.toString().charAt(0) === '_')) {
