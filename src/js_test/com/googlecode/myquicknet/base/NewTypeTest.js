@@ -27,8 +27,8 @@
                 this.test6();
             },
             test1: function () {
-                test('TestingNewType', function () {
-                    var error, errorName, type;
+                test('Testing newType/NewType', function () {
+                    var error, errorName, instance, Obj1, Obj2, type;
                     ok(newType instanceof Object);
                     ok(newType.isInstance(newType, Object));
                     ok(newType.isInstance(newType, 'Object'));
@@ -58,6 +58,22 @@
                     equal(errorName, 'ReferenceError');
                     equal(newType.getTypeFullName(com.googlecode.myquicknet.base.NewType), 'com.googlecode.myquicknet.base.NewType');
                     equal(newType.getTypeName(com.googlecode.myquicknet.base.NewType), 'NewType');
+
+                    Obj1 = function () {
+                        return this;
+                    };
+
+                    Obj1.prototype = {};
+
+                    Obj2 = function () {
+                        Obj1.call(this);
+                        return this;
+                    };
+
+                    Obj2.prototype = newType.createPrototype(Obj1.prototype);
+                    Obj2.prototype.constructor = Obj2;
+                    instance = new Obj2();
+                    ok(Obj1.prototype.isPrototypeOf(instance));
                 });
             },
             test2: function () {

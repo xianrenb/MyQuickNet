@@ -114,22 +114,6 @@ var newType;
 
     /**
      * 
-     * @method com.googlecode.myquicknet.base.NewType.prototype._createPrototype
-     * @protected
-     * @param {Object} proto
-     * @returns {Object}
-     */
-    NewType.prototype._createPrototype = function (proto) {
-        var Ctor = function () {
-            return this;
-        };
-
-        Ctor.prototype = proto;
-        return new Ctor();
-    };
-
-    /**
-     * 
      * @method com.googlecode.myquicknet.base.NewType.prototype._decorateMethod
      * @protected
      * @param {Function} method
@@ -238,7 +222,7 @@ var newType;
                 };
             }(_, my.name, my.fullName));
 
-            _[my.name.toString()].prototype = this._createPrototype(my.base.prototype);
+            _[my.name.toString()].prototype = this.createPrototype(my.base.prototype);
             baseFullName = this.getTypeFullName(my.base).toString();
 
             if (typeof baseFullName === 'string') {
@@ -356,6 +340,23 @@ var newType;
 
     /**
      * 
+     * @method com.googlecode.myquicknet.base.NewType.prototype.createPrototype
+     * @param {Object} proto
+     * @returns {Object}
+     */
+    NewType.prototype.createPrototype = function (proto) {
+        //var my = this['_' + newTypeTypeFullName.toString()];
+
+        var Ctor = function () {
+            return this;
+        };
+
+        Ctor.prototype = proto;
+        return new Ctor();
+    };
+
+    /**
+     * 
      * @method com.googlecode.myquicknet.base.NewType.prototype.def
      * @param {Object} args
      * @returns {undefined}
@@ -423,7 +424,7 @@ var newType;
         }
 
         if (my.base && my.base.shared) {
-            _[my.name.toString()].shared = this._createPrototype(my.base.shared);
+            _[my.name.toString()].shared = this.createPrototype(my.base.shared);
         } else {
             _[my.name.toString()].shared = {};
         }
