@@ -345,8 +345,6 @@ var newType;
      * @returns {Object}
      */
     NewType.prototype.createPrototype = function (proto) {
-        //var my = this['_' + newTypeTypeFullName.toString()];
-
         var Ctor = function () {
             return this;
         };
