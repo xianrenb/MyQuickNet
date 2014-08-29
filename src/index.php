@@ -7,9 +7,6 @@
  * @copyright (c) 2014 MyQuickNet Development Group
  * @license http://opensource.org/licenses/MIT
  */
-/**
- *
- */
 call_user_func(
         function () {
             require_once(__DIR__ . '/config.php');
