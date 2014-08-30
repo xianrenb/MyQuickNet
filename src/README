@@ -1,4 +1,4 @@
-This is the README file for MyQuickNet 4.7.1.
+This is the README file for MyQuickNet 5.0.0.
 
     This program (MyQuickNet) is free software: you can redistribute it and/or
     modify it under the terms of the MIT License as in the "MIT-LICENSE.txt"
@@ -25,8 +25,8 @@ js_test_public/ --- directory that contains public accessible resource(s) for
 php_class/ --- directory that contains PHP class file(s)
 php_global_class/ --- directory that contains PHP global class file(s)
 php_test/ --- directory that contains PHP test file(s)
-qunit/ --- directory that contains QUnit related file(s)
 public/ --- directory that contains public accessible resource(s)
+qunit/ --- directory that contains QUnit related file(s)
 sql/ --- directory that contains SQL file(s)
 sqlite/ --- directory that contains the default sqlite3 database
 .htaccess --- file that contains Apache configuration
@@ -103,6 +103,13 @@ Browser/User
 instead of "\com\googlecode\myquicknet\autorecord\MQNAutoRecord" to build a
 practical system, as this would handle the data better and avoid unexpected
 problems.
+
+Major changes from version 4.7.1:
+* updated jQuery
+* updated QUnit
+* changed newType.js: no need to call _() after new for user defined types
+* changed to use PSR-0 autoloader example implementation
+* modified MySQL related code to support socket or named pipe
 
 Major changes from version 4.7.0:
 * updated jQuery
