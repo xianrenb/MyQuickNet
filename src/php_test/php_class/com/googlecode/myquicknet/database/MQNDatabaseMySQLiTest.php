@@ -27,11 +27,11 @@ class MQNDatabaseMySQLiTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $config['db_host'] = 'localhost';
+        $config['db_host'] = '127.0.0.1';
         $config['db_port'] = '';
         $config['db_name'] = 'mqntestdb';
-        $config['db_user'] = 'mqntestdbuser';
-        $config['db_password'] = 'mqntest';
+        $config['db_user'] = 'travis';
+        $config['db_password'] = '';
         $config['db_socket'] = '';
         $this->config = $config;
     }
