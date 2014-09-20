@@ -5,3 +5,4 @@ php:
 before_script:
   - mysql -e 'create database mqntestdb;'
   - mysql mqntestdb < src/sql/mysql/mqntestdb.sql
+script: phpunit --bootstrap src/config.php src/php_test/
