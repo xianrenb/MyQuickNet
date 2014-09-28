@@ -16,4 +16,4 @@ before_script:
   # prepare database
   - mysql -e 'create database mqntestdb;'
   - mysql mqntestdb < src/sql/mysql/mqntestdb.sql
-script: phantomjs phantomjs_qunit/run-qunit.js http://localhost/MyQuickNet/testing/
+script: curl http://localhost/MyQuickNet/testing/
