@@ -8,7 +8,6 @@ before_script:
   - sudo apt-get install apache2 libapache2-mod-fastcgi
   # enable hhvm
   - sudo a2enmod rewrite actions fastcgi alias
-  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - hhvm --mode daemon -vServer.Type=fastcgi -vServer.FileSocket=/var/run/hhvm/sock
   # configure apache virtual hosts
   - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
