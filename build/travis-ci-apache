@@ -25,7 +25,7 @@
     Action hhvm-php-extension /hhvm virtual
     Action hhvm-hack-extension /hhvm virtual
 
-    FastCgiExternalServer /hhvm -socket /var/run/hhvm/sock -pass-header Authorization -idle-timeout 300 -vServer.FixPathInfo=true
+    FastCgiExternalServer /hhvm -socket /var/run/hhvm/sock -pass-header Authorization -idle-timeout 300
   </IfModule>
 
   # [...]
