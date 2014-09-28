@@ -11,12 +11,21 @@
     Allow from all
   </Directory>
 
-  # Wire up Apache to use Travis CI's php-fpm.
+  # Wire up Apache to use Travis CI's hhvm.
   <IfModule mod_fastcgi.c>
-    AddHandler php5-fcgi .php
-    Action php5-fcgi /php5-fcgi
-    Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
-    FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host 127.0.0.1:9000 -pass-header Authorization
+    <FilesMatch \.php$>
+      SetHandler hhvm-php-extension
+    </FilesMatch>
+
+    <FilesMatch \.hh$>
+      SetHandler hhvm-hack-extension
+    </FilesMatch>
+
+    Alias /hhvm /hhvm
+    Action hhvm-php-extension /hhvm virtual
+    Action hhvm-hack-extension /hhvm virtual
+
+    FastCgiExternalServer /hhvm -socket /var/run/hhvm/sock -pass-header Authorization -idle-timeout 300 -vServer.FixPathInfo=true
   </IfModule>
 
   # [...]
